@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('image_path')->nullable(); // Changed column name from 'image' to 'image_path'
             $table->boolean('favorite')->default(false);
+            $table->string('ig_account')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
 

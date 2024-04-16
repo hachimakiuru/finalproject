@@ -20,6 +20,7 @@ class ExperiencePost extends Model
         'content',
         'image_path',
         'favorite',
+        'ig_account',
         // 'created_at', 'updated_at' は自動的に設定されるため、ここには含めない
     ];
 
