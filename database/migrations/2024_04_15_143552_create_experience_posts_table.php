@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->text('content');
-            $table->string('image_path')->nullable(); // Changed column name from 'image' to 'image_path'
+            $table->string('image_path'); 
             $table->boolean('favorite')->default(false);
             $table->string('ig_account')->nullable();
             $table->timestamp('created_at')->nullable();

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RestaurantDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,9 @@ Route::get('/activity-dashboard', function () {
     return view('activity-dashboard');
 });
 // -----------------------------------------------
+
+
+//restaurants Route
+Route::get('/restaurant-dashboard', [RestaurantDashboardController::class, 'index'])->name('restaurant.dashboard');
+
 
