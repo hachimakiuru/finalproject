@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('experience_posts', function (Blueprint $table) {
             $table->id(); // Auto-increment primary key
-            $table->unsignedBigInteger('user_id');
-            $table->string('title');
-            $table->text('content');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('title')->nullable();
+            $table->string('address')->nullable();
+            $table->text('content')->nullable();
             $table->string('image_path')->nullable(); // Changed column name from 'image' to 'image_path'
             $table->boolean('favorite')->default(false);
+            $table->boolean('ig_permission')->nullable();
             $table->string('ig_account')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

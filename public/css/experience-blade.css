@@ -1,4 +1,19 @@
-.moji {
-    color: pink;
-    height: 40px;
-  }
+.ig-permission {
+
+}
+
+input[type="checkbox"] + label {
+  background-color: gray;
+}
+
+input[type="checkbox"]:checked  + label {
+  background-color: blue;
+}
+
+#instagram_permission {
+  display: none;
+}
+
+.custom-button{
+  background-color: gray!important;
+}

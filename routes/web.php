@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ExperienceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,11 +19,9 @@ Route::get('/', function () {
 });
 
 // ここのルートを変更して各自の画面を確認する
-Route::get('/index', function () {
-    return view('experience.index');
-});
+Route::get('/index', [ExperienceController::class, 'index'])->name('experience.index');
 
-use App\Http\Controllers\ExperienceController;
+
 
 Route::post('/experience', [ExperienceController::class, 'store'])->name('experience.store');
 

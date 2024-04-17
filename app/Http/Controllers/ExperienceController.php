@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ExperiencePost; 
+use App\Models\ExperiencePost;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 
 class ExperienceController extends Controller
@@ -30,30 +33,31 @@ class ExperienceController extends Controller
      */
     public function store(Request $request)
     {
-            $request->validate([
-                'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // adjust max file size as needed
-            ]);
-    
-            if ($request->file('image_path')) {
-                $image = $request->file('image_path');
-                $imageName = time().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path('storage/img'), $imageName);
-    
-                $experience = new ExperiencePost(); // Experience を ExperiencePost に変更
-                $experience->image_path = $imageName; // image を image_path に変更
-                // You might want to associate other data with the post as well
-                $experience->save();
-    
-                Session::flash('success', 'Image uploaded successfully.');
-                return redirect()->route('show');
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // フォームの名前を 'image' に変更
+        ]);
+        
+        if ($request->file('image')) { // フォームの名前を 'image' に変更
+            $image = $request->file('image'); // フォームの名前を 'image' に変更
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('storage/img'), $imageName);
+        
+            $experience = new ExperiencePost();
+            // $experience->user_id = Auth::user()->id;
+            $experience->title = $request->title; 
+            $experience->address = $request->address; 
+            $experience->image_path = $imageName; // データベースカラム名を 'image_path' から 'image' に変更
+            if ($request->has('instagram_permission')) {
+                $experience->ig_permission = true;
             }
-    
+            $experience->ig_account = $request->instagram_account; 
+            $experience->save();
+        
+            Session::flash('success', 'Image uploaded successfully.');
+            return redirect()->route('experience.index');
+        }
             return response()->json(['error' => 'No image uploaded'], 400);
         }
-    
-    
-
-
     public function edit(string $id)
     {
         //
