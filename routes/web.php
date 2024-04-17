@@ -19,7 +19,15 @@ Route::get('/', function () {
 });
 
 // ここのルートを変更して各自の画面を確認する
-Route::get('/layout', function () {
-    return view('layouts.layout');
+// Route::get('/layout', function () {
+//     return view('layouts.layout');
+// });
+
+Route::get('/news-dashboard', function () {
+    return view('news-dashboard');
+});
+Route::get('/activity-dashboard', function () {
+    return view('activity-dashboard');
 });
 // -----------------------------------------------
+
