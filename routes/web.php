@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantDashboardController;
+use App\Http\Controllers\RestaurantPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,10 @@ Route::get('/activity-dashboard', function () {
 // -----------------------------------------------
 
 
-//restaurants Route
+//restaurant-dashboard
 Route::get('/restaurant-dashboard', [RestaurantDashboardController::class, 'index'])->name('restaurant.dashboard');
+
+// restaurant-search
+
 
 

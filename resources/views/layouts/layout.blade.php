@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ asset('/css/activity-dasboad-blade.css')  }}" >
   <link rel="stylesheet" href="{{ asset('/css/news-dashboard.css')  }}" >
   <link rel="stylesheet" href="{{ asset('/css/header-blade.css')  }}" >
+  <link rel="stylesheet" href="{{ asset('/css/restaurant-dashboard.css')  }}" >
   
 
   {{-- Bootstrap5のCDN読み込み記述 --}}
