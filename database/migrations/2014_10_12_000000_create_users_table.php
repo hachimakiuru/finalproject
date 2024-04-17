@@ -31,6 +31,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['foreign_key_column_name']); // 外部キー制約を削除する
+        });
         Schema::dropIfExists('users');
     }
 };
