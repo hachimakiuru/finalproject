@@ -1,6 +1,6 @@
 
             <div class="bottom-box">
-                {{-- <a href="#">
+                <a href="#">
                     <img src="./public/img/event.jpg" alt="ローカルイベント">
                     イメージ1
                 </a>
@@ -15,5 +15,5 @@
                 <a href="#">
                     <img src="./public/img/others.jpg" alt="その他おすすめ情報">
                     イメージ4
-                </a> --}}
+                </a>
             </div>
