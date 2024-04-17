@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Auto-increment primary key
             $table->unsignedBigInteger('user_id'); // ユーザーID列の作成
             $table->unsignedBigInteger('restaurant_post_id'); // レストランポストID列の作成
-            $table->text('comment')->nullable(); // コメントテキスト列の作成（null許容）
+            $table->text('comment'); // コメントテキスト列の作成（null許容）
             $table->timestamps(); // 作成日時と更新日時のタイムスタンプ列の作成
             
             // 外部キー制約の追加
