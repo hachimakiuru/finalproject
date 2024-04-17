@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+// ここのルートを変更して各自の画面を確認する
 Route::get('/layout', function () {
     return view('layouts.layout');
 });
+// -----------------------------------------------
