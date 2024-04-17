@@ -19,7 +19,12 @@ Route::get('/', function () {
 });
 
 // ここのルートを変更して各自の画面を確認する
-Route::get('/layout', function () {
-    return view('layouts.layout');
+Route::get('/index', function () {
+    return view('experience.index');
 });
+
+use App\Http\Controllers\ExperienceController;
+
+Route::post('/experience', [ExperienceController::class, 'store'])->name('experience.store');
+
 // -----------------------------------------------
