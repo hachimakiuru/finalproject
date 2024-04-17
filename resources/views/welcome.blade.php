@@ -1,4 +1,1 @@
-@extends('layouts.layout')
-@section('content')
-    
-@endsection
+<h1>初期のWELCOMEページの中身消してます。ヘッダー継承していません。</h1>
