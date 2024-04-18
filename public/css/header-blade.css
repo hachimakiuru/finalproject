@@ -1,37 +1,45 @@
 .header {
   background-color: black;
   height: 50px;
+  position: sticky;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  li {
+    list-style: none;
+  }
 }
+
+
 .inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-inline: auto ;
   padding-inline: 5%;
+  line-height: 50px;
 }
 .header-logo {
   color: white;
   font-size: 20px;
 }
 .header-wrapper {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 .header-nav {
   display: flex;
-  gap: 20px;
-}
-.header-nav li {
-  list-style: none;
-}
-.header-nav a {
-  text-decoration: none;
-  color: white;
+  gap: 30px;
 }
 .user-name {
   color: white;
 }
-.user-name a {
-  text-decoration: none;
-  color: white;
+
+.header-right {
+  display: flex;
+  gap: 20px;
 }
