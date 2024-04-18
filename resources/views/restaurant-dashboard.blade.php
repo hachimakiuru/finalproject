@@ -7,19 +7,19 @@
 
             <div class="restaurant-dashboard-right" >
                 <div>
-                    {{-- @include('restaurant-search') --}}/
+                    @include('restaurants.restaurant-search')
                 </div>
             </div>
 
             <div class="restaurant-dashboard-center" >
                 <div>
-                    @include('restaurant.restaurant-index')
+                    @include('restaurants.restaurant-index')
                 </div>
             </div>
 
             <div class="restaurant-dashboard-left" >
                 <div>
-                    {{-- @include('restaurant-post') --}}
+                    @include('restaurants.restaurant-post')
                 </div>
             </div>
 

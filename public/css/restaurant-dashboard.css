@@ -4,20 +4,26 @@
     padding-inline: 10px;
     height: 100vh; 
 }
+
 /* 検索機能のcss */
 .restaurant-dashboard-right{
     flex: 1;
-    background-color: blue;
+    border: 1px solid #000000; /* ボーダー追加 */
+    border-radius: 2px;
 }
+
 .restaurant-dashboard-right div{
     display: flex;
     justify-content: center;
 }
+
 /* 一覧表示のcss */
 .restaurant-dashboard-center{
     flex: 2; 
-    background-color: aqua;
+    border: 1px solid black; /* ボーダー追加 */
+    border-radius: 2px;
 }
+
 .restaurant-dashboard-center div{
     display: flex;
     justify-content: center;
@@ -26,10 +32,13 @@
 /* 投稿機能のcss */
 .restaurant-dashboard-left{
     flex: 1;
-    background-color: orange;
+    border: 1px solid black; /* ボーダー追加 */
+    border-radius: 2px;
 }
+
 .restaurant-dashboard-left div{
     display: flex;
     justify-content: center;
 }
+
     
