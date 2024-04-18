@@ -21,8 +21,8 @@ Route::get('/', function () {
 // ここのルートを変更して各自の画面を確認する
 Route::get('/index', [ExperienceController::class, 'index'])->name('experience.index');
 
-
-
 Route::post('/experience', [ExperienceController::class, 'store'])->name('experience.store');
 
+
+Route::delete('/experience/{id}', [ExperienceController::class, 'destroy'])->name('experience.destroy');
 // -----------------------------------------------

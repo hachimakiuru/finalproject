@@ -54,9 +54,18 @@ class ExperienceController extends Controller
             $experience->address = $request->address; 
             $experience->content = $request->content; 
             $experience->image_path = $imageName; 
+
+            // いいね
+            // $experience->favorite = $imageName; 
+            
             if ($request->has('instagram_permission')) {
                 $experience->ig_permission = true;
             }
+// いいね
+            // if ($request->has('favorite')) {
+            //     $experience->favorite = true;
+            // }
+// いいね
             $experience->ig_account = $request->instagram_account; 
             $experience->save();
         
@@ -81,11 +90,20 @@ class ExperienceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        $experience = ExperiencePost::findOrFail($id); 
-        $experience->delete();
+//     public function destroy(string $id)
+//     {
+//         $experience = ExperiencePost::findOrFail($id); 
+//         $experience->delete();
     
-        return redirect()->back()->with('success', '投稿が削除されました。');
-    }
+//         return redirect()->back()->with('success', '投稿が削除されました。');
+//     }
+// }
+
+public function destroy(Request $request, $id)
+{
+    $experience = ExperiencePost::findOrFail($id); 
+    $experience->delete();
+
+    return redirect()->back()->with('success', '投稿が削除されました。');
+}
 }

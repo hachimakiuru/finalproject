@@ -26,6 +26,7 @@
 <div class="d-flex justify-content-center p-3">
     <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal">写真投稿はこちら!</button>
 </div>
+
 <div class="row row-cols-1 row-cols-md-4 g-4 ">
     @foreach($experiences->reverse() as $key => $experience)
     <div class="col">
@@ -36,6 +37,13 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $experience->title }}</h5>
                 <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
+
+                <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger delete-button">×</button>
+                </form>
+                
             </div>
         </div>
     </div>
@@ -129,6 +137,7 @@
       </div>
     </div>
   </div>
+
 
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

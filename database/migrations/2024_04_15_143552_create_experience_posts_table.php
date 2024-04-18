@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('address')->nullable();
             $table->text('content')->nullable();
-            $table->string('image_path')->nullable(); // Changed column name from 'image' to 'image_path'
+            $table->string('image_path')->nullable(); 
             $table->boolean('favorite')->default(false);
             $table->boolean('ig_permission')->nullable();
             $table->string('ig_account')->nullable();
