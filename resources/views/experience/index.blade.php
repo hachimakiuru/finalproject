@@ -27,16 +27,32 @@
     <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal">写真投稿はこちら!</button>
 </div>
 <div class="row row-cols-1 row-cols-md-4 g-4 ">
-    @foreach($experiences->reverse() as $experience)
+    @foreach($experiences->reverse() as $key => $experience)
     <div class="col">
-        <div class="card custom-card"> <!-- カード自体のクラスに custom-card を追加 -->
+        <div class="card custom-card">
             <div class='postimg'>
                 <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ $experience->title }}</h5> <!-- ここにtitleを出力 -->
-                <button class="backtotopthesite" style="text-decoration: none;" onclick="scrollToTop()">top
-                </button>
+                <h5 class="card-title">{{ $experience->title }}</h5>
+                <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal{{ $key }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $key }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">{{ $experience->title }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
+                    <p><strong>Address:</strong> {{ $experience->address }}</p>
+                    <p><strong>Content:</strong> {{ $experience->content }}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -114,7 +130,21 @@
     </div>
   </div>
 
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+<script>
+    $('.detail-button').click(function() {
+        var title = $(this).data('title');
+        var address = $(this).data('address');
+        var content = $(this).data('content');
+        var image = $(this).data('image');
+
+        $('#exampleModal .modal-title').text(title);
+        $('#exampleModal .modal-body').html('<img src="' + image + '" class="card-img-top" alt="..."><p><strong>Address:</strong> ' + address + '</p><p><strong>Content:</strong> ' + content + '</p>');
+    });
+</script>
+
 </body>
 </html>
