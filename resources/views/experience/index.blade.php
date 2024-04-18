@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -35,6 +34,7 @@
                 <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
             </div>
             <div class="card-body">
+                <h5 class="card-title">{{ $experience->title }}</h5> <!-- ここにtitleを出力 -->
                 <button class="backtotopthesite" style="text-decoration: none;" onclick="scrollToTop()">top
                 </button>
             </div>
@@ -71,14 +71,14 @@
                 <div class="mb-3">
                     <label for="address" class="form-label">address :</label>
                     <div class="input-group" style="width: 100%;">
-                        <input type="text" id="address" name="adress"  style="width: 100%;">
+                        <input type="text" id="address" name="address"  style="width: 100%;">
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="comment" class="form-label">comment :</label>
+                    <label for="content" class="form-label">comment :</label>
                     <div class="input-group" style="width: 100%;">
-                        <input type="text" id="comment" name="comment"  style="width: 100%;">
+                        <input type="text" id="content" name="content"  style="width: 100%;">
                     </div>
                 </div>
 
@@ -102,7 +102,7 @@
                 <div class="mb-3">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">投稿！</button>
                     </div>
                 </div>
 

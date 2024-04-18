@@ -34,11 +34,17 @@ class ExperienceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // フォームの名前を 'image' に変更
+            'title' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'content' => 'nullable|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'favorite' => 'nullable|boolean', 
+            'ig_permission' => 'nullable|boolean',
+            'ig_account' => 'nullable|string|max:255',
         ]);
         
-        if ($request->file('image')) { // フォームの名前を 'image' に変更
-            $image = $request->file('image'); // フォームの名前を 'image' に変更
+        if ($request->file('image')) { 
+            $image = $request->file('image'); 
             $imageName = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('storage/img'), $imageName);
         
@@ -46,7 +52,8 @@ class ExperienceController extends Controller
             // $experience->user_id = Auth::user()->id;
             $experience->title = $request->title; 
             $experience->address = $request->address; 
-            $experience->image_path = $imageName; // データベースカラム名を 'image_path' から 'image' に変更
+            $experience->content = $request->content; 
+            $experience->image_path = $imageName; 
             if ($request->has('instagram_permission')) {
                 $experience->ig_permission = true;
             }
@@ -76,7 +83,7 @@ class ExperienceController extends Controller
      */
     public function destroy(string $id)
     {
-        $experience = ExperiencePost::findOrFail($id); // ExperiencePost モデルを使用するように修正
+        $experience = ExperiencePost::findOrFail($id); 
         $experience->delete();
     
         return redirect()->back()->with('success', '投稿が削除されました。');

@@ -17,6 +17,7 @@ class ExperiencePost extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'address',
         'content',
         'image_path',
         'favorite',
