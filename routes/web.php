@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,10 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 
 Route::get('/', function () {
+    return view('auth.login');
+});
+
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -24,6 +29,7 @@ Route::get('/', function () {
 Route::get('/layout', function () {
     return view('layouts.layout');
 });
+
 // -----------------------------------------------
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -34,4 +40,4 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'admin']);
-// Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');

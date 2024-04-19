@@ -8,6 +8,7 @@
   {{-- 独自cssの読み込み --}}
   <link rel="stylesheet" href="{{ asset('/css/reset.css')  }}" >
   <link rel="stylesheet" href="{{ asset('/css/header-blade.css')  }}" >
+  <link rel="stylesheet" href="{{ asset('/css/welcome-blade.css')  }}" >
   <link rel="stylesheet" href="{{ asset('/css/auth.css')  }}" >
 
   {{-- Bootstrap5のCDN読み込み記述 --}}

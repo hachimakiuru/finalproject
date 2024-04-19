@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 
-  <h1>管理者ページ</h1>
+  <h1>admin page</h1>
+  ここに
 
 @endsection

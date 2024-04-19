@@ -33,7 +33,7 @@ class AuthController extends Controller
             ]
         );
 
-        return redirect()->route('register')->with('success', 'アカウント作成が完了しました！');
+        return redirect('/welcome')->with('success', 'アカウント作成が完了しました！');
     }
 
     public function login()
@@ -54,11 +54,12 @@ class AuthController extends Controller
 
         if (auth()->attempt($valideaed)) {
             request()->session()->regenerate();
+            return redirect('/welcome')->with('success', 'ログインが完了しました!');;
 
-            return redirect()->route('login')->with('success', 'ログインが完了しました!');
+            // return redirect()->route('/')->
         }
 
-        return redirect()->route('login')->withErrors([
+        return redirect('login')->withErrors([
             'email'  => "入力された情報全てにマッチするアカウントはありませんでした。"
         ]);
     }
@@ -70,6 +71,6 @@ class AuthController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect()->route('login')->with('success', "Logged out successfully !");
+        return redirect('login')->with('success', "ログアウトしました。");
     }
 }
