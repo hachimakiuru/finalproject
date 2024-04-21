@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 @section('content')
-    
+
+@push('css')
+    <link rel="stylesheet" href="{{ asset('/css/activity-dasboad-blade.css')  }}" >
+@endpush
 
 <body>
 

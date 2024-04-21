@@ -1,6 +1,10 @@
 @extends('layouts.layout')
 @section('content')
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('/css/auth.css')  }}" >
+@endpush
+
 @include('parts.success-message')
 <div class="container">
   <div class="row justify-content-center">

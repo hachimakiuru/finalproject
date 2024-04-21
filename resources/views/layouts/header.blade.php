@@ -3,7 +3,7 @@
     @guest
     <div class="header-wrapper">
       <ul class="header-nav">
-        <li><a href="#">Home</a></li>
+        <li><a href="{{ route('welcome') }}">Home</a></li>
         <li><a href="#">Food</a></li>
         <li><a href="#">Activity</a></li>
         <li><a href="#">Chat Message</a></li>

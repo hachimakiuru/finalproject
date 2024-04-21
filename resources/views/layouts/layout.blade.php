@@ -7,14 +7,9 @@
   <title>Final Project</title>
   {{-- 独自cssの読み込み --}}
   <link rel="stylesheet" href="{{ asset('/css/reset.css')  }}" >
-  <link rel="stylesheet" href="{{ asset('/css/activity-dasboad-blade.css')  }}" >
   <link rel="stylesheet" href="{{ asset('/css/news-dashboard.css')  }}" >
   <link rel="stylesheet" href="{{ asset('/css/header-blade.css')  }}" >
-
-  <link rel="stylesheet" href="{{ asset('/css/welcome-blade.css')  }}" >
-  <link rel="stylesheet" href="{{ asset('/css/auth.css')  }}" >
-
-  
+  @stack('css')
 
 
   {{-- Bootstrap5のCDN読み込み記述 --}}
