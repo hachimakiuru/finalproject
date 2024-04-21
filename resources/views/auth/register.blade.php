@@ -6,7 +6,7 @@
       <div class="col-12 col-sm-8 col-md-6">
           <form class="form mt-5" action="{{ route('register') }}" method="post">
             @csrf
-              <h3 class="text-center text-dark">アカウント登録</h3>
+              <h3 class="text-center text-dark">アカウント追加</h3>
               <div class="form-group">
                 <label for="name" class="text-dark">名前:</label><br>
                 <input type="text" name="name" id="name" class="form-control">
@@ -49,6 +49,28 @@
                   <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
                   @enderror
               </div>
+
+              <p class="mt-3">ユーザータイプ:</p>
+              
+              <label class="form-check-label" for="">Role:</label>
+              @foreach ($roles as $role)
+              <input class="form-check-input" type="radio" name="role_id" id="role_id" value="{{ $role->id }}">
+              <label class="form-check-label" for="{{ $role->id }}">{{ $role->name }}</label>
+
+              {{-- <div class="form-check form-check-inline">
+              </div> --}}
+              @endforeach
+
+              {{-- <div class="form-group form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="2">
+                <label class="form-check-label" for="inlineRadio1">Employee</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="3">
+                <label class="form-check-label" for="inlineRadio2">Guest</label>
+              </div> --}}
+ 
+
               <div class="form-group">
                   <label for="remember-me" class="text-dark"></label><br>
                   <input type="submit" name="submit" class="btn btn-dark btn-md" value="送信">

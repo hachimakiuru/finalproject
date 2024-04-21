@@ -23,6 +23,7 @@ class User extends Authenticatable
         'room_number',
         'email_verified_at',
         'memo',
+        'role_id',
     ];
 
     /**

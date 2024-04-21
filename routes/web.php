@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 
 /*
@@ -23,7 +24,7 @@ Route::get('/', function () {
 
 Route::get('/welcome', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 // ここのルートを変更して各自の画面を確認する
 Route::get('/layout', function () {
@@ -39,5 +40,12 @@ Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'admin']);
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+// Route::middleware(['auth', 'can:admin'])->prefix('/admin')->as('admin.')->group(function () {
+//     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+// });
+
+Route::get('/users', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);
+
+
+Route::delete('/admin/dashboard/{user}', [UserController::class, 'destroy'])->name('user.destroy');

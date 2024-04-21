@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class AuthController extends Controller
 {
     public function register()
     {
-        return view('auth.register');
+        $roles = Role::all();
+        return view('auth.register', compact('roles'));
     }
 
     public function store()
@@ -20,6 +23,7 @@ class AuthController extends Controller
                 'name' => 'required|min:5|max:40',
                 'email' => 'required|email|unique:users,email',
                 'room_number' => 'nullable',
+                'role_id' => 'required|exists:roles,id',
                 'password' => 'required|confirmed|min:8'
             ]
         );
@@ -29,11 +33,13 @@ class AuthController extends Controller
                 'name' => $valideaed['name'],
                 'email' => $valideaed['email'],
                 'room_number' => $valideaed['room_number'],
+                // 'role' => Role::find($valideaed['role']),
+                'role_id' => $valideaed['role_id'],
                 'password' => Hash::make($valideaed['password']),
             ]
         );
 
-        return redirect('/welcome')->with('success', 'アカウント作成が完了しました！');
+        return redirect()->route('welcome')->with('success', 'アカウント追加が完了しました！');
     }
 
     public function login()
@@ -54,7 +60,7 @@ class AuthController extends Controller
 
         if (auth()->attempt($valideaed)) {
             request()->session()->regenerate();
-            return redirect('/welcome')->with('success', 'ログインが完了しました!');;
+            return redirect()->route('welcome')->with('success', 'ログインが完了しました!');;
 
             // return redirect()->route('/')->
         }
