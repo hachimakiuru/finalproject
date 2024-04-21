@@ -49,7 +49,7 @@ class ExperienceController extends Controller
             $image->move(public_path('storage/img'), $imageName);
         
             $experience = new ExperiencePost();
-            // $experience->user_id = Auth::user()->id;
+            $experience->user_id = Auth::user()->id;
             $experience->title = $request->title; 
             $experience->address = $request->address; 
             $experience->content = $request->content; 
@@ -91,6 +91,7 @@ class ExperienceController extends Controller
         ]);
         
         $experience = ExperiencePost::findOrFail($id);
+        $experience->user_id = Auth::user()->id;
         $experience->title = $request->title; 
         $experience->address = $request->address; 
         $experience->content = $request->content; 
