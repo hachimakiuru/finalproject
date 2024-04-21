@@ -10,6 +10,8 @@ use App\Http\Controllers\WelcomeController;
 
 use App\Http\Controllers\ExperienceController;
 
+use App\Http\Controllers\LikeController;
+
 /*
 |--------------------------------------------------------------------------
 - Web Routes
@@ -46,6 +48,8 @@ Route::get('/users', [AdminDashboardController::class, 'index'])->name('admin.da
 
 Route::delete('/admin/dashboard/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 // --------------------------------------------------------------
+
+// ポンポン投稿
 Route::get('/index', [ExperienceController::class, 'index'])->name('experience.index');
 
 Route::post('/experience', [ExperienceController::class, 'store'])->name('experience.store');
@@ -56,5 +60,7 @@ Route::delete('/experience/{id}', [ExperienceController::class, 'destroy'])->nam
 Route::get('/experience/{id}/edit', [ExperienceController::class, 'edit'])->name('experience.edit');
 Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('experience.update');
 
-// -----------------------------------------------
+// いいね機能
+Route::post('/like/{postId}',[LikeController::class,'store']);
+Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
 
