@@ -1,18 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RestaurantDashboardController;
-
+use App\Http\Controllers\ExperienceController;
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+- Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+- | Here is where you can register web routes for your application. These
+- routes are loaded by the RouteServiceProvider and all of them will
+- be assigned to the "web" middleware group. Make something great!
+- */
 
 
 Route::get('/', function () {
@@ -20,20 +17,14 @@ Route::get('/', function () {
 });
 
 // ここのルートを変更して各自の画面を確認する
-// Route::get('/layout', function () {
-//     return view('layouts.layout');
-// });
+Route::get('/index', [ExperienceController::class, 'index'])->name('experience.index');
 
-Route::get('/news-dashboard', function () {
-    return view('news-dashboard');
-});
-Route::get('/activity-dashboard', function () {
-    return view('activity-dashboard');
-});
+Route::post('/experience', [ExperienceController::class, 'store'])->name('experience.store');
+
+
+Route::delete('/experience/{id}', [ExperienceController::class, 'destroy'])->name('experience.destroy');
+
+Route::get('/experience/{id}/edit', [ExperienceController::class, 'edit'])->name('experience.edit');
+Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('experience.update');
+
 // -----------------------------------------------
-
-
-//restaurants Route
-Route::get('/restaurant-dashboard', [RestaurantDashboardController::class, 'index'])->name('restaurant.dashboard');
-
-
