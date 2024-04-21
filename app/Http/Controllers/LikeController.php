@@ -15,8 +15,6 @@ class LikeController extends Controller
         $like->user_id = Auth::user()->id;
         $like->experience_post_id = $postId;
         $like->save();
-
-        return back();
     }
 
     public function destroy($postId)
@@ -24,7 +22,5 @@ class LikeController extends Controller
         Like::where('experience_post_id', $postId)
             ->where('user_id', Auth::user()->id)
             ->delete();
-
-        return back();
     }
 }
