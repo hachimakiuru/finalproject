@@ -1,8 +1,16 @@
 @extends('layouts.layout')
 @section('content')
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('/css/admin-dashboard.css')  }}" >
+@endpush
+
 @include('parts.success-message')
+<body>
   <h1>ADMIN PAGE</h1>
+  <button type="submit" class="btn-create-user">
+    <a href="{{ route('register') }}">新規アカウントを追加</a>
+  </button>
   <table class="table">
     <thead>
       <tr>
@@ -22,9 +30,9 @@
         <th scope="row">{{ $user->id }}</th>
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
-        <td>{{ $user->RoomNo }}</td>
+        <td>{{ $user->room_number }}</td>
         <td>{{ $user->created_at }}</td>
-        <td>{{ $user->is_admin }}</td>
+        <td>{{ $user->role->name }}</td>
         <td><button type="button" class="btn btn-secondary">Details</button></td>
         <td><button type="button" class="btn btn-secondary">Update</button></td>
         <td>
@@ -67,5 +75,5 @@ deleteButtons.forEach(function(button) {
     //   alert('aaaa');
     //  });
   </script>
+</body>
 @endsection
-
