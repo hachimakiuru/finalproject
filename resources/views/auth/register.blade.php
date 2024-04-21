@@ -19,7 +19,7 @@
               </div>
               <div class="form-group mt-3">
                   <label for="email" class="text-dark">メールドレス:</label><br>
-                  <input type="email" name="email" id="email" placeholder="namiki@test.com" class="form-control">
+                  <input type="email" name="email" id="email" class="form-control">
                   @error('email')
                   <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
                   @enderror
