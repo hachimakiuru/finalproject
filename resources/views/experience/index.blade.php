@@ -55,19 +55,20 @@
                     <button type="submit" class="btn btn-danger delete-button">削除</button>
                 </form>
                 <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
-                
-                {{-- if notlike --}}
-                <form action="{{ route('like.store', $experience->id) }}" method="POST">
-                    @csrf
-                    <button><i class="ri-heart-line"></i></button>
-                </form>
 
-                {{-- else
-                <form action="{{ route('like.destroy', $experience->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button><i class="ri-heart-fill"></i></button>
-                </form> --}}
+                @if ($experience->isLike)
+                    <form action="{{ route('like.destroy', $experience->id) }}" method="POST" class="likebutton">
+                        @csrf
+                        @method('DELETE')
+                        <button><i class="ri-heart-fill"></i></button>
+                    </form>
+                @else
+                    <form action="{{ route('like.store', $experience->id) }}" method="POST" class="likebutton">
+                        @csrf
+                        <button><i class="ri-heart-line"></i></button>
+                    </form>
+                @endif
+                
             </div>
         </div>
     </div>
