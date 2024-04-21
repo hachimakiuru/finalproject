@@ -3,6 +3,10 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\RestaurantDashboardController;
+use App\Http\Controllers\NewsController;
+
+
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -11,6 +15,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ExperienceController;
 
 use App\Http\Controllers\LikeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +37,15 @@ Route::get('/welcome', function () {
 
 // ここのルートを変更して各自の画面を確認する
 
-Route::get('/layout', function () {
-    return view('layouts.layout');
+
+Route::get('/activity-dashboard', function () {
+    return view('activity-dashboard');
 });
+
+//news Route
+Route::get('/news', [NewsController::class,'index'])->name('news.index');
+
+
 
 
 // ログイン・ログアウト・レジスター・

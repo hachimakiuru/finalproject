@@ -7,7 +7,12 @@
   <title>Final Project</title>
   {{-- 独自cssの読み込み --}}
   <link rel="stylesheet" href="{{ asset('/css/reset.css')  }}" >
+
+  <link rel="stylesheet" href="{{ asset('/css/activity-dasboad-blade.css')  }}" >
+ 
+
   <link rel="stylesheet" href="{{ asset('/css/news-dashboard.css')  }}" >
+
   <link rel="stylesheet" href="{{ asset('/css/header-blade.css')  }}" >
   @stack('css')
 
