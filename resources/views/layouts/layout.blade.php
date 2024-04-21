@@ -14,7 +14,15 @@
   <link rel="stylesheet" href="{{ asset('/css/news-dashboard.css')  }}" >
 
   <link rel="stylesheet" href="{{ asset('/css/header-blade.css')  }}" >
+
+  <link rel="stylesheet" href="{{ asset('/css/restaurant-dashboard.css')  }}" >
+  <link rel="stylesheet" href="{{ asset('/css/rest-index.css')  }}" >
+  <link rel="stylesheet" href="{{ asset('/css/rest-post.css')  }}" >
+
+  
+
   @stack('css')
+
 
 
   {{-- Bootstrap5のCDN読み込み記述 --}}

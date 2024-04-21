@@ -1,5 +1,15 @@
 <?php
 
+
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RestaurantPostController;
+
+
+/*
+|-------------------------------------------------------------------------- 
+| Web Routes
+
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +30,7 @@ use App\Http\Controllers\LikeController;
 /*
 |--------------------------------------------------------------------------
 - Web Routes
+
 |--------------------------------------------------------------------------
 - | Here is where you can register web routes for your application. These
 - routes are loaded by the RouteServiceProvider and all of them will
@@ -41,6 +52,13 @@ Route::get('/welcome', function () {
 Route::get('/activity-dashboard', function () {
     return view('activity-dashboard');
 });
+
+Route::get('/restaurant-dashboard', function () {
+    return view('restaurant-dashboard');
+});
+// -----------------------------------------------
+
+
 
 //news Route
 Route::get('/news', [NewsController::class,'index'])->name('news.index');
@@ -68,10 +86,21 @@ Route::post('/experience', [ExperienceController::class, 'store'])->name('experi
 
 Route::delete('/experience/{id}', [ExperienceController::class, 'destroy'])->name('experience.destroy');
 
+
+// restaurant-haruki
+Route::get('/restaurants', [App\Http\Controllers\RestaurantPostController::class, 'index'])->name('restaurants.index');
+Route::get('/restaurants/create', [App\Http\Controllers\RestaurantPostController::class, 'create'])->name('restaurants.create');
+Route::post('/restaurants', [App\Http\Controllers\RestaurantPostController::class, 'store'])->name('restaurants.store');
+Route::get('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantPostController::class, 'show'])->name('restaurants.show');
+Route::get('/restaurants/{restaurant}/edit', [App\Http\Controllers\RestaurantPostController::class, 'edit'])->name('restaurants.edit');
+Route::put('/restaurants/{restaurant}/update', [App\Http\Controllers\RestaurantPostController::class, 'update'])->name('restaurants.update');
+Route::delete('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantPostController::class, 'destroy'])->name('restaurants.destroy');
+
 Route::get('/experience/{id}/edit', [ExperienceController::class, 'edit'])->name('experience.edit');
 Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('experience.update');
 
 // いいね機能
 Route::post('/like/{postId}',[LikeController::class,'store'])->name('like.store');
 Route::delete('/unlike/{postId}',[LikeController::class,'destroy'])->name('like.destroy');
+
 
