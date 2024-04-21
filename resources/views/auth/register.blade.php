@@ -1,5 +1,8 @@
 @extends('layouts.layout')
 @section('content')
+@push('css')
+  <link rel="stylesheet" href="{{ asset('/css/auth.css')  }}" >
+@endpush
 
 <div class="container">
   <div class="row justify-content-center">

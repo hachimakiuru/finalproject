@@ -1,5 +1,8 @@
 @extends('layouts.layout')
 @section('content')
+@push('css')
+<link rel="stylesheet" href="{{ asset('/css/welcome-blade.css')  }}" >
+@endpush
 
 @include('parts.success-message')
 <div class="welcome__container">
