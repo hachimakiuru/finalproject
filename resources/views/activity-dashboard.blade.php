@@ -13,7 +13,7 @@
             </div>
             <!-- ニュース -->
             <div class="bottom-box">
-                @include('news-dashboard')
+                @include('news.news-dashboard')
             </div>
         </div>
         <!-- アクティビティ -->

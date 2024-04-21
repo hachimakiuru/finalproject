@@ -1,13 +1,46 @@
+/* CSS for displaying text on images and applying a mosaic effect on hover */
+.news-dashboard-bottom-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create 2 columns of equal width */
+    grid-template-rows: repeat(2, 1fr); /* Create 2 rows of equal height */
+    gap: 10px; /* Optional: Space between items */
+}
 
+.news-dashboard-bottom-box a {
+    position: relative; /* Allow absolute positioning of child elements */
+    overflow: hidden; /* Hide overflow */
+    display: block;
+    width: 100%; 
+    height: 100%;
+}
 
+.news-dashboard-bottom-box img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease; /* Transition for mosaic effect */
+}
 
+/* Text container */
+.news-dashboard-bottom-box a::before {
+    content: attr(data-text); /* Use data-text attribute for the text */
+    position: absolute;
+    top: 50%; /* Center the text vertically */
+    left: 50%; /* Center the text horizontally */
+    transform: translate(-50%, -50%); /* Center the text */
+    color: white; /* Text color */
+    font-size: 1.5rem; /* Text size */
+    text-align: center;
+    z-index: 1; /* Position the text above the image */
+    opacity: 0; /* Initially hide the text */
+    transition: opacity 0.3s ease; /* Transition for opacity */
+}
 
-        /* .bottom-box a {
-            display: block;
-            background-color: white;
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-decoration: none;
-            color: black;
-        } */
+/* Apply mosaic effect on hover and show text */
+.news-dashboard-bottom-box a:hover img {
+    filter: blur(5px); /* Apply blur filter for mosaic effect */
+}
+
+.news-dashboard-bottom-box a:hover::before {
+    opacity: 1; /* Show the text */
+}
