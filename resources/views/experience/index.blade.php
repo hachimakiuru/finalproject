@@ -55,7 +55,20 @@
                     <button type="submit" class="btn btn-danger delete-button">削除</button>
                 </form>
                 <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
-                <i class="ri-heart-line"></i>
+
+                @if ($experience->isLike)
+                    <form action="{{ route('like.destroy', $experience->id) }}" method="POST" class="likebutton">
+                        @csrf
+                        @method('DELETE')
+                        <button><i class="ri-heart-fill"></i></button>
+                    </form>
+                @else
+                    <form action="{{ route('like.store', $experience->id) }}" method="POST" class="likebutton">
+                        @csrf
+                        <button><i class="ri-heart-line"></i></button>
+                    </form>
+                @endif
+                
             </div>
         </div>
     </div>
@@ -179,8 +192,8 @@
                 <div class="mb-3">
                     <span class="form-label">instagram permission :</span>
                     <div class="input-group" style="width: 100%;">
-                        <input type="checkbox" id="instagram_permission1" name="instagrampermission"  style="width: 100%;">
-                        <label for="instagram_permission1" class="btn ig-permission">投稿可能な場合はこちらをクリック</label>
+                        <input type="checkbox" id="instagram_permission" name="instagrampermission"  style="width: 100%;">
+                        <label for="instagram_permission" class="btn ig-permission">投稿可能な場合はこちらをクリック</label>
                         
                     </div>
                 </div>

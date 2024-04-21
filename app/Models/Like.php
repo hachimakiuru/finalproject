@@ -13,4 +13,14 @@ class Like extends Model
         'user_id',
         'experience_post_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function experiencePost()
+    {
+        return $this->belongsTo(ExperiencePost::class);
+    }
 }
