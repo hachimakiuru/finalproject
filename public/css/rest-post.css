@@ -1,4 +1,4 @@
-.rest-post-container {
+/* .rest-post-container {
     max-width: 600px;
     height: 678px;
     margin: 0 auto;
@@ -25,7 +25,7 @@
 .rest-post-container input[type="text"],
 .rest-post-container textarea,
 .rest-post-container .form-select {
-    width: calc(100% - 18px); /* 調整 */
+    width: calc(100% - 18px); 
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -71,7 +71,7 @@
 }
 
 .custom-file {
-    display: inline-block; /* 調整 */
+    display: inline-block;
     width: 100%;
 }
 
@@ -107,7 +107,7 @@
 .custom-file-input:valid ~ .custom-file-label {
     border-color: #007bff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
+} */
 
 
 

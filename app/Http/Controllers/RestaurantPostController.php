@@ -3,66 +3,89 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\RestaurantPost; // RestaurantPostモデルを使用するために必要
+use App\Models\RestaurantPost;
 
 class RestaurantPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('restaurants.restaurant-index');
+    public function index(){
+        $restaurants = RestaurantPost::all();
+        return view('restaurants.index' , ['restaurants' =>$restaurants]);
     }
-    
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('restaurants.restaurant-post');
+    public function create(){
+        return view('restaurants.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-       
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
+        $Data = $request->validate([
+            // ‘user_id’ => ‘required|string|max:255’,
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'genre_place' => 'required',
+            'genre_variety' => 'required',
+            'genre_religion' => 'required',
+            'genre_payment' => 'required',
+        ]);
         
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-       
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
+        $image = $request->file('image_path');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->storeAs('public/restaurant_images', $imageName);
+        
+        $restaurant = new RestaurantPost($Data);
+        // $restaurant->user_id = $Data['user_id'];
+        $restaurant->name = $Data['name'];
+        $restaurant->address = $Data['address'];
+        $restaurant->image_path = 'restaurant_images/' . $imageName;
+        $restaurant->genre_place = $Data['genre_place'];
+        $restaurant->genre_variety = $Data['genre_variety'];
+        $restaurant->genre_religion = $Data['genre_religion'];
+        $restaurant->genre_payment = $Data['genre_payment'];
+        $restaurant->save();
+        
+        // データベースからすべてのレストランポストを取得
+        $restaurant_posts = RestaurantPost::all();
+        
+       return redirect(route('restaurants.index'));
     
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    // 投稿を削除
-    public function destroy($id)
-    {
-
+    public function edit(RestaurantPost $restaurant){
+        return view('restaurants.edit' , ['restaurant' =>  $restaurant]);
     }
+
+    public function update(RestaurantPost $restaurant, Request $request) {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'image_path' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'genre_place' => 'required',
+            'genre_variety' => 'required',
+            'genre_religion' => 'required',
+            'genre_payment' => 'required',
+        ]);
+    
+        if ($request->hasFile('image_path')) {
+            $image = $request->file('image_path');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('public/restaurant_images', $imageName);
+            $validatedData['image_path'] = 'restaurant_images/' . $imageName;
+        }
+    
+        $restaurant->update($validatedData);
+    
+        return redirect(route('restaurants.index'))->with('success', 'Updated Successfully');
+    }
+    public function destroy(RestaurantPost $restaurant) {
+        $restaurant->delete();
+    
+        return redirect()->route('restaurants.index')->with('success', '削除しました');
+    }
+    public function show(RestaurantPost $id)
+    {
+        $restaurant = RestaurantPost::findOrFail($id);
+        return view('restaurants.show', ['restaurant' => $restaurant]);
+    }
+    
+        
+
 }

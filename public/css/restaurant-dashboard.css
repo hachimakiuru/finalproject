@@ -1,7 +1,7 @@
 /* 画面全体css */
 .restaurant-dashboard-container{
     display: flex;
-    padding-inline: 10px;
+    padding-inline: 3px;
     height: 100vh; 
 }
 
@@ -20,25 +20,14 @@
 /* 一覧表示のcss */
 .restaurant-dashboard-center{
     flex: 2; 
-    border: 1px solid black; /* ボーダー追加 */
-    border-radius: 2px;
+
 }
 
 .restaurant-dashboard-center div{
-    display: flex;
+    /* display: flex; */
     justify-content: center;
 }
 
-/* 投稿機能のcss */
-.restaurant-dashboard-left{
-    flex: 1;
-    border: 1px solid black; /* ボーダー追加 */
-    border-radius: 2px;
-}
 
-.restaurant-dashboard-left div{
-    display: flex;
-    justify-content: center;
-}
 
     

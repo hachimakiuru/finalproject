@@ -2,8 +2,8 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RestaurantDashboardController;
 use App\Http\Controllers\RestaurantPostController;
+
 
 /*
 |-------------------------------------------------------------------------- 
@@ -32,34 +32,18 @@ Route::get('/news-dashboard', function () {
 Route::get('/activity-dashboard', function () {
     return view('activity-dashboard');
 });
+Route::get('/restaurant-dashboard', function () {
+    return view('restaurant-dashboard');
+});
 // -----------------------------------------------
 
 
-//restaurant-dashboard
-Route::get('/restaurant-dashboard', [RestaurantDashboardController::class, 'index'])->name('restaurant.dashboard');
-
-// restaurant-search
-
-// リスト表示
-Route::get('/restaurant-index', [RestaurantPostController::class, 'index'])->name('restaurant.index');
-
-// 新規作成フォームの表示
-Route::get('/restaurant-index/create', [RestaurantPostController::class, 'create'])->name('restaurant.create');
-
-// 新規作成フォームの送信
-Route::post('/restaurant-posts', [RestaurantPostController::class, 'store'])->name('restaurant-posts.store');
-
-// 特定の投稿の表示
-Route::get('/restaurant-posts/{id}', [RestaurantPostController::class, 'show'])->name('restaurant-posts.show');
-
-// 編集フォームの表示
-Route::get('/restaurant-posts/{id}/edit', [RestaurantPostController::class, 'edit'])->name('restaurant-posts.edit');
-
-// 編集フォームの送信
-Route::put('/restaurant-posts/{id}', [RestaurantPostController::class, 'update'])->name('restaurant-posts.update');
-
-// 削除
-Route::delete('/restaurant-posts/{id}', [RestaurantPostController::class, 'destroy'])->name('restaurant-posts.destroy');
-
-
+// restaurant-haruki
+Route::get('/restaurants', [App\Http\Controllers\RestaurantPostController::class, 'index'])->name('restaurants.index');
+Route::get('/restaurants/create', [App\Http\Controllers\RestaurantPostController::class, 'create'])->name('restaurants.create');
+Route::post('/restaurants', [App\Http\Controllers\RestaurantPostController::class, 'store'])->name('restaurants.store');
+Route::get('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantPostController::class, 'show'])->name('restaurants.show');
+Route::get('/restaurants/{restaurant}/edit', [App\Http\Controllers\RestaurantPostController::class, 'edit'])->name('restaurants.edit');
+Route::put('/restaurants/{restaurant}/update', [App\Http\Controllers\RestaurantPostController::class, 'update'])->name('restaurants.update');
+Route::delete('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantPostController::class, 'destroy'])->name('restaurants.destroy');
 
