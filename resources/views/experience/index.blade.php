@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Final Project</title>
     {{-- 独自cssの読み込み --}}
     <link rel="stylesheet" href="{{ asset('/css/reset.css') }}">
@@ -56,18 +57,22 @@
                 </form>
                 <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
 
-                @if ($experience->isLike)
-                    <form action="{{ route('like.destroy', $experience->id) }}" method="POST" class="likebutton">
-                        @csrf
-                        @method('DELETE')
-                        <button><i class="ri-heart-fill"></i></button>
-                    </form>
-                @else
-                    <form action="{{ route('like.store', $experience->id) }}" method="POST" class="likebutton">
-                        @csrf
-                        <button><i class="ri-heart-line"></i></button>
-                    </form>
-                @endif
+
+                {{-- likeボタンの作成 --}}
+                <div class="btn-container" id="target{{ $experience->id }}">
+                    @if ($experience->isLike)
+                        {{-- <form action="{{ route('like.destroy', $experience->id) }}" method="POST" class="likebutton">
+                            @csrf
+                            @method('DELETE') --}}
+                            <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
+                        {{-- </form> --}}
+                    @else
+                        {{-- <form action="{{ route('like.store', $experience->id) }}" method="POST" class="likebutton"> --}}
+                            {{-- @csrf --}}
+                            <button id="like" onclick="like({{ $experience->id }})"><i class="ri-heart-line"></i></button>
+                        {{-- </form> --}}
+                    @endif
+                </div>
                 
             </div>
         </div>
@@ -224,6 +229,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
 
 <script>
     $('.detail-button').click(function() {
@@ -236,6 +244,59 @@
         $('#exampleModal .modal-body').html('<img src="' + image + '" class="card-img-top" alt="..."><p><strong>Address:</strong> ' + address + '</p><p><strong>Content:</strong> ' + content + '</p>');
     });
 </script>
+
+<script>
+    function like(id) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: `/like/${id}`,
+            success: function(data) {
+                $(`#target${id}`).empty();
+                var $button = $('<button></button>', {
+                    id: 'unlike',
+                    html: '<i class="ri-heart-fill"></i>',
+                    click: function() { unlike(id); }
+                });
+                $(`#target${id}`).append($button);
+            },
+            error: function(error) {
+                console.log('Error:', error);
+            }
+        });
+    }
+
+    function unlike(id) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'DELETE',
+            url: `/unlike/${id}`,
+            success: function(data) {
+                $(`#target${id}`).empty();
+                var $button = $('<button></button>', {
+                    id: 'like',
+                    html: '<i class="ri-heart-line"></i>',
+                    click: function() { like(id); }
+                });
+                $(`#target${id}`).append($button);
+            },
+            error: function(error) {
+                console.log('Error:', error);
+            }
+        });
+    }
+</script>
+    
 
 
 
