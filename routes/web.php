@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\LikeController;
 /*
 |--------------------------------------------------------------------------
 - Web Routes
@@ -26,5 +27,8 @@ Route::delete('/experience/{id}', [ExperienceController::class, 'destroy'])->nam
 
 Route::get('/experience/{id}/edit', [ExperienceController::class, 'edit'])->name('experience.edit');
 Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('experience.update');
+
+Route::post('/like/{postId}',[LikeController::class,'store']);
+Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
 
 // -----------------------------------------------
