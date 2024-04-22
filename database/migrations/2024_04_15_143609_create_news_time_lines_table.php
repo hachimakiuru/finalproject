@@ -17,21 +17,20 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title', 255);
-            $table->text('content');
+            $table->text('content')->default('');
             $table->string('image', 255)->nullable();
             $table->text('day')->nullable();
             $table->decimal('price')->nullable();
-            $table->string('place');
-            $table->string('others');
-            $table->string('genre_japan_activity', 50);
-            $table->string('genre_local_event', 50);
-            $table->string('genre_others', 50);
-            $table->string('genre_hotel_info', 50);
+            $table->string('place')->default(''); 
+            $table->string('others')->default('');
+            $table->string('genre_japan_activity', 50)->default('')->nullable();
+            $table->string('genre_local_event', 50)->default('')->nullable();
+            $table->string('genre_others', 50)->default('')->nullable();
+            $table->string('genre_hotel_info', 50)->default('')->nullable();
             $table->timestamps();
-
+    
             // 外部キー制約の追加
             $table->foreign('user_id')->references('id')->on('users');
-            // usersテーブルが存在しない場合、外部キー制約はエラーとなる可能性があるため、必要に応じてコメントアウトしてください。
         });
     }
 

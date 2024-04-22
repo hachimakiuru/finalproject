@@ -1,0 +1,1 @@
+show hotel-info

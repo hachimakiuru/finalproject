@@ -42,8 +42,8 @@ Route::get('/activity-dashboard', function () {
     return view('activity-dashboard');
 });
 
-//news Route
-Route::get('/news', [NewsController::class,'index'])->name('news.index');
+
+
 
 
 
