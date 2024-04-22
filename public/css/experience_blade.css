@@ -46,3 +46,19 @@ input[type="checkbox"] + label {
     display: flex;
     justify-content: center;
   }
+
+  .likebutton{
+    display:inline-block;
+  }
+
+  .likebutton * {
+    border: none;
+    background: none;
+  }
+
+  .btn-container,
+  .btn-container * {
+    display: inline-block;
+    background: none;
+    border: none;
+  }

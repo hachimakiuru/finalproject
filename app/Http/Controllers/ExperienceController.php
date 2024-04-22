@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ExperiencePost;
+use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -17,6 +18,17 @@ class ExperienceController extends Controller
     public function index()
     {
         $experiences = ExperiencePost::all(); // あなたのアプリケーションに適した方法でデータを取得してください
+        
+        if($experiences) {
+            foreach($experiences as $experience) {
+                // $experience['isLike'] = 
+                $likes = Like::where('user_id', Auth::user()->id)
+                    ->where('experience_post_id', $experience->id)
+                    ->get();
+                $experience['isLike'] = count($likes) > 0 ? true : false;
+            }
+        }
+        
         return view('experience.index', compact('experiences'));
     }
 
@@ -49,7 +61,7 @@ class ExperienceController extends Controller
             $image->move(public_path('storage/img'), $imageName);
         
             $experience = new ExperiencePost();
-            // $experience->user_id = Auth::user()->id;
+            $experience->user_id = Auth::user()->id;
             $experience->title = $request->title; 
             $experience->address = $request->address; 
             $experience->content = $request->content; 
@@ -91,6 +103,7 @@ class ExperienceController extends Controller
         ]);
         
         $experience = ExperiencePost::findOrFail($id);
+        $experience->user_id = Auth::user()->id;
         $experience->title = $request->title; 
         $experience->address = $request->address; 
         $experience->content = $request->content; 
