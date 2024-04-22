@@ -96,9 +96,6 @@ Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('e
 
 // いいね機能
 
-Route::post('/like/{postId}', [LikeController::class, 'store']);
-Route::post('/unlike/{postId}', [LikeController::class, 'destroy']);
-
 Route::post('/like/{postId}',[LikeController::class,'store'])->name('like.store');
 Route::delete('/unlike/{postId}',[LikeController::class,'destroy'])->name('like.destroy');
 
