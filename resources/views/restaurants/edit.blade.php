@@ -16,8 +16,8 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h4>編集フォーム</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="window.location='{{ route('restaurants.index') }}'"></button>
+                            </div>                            
                             <div class="card-body">
                                 <!-- 投稿フォーム -->
                                 <form action="{{ route('restaurants.update', ['restaurant' => $restaurant]) }}" method="post" enctype="multipart/form-data">

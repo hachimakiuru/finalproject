@@ -4,7 +4,7 @@
     <div class="header-wrapper">
       <ul class="header-nav">
         <li><a href="{{ route('welcome') }}">Home</a></li>
-        <li><a href="#">Food</a></li>
+        <li><a href="{{ route('restaurants.index') }}">Food</a></li>
         <li><a href="#">Activity</a></li>
         <li><a href="#">Chat Message</a></li>
       </ul>
@@ -17,7 +17,7 @@
       @auth
       <ul class="header-nav">
         <li><a href="{{ route('welcome') }}">Home</a></li>
-        <li><a href="#">Food</a></li>
+        <li><a href="{{ route('restaurants.index') }}">Food</a></li>
         <li><a href="#">Activity</a></li>
         <li><a href="#">Chat Message</a></li>
         @auth

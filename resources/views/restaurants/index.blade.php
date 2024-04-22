@@ -1,4 +1,7 @@
 @extends('layouts.layout')
+@push('css')
+<link rel="stylesheet" href="{{ asset('/css/restaurant-dashboard.css')  }}" >
+@endpush
 
 @section('content')
 <div class="container-fluid mt-3">

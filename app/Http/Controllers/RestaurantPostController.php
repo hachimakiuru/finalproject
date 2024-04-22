@@ -4,20 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RestaurantPost;
+use App\Models\User;
 
 class RestaurantPostController extends Controller
 {
-    public function index(){
+        public function index(User $user){
+        $users =User::all();
         $restaurants = RestaurantPost::all();
-        return view('restaurants.index' , ['restaurants' =>$restaurants]);
+        return view('restaurants.index' , ['restaurants' =>$restaurants,'users'=>$users ]);
     }
+
     public function create(){
         return view('restaurants.create');
     }
+
     public function store(Request $request)
     {
         $Data = $request->validate([
-            // ‘user_id’ => ‘required|string|max:255’,
+            'user_id' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -32,7 +36,7 @@ class RestaurantPostController extends Controller
         $image->storeAs('public/restaurant_images', $imageName);
         
         $restaurant = new RestaurantPost($Data);
-        // $restaurant->user_id = $Data['user_id'];
+        $restaurant->user_id = $Data['user_id'];
         $restaurant->name = $Data['name'];
         $restaurant->address = $Data['address'];
         $restaurant->image_path = 'restaurant_images/' . $imageName;

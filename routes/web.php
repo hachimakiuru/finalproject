@@ -6,12 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantPostController;
 
 
-/*
-|-------------------------------------------------------------------------- 
-| Web Routes
+
+
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
+
 
 use App\Http\Controllers\RestaurantDashboardController;
 use App\Http\Controllers\NewsController;
@@ -96,6 +95,8 @@ Route::get('/restaurants/{restaurant}/edit', [App\Http\Controllers\RestaurantPos
 Route::put('/restaurants/{restaurant}/update', [App\Http\Controllers\RestaurantPostController::class, 'update'])->name('restaurants.update');
 Route::delete('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantPostController::class, 'destroy'])->name('restaurants.destroy');
 
+
+// experience
 Route::get('/experience/{id}/edit', [ExperienceController::class, 'edit'])->name('experience.edit');
 Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('experience.update');
 
