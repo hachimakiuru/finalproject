@@ -157,6 +157,24 @@
                                                 投稿詳細を表示
                                             </button>
 
+
+
+                                            {{-- likeボタンの作成 --}}
+                                            <div class="btn-container" id="target{{ $restaurant->id }}">
+                                                @if ($restaurant->isLike)
+                                                    {{-- <form action="{{ route('like.destroy', $restaurant->id) }}" method="POST" class="likebutton">
+                                                        @csrf
+                                                        @method('DELETE') --}}
+                                                        <button id="unlike" onclick="unlike({{ $restaurant->id }})"><i class="ri-heart-fill"></i></button>
+                                                    {{-- </form> --}}
+                                                @else
+                                                    {{-- <form action="{{ route('like.store', $restaurant->id) }}" method="POST" class="likebutton"> --}}
+                                                        {{-- @csrf --}}
+                                                        <button id="like" onclick="like({{ $restaurant->id }})"><i class="ri-heart-line"></i></button>
+                                                    {{-- </form> --}}
+                                                @endif
+                                            </div>
+
                                             <!-- 詳細モーダル始 -->
                                             <div class="modal fade" id="exampleModal_{{ $restaurant->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -222,6 +240,59 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+});
+
+
+function like(id) {
+    
+
+    $.ajax({
+        type: 'POST',
+        url: `/restaurant/like/${id}`,
+        success: function(data) {
+            $(`#target${id}`).empty();
+            var $button = $('<button></button>', {
+                id: 'unlike',
+                html: '<i class="ri-heart-fill"></i>',
+                click: function() { unlike(id); }
+            });
+            $(`#target${id}`).append($button);
+        },
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
+}
+
+function unlike(id) {
+
+    $.ajax({
+        type: 'DELETE',
+        url: `/restaurant/unlike/${id}`,
+        success: function(data) {
+            $(`#target${id}`).empty();
+            var $button = $('<button></button>', {
+                id: 'like',
+                html: '<i class="ri-heart-line"></i>',
+                click: function() { like(id); }
+            });
+            $(`#target${id}`).append($button);
+        },
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
+}
+</script>
+
 @endsection
-
-

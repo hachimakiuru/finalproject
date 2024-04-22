@@ -2,15 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RestaurantLike;
 use Illuminate\Http\Request;
 use App\Models\RestaurantPost;
+use Illuminate\Support\Facades\Auth;
 
 class RestaurantPostController extends Controller
 {
     public function index(){
         $restaurants = RestaurantPost::all();
-        return view('restaurants.index' , ['restaurants' =>$restaurants]);
+
+        if($restaurants ) {
+            foreach($restaurants  as $restaurant) {
+                // $restaurant['isLike'] = 
+                $likes = RestaurantLike::where('user_id', Auth::user()->id)
+                    ->where('restaurant_post_id', $restaurant->id)
+                    ->get();
+                $restaurant['isLike'] = count($likes) > 0 ? true : false;
+            }
+        }
+        
+        return view('restaurants.index', compact('restaurants'));
+
+        // return view('restaurants.index' , ['restaurants' =>$restaurants]);
     }
+
+
     public function create(){
         return view('restaurants.create');
     }
