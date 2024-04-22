@@ -25,7 +25,11 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ExperienceController;
 
 use App\Http\Controllers\LikeController;
+
+use App\Http\Controllers\RbookingController;
+
 use App\Http\Controllers\RestaurantLikeController;
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -50,7 +54,7 @@ Route::get('/restaurant-dashboard', function () {
 
 
 //news Route
-Route::get('/news', [NewsController::class,'index'])->name('news.index');
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 
 
 
@@ -91,14 +95,19 @@ Route::delete('/restaurants/{restaurant}', [App\Http\Controllers\RestaurantPostC
 Route::get('/experience/{id}/edit', [ExperienceController::class, 'edit'])->name('experience.edit');
 Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('experience.update');
 
-// いいね機能
+// restaurant-booking-form
+Route::get('/rbooking', [RbookingController::class, 'index'])->name('rbooking.index');
+Route::put('/rbooking/{id}', [RbookingController::class, 'update'])->name('rbooking.update');
+Route::delete('/rbooking/{id}', [RbookingController::class, 'destroy'])->name('rbooking.destroy');
 
+
+// いいね機能
 Route::post('/like/{postId}',[LikeController::class,'store'])->name('like.store');
 Route::delete('/unlike/{postId}',[LikeController::class,'destroy'])->name('like.destroy');
 
 
 // いいね機能(restaurant)
-
 Route::post('/restaurant/like/{postId}',[RestaurantLikeController::class,'store'])->name('resto-like.store');
 Route::delete('/restaurant/unlike/{postId}',[RestaurantLikeController::class,'destroy'])->name('resto-like.destroy');
+
 
