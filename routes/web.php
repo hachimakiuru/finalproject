@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+// use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 
@@ -44,9 +44,25 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/users', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);
+// admin.dashboardのルート
+// Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);
 
-Route::delete('/admin/dashboard/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::get('/admin', [UserController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);
+Route::get('/admin/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::post('/admin/{user}', [UserController::class, 'update'])->name('user.update');
+Route::delete('/admin/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+
+// Route::get('/admin', [UserController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);
+
+// Route::get('/admin/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+
+// Route::post('/admin/{user}', [UserController::class, 'update'])->name('user.update');
+
+// Route::delete('/admin/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+
+
 // --------------------------------------------------------------
 
 // ポンポン投稿
@@ -61,6 +77,5 @@ Route::get('/experience/{id}/edit', [ExperienceController::class, 'edit'])->name
 Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('experience.update');
 
 // いいね機能
-Route::post('/like/{postId}',[LikeController::class,'store']);
-Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
-
+Route::post('/like/{postId}', [LikeController::class, 'store']);
+Route::post('/unlike/{postId}', [LikeController::class, 'destroy']);
