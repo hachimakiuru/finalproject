@@ -246,12 +246,14 @@
 </script>
 
 <script>
-    function like(id) {
-        $.ajaxSetup({
+
+    $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+    function like(id) {
+        
 
         $.ajax({
             type: 'POST',
@@ -272,11 +274,6 @@
     }
 
     function unlike(id) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
         $.ajax({
             type: 'DELETE',
