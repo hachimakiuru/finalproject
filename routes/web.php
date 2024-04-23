@@ -26,10 +26,11 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ExperienceController;
 
 use App\Http\Controllers\LikeController;
-
 use App\Http\Controllers\RbookingController;
 
 use App\Http\Controllers\RestaurantLikeController;
+
+use App\Http\Controllers\NewsCalendarController;
 
 
 Route::get('/', function () {
@@ -112,3 +113,6 @@ Route::post('/restaurant/like/{postId}',[RestaurantLikeController::class,'store'
 Route::delete('/restaurant/unlike/{postId}',[RestaurantLikeController::class,'destroy'])->name('resto-like.destroy');
 
 
+// カレンダー機能
+Route::get('/calendar', [NewsCalendarController::class, 'view'])->name('calendar.view');
+Route::get('/calendar/search', [NewsCalendarController::class, 'search'])->name('calendar.search');
