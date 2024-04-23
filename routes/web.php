@@ -43,7 +43,22 @@ Route::get('/activity-dashboard', function () {
 });
 
 
+//News.index
+Route::get('/news/event', [NewsController::class,'event'])->name('news.event');
+Route::get('/news/hotel-info', [NewsController::class,'hotelInfo'])->name('news.hotel-info');
+Route::get('/news/japan-culture', [NewsController::class,'japanCulture'])->name('news.japan-culture');
+Route::get('/news/others', [NewsController::class,'others'])->name('news.others');
 
+//News.Modalのstore
+Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+//News.show
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+//News.edit
+Route::get('/news/{id}/edit',[NewsController::class,'edit'])->name('news.news-edit');
+
+Route::put('/news/{id}',[NewsController::class,'update'])->name('news.update');
+
+Route::delete('posts/{id}',[NewsController::class,'destroy'])->name('news.destroy');
 
 
 

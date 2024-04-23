@@ -23,14 +23,12 @@ return new class extends Migration
             $table->decimal('price')->nullable();
             $table->string('place')->default(''); 
             $table->string('others')->default('');
-            $table->string('genre_japan_activity', 50)->default('')->nullable();
-            $table->string('genre_local_event', 50)->default('')->nullable();
-            $table->string('genre_others', 50)->default('')->nullable();
-            $table->string('genre_hotel_info', 50)->default('')->nullable();
+            $table->unsignedBigInteger('genre_id');
             $table->timestamps();
     
             // 外部キー制約の追加
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('genre_id')->references('id')->on('genres');
         });
     }
 
@@ -41,7 +39,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('your_table_name');
+        Schema::dropIfExists('news_time_lines');
     }
 };
 

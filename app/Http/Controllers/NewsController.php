@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\NewsTimeLine;
 
 class NewsController extends Controller
 {
@@ -11,7 +13,33 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $newsTimeLines = NewsTimeLine::all();
+
+        return view('news.event.index', compact('newsTimeLines'));
+    }
+
+    public function event()
+    {
+        $newsTimeLines = NewsTimeLine::where('genre_id', 1)->get();
+        return view('news.event.index', compact('newsTimeLines'));
+    }
+
+    public function hotelInfo()
+    {
+        $newsTimeLines = NewsTimeLine::where('genre_id', 2)->get();
+        return view('news.hotel-info.index', compact('newsTimeLines'));
+    }
+
+    public function japanCulture()
+    {
+        $newsTimeLines = NewsTimeLine::where('genre_id', 3)->get();
+        return view('news.japan-culture.index', compact('newsTimeLines'));
+    }
+
+    public function others()
+    {
+        $newsTimeLines = NewsTimeLine::where('genre_id', 4)->get();
+        return view('news.others.index', compact('newsTimeLines'));
     }
 
     /**
@@ -19,7 +47,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -27,15 +55,52 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // バリデーションルールの定義
+         $request->validate([
+            // 'user_id' => 'required|exists:users,id',
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'day' => 'required',
+            'price' => 'required|numeric',
+            'place' => 'required|string',
+            'others' => 'nullable|string',
+            'genre_id' => 'required',
+        ]);
+        // 新しい NewsTimeLine インスタンスの作成
+        $newsTimeLine = new NewsTimeLine([
+            'user_id' => Auth::user()->id,
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'day' => $request->input('day'),
+            'price' => $request->input('price'),
+            'place' => $request->input('place'),
+            'others' => $request->input('others'),
+            'genre_id' => intval($request->input('genre_id'))
+        ]);
+        // dd($newsTimeLine);
+
+        // 写真がアップロードされている場合
+        if ($request->hasFile('image')) {
+            $image = $request->file('image'); 
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('storage/img'), $imageName);
+            $newsTimeLine->image = $imageName;
+        }
+
+        // レコードを保存
+        $newsTimeLine->save();
+
+        return back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $newsTimeLine = NewsTimeLine::find($id);
+        return view('news.show', compact('newsTimeLine'));
     }
 
     /**
@@ -43,7 +108,9 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $newsTimeLine = NewsTimeLine::find($id);
+        
+        return view('news.news-edit', compact('newsTimeLine'));
     }
 
     /**
@@ -51,7 +118,19 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $newsTimeLine = NewsTimeLine::find($id);
+
+        $newsTimeLine -> title = $request -> title;
+        $newsTimeLine -> content = $request -> content;
+        $newsTimeLine -> place = $request -> place;
+        $newsTimeLine -> price  = $request -> price ;
+        $newsTimeLine -> others = $request -> others;
+        $newsTimeLine -> day = $request -> day;
+        $newsTimeLine -> image = $request -> image;
+
+        $newsTimeLine -> save();
+
+        return view('news.show', compact('newsTimeLine'));
     }
 
     /**
@@ -59,6 +138,10 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $newsTimeLine = NewsTimeLine::find($id);
+
+        $newsTimeLine -> delete();
+
+        return redirect() -> route('news.index');
     }
 }

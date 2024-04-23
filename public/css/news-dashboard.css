@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Create 2 columns of equal width */
     grid-template-rows: repeat(2, 1fr); /* Create 2 rows of equal height */
-    gap: 10px; /* Optional: Space between items */
+    /* gap: 10px; */
 }
 
 .news-dashboard-bottom-box a {
