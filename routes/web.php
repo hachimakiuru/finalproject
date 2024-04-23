@@ -102,6 +102,8 @@ Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('e
 Route::get('/rbooking', [RbookingController::class, 'index'])->name('rbooking.index');
 Route::put('/rbooking/{id}', [RbookingController::class, 'update'])->name('rbooking.update');
 Route::delete('/rbooking/{id}', [RbookingController::class, 'destroy'])->name('rbooking.destroy');
+Route::post('/rbooking', [RbookingController::class, 'store'])->name('rbooking.store');
+
 
 // News Bookings一覧
 Route::get('/news-bookings', [NewsBookingController::class, 'index'])->name('newsBookings.index');
