@@ -45,7 +45,7 @@
       </tr>
     </tbody>
 
- <!-- Modal -->
+ <!-- Modal of edit-->
 <div class="modal fade" id="exampleModal{{ $restaurant_post->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

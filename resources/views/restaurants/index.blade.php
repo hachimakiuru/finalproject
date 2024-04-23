@@ -198,7 +198,7 @@
                                             <p>{{ $restaurant->genre_place }}</p>
                                             <!-- モーダルトリガーボタン -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
-                                                投稿詳細を表示
+                                                詳細&予約フォーム
                                             </button>
 
 
@@ -219,58 +219,133 @@
                                                 @endif
                                             </div>
 
-                                            <!-- 詳細モーダル始 -->
-                                            <div class="modal fade" id="exampleModal_{{ $restaurant->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">{{ $restaurant->name }}</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="container-fluid">
-                                                                <div class="row">
-                                                                    <div class="col-md-12 text-center mb-4">
-                                                                        <img src="{{ Storage::url($restaurant->image_path) }}" class="img-fluid rounded shadow-lg" alt="restaurant photo">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <p><strong>ユーザー名:</strong> {{ $restaurant->user->name }}</p>
-                                                                        <p><strong>店舗名:</strong> {{ $restaurant->name }}</p>
-                                                                        <p><strong>住所:</strong> {{ $restaurant->address }}</p>
-                                                                        <p><strong>エリア:</strong> {{ $restaurant->genre_place }}</p>
-                                                                        <p><strong>ジャンル:</strong> {{ $restaurant->genre_variety }}</p>
-                                                                        <p><strong>食事制限:</strong> {{ $restaurant->genre_religion }}</p>
-                                                                        <p><strong>支払方法:</strong> {{ $restaurant->genre_payment }}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <div class="container-fluid">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <div class="text-start">
-                                                                            <a href="{{ route('restaurants.edit', ['restaurant' => $restaurant]) }}" class="btn btn-primary">編集フォーム</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="text-end">
-                                                                            <form action="{{ route('restaurants.destroy', ['restaurant' => $restaurant]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？')">
-                                                                                @csrf
-                                                                                @method('DELETE')
-                                                                                <button type="submit" class="btn btn-danger">削除</button>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- モーダル終 -->
+<!-- 詳細モーダル始 -->
+<div class="modal fade" id="exampleModal_{{ $restaurant->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ $restaurant->name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <!-- ページ1の内容 -->
+                    <div class="page" id="page1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="text-center">
+                                    <img src="{{ Storage::url($restaurant->image_path) }}" class="img-fluid rounded shadow-lg" alt="restaurant photo">
+                                </div>
+                                <p><strong>ユーザー名:</strong> {{ $restaurant->user->name }}</p>
+                                <p><strong>店舗名:</strong> {{ $restaurant->name }}</p>
+                                <p><strong>住所:</strong> {{ $restaurant->address }}</p>
+                                <p><strong>エリア:</strong> {{ $restaurant->genre_place }}</p>
+                                <p><strong>ジャンル:</strong> {{ $restaurant->genre_variety }}</p>
+                                <p><strong>食事制限:</strong> {{ $restaurant->genre_religion }}</p>
+                                <p><strong>支払方法:</strong> {{ $restaurant->genre_payment }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 各ページの内容を追加 -->
+                    <!-- <div class="page" id="page2">ページ2の内容</div> -->
+                    <!-- <div class="page" id="page3">ページ3の内容</div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- 前のページに移動するボタン -->
+                                <button type="button" class="btn btn-light" id="prevBtn">
+                                    <i class="fas fa-chevron-left"></i> 詳細
+                                </button>
+                                <!-- ページ番号 -->
+                                <div id="pageNumber" class="h5 text-center">1 / 2</div>
+                                <!-- 次のページに移動するボタン -->
+                                <button type="button" class="btn btn-light" id="nextBtn">
+                                    予約フォーム <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 削除ボタンと編集ボタン -->
+            <div class="modal-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- 編集ボタン -->
+                                <a href="{{ route('restaurants.edit', ['restaurant' => $restaurant]) }}" class="btn btn-primary">編集</a>
+                                <!-- 削除ボタン -->
+                                <form action="{{ route('restaurants.destroy', ['restaurant' => $restaurant]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">削除</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- モーダル終 -->
+
+<script>
+    // 現在のページと総ページ数を保持する変数
+    let currentPage = 1;
+    const totalPages = 2; // 総ページ数は適宜変更してください
+
+    // ページ番号を更新する関数
+    function updatePageNumber() {
+        document.getElementById('pageNumber').textContent = currentPage + ' / ' + totalPages;
+    }
+
+    // 前のページに移動する関数
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            updatePageNumber();
+            showPage(currentPage);
+        }
+    }
+
+    // 次のページに移動する関数
+    function nextPage() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            updatePageNumber();
+            showPage(currentPage);
+        }
+    }
+
+    // ページを表示する関数
+    function showPage(page) {
+        // 全てのページを非表示にする
+        document.querySelectorAll('.page').forEach(function(element) {
+            element.style.display = 'none';
+        });
+        // 指定されたページを表示する
+        document.getElementById('page' + page).style.display = 'block';
+    }
+
+    // 初期表示として最初のページを表示
+    showPage(currentPage);
+    
+    // ボタンのクリックイベントリスナーを追加
+    document.getElementById('prevBtn').addEventListener('click', function() {
+        prevPage();
+    });
+    document.getElementById('nextBtn').addEventListener('click', function() {
+        nextPage();
+    });
+</script>
+
+
 
                                         </div>
                                     </div>
