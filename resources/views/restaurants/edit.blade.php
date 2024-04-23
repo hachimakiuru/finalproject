@@ -16,7 +16,7 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h4>編集フォーム</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" onclick="location.href='{{ route('restaurants.index') }}'" aria-label="閉じる"></button>
                             </div>
                             <div class="card-body">
                                 <!-- 投稿フォーム -->
@@ -25,7 +25,8 @@
                                     @method('put')
                                     <div class="mb-3">
                                         <label for="username" class="form-label">ユーザー名</label>
-                                        <input type="text" id="username" name="user_id" class="form-control @error('user_id') is-invalid @enderror" value="{{ old('user_id') }}">
+                                        {{-- <input type="text" id="username" name="user_id" class="form-control @error('user_id') is-invalid @enderror" value="{{ old('user_id') }}"> --}}
+                                        <p>{{Auth::user()->name }}</p>
                                         @error('user_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
