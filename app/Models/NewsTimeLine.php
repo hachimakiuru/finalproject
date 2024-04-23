@@ -18,10 +18,7 @@ class NewsTimeLine  extends Model
         'price',
         'place',
         'others',
-        'genre_japan_activity',
-        'genre_local_event',
-        'genre_others',
-        'genre_hotel_info',
+        'genre_id',
     ];
 
     /**
