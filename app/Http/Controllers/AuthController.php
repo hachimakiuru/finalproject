@@ -39,7 +39,7 @@ class AuthController extends Controller
             ]
         );
 
-        return redirect()->route('welcome')->with('success', 'アカウント追加が完了しました！');
+        return redirect()->route('admin.dashboard')->with('success', 'アカウント追加が完了しました！');
     }
 
     public function login()

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Final Project</title>
     {{-- 独自cssの読み込み --}}
     <link rel="stylesheet" href="{{ asset('/css/reset.css') }}">
@@ -55,7 +56,24 @@
                     <button type="submit" class="btn btn-danger delete-button">削除</button>
                 </form>
                 <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
-                <i class="ri-heart-line"></i>
+
+
+                {{-- likeボタンの作成 --}}
+                <div class="btn-container" id="target{{ $experience->id }}">
+                    @if ($experience->isLike)
+                        {{-- <form action="{{ route('like.destroy', $experience->id) }}" method="POST" class="likebutton">
+                            @csrf
+                            @method('DELETE') --}}
+                            <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
+                        {{-- </form> --}}
+                    @else
+                        {{-- <form action="{{ route('like.store', $experience->id) }}" method="POST" class="likebutton"> --}}
+                            {{-- @csrf --}}
+                            <button id="like" onclick="like({{ $experience->id }})"><i class="ri-heart-line"></i></button>
+                        {{-- </form> --}}
+                    @endif
+                </div>
+                
             </div>
         </div>
     </div>
@@ -179,8 +197,8 @@
                 <div class="mb-3">
                     <span class="form-label">instagram permission :</span>
                     <div class="input-group" style="width: 100%;">
-                        <input type="checkbox" id="instagram_permission1" name="instagrampermission"  style="width: 100%;">
-                        <label for="instagram_permission1" class="btn ig-permission">投稿可能な場合はこちらをクリック</label>
+                        <input type="checkbox" id="instagram_permission" name="instagrampermission"  style="width: 100%;">
+                        <label for="instagram_permission" class="btn ig-permission">投稿可能な場合はこちらをクリック</label>
                         
                     </div>
                 </div>
@@ -211,6 +229,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
 
 <script>
     $('.detail-button').click(function() {
@@ -223,6 +244,56 @@
         $('#exampleModal .modal-body').html('<img src="' + image + '" class="card-img-top" alt="..."><p><strong>Address:</strong> ' + address + '</p><p><strong>Content:</strong> ' + content + '</p>');
     });
 </script>
+
+<script>
+
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    function like(id) {
+        
+
+        $.ajax({
+            type: 'POST',
+            url: `/like/${id}`,
+            success: function(data) {
+                $(`#target${id}`).empty();
+                var $button = $('<button></button>', {
+                    id: 'unlike',
+                    html: '<i class="ri-heart-fill"></i>',
+                    click: function() { unlike(id); }
+                });
+                $(`#target${id}`).append($button);
+            },
+            error: function(error) {
+                console.log('Error:', error);
+            }
+        });
+    }
+
+    function unlike(id) {
+
+        $.ajax({
+            type: 'DELETE',
+            url: `/unlike/${id}`,
+            success: function(data) {
+                $(`#target${id}`).empty();
+                var $button = $('<button></button>', {
+                    id: 'like',
+                    html: '<i class="ri-heart-line"></i>',
+                    click: function() { like(id); }
+                });
+                $(`#target${id}`).append($button);
+            },
+            error: function(error) {
+                console.log('Error:', error);
+            }
+        });
+    }
+</script>
+    
 
 
 

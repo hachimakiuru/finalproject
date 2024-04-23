@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Like extends Model
+class RestaurantLike extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'experience_post_id',
+        'restaurant_post_id',
     ];
 
     public function user()
@@ -19,8 +19,8 @@ class Like extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function experiencePost()
+    public function restaurantPost()
     {
-        return $this->belongsTo(ExperiencePost::class);
+        return $this->belongsTo(RestaurantPost::class);
     }
 }

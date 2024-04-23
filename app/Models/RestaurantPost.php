@@ -44,4 +44,5 @@ class RestaurantPost extends Model
     {
         return $this->hasMany(RestaurantComment::class);
     }
+    
 }

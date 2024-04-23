@@ -18,7 +18,7 @@
     </a>
   </div>
   <div>
-    <a class="welcome__box" href="#">
+    <a class="welcome__box" href="{{ route('restaurants.index') }}">
       <div class="welcome__box-img">
         <img src="{{ asset('/img/welcome-food.png') }}" alt="">
         <span class="welcome__box-title">グルメ</span>

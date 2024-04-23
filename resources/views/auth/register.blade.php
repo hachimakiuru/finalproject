@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 @section('content')
+
 @push('css')
   <link rel="stylesheet" href="{{ asset('/css/auth.css')  }}" >
 @endpush
@@ -19,7 +20,7 @@
               </div>
               <div class="form-group mt-3">
                   <label for="email" class="text-dark">メールドレス:</label><br>
-                  <input type="email" name="email" id="email" placeholder="namiki@test.com" class="form-control">
+                  <input type="email" name="email" id="email" class="form-control">
                   @error('email')
                   <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
                   @enderror
@@ -31,13 +32,6 @@
                 <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
                 @enderror
               </div>
-              {{-- 従業員ID一旦コメントアウト --}}
-              {{-- <div class="form-group mt-3">
-                <label for="employ" class="text-dark">従業員ID:</label><br>
-                <input type="number" name="employ" id="employ" min="1" placeholder="" class="form-control">
-                <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
-              </div> --}}
-              {{-- ---------------------------- --}}
               <div class="form-group mt-3">
                   <label for="password" class="text-dark">パスワード:</label><br>
                   <input type="password" name="password" id="password" class="form-control">
@@ -53,7 +47,7 @@
                   @enderror
               </div>
 
-              <p class="mt-3">ユーザータイプ:</p>
+              <p class="mt-3">ユーザー権限:</p>
               
               <label class="form-check-label" for="">Role:</label>
               @foreach ($roles as $role)
@@ -63,17 +57,6 @@
               {{-- <div class="form-check form-check-inline">
               </div> --}}
               @endforeach
-
-              {{-- <div class="form-group form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="2">
-                <label class="form-check-label" for="inlineRadio1">Employee</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="3">
-                <label class="form-check-label" for="inlineRadio2">Guest</label>
-              </div> --}}
- 
-
               <div class="form-group">
                   <label for="remember-me" class="text-dark"></label><br>
                   <input type="submit" name="submit" class="btn btn-dark btn-md" value="送信">
