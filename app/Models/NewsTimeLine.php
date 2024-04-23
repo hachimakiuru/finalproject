@@ -37,6 +37,8 @@ class NewsTimeLine  extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function newsBooking()
+    {
+        return $this->hasMany(NewsBooking::class);
+    }
 }
-
-

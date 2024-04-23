@@ -26,6 +26,4 @@ class RbookingController extends Controller
 
         return redirect()->route('rbooking.index')->with('success', '削除ができました');
     }
-
-    // viewとvalidationと
 }

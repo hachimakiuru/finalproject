@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RestaurantForm extends Model
+class NewsBooking extends Model
 {
     use HasFactory;
 
@@ -13,8 +13,9 @@ class RestaurantForm extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function restaurantPost()
+
+    public function newsPost()
     {
-        return $this->belongsTo(RestaurantPost::class, 'restaurant_post_id');
+        return $this->belongsTo(NewsTimeLine::class, 'newsPost_id');
     }
 }
