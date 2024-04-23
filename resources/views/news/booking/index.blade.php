@@ -1,19 +1,15 @@
 @extends('layouts.layout')
 @section('content')
 
-@push('css')
-  <link rel="stylesheet" href="{{ asset('/css/restaurant/booking-index.css')  }}" >
-@endpush
-
 @include('parts.success-message')
-<body class="rbooking__body">
-  <h1>Restaurant Booking Request</h1>
+<body class="">
+  <h1>Activities Booking Request</h1>
 
   <table class="table">
     <thead>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">Restaurant</th>
+        <th scope="col">Event</th>
         <th scope="col">Guest Name</th>
         <th scope="col">#Room</th>
         <th scope="col">Number</th>
@@ -25,42 +21,42 @@
         <th scope="col">Delete</th>
       </tr>
     <tbody>
-      @foreach ($restaurant_posts as $restaurant_post)
+      @foreach ($news_posts as $news_post)
       <tr>
-        <th scope="row">{{ $restaurant_post->id }}</th>
-        <td>{{ $restaurant_post->restaurantPost->name }}</td>
-        <td>{{ $restaurant_post->user->name }}</td>
-        <td>{{ $restaurant_post->user->room_number }}</td>
-        <td>{{ $restaurant_post->number_guests }}</td>
-        <td>{{ $restaurant_post->day }}</td>
-        <td>{{ $restaurant_post->time1 }}</td>
-        <td>{{ $restaurant_post->time2 }}</td>
-        <td>{{ $restaurant_post->memo }}</td>
-        <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $restaurant_post->id }} ">Edit</button></td>
+        <th scope="row">{{ $news_post->id }}</th>
+        <td>{{ $news_post->day }}</td>
+        <td>{{ $news_post->user->name }}</td>
+        <td>{{ $news_post->user->room_number }}</td>
+        <td>{{ $news_post->number_guests }}</td>
+        <td>{{ $news_post->day }}</td>
+        <td>{{ $news_post->time1 }}</td>
+        <td>{{ $news_post->time2 }}</td>
+        <td>{{ $news_post->memo }}</td>
+        <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $news_post->id }} ">Edit</button></td>
         <td>
-          <form method="POST" action="{{ route('rbooking.destroy', $restaurant_post->id) }}">
+          <form method="POST" action="{{ route('newsBookings.destroy', $news_post->id) }}">
+          <form method="POST" action="">
             @csrf
             @method('delete')
-            <button type="submit" class="btn btn-danger deleteUser">Delete</button>
+            <button type="submit" class="btn btn-danger deleteNewspost">Delete</button>
         </form>
         </td>
       </tr>
     </tbody>
 
  <!-- Modal of edit-->
-<div class="modal fade" id="exampleModal{{ $restaurant_post->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal fade" id="exampleModal{{ $news_post->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">アカウント情報の変更</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">希望情報の変更</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
         <div class="container">
           <div class="row justify-content-center">
               <div class="col-12 col-sm-8 col-md-10">
-                  <form class="form mt-5" action="{{ route('rbooking.update', $restaurant_post->id) }}" method="post">
+                  <form class="form mt-5" action="" method="post">
                     @csrf 
                     @method('put')
                       <div class="form-group">
@@ -79,7 +75,7 @@
 
   <script>
 
-    var deleteButtons = document.querySelectorAll('.deleteUser');
+    var deleteButtons = document.querySelectorAll('.deleteNewspost');
     deleteButtons.forEach(function(button) {
         button.addEventListener('click', function(event) {
           // alert('test');
@@ -93,4 +89,5 @@
     });
       </script>
 </body>
+
 @endsection

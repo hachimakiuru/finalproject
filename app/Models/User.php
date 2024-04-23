@@ -59,6 +59,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(RestaurantPost::class);
     }
+    public function newsBooking()
+    {
+        return $this->hasMany(NewsBooking::class);
+    }
     public function Role()
     {
         return $this->belongsTo(Role::class,);

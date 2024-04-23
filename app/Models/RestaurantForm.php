@@ -33,4 +33,8 @@ class RestaurantForm extends Model
     {
         return $this->belongsTo(RestaurantPost::class);
     }
+    public function restaurantPost()
+    {
+        return $this->belongsTo(RestaurantPost::class, 'restaurant_post_id');
+    }
 }

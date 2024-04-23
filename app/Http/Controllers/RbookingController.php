@@ -29,37 +29,9 @@ class RbookingController extends Controller
         return redirect()->route('rbooking.index')->with('success', '削除ができました');
     }
 
-    // viewとvalidationと
 
-//     public function store(Request $request)
-// {
-  
-//     $validatedData = $request->validate([
-//         'user_id' => 'required|exists:users,id',
-//         'restaurant_post_id' => 'required|exists:restaurant_posts,id',
-//         'day' => 'required|date',
-//         'time1' => 'required|date_format:H:i',
-//         'time2' => 'required|date_format:H:i',
-//         'number_guests' => 'required|integer|min:1',
-//         'memo' => 'nullable|string|max:255',
-//     ]);
-    
-//     try {
-//         $restaurantForm = new RestaurantForm();
-//         $restaurantForm->fill($validatedData);<- what's is this??
-//         $restaurantForm->user_id = Auth::id();
-//         $restaurantForm->save();
-    
-//         // 成功メッセージをフラッシュするなどの処理
-//         session()->flash('success', 'データが正常に保存されました。');
-    
-//         // リダイレクト先を指定
-//         return redirect()->route('restaurants.index');
-//     } catch (\Exception $e) {
-//         // 例外が発生した場合はエラーメッセージを表示し、フォーム入力を再表示
-//         return back()->withInput()->withErrors(['error' => $e->getMessage()]);
-//     }
-// }
+
+
 
 public function store(Request $request)
 {
@@ -99,18 +71,6 @@ public function store(Request $request)
 }
 
 
-// public function store(Request $request)
-// {
-//     $validatedData = validate([
-//                 'user_id' => 'required|exists:users,id',
-//                 'restaurant_post_id' => 'required|exists:restaurant_posts,id',
-//                 'day' => 'required|date',
-//                 'time1' => 'required|date_format:H:i',
-//                 'time2' => 'required|date_format:H:i',
-//                 'number_guests' => 'required|integer|min:1',
-//                 'memo' => 'nullable|string|max:255',
-//             ]);
-}
 
 
 
