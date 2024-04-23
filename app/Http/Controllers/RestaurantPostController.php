@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RestaurantPost;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class RestaurantPostController extends Controller
 {
@@ -21,7 +22,6 @@ class RestaurantPostController extends Controller
     public function store(Request $request)
     {
         $Data = $request->validate([
-            'user_id' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -34,9 +34,11 @@ class RestaurantPostController extends Controller
         $image = $request->file('image_path');
         $imageName = time() . '_' . $image->getClientOriginalName();
         $image->storeAs('public/restaurant_images', $imageName);
+
+        $user_id = auth()->id();
         
         $restaurant = new RestaurantPost($Data);
-        $restaurant->user_id = $Data['user_id'];
+        $restaurant->user_id = $user_id; // リクエストを送信したユーザーの ID を保存
         $restaurant->name = $Data['name'];
         $restaurant->address = $Data['address'];
         $restaurant->image_path = 'restaurant_images/' . $imageName;
@@ -87,6 +89,10 @@ class RestaurantPostController extends Controller
     public function show(RestaurantPost $id)
     {
         $restaurant = RestaurantPost::findOrFail($id);
+        // レストラン投稿に関連するユーザーモデルを取得
+        $user = User::find($restaurant->user_id);
+         // ユーザーモデルが存在するか確認して、名前を取得する
+         $user_name = $user ? $user->name : "ユーザーが存在しません";
         return view('restaurants.show', ['restaurant' => $restaurant]);
     }
     

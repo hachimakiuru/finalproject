@@ -36,7 +36,8 @@
                                             <div class="mb-3 row">
                                                 <label for="username" class="col-sm-2 col-form-label">ユーザー名</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" id="username" name="user_id" class="form-control @error('user_id') is-invalid @enderror" value="{{ old('user_id') }}">
+                                                    {{-- <input type="text" id="username" name="user_id" class="form-control @error('user_id') is-invalid @enderror" value="#"> --}}
+                                                    <p>{{Auth::user()->name }}</p>
                                                     @error('user_id')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -146,6 +147,7 @@
                         <div class="card-body" style="overflow-y: auto; max-height: 92vh;">
                             <ul class="list-group">
                                 @foreach ($restaurants as $restaurant)
+                                {{-- <div>{{ dd($restaurant) }}</div> --}}
                                 <li class="list-group-item" style="background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 8px;">
                                     <div class="row align-items-center">
                                         <div class="col-md-4">
@@ -177,7 +179,7 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-12">
-                                                                        <p><strong>ユーザー名:</strong> {{ $restaurant->user_id }}</p>
+                                                                        <p><strong>ユーザー名:</strong> {{ $restaurant->user->name }}</p>
                                                                         <p><strong>店舗名:</strong> {{ $restaurant->name }}</p>
                                                                         <p><strong>住所:</strong> {{ $restaurant->address }}</p>
                                                                         <p><strong>エリア:</strong> {{ $restaurant->genre_place }}</p>

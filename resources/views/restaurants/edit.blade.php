@@ -25,7 +25,8 @@
                                     @method('put')
                                     <div class="mb-3">
                                         <label for="username" class="form-label">ユーザー名</label>
-                                        <input type="text" id="username" name="user_id" class="form-control @error('user_id') is-invalid @enderror" value="{{ old('user_id') }}">
+                                        {{-- <input type="text" id="username" name="user_id" class="form-control @error('user_id') is-invalid @enderror" value="#"> --}}
+                                        <p>{{Auth::user()->name }}</p>
                                         @error('user_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
