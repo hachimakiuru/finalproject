@@ -126,7 +126,13 @@ class NewsController extends Controller
         $newsTimeLine -> price  = $request -> price ;
         $newsTimeLine -> others = $request -> others;
         $newsTimeLine -> day = $request -> day;
-        $newsTimeLine -> image = $request -> image;
+        // $newsTimeLine -> image = $request -> image;
+
+        // 画像がアップロードされた場合は保存してデータベースにファイル名を更新
+        // if ($request->hasFile('image')) {
+        //     $imagePath = $request->file('image')->store('public/img');
+        //     $newsTimeLine->image = basename($imagePath);
+        // }
 
         $newsTimeLine -> save();
 
@@ -140,8 +146,18 @@ class NewsController extends Controller
     {
         $newsTimeLine = NewsTimeLine::find($id);
 
+        $genre = $newsTimeLine->genre_id;
+
         $newsTimeLine -> delete();
 
-        return redirect() -> route('news.index');
+        if($genre == 1) {
+            return redirect() -> route('news.event');
+        } elseif($genre == 2) {
+            return redirect() -> route('news.hotel-info');
+        } elseif($genre == 3) {
+            return redirect() -> route('news.japan-culture');
+        } elseif($genre == 4) {
+            return redirect() -> route('news.others');
+        }
     }
 }
