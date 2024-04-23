@@ -33,7 +33,7 @@
                                             <div class="mb-3 row">
                                                 <label for="username" class="col-sm-2 col-form-label">ユーザー名</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" id="username" name="user_id" class="form-control @error('user_id') is-invalid @enderror" value="{{ old('user_id') }}">
+                                                    <p>{{Auth::user()->name }}</p>
                                                     @error('user_id')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -74,6 +74,24 @@
                                                         <option value="新宿">新宿</option>
                                                         <option value="代々木">代々木</option>
                                                         <option value="浅草">浅草</option>
+                                                        <option value="筑地">筑地</option>
+                                                        <option value="渋谷">渋谷</option>
+                                                        <option value="池袋">池袋</option>
+                                                        <option value="秋葉原">秋葉原</option>
+                                                        <option value="原宿">原宿</option>
+                                                        <option value="銀座">銀座</option>
+                                                        <option value="上野">上野</option>
+                                                        <option value="東京駅周辺">東京駅周辺</option>
+                                                        <option value="六本木">六本木</option>
+                                                        <option value="品川">品川</option>
+                                                        <option value="赤坂">赤坂</option>
+                                                        <option value="自由ヶ丘">自由ヶ丘</option>
+                                                        <option value="恵比寿">恵比寿</option>
+                                                        <option value="吉祥寺">吉祥寺</option>
+                                                        <option value="中野">中野</option>
+                                                        <option value="月島">月島</option>
+                                                        <option value="お台場">お台場</option>
+                                                        <option value="下北沢">下北沢</option>
                                                         <!-- 他のオプションを追加 -->
                                                     </select>
                                                     @error('genre_place')
@@ -89,6 +107,24 @@
                                                         <option value="寿司">寿司</option>
                                                         <option value="天ぷら">天ぷら</option>
                                                         <option value="すき焼き">すき焼き</option>
+                                                        <option value="しゃぶしゃぶ">しゃぶしゃぶ</option>
+                                                        <option value="ラーメン">ラーメン</option>
+                                                        <option value="お好み焼き">お好み焼き</option>
+                                                        <option value="たこ焼き">たこ焼き</option>
+                                                        <option value="和牛">和牛</option>
+                                                        <option value="そば">そば</option>
+                                                        <option value="うどん">うどん</option>
+                                                        <option value="和菓子">和菓子</option>
+                                                        <option value="焼き鳥">焼き鳥</option>
+                                                        <option value="刺身">刺身</option>
+                                                        <option value="おせち料理">おせち料理</option>
+                                                        <option value="カツ丼">カツ丼</option>
+                                                        <option value="イタリア料理">イタリア料理</option>
+                                                        <option value="フランス料理">フランス料理</option>
+                                                        <option value="スペイン料理">スペイン料理</option>
+                                                        <option value="ドイツ料理">ドイツ料理</option>
+                                                        <option value="中国料理">中国料理</option>
+                                                        <option value="インド料理">インド料理</option>
                                                         <!-- 他のオプションを追加 -->
                                                     </select>
                                                     @error('genre_variety')
@@ -104,6 +140,13 @@
                                                         <option value="ベジタリアン対応">ベジタリアン対応</option>
                                                         <option value="ヴィーガン対応">ヴィーガン対応</option>
                                                         <option value="ハラルフード（ムスリム）">ハラルフード（ムスリム）</option>
+                                                        <option value="コーシャフード（ユダヤ教）">コーシャフード（ユダヤ教）</option>
+                                                        <option value="サトウキビ不使用">サトウキビ不使用</option>
+                                                        <option value="グルテンフリー">グルテンフリー</option>
+                                                        <option value="ラクトオボベジタリアン">ラクトオボベジタリアン</option>
+                                                        <option value="オーガニックフード">オーガニックフード</option>
+                                                        <option value="無添加食品">無添加食品</option>
+                                                        <option value="特になし">特に無し</option>
                                                         <!-- 他のオプションを追加 -->
                                                     </select>
                                                     @error('genre_religion')
@@ -119,6 +162,7 @@
                                                         <option value="なんでもok">なんでもok</option>
                                                         <option value="現金のみ">現金のみ</option>
                                                         <option value="クレジットカード">クレジットカード不可</option>
+                                                        <option value="電子マネー">電子マネー不可</option>
                                                         <!-- 他のオプションを追加 -->
                                                     </select>                
                                                     @error('genre_payment')
@@ -192,7 +236,7 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-12">
-                                                                        <p><strong>ユーザー名:</strong> {{ $restaurant->user_id }}</p>
+                                                                        <p><strong>ユーザー名:</strong> {{ $restaurant->user->name }}</p>
                                                                         <p><strong>店舗名:</strong> {{ $restaurant->name }}</p>
                                                                         <p><strong>住所:</strong> {{ $restaurant->address }}</p>
                                                                         <p><strong>エリア:</strong> {{ $restaurant->genre_place }}</p>

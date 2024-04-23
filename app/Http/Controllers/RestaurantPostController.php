@@ -34,7 +34,6 @@ class RestaurantPostController extends Controller
     public function store(Request $request)
     {
         $Data = $request->validate([
-            // ‘user_id’ => ‘required|string|max:255’,
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -47,9 +46,11 @@ class RestaurantPostController extends Controller
         $image = $request->file('image_path');
         $imageName = time() . '_' . $image->getClientOriginalName();
         $image->storeAs('public/restaurant_images', $imageName);
+
+        $user_id = auth()->id();
         
         $restaurant = new RestaurantPost($Data);
-        // $restaurant->user_id = $Data['user_id'];
+        $restaurant->user_id = $user_id;
         $restaurant->name = $Data['name'];
         $restaurant->address = $Data['address'];
         $restaurant->image_path = 'restaurant_images/' . $imageName;
