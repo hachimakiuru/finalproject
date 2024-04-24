@@ -244,6 +244,37 @@
                                                                 <p><strong>食事制限:</strong> {{ $restaurant->genre_religion }}</p>
                                                                 <p><strong>支払方法:</strong> {{ $restaurant->genre_payment }}</p>
                                                             </div>
+
+                                                            @if (Auth::check())
+                                                            <form method="POST" action="{{ route('restaurant_comments.store') }}">
+                                                                @csrf
+                                                                <input type="hidden" name="restaurant_post_id" value="{{ $restaurant->id }}">
+                                                                <textarea name="comment" placeholder="コメントを入力してください"></textarea>
+                                                                <button type="submit">コメントする</button>
+                                                            </form>
+                                                        @else
+                                                            <p>コメントを投稿するにはログインしてください。</p>
+                                                        @endif
+                                                        
+                                                        @if ($restaurant->comments->count() > 0)
+                                                            <h3>コメント一覧</h3>
+                                                            <ul>
+                                                                @foreach ($restaurant->comments as $comment)
+                                                                    <li>{{ $comment->comment }}</li>
+                                                                    @if (Auth::check() && Auth::user()->id === $comment->user_id)
+                                                                        <form method="POST" action="{{ route('restaurant_comments.destroy', $comment->id) }}">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit">削除</button>
+                                                                        </form>
+                                                                    @endif
+                                                                @endforeach
+                                                            </ul>
+                                                        @else
+                                                            <p>まだコメントがありません。</p>
+                                                        @endif
+                                                        
+
                                                         </div>
                                                     </div>
 
