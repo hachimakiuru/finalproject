@@ -4,21 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateRestaurantCommentsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('restaurant_comments', function (Blueprint $table) {
-            $table->id(); // Auto-increment primary key
-            $table->unsignedBigInteger('user_id'); // ユーザーID列の作成
-            $table->unsignedBigInteger('restaurant_post_id'); // レストランポストID列の作成
-            $table->text('comment'); // コメントテキスト列の作成（null許容）
-            $table->timestamps(); // 作成日時と更新日時のタイムスタンプ列の作成
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('restaurant_post_id');
+            $table->text('comment')->nullable();
+            $table->timestamps();
             
-            // 外部キー制約の追加
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('restaurant_post_id')->references('id')->on('restaurant_posts')->onDelete('cascade');
         });
@@ -26,11 +27,14 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('restaurant_comments');
     }
-};
+}
+
 
 

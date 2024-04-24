@@ -63,7 +63,7 @@ class RbookingController extends Controller
             session()->flash('success', 'データが正常に保存されました。');
 
             // リダイレクト先を指定
-            return redirect()->route('restaurants.index')->with();
+            return redirect()->route('restaurants.index')->with('success', '削除ができました');
         } catch (\Exception $e) {
             // 例外が発生した場合はエラーメッセージを表示し、フォーム入力を再表示
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);

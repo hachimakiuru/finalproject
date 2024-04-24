@@ -22,6 +22,8 @@ use App\Http\Controllers\NewsBookingController;
 use App\Http\Controllers\RbookingController;
 
 use App\Http\Controllers\RestaurantLikeController;
+use App\Http\Controllers\RestaurantCommentsController;
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -119,3 +121,10 @@ Route::delete('/unlike/{postId}', [LikeController::class, 'destroy'])->name('lik
 // いいね機能(restaurant)
 Route::post('/restaurant/like/{postId}', [RestaurantLikeController::class, 'store'])->name('resto-like.store');
 Route::delete('/restaurant/unlike/{postId}', [RestaurantLikeController::class, 'destroy'])->name('resto-like.destroy');
+
+
+Route::prefix('comments')->group(function () {
+    Route::post('/', [RestaurantCommentsController::class, 'store'])->name('restaurant_comments.store');
+    Route::put('/{restaurantComment}', [RestaurantCommentsController::class, 'update'])->name('comments.update');
+    Route::delete('/{restaurantComment}', [RestaurantCommentsController::class, 'destroy'])->name('comments.destroy');
+});
