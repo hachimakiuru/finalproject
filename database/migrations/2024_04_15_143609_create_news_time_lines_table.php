@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('title', 255);
             $table->text('content')->default('');
             $table->string('image', 255)->nullable();
-            $table->text('day')->nullable();
+            // $table->text('day')->nullable();
+            $table->dateTime('start')->nullable();
+            $table->dateTime('end')->nullable();
             $table->decimal('price')->nullable();
             $table->string('place')->default(''); 
             $table->string('others')->default('');
