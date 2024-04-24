@@ -16,6 +16,6 @@ class NewsBooking extends Model
 
     public function newsPost()
     {
-        return $this->belongsTo(NewsTimeLine::class, 'newsPost_id');
+        return $this->belongsTo(NewsTimeLine::class, 'news_time_lines_id');
     }
 }

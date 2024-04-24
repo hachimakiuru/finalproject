@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('news_bookings', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('news_time_line_id')->constrained()->onDelete('cascade');
+
             $table->date('day');
             $table->time('time1');
             $table->time('time2')->nullable();

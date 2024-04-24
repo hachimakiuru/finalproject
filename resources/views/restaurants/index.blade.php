@@ -1,8 +1,8 @@
 @extends('layouts.layout')
-
-
-
 @section('content')
+
+@include('parts.success-message')
+
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col-md-3">
