@@ -9,6 +9,8 @@
         @auth
         @if(auth()->user()->role_id === 1)
         <li><a href="{{ route('admin.dashboard') }}">Admin Page</a></li>
+        <li><a href="{{ route('rbooking.index') }}">Restaurant Reservation List</a></li>
+        <li><a href="{{ route('newsBookings.index') }}">Activity Reservation List</a></li>
         @endif
         @endauth
       </ul>

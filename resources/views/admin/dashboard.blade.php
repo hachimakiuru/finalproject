@@ -7,7 +7,7 @@
 
 @include('parts.success-message')
 <body>
-  <h1>ADMIN PAGE</h1>
+  <div><a href="{{ route('admin.dashboard') }}">Admin Page</a></div>
   <button type="submit" class="btn-create-user">
     <a href="{{ route('register') }}">新規アカウントを追加</a>
   </button>
