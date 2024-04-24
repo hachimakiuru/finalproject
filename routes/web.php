@@ -38,7 +38,7 @@ Route::get('/welcome', function () {
 
 Route::get('/activity-dashboard', function () {
     return view('activity-dashboard');
-});
+})->name('activity.dashboard');
 
 
 
