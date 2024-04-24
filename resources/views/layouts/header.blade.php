@@ -4,7 +4,7 @@
       <ul class="header-nav">
         <li><a href="{{ route('welcome') }}">Home</a></li>
         <li><a href="{{ route('restaurants.index') }}">Food</a></li>
-        <li><a href="#">Activity</a></li>
+        <li><a href="{{ route('activity.dashboard') }}">Activity</a></li>
         <li><a href="#">Chat Message</a></li>
         @auth
         @if(auth()->user()->role_id === 1)
