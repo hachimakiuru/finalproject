@@ -207,8 +207,8 @@
                                             <div class="mb-3 row">
                                                 <label for="image" class="col-sm-2 col-form-label">写真</label>
                                                 <div class="col-sm-10">
-                                                    <input type="file" id="image" name="image_path" class="form-control @error('image_path') is-invalid @enderror" value="">
-                                                    @error('image_path')
+                                                    <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" value="">
+                                                    @error('image')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
@@ -276,7 +276,6 @@
                             <div class="col-md-12">
                                 <div class="text-center">
                                     <img src="{{asset('storage/img/' . $newsTimeLine->image)}}" class="img-fluid rounded shadow-lg" alt="restaurant photo">
-                                    {{-- asset('storage/img/' . $newsTimeLine->image)  --}}
                                 </div>
                                 <p><strong>ユーザー名:</strong> {{ $newsTimeLine->user->name }}</p>
                                 <p><strong>開催日:</strong> {{ $newsTimeLine->day }}</p>

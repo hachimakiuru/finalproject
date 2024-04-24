@@ -134,9 +134,19 @@ class NewsController extends Controller
         //     $newsTimeLine->image = basename($imagePath);
         // }
 
+        $genre = $newsTimeLine->genre_id;
+
         $newsTimeLine -> save();
 
-        return view('news.show', compact('newsTimeLine'));
+        if($genre == 1) {
+            return redirect() -> route('news.event');
+        } elseif($genre == 2) {
+            return redirect() -> route('news.hotel-info');
+        } elseif($genre == 3) {
+            return redirect() -> route('news.japan-culture');
+        } elseif($genre == 4) {
+            return redirect() -> route('news.others');
+        }
     }
 
     /**
