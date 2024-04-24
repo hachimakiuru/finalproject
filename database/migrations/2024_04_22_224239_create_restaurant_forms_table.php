@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('restaurant_forms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('restaurant_post_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('restaurant_post_id')->constrained()->cascadeOnDelete();
             $table->date('day');
             $table->time('time1');
             $table->time('time2')->nullable();
