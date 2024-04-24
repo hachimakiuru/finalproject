@@ -6,7 +6,7 @@ use App\Models\NewsTimeLine;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class NewsPostTableSeeder extends Seeder
+class NewsPostsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,7 +22,7 @@ class NewsPostTableSeeder extends Seeder
                 'day' => '2024/03/11',
                 'price' => '2000',
                 'place' => 'Shinjuku',
-                'other' => 'Thanks!!',
+                'others' => 'Thanks!!',
                 'genre_id' => 1,
             ],
 
