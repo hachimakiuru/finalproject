@@ -7,8 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Final Project</title>
     {{-- 独自cssの読み込み --}}
-    <link rel="stylesheet" href="{{ asset('/css/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/header-blade.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/global/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/global/header-blade.css') }}">
 
     {{-- Bootstrap5のCDN読み込み記述 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
