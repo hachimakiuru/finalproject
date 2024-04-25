@@ -27,7 +27,7 @@ use App\Http\Controllers\RestaurantLikeController;
 use App\Http\Controllers\RestaurantCommentsController;
 
 use App\Http\Controllers\NewsCalendarController;
-
+use App\Models\NewsBooking;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -54,6 +54,7 @@ Route::get('/news/others', [NewsController::class, 'others'])->name('news.others
 
 //News.Modalのstore
 Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+
 //News.show
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 //News.edit
@@ -62,6 +63,9 @@ Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('news.news-
 Route::put('/news/{id}', [NewsController::class, 'update'])->name('news.update');
 
 Route::delete('posts/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+
+//リクエスト送信用のsote Namiki
+Route::post('/news-booking', [NewsBookingController::class, 'newsBookingStore'])->name('news-booking.store');
 
 Route::get('/restaurant-dashboard', function () {
     return view('restaurant-dashboard');
