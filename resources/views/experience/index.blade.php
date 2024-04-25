@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{ asset('/css/experience_blade.css') }}">
 
 </head>
+
+
 <body>
 @include('layouts.header')
 <div>
@@ -243,7 +245,6 @@
 </script>
 
     <script>
-
     $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

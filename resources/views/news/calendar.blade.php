@@ -10,14 +10,17 @@
 
     <style>
         #result .container:not(:last-of-type) {
-            border-bottom: 1px solid red;
+            border-bottom: 1px solid green;
         }
     </style>
+        <h1>upcoming events</h1>
 </head>
 <body>
+
     <div id='calendar'></div>
 
     <!-- Button trigger modal -->
+    {{-- モーダルの中身はまりこちゃんのDB紐付けてから --}}
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -27,8 +30,7 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Events</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" id="result">
-            
+        <div class="modal-body" id="result">       
         </div>
         <div class="modal-footer">
           {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
@@ -38,11 +40,32 @@
     </div>
   </div>
 
+
+<!-- Modal -->
+{{-- <div class="modal fade" id="exampleModal{{ $key }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $key }}" aria-hidden="true"> --}}
+      {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">{{ $experience->title }}</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Events</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Content:</strong> </p>
+                </div>
+            </div>
+        </div>
+    </div>  --}}
+    {{-- @endforeach  --}}
+{{-- </div>  --}}
+
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
 
+    <script>
         var calendarEvents = @json($events)
     
     
@@ -50,6 +73,7 @@
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
+            // initialView: 'dayGridWeek',
             displayEventTime : false,
             dateClick: function(info) {
                 // $('#exampleModal').modal('toggle');
@@ -93,7 +117,14 @@
                             var $price = $('<div></div>').addClass('item').text(d.price);   
                             var $place = $('<div></div>').addClass('item').text(d.place);   
                             var $others = $('<div></div>').addClass('item').text(d.others);   
-                            var $btn = $('<a></a>').addClass('item').text('show').attr('href', 'https://www.example.com');   
+                            // var $btn = $('<a></a>').addClass('item').text('show').attr('href', 'https://www.example.com');   
+
+                            // var $btn = $('<a></a>').addClass('item').text('reservation').attr('href', 'https://www.example.com');   
+                            var $btn = $('<a></a>').addClass('item').text('reservation').attr({
+                                'href': '#exampleModal',
+                                'data-bs-toggle': 'modal',
+                                'data-bs-target': '#exampleModal'
+                            });
 
                             // Append the item div to the container
                             $container.append($user_id);
