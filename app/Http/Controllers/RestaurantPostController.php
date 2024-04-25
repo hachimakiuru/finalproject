@@ -10,24 +10,28 @@ use Illuminate\Support\Facades\Auth;
 
 class RestaurantPostController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $restaurants = RestaurantPost::all();
+
 
         if($restaurants ) {
             foreach($restaurants  as $restaurant) { 
+
                 $likes = RestaurantLike::where('user_id', Auth::user()->id)
                     ->where('restaurant_post_id', $restaurant->id)
                     ->get();
                 $restaurant['isLike'] = count($likes) > 0 ? true : false;
             }
         }
-        
+
         return view('restaurants.index', compact('restaurants'));
 
     }
 
 
-    public function create(){
+    public function create()
+    {
         return view('restaurants.create');
     }
     public function store(Request $request)
@@ -41,15 +45,15 @@ class RestaurantPostController extends Controller
             'genre_religion' => 'required',
             'genre_payment' => 'required',
         ]);
-        
+
         $image = $request->file('image_path');
         $imageName = time() . '_' . $image->getClientOriginalName();
         $image->storeAs('public/restaurant_images', $imageName);
 
         $user_id = auth()->id();
-        
+
         $restaurant = new RestaurantPost($Data);
-        $restaurant->user_id = $user_id; 
+        $restaurant->user_id = $user_id;
         $restaurant->name = $Data['name'];
         $restaurant->address = $Data['address'];
         $restaurant->image_path = 'restaurant_images/' . $imageName;
@@ -58,19 +62,20 @@ class RestaurantPostController extends Controller
         $restaurant->genre_religion = $Data['genre_religion'];
         $restaurant->genre_payment = $Data['genre_payment'];
         $restaurant->save();
-        
+
         // データベースからすべてのレストランポストを取得
         $restaurant_posts = RestaurantPost::all();
-        
-       return redirect(route('restaurants.index'));
-    
+
+        return redirect(route('restaurants.index'));
     }
 
-    public function edit(RestaurantPost $restaurant){
-        return view('restaurants.edit' , ['restaurant' =>  $restaurant]);
+    public function edit(RestaurantPost $restaurant)
+    {
+        return view('restaurants.edit', ['restaurant' =>  $restaurant]);
     }
 
-    public function update(RestaurantPost $restaurant, Request $request) {
+    public function update(RestaurantPost $restaurant, Request $request)
+    {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
@@ -80,21 +85,22 @@ class RestaurantPostController extends Controller
             'genre_religion' => 'required',
             'genre_payment' => 'required',
         ]);
-    
+
         if ($request->hasFile('image_path')) {
             $image = $request->file('image_path');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->storeAs('public/restaurant_images', $imageName);
             $validatedData['image_path'] = 'restaurant_images/' . $imageName;
         }
-    
+
         $restaurant->update($validatedData);
-    
+
         return redirect(route('restaurants.index'))->with('success', 'Updated Successfully');
     }
-    public function destroy(RestaurantPost $restaurant) {
+    public function destroy(RestaurantPost $restaurant)
+    {
         $restaurant->delete();
-    
+
         return redirect()->route('restaurants.index')->with('success', '削除しました');
     }
     public function show(RestaurantPost $id)
@@ -102,4 +108,5 @@ class RestaurantPostController extends Controller
         $restaurant = RestaurantPost::findOrFail($id);
         return view('restaurants.show', ['restaurant' => $restaurant]);
     }
+
 }

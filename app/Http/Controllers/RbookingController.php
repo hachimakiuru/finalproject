@@ -12,13 +12,43 @@ class RbookingController extends Controller
     public function index()
     {
         $restaurant_posts = RestaurantForm::all();
-        return view('restaurants.booking.index', compact('restaurant_posts'));
+        $times = [];
+        for ($hour = 6; $hour < 24; $hour++) {
+            $times[] = sprintf('%02d:00', $hour);
+        }
+
+        return view('restaurants.booking.index', compact('restaurant_posts', 'times'));
     }
 
-    public function update($id)
+    // public function edit(string $id)
+    // {
+    //     $user = User::findOrFail($id);
+    //     return view('users.edit', compact('user'));
+    // }
+
+
+    public function edit(string $id)
     {
-        dd('test');
-        // return view('')
+        $restaurantForm =  RestaurantForm::findorFail($id);
+        return view('rbooking.edit', compact('restaurantForm'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // dd($id);
+
+        $restaurantForm = RestaurantForm::find($id);
+
+        $restaurantForm->update([
+            'user_id' => Auth::user()->id, // ログインユーザーのIDを取得
+            // 'restaurant_post_id' => $request->restaurant_post_id,
+            'day' => $request->day,
+            'time1' => $request->time1,
+            'time2' => $request->time2,
+            'number_guests' => $request->number_guests,
+            'memo' => $request->memo,
+        ]);
+        return redirect()->route('rbooking.index');
     }
 
     public function destroy($id)
@@ -35,6 +65,7 @@ class RbookingController extends Controller
 
     public function store(Request $request)
     {
+
         // バリデーションルールの定義
         $validatedData = $request->validate([
             'day' => 'required|date',
@@ -64,7 +95,7 @@ class RbookingController extends Controller
 
             // リダイレクト先を指定
 
- 
+
 
             return redirect()->route('restaurants.index')->with('success', '予約フォームの送信が完了しました。');
         } catch (\Exception $e) {
