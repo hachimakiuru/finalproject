@@ -28,7 +28,6 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        // dd($user);
         // Validate the incoming request data
         $request->validate([
             'name' => 'required|string|max:255',
@@ -42,7 +41,6 @@ class UserController extends Controller
             'email' => $request->email,
             'room_number' => $request->room_number,
             'role_id' => $request->role_id,
-
         ]);
 
         // return redirect()->route('user.edit', $user->id)->with('success', 'ユーザー情報が更新されました。');

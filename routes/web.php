@@ -102,9 +102,10 @@ Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('e
 
 // restaurant-booking-form
 Route::get('/rbooking', [RbookingController::class, 'index'])->name('rbooking.index');
+Route::post('/rbooking', [RbookingController::class, 'store'])->name('rbooking.store');
+Route::get('/rbooking/{id}/edit', [RbookingController::class, 'edit'])->name('rbooking.edit');
 Route::put('/rbooking/{id}', [RbookingController::class, 'update'])->name('rbooking.update');
 Route::delete('/rbooking/{id}', [RbookingController::class, 'destroy'])->name('rbooking.destroy');
-Route::post('/rbooking', [RbookingController::class, 'store'])->name('rbooking.store');
 
 
 // News Bookings一覧
