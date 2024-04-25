@@ -6,7 +6,7 @@ use App\Models\NewsTimeLine;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class NewsPostTableSeeder extends Seeder
+class NewsPostsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,10 +19,11 @@ class NewsPostTableSeeder extends Seeder
                 'title' => 'Fireworks',
                 'content' => 'The most beautiful fireworks in Tokyo!',
                 'image' => null,
-                'day' => '2024/03/11',
+                'start' => '2024-04-24 11:23:35',
+                'end' => '2024-04-24 15:23:35',
                 'price' => '2000',
                 'place' => 'Shinjuku',
-                'other' => 'Thanks!!',
+                'others' => 'Thanks!!',
                 'genre_id' => 1,
             ],
 

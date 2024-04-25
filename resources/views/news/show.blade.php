@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     title: {{ $newsTimeLine->title }}
 </div>
 
@@ -29,11 +29,15 @@
 <tr>
     <td>
         <a href="{{ route('news.news-edit' , $newsTimeLine -> id) }}">編集</a>
-        <from action="{{ route('news.destroy', $newsTimeLine -> id) }}" method='POST'>
+    </td>
+    <td>
+        <form action="{{ route('news.destroy', $newsTimeLine -> id) }}" method='POST'>
             @csrf
             @method('delete')
                 <input type="submit" value='削除' class="btn btn-danger" onclick='return confirm("本当に削除しますか？");'>
-        </from>
-                {{-- <a href="#">destroy</a> --}}
+        </form>
     </td>
-</tr>
+    <td>
+        <a href="{{ url()->previous() }}">戻る</a>
+    </td>
+</tr> --}}

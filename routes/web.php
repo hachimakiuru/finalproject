@@ -18,11 +18,15 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ExperienceController;
 
 use App\Http\Controllers\LikeController;
+
 use App\Http\Controllers\NewsBookingController;
+
 use App\Http\Controllers\RbookingController;
 
 use App\Http\Controllers\RestaurantLikeController;
 use App\Http\Controllers\RestaurantCommentsController;
+
+use App\Http\Controllers\NewsCalendarController;
 
 
 Route::get('/', function () {
@@ -38,7 +42,7 @@ Route::get('/welcome', function () {
 
 Route::get('/activity-dashboard', function () {
     return view('activity-dashboard');
-});
+})->name('activity.dashboard');
 
 
 
@@ -123,8 +127,13 @@ Route::post('/restaurant/like/{postId}', [RestaurantLikeController::class, 'stor
 Route::delete('/restaurant/unlike/{postId}', [RestaurantLikeController::class, 'destroy'])->name('resto-like.destroy');
 
 
+
+Route::get('/calendar', [NewsCalendarController::class, 'view'])->name('calendar.view');
+Route::get('/calendar/search', [NewsCalendarController::class, 'search'])->name('calendar.search');
+
 Route::prefix('comments')->group(function () {
     Route::post('/', [RestaurantCommentsController::class, 'store'])->name('restaurant_comments.store');
     Route::put('/{restaurantComment}', [RestaurantCommentsController::class, 'update'])->name('comments.update');
     Route::delete('/{restaurantComment}', [RestaurantCommentsController::class, 'destroy'])->name('comments.destroy');
 });
+

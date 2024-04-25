@@ -1,26 +1,23 @@
-
-/* テーブルのスタイル */
+/* 
 table.center {
-    width: 80%; /* 画面幅の80%に制限 */
-    margin: 0 auto; /* 水平方向に中央揃え */
+    width: 80%;
+    margin: 0 auto;
     border-collapse: collapse;
 }
 
-/* box1クラスの枠線 */
 .box1 td {
     border: 2px solid black;
-    border-radius: 10px; /* 丸みを持たせる */
+    border-radius: 10px; 
     padding: 8px;
 }
 
-/* テーブルのヘッダーのスタイル */
+
 th {
     background-color: #f2f2f2;
     padding: 8px;
     text-align: left;
 }
 
-/* 詳細ボタンのスタイル */
 .no4 a {
     display: block;
     text-align: center;
@@ -30,10 +27,10 @@ th {
     padding: 6px 12px;
     border-radius: 4px;
     transition: background-color 0.3s;
-    margin: 10px auto 0; /* 上部に余白を設定し、水平方向に中央揃え */
-    width: 50px; /* 幅を指定 */
+    margin: 10px auto 0; 
+    width: 50px; 
 }
 
 .no4 a:hover {
     background-color: #45a049;
-}
+} */
