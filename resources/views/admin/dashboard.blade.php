@@ -7,7 +7,7 @@
 
 @include('parts.success-message')
 <body>
-  <h1>ADMIN PAGE</h1>
+  <div><a href="{{ route('admin.dashboard') }}">Admin Page</a></div>
   <button type="submit" class="btn-create-user">
     <a href="{{ route('register') }}">新規アカウントを追加</a>
   </button>
@@ -31,7 +31,7 @@
         <td>{{ $user->email }}</td>
         <td>{{ $user->room_number }}</td>
         <td>{{ $user->created_at }}</td>
-        <td>{{ $user->role->name }}</td>
+        <td>{{ $user->role ? $user->role->name : 'No Role' }}</td>
         <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $user->id }} ">Edit</button></td>
         <td>
           <form method="POST" action="{{ route('user.destroy', $user->id) }}">

@@ -50,7 +50,7 @@ class RestaurantPostController extends Controller
         $user_id = auth()->id();
         
         $restaurant = new RestaurantPost($Data);
-        $restaurant->user_id = $user_id;
+        $restaurant->user_id = $user_id; 
         $restaurant->name = $Data['name'];
         $restaurant->address = $Data['address'];
         $restaurant->image_path = 'restaurant_images/' . $imageName;

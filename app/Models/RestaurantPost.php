@@ -44,5 +44,9 @@ class RestaurantPost extends Model
     {
         return $this->hasMany(RestaurantComment::class);
     }
-    
+
+    public function restaurantForm()
+    {
+        return $this->belongsTo(RestaurantForm::class);
+    }
 }

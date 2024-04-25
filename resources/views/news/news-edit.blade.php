@@ -1,0 +1,142 @@
+{{-- <form action="{{ route('news.update',$newsTimeLine -> id) }}" method="POST">
+    @csrf
+    @method('put')
+
+    <div>
+        <div>
+            <label for="title">タイトル</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ $newsTimeLine->title }}">
+        </div>
+        <div>
+            <label for="content">内容</label>
+            <input type="text" class="form-control" id="content" name="content" value="{{ $newsTimeLine->content }}">
+        </div>
+        <div>
+            <label for="place">場所</label>
+            <input type="text" class="form-control" id="place" name="place" value="{{ $newsTimeLine->place }}">
+        </div>
+        <div>
+            <label for="price">値段</label>
+            <input type="number" class="form-control" id="price" name="price" value="{{ $newsTimeLine->price }}">
+        </div>
+        <div>
+            <label for="others">その他</label>
+            <input type="text" class="form-control" id="others" name="others" value="{{ $newsTimeLine->others }}">
+        </div>
+        <div>
+            <label for="day">日付</label>
+            <input type="text" class="form-control" id="day" name="day" value="{{ $newsTimeLine->day }}">
+        </div>
+        <div>
+            <label for="image">写真を選択してください：</label>
+            <input type="file" id="image" name="image">
+            @if($newsTimeLine->image)
+                <div>
+                    現在の写真:
+                    <img src="{{ asset('storage/img/' . $newsTimeLine->image) }}" alt="" width="100" height="100">
+                </div>
+            @else
+                <div>写真はありません。</div>
+            @endif
+        </div>
+    </div>
+
+    <button type="submit">更新</button>
+   
+</form> --}}
+
+
+
+@extends('layouts.layout')
+@section('content')
+<div class="container-fluid mt-3">
+    <div class="row">
+     <div class="col-md-15">
+            <div class="restaurant-dashboard-container">
+                <div class="restaurant-dashboard-center">
+                    <div class="col-md-18">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h4>編集フォーム</h4>
+                                {{-- <button type="button" class="btn-close" onclick="location.href='{{ url()->previous() }}" aria-label="閉じる"></button> --}}
+                                {{-- <button type="button" class="btn-close" onclick="location.href='{{ route('news.event') }}" aria-label="閉じる"></button> --}}
+                                <button type="button" class="btn-close" onclick="location.href='{{ url()->previous() }}'" aria-label="閉じる"></button>
+                            </div>
+                            <div class="card-body"> 
+                                <!-- 投稿フォーム -->
+                               <form action="{{ route('news.update',$newsTimeLine->id) }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('put')
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">ユーザー名</label> 
+                                        {{-- <input type="text" id="username" name="user_id" class="form-control @error('user_id') is-invalid @enderror" value="{{ old('user_id') }}">  --}}
+                                         <p>{{Auth::user()->name }}</p>
+                                        @error('user_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">タイトル</label>
+                                        <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ $newsTimeLine->title }}">
+                                        @error('title')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="day" class="form-label">開催日</label>
+                                        <input type="text" id="day" name="day" class="form-control @error('day') is-invalid @enderror" value="{{ $newsTimeLine->day }}">
+                                        @error('day')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="place" class="form-label">場所</label>
+                                        <input type="text" id="place" name="place" class="form-control @error('place') is-invalid @enderror" value="{{ $newsTimeLine->place }}">
+                                        @error('place')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="content" class="form-label">内容</label>
+                                        <input type="text" id="content" name="content" class="form-control @error('content') is-invalid @enderror" value="{{ $newsTimeLine->content }}">
+                                        @error('content')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="price" class="form-label">金額</label>
+                                        <input type="number" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ $newsTimeLine->price }}">
+                                        @error('price')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="others" class="form-label">その他</label>
+                                        <input type="text" id="others" name="others" class="form-control @error('others') is-invalid @enderror" value="{{ $newsTimeLine->others }}">
+                                        @error('others')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="image" class="form-label">写真</label>
+                                        <div class="input-group">
+                                            <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ $newsTimeLine->image }}" aria-describedby="inputGroupFileAddon">
+                                            @error('image')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">保存する</button>
+                                    </div>
+                                </form>
+                                <!-- 投稿フォーム -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection 

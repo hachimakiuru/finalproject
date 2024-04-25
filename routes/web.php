@@ -1,13 +1,5 @@
 <?php
 
-
-
-
-
-
-
-
-
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestaurantPostController;
@@ -26,9 +18,13 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ExperienceController;
 
 use App\Http\Controllers\LikeController;
+
+use App\Http\Controllers\NewsBookingController;
+
 use App\Http\Controllers\RbookingController;
 
 use App\Http\Controllers\RestaurantLikeController;
+use App\Http\Controllers\RestaurantCommentsController;
 
 use App\Http\Controllers\NewsCalendarController;
 
@@ -46,19 +42,30 @@ Route::get('/welcome', function () {
 
 Route::get('/activity-dashboard', function () {
     return view('activity-dashboard');
-});
+})->name('activity.dashboard');
+
+
+
+//News.index
+Route::get('/news/event', [NewsController::class, 'event'])->name('news.event');
+Route::get('/news/hotel-info', [NewsController::class, 'hotelInfo'])->name('news.hotel-info');
+Route::get('/news/japan-culture', [NewsController::class, 'japanCulture'])->name('news.japan-culture');
+Route::get('/news/others', [NewsController::class, 'others'])->name('news.others');
+
+//News.Modalのstore
+Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+//News.show
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+//News.edit
+Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('news.news-edit');
+
+Route::put('/news/{id}', [NewsController::class, 'update'])->name('news.update');
+
+Route::delete('posts/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
 
 Route::get('/restaurant-dashboard', function () {
     return view('restaurant-dashboard');
 });
-// -----------------------------------------------
-
-
-
-//news Route
-Route::get('/news', [NewsController::class, 'index'])->name('news.index');
-
-
 
 
 // ログイン・ログアウト・レジスター・
@@ -101,18 +108,32 @@ Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('e
 Route::get('/rbooking', [RbookingController::class, 'index'])->name('rbooking.index');
 Route::put('/rbooking/{id}', [RbookingController::class, 'update'])->name('rbooking.update');
 Route::delete('/rbooking/{id}', [RbookingController::class, 'destroy'])->name('rbooking.destroy');
+Route::post('/rbooking', [RbookingController::class, 'store'])->name('rbooking.store');
+
+
+// News Bookings一覧
+Route::get('/news-bookings', [NewsBookingController::class, 'index'])->name('newsBookings.index');
+Route::put('/news-bookings/{id}', [RbookingController::class, 'update'])->name('newsBooking.update');
+Route::delete('/news-bookings/{id}', [NewsBookingController::class, 'destroy'])->name('newsBookings.destroy');
 
 
 // いいね機能
-Route::post('/like/{postId}',[LikeController::class,'store'])->name('like.store');
-Route::delete('/unlike/{postId}',[LikeController::class,'destroy'])->name('like.destroy');
+Route::post('/like/{postId}', [LikeController::class, 'store'])->name('like.store');
+Route::delete('/unlike/{postId}', [LikeController::class, 'destroy'])->name('like.destroy');
 
 
 // いいね機能(restaurant)
-Route::post('/restaurant/like/{postId}',[RestaurantLikeController::class,'store'])->name('resto-like.store');
-Route::delete('/restaurant/unlike/{postId}',[RestaurantLikeController::class,'destroy'])->name('resto-like.destroy');
+Route::post('/restaurant/like/{postId}', [RestaurantLikeController::class, 'store'])->name('resto-like.store');
+Route::delete('/restaurant/unlike/{postId}', [RestaurantLikeController::class, 'destroy'])->name('resto-like.destroy');
 
 
-// カレンダー機能
+
 Route::get('/calendar', [NewsCalendarController::class, 'view'])->name('calendar.view');
 Route::get('/calendar/search', [NewsCalendarController::class, 'search'])->name('calendar.search');
+
+Route::prefix('comments')->group(function () {
+    Route::post('/', [RestaurantCommentsController::class, 'store'])->name('restaurant_comments.store');
+    Route::put('/{restaurantComment}', [RestaurantCommentsController::class, 'update'])->name('comments.update');
+    Route::delete('/{restaurantComment}', [RestaurantCommentsController::class, 'destroy'])->name('comments.destroy');
+});
+

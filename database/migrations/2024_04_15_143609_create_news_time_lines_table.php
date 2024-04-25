@@ -17,21 +17,20 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title', 255);
-            $table->text('content');
+            $table->text('content')->default('');
             $table->string('image', 255)->nullable();
-            $table->text('day')->nullable();
+            // $table->text('day')->nullable();
+            $table->dateTime('start')->nullable();
+            $table->dateTime('end')->nullable();
             $table->decimal('price')->nullable();
-            $table->string('place');
-            $table->string('others');
-            $table->string('genre_japan_activity', 50);
-            $table->string('genre_local_event', 50);
-            $table->string('genre_others', 50);
-            $table->string('genre_hotel_info', 50);
+            $table->string('place')->default(''); 
+            $table->string('others')->default('');
+            $table->unsignedBigInteger('genre_id');
             $table->timestamps();
-
+    
             // 外部キー制約の追加
             $table->foreign('user_id')->references('id')->on('users');
-            // usersテーブルが存在しない場合、外部キー制約はエラーとなる可能性があるため、必要に応じてコメントアウトしてください。
+            $table->foreign('genre_id')->references('id')->on('genres');
         });
     }
 
@@ -42,7 +41,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('your_table_name');
+        Schema::dropIfExists('news_time_lines');
     }
 };
 
