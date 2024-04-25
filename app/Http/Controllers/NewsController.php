@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NewsBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NewsTimeLine;
@@ -47,7 +48,6 @@ class NewsController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -55,8 +55,8 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-         // バリデーションルールの定義
-         $request->validate([
+        // バリデーションルールの定義
+        $request->validate([
             // 'user_id' => 'required|exists:users,id',
             'title' => 'required|string',
             'content' => 'required|string',
@@ -82,8 +82,8 @@ class NewsController extends Controller
 
         // 写真がアップロードされている場合
         if ($request->hasFile('image')) {
-            $image = $request->file('image'); 
-            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('storage/img'), $imageName);
             $newsTimeLine->image = $imageName;
         }
@@ -109,7 +109,7 @@ class NewsController extends Controller
     public function edit(string $id)
     {
         $newsTimeLine = NewsTimeLine::find($id);
-        
+
         return view('news.news-edit', compact('newsTimeLine'));
     }
 
@@ -120,12 +120,12 @@ class NewsController extends Controller
     {
         $newsTimeLine = NewsTimeLine::find($id);
 
-        $newsTimeLine -> title = $request -> title;
-        $newsTimeLine -> content = $request -> content;
-        $newsTimeLine -> place = $request -> place;
-        $newsTimeLine -> price  = $request -> price ;
-        $newsTimeLine -> others = $request -> others;
-        $newsTimeLine -> day = $request -> day;
+        $newsTimeLine->title = $request->title;
+        $newsTimeLine->content = $request->content;
+        $newsTimeLine->place = $request->place;
+        $newsTimeLine->price  = $request->price;
+        $newsTimeLine->others = $request->others;
+        $newsTimeLine->day = $request->day;
         // $newsTimeLine -> image = $request -> image;
 
         // 画像がアップロードされた場合は保存してデータベースにファイル名を更新
@@ -136,16 +136,16 @@ class NewsController extends Controller
 
         $genre = $newsTimeLine->genre_id;
 
-        $newsTimeLine -> save();
+        $newsTimeLine->save();
 
-        if($genre == 1) {
-            return redirect() -> route('news.event');
-        } elseif($genre == 2) {
-            return redirect() -> route('news.hotel-info');
-        } elseif($genre == 3) {
-            return redirect() -> route('news.japan-culture');
-        } elseif($genre == 4) {
-            return redirect() -> route('news.others');
+        if ($genre == 1) {
+            return redirect()->route('news.event');
+        } elseif ($genre == 2) {
+            return redirect()->route('news.hotel-info');
+        } elseif ($genre == 3) {
+            return redirect()->route('news.japan-culture');
+        } elseif ($genre == 4) {
+            return redirect()->route('news.others');
         }
     }
 
@@ -158,16 +158,60 @@ class NewsController extends Controller
 
         $genre = $newsTimeLine->genre_id;
 
-        $newsTimeLine -> delete();
+        $newsTimeLine->delete();
 
-        if($genre == 1) {
-            return redirect() -> route('news.event');
-        } elseif($genre == 2) {
-            return redirect() -> route('news.hotel-info');
-        } elseif($genre == 3) {
-            return redirect() -> route('news.japan-culture');
-        } elseif($genre == 4) {
-            return redirect() -> route('news.others');
+        if ($genre == 1) {
+            return redirect()->route('news.event');
+        } elseif ($genre == 2) {
+            return redirect()->route('news.hotel-info');
+        } elseif ($genre == 3) {
+            return redirect()->route('news.japan-culture');
+        } elseif ($genre == 4) {
+            return redirect()->route('news.others');
         }
     }
+
+    // public function formStore(Request $request)
+    // {
+
+    //     // バリデーションルールの定義
+    //     $validatedData = $request->validate([
+    //         'day' => 'required|date',
+    //         'time1' => 'required|date_format:H:i',
+    //         'time2' => 'required|date_format:H:i',
+    //         'number_guests' => 'required|integer|min:1',
+    //         'memo' => 'nullable|string|max:255',
+    //     ]);
+
+
+    //     // dd($request);
+    //     try {
+    //         // 新しい RestaurantForm インスタンスの作成
+    //         $newsBooking = new NewsBooking([
+    //             'user_id' => Auth::id(), // ログインユーザーのIDを取得
+    //             'news_time_line_id' => $request->input('news_time_line_id'), // リクエストから restaurant_post_id を取得
+    //             'day' => $request->input('day'),
+    //             'time1' => $request->input('time1'),
+    //             'time2' => $request->input('time2'),
+    //             'number_guests' => $request->input('number_guests'),
+    //             'memo' => $request->input('memo'),
+    //         ]);
+
+
+    //         // レコードを保存
+    //         $newsBooking->save();
+
+    //         // 成功メッセージをフラッシュするなどの処理
+    //         session()->flash('success', 'データが正常に保存されました。');
+
+    //         // リダイレクト先を指定
+
+
+
+    //         return redirect()->route('restaurants.index')->with('success', '予約フォームの送信が完了しました。');
+    //     } catch (\Exception $e) {
+    //         // 例外が発生した場合はエラーメッセージを表示し、フォーム入力を再表示
+    //         return back()->withInput()->withErrors(['error' => $e->getMessage()]);
+    //     }
+    // }
 }
