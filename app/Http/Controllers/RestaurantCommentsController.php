@@ -15,17 +15,27 @@ class RestaurantCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        // バリデーションルールを定義することが適切です
+
+                // バリデーションルールを定義することが適切です
         $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
             'restaurant_post_id' => 'required|exists:restaurant_posts,id',
-            'comment' => 'required|string',
+            'comment' => 'required|string|max:255', // 最大255文字まで許可
         ]);
-
-        $restaurantComment = RestaurantComment::create($validatedData);
-
-        return response()->json($restaurantComment, 201);
+    
+        // ログインしているユーザーのIDを取得
+        $userId = auth()->id();
+    
+        // ログインしているユーザーのIDを使用してRestaurantCommentモデルを作成し、リクエストされたデータを保存
+        $restaurantComment = RestaurantComment::create([
+            'user_id' => $userId,
+            'restaurant_post_id' => $validatedData['restaurant_post_id'],
+            'comment' => $validatedData['comment'],
+        ]);
+    
+        // レスポンスとしてJSON形式で作成したコメントを返す
+        return redirect()->back();
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -45,7 +55,7 @@ class RestaurantCommentsController extends Controller
 
         $restaurantComment->update($validatedData);
 
-        return response()->json($restaurantComment, 200);
+        return redirect()->back();
     }
 
     /**
@@ -58,7 +68,7 @@ class RestaurantCommentsController extends Controller
     {
         $restaurantComment->delete();
 
-        return response()->json(null, 204);
+        return redirect()->back();
     }
 }
 
