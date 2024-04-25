@@ -40,9 +40,7 @@ Route::get('/welcome', function () {
 // ここのルートを変更して各自の画面を確認する
 
 
-Route::get('/activity-dashboard', function () {
-    return view('activity-dashboard');
-})->name('activity.dashboard');
+Route::get('/activity-dashboard', [ExperienceController::class, 'activityDashboard'])->name('activity.dashboard');
 
 
 
@@ -129,7 +127,7 @@ Route::delete('/restaurant/unlike/{postId}', [RestaurantLikeController::class, '
 
 
 Route::get('/calendar', [NewsCalendarController::class, 'view'])->name('calendar.view');
-Route::get('/calendar/search', [NewsCalendarController::class, 'search'])->name('calendar.search');
+Route::get('/calendar/search', [ExperienceController::class, 'search'])->name('calendar.search');
 
 Route::prefix('comments')->group(function () {
     Route::post('/', [RestaurantCommentsController::class, 'store'])->name('restaurant_comments.store');
