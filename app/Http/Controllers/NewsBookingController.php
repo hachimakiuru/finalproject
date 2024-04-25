@@ -63,7 +63,7 @@ class NewsBookingController extends Controller
 
 
 
-            return redirect()->route('restaurants.index')->with('success', '予約フォームの送信が完了しました。');
+            return redirect()->route('newsBookings.index')->with('success', '予約フォームの送信が完了しました。');
         } catch (\Exception $e) {
             // 例外が発生した場合はエラーメッセージを表示し、フォーム入力を再表示
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);
@@ -81,9 +81,19 @@ class NewsBookingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, NewsBooking $newsBooking)
+    public function update(Request $request, $id)
     {
-        //
+        $newsBooking = NewsBooking::find($id);
+
+        $newsBooking->update([
+            'user_id' => Auth::user()->id, // ログインユーザーのIDを取得
+            'day' => $request->day,
+            'time1' => $request->time1,
+            'time2' => $request->time2,
+            'number_guests' => $request->number_guests,
+            'memo' => $request->memo,
+        ]);
+        return redirect()->route('newsBookings.index')->with('success', '予約情報の変更が完了しました。');
     }
 
     /**
