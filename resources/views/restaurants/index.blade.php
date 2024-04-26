@@ -3,6 +3,11 @@
 
 @include('parts.success-message')
 
+<script>
+ 
+
+</script>
+
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col-md-3">
@@ -245,34 +250,50 @@
                                                                 <p><strong>支払方法:</strong> {{ $restaurant->genre_payment }}</p>
                                                             </div>
 
-                                                            @if (Auth::check())
-                                                            <form method="POST" action="{{ route('restaurant_comments.store') }}">
-                                                                @csrf
-                                                                <input type="hidden" name="restaurant_post_id" value="{{ $restaurant->id }}">
-                                                                <textarea name="comment" placeholder="コメントを入力してください"></textarea>
-                                                                <button type="submit">コメントする</button>
-                                                            </form>
-                                                        @else
-                                                            <p>コメントを投稿するにはログインしてください。</p>
-                                                        @endif
-                                                        
-                                                        @if ($restaurant->comments->count() > 0)
-                                                            <h3>コメント一覧</h3>
-                                                            <ul>
-                                                                @foreach ($restaurant->comments as $comment)
-                                                                    <li>{{ $comment->comment }}</li>
-                                                                    @if (Auth::check() && Auth::user()->id === $comment->user_id)
-                                                                        <form method="POST" action="{{ route('restaurant_comments.destroy', $comment->id) }}">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <button type="submit">削除</button>
-                                                                        </form>
-                                                                    @endif
-                                                                @endforeach
-                                                            </ul>
-                                                        @else
-                                                            <p>まだコメントがありません。</p>
-                                                        @endif
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        @if ($restaurant->comments->count() > 0)
+                                                                            <h3>みんなの声</h3>
+                                                                            <ul class="list-group">
+                                                                                @foreach ($restaurant->comments as $comment)
+                                                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                                        <span>{{ $comment->comment }}</span>
+                                                                                        @if (Auth::check() && Auth::user()->id === $comment->user_id)
+                                                                                            <form method="POST" action="{{ route('restaurant_comments.destroy', $comment->id) }}">
+                                                                                                @csrf
+                                                                                                @method('DELETE')
+                                                                                                <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                                                                                            </form>
+                                                                                        @endif
+                                                                                    </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        @else
+                                                                            <p>まだコメントがありません。</p>
+                                                                        @endif
+                                                                    </div>                                                                    
+                                                                </div>
+                                                            
+                                                                <div class="row mt-4">
+                                                                    <div class="col-md-12">
+                                                                        @if (Auth::check())
+                                                                            <form method="POST" action="{{ route('restaurant_comments.store') }}">
+                                                                                @csrf
+                                                                                <input type="hidden" name="restaurant_post_id" value="{{ $restaurant->id }}">
+                                                                                <div class="mb-3">
+                                                                                    <label for="comment" class="form-label"><h3>コメント使用！</h3></label>
+                                                                                    <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="コメントを入力してください"></textarea>
+                                                                                </div>
+                                                                                <button type="submit" class="btn btn-primary">コメントする</button>
+                                                                            </form>
+                                                                        @else
+                                                                            <p>コメントを投稿するにはログインしてください。</p>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
                                                         
 
                                                         </div>
@@ -427,12 +448,17 @@
                                             
                                              <script>
                                                 // 現在のページと総ページ数を保持する変数
+                                                // 変数の宣言はforeachでやってるから2回目以降は変数は再定義できないから、表示されない（エラー）
+                                                // 
                                                 let currentPage = 1;
                                                 const totalPages = 2; // 総ページ数は適宜変更してください
+                                               
                                             
+                                                console.log(currentPage);
                                                 // ページ番号を更新する関数
                                                 function updatePageNumber() {
                                                     document.getElementById('pageNumber').textContent = currentPage + ' / ' + totalPages;
+                                                    console.log("ページ番号を更新する関数＝"+currentPage);
                                                 }
                                             
                                                 // 前のページに移動する関数
@@ -441,6 +467,7 @@
                                                         currentPage--;
                                                         updatePageNumber();
                                                         showPage(currentPage);
+                                                        console.log("462="+currentPage);
                                                     }
                                                 }
                                             
@@ -450,6 +477,7 @@
                                                         currentPage++;
                                                         updatePageNumber();
                                                         showPage(currentPage);
+                                                        console.log("472="+currentPage);
                                                     }
                                                 }
                                             
@@ -458,9 +486,11 @@
                                                     // 全てのページを非表示にする
                                                     document.querySelectorAll('.page').forEach(function(element) {
                                                         element.style.display = 'none';
+                                                        console.log("481="+currentPage);
                                                     });
                                                     // 指定されたページを表示する
                                                     document.getElementById('page' + page).style.display = 'block';
+                                                    console.log("485="+currentPage);
                                                 }
                                             
                                                 // 初期表示として最初のページを表示
@@ -469,9 +499,11 @@
                                                 // ボタンのクリックイベントリスナーを追加
                                                 document.getElementById('prevBtn').addEventListener('click', function() {
                                                     prevPage();
+                                                    console.log("494="+currentPage);
                                                 });
                                                 document.getElementById('nextBtn').addEventListener('click', function() {
                                                     nextPage();
+                                                    console.log("498="+currentPage);
                                                 });
                                             </script> 
 
