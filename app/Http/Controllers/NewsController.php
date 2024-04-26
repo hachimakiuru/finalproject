@@ -9,39 +9,49 @@ use App\Models\NewsTimeLine;
 
 class NewsController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        $newsTimeLines = NewsTimeLine::all();
-
+         $newsTimeLines = NewsTimeLine::orderBy('start', 'desc')->get();
         return view('news.event.index', compact('newsTimeLines'));
     }
 
     public function event()
     {
-        $newsTimeLines = NewsTimeLine::where('genre_id', 1)->get();
+        $newsTimeLines = NewsTimeLine::where('genre_id', 1)
+                                      ->orderBy('start', 'desc')
+                                      ->get();
         return view('news.event.index', compact('newsTimeLines'));
     }
-
+    
     public function hotelInfo()
     {
-        $newsTimeLines = NewsTimeLine::where('genre_id', 2)->get();
+        $newsTimeLines = NewsTimeLine::where('genre_id', 2)
+                                      ->orderBy('start', 'desc')
+                                      ->get();
         return view('news.hotel-info.index', compact('newsTimeLines'));
     }
-
+    
     public function japanCulture()
     {
-        $newsTimeLines = NewsTimeLine::where('genre_id', 3)->get();
+        $newsTimeLines = NewsTimeLine::where('genre_id', 3)
+                                      ->orderBy('start', 'desc')
+                                      ->get();
         return view('news.japan-culture.index', compact('newsTimeLines'));
     }
-
+    
     public function others()
     {
-        $newsTimeLines = NewsTimeLine::where('genre_id', 4)->get();
+        $newsTimeLines = NewsTimeLine::where('genre_id', 4)
+                                      ->orderBy('start', 'desc')
+                                      ->get();
         return view('news.others.index', compact('newsTimeLines'));
     }
+
 
     /**
      * Show the form for creating a new resource.

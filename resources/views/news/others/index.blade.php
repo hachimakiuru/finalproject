@@ -129,7 +129,7 @@
                                             <img src="{{ asset('storage/img/' . $newsTimeLine->image)}}" class="img-thumbnail" alt="restaurant photo" style="width: 50%; height: auto; border-radius: 8px;">
                                         </div>
                                         <div class="col-md-8">
-                                            <h5>{{ $newsTimeLine->start }} - {{ $newsTimeLine->title }}</h5>
+                                            <h5>{{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }} - {{ $newsTimeLine->title }}</h5>
                                             <p>{{ $newsTimeLine->place }}</p>
                                             <!-- モーダルトリガーボタン -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $newsTimeLine->id }}">
@@ -156,7 +156,7 @@
                                     <img src="{{asset('storage/img/' . $newsTimeLine->image)}}" class="img-fluid rounded shadow-lg" alt="restaurant photo" style="max-width: 200px;">
                                 </div>
                                 <p><strong>ユーザー名:</strong> {{ $newsTimeLine->user->name }}</p>
-                                <p><strong>開催日:</strong> {{ $newsTimeLine->start }}</p>
+                                <p><strong>開催日:</strong> {{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }}</p>
                                 <p><strong>場所:</strong>{{ $newsTimeLine->content }}</p>
                                 <p><strong>内容:</strong> {{ $newsTimeLine->place}}</p>
                                 <p><strong>金額:</strong> {{ $newsTimeLine->price  }}</p>
