@@ -12,11 +12,23 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index(User $user)
+    public function index(Request $request)
     {
+        // $roles = Role::all();
+        // $users = User::all();
+        // return view('admin.dashboard', compact('roles', 'users'));
+
         $roles = Role::all();
-        $users = User::all();
-        return view('admin.dashboard', compact('roles', 'users'));
+        $selectedRole = $request->input('role');
+
+        // 選択された役割によるユーザーのフィルタリング
+        $users = User::query();
+        if ($selectedRole) {
+            $users->where('role_id', $selectedRole);
+        }
+        $users = $users->get();
+
+        return view('admin.dashboard', compact('roles', 'users', 'selectedRole'));
     }
 
 
