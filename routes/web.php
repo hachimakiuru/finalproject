@@ -27,7 +27,7 @@ use App\Http\Controllers\RestaurantLikeController;
 use App\Http\Controllers\RestaurantCommentsController;
 
 use App\Http\Controllers\NewsCalendarController;
-
+use App\Models\NewsBooking;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -40,9 +40,7 @@ Route::get('/welcome', function () {
 // ここのルートを変更して各自の画面を確認する
 
 
-Route::get('/activity-dashboard', function () {
-    return view('activity-dashboard');
-})->name('activity.dashboard');
+Route::get('/activity-dashboard', [ExperienceController::class, 'activityDashboard'])->name('activity.dashboard');
 
 
 
@@ -54,6 +52,7 @@ Route::get('/news/others', [NewsController::class, 'others'])->name('news.others
 
 //News.Modalのstore
 Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+
 //News.show
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 //News.edit
@@ -62,6 +61,9 @@ Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('news.news-
 Route::put('/news/{id}', [NewsController::class, 'update'])->name('news.update');
 
 Route::delete('posts/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+
+//リクエスト送信用のsote Namiki
+Route::post('/news-booking', [NewsBookingController::class, 'newsBookingStore'])->name('news-booking.store');
 
 Route::get('/restaurant-dashboard', function () {
     return view('restaurant-dashboard');
@@ -107,14 +109,13 @@ Route::put('/experience/{id}', [ExperienceController::class, 'update'])->name('e
 // restaurant-booking-form
 Route::get('/rbooking', [RbookingController::class, 'index'])->name('rbooking.index');
 Route::post('/rbooking', [RbookingController::class, 'store'])->name('rbooking.store');
-Route::get('/rbooking/{id}/edit', [RbookingController::class, 'edit'])->name('rbooking.edit');
 Route::put('/rbooking/{id}', [RbookingController::class, 'update'])->name('rbooking.update');
 Route::delete('/rbooking/{id}', [RbookingController::class, 'destroy'])->name('rbooking.destroy');
 
 
 // News Bookings一覧
 Route::get('/news-bookings', [NewsBookingController::class, 'index'])->name('newsBookings.index');
-Route::put('/news-bookings/{id}', [RbookingController::class, 'update'])->name('newsBooking.update');
+Route::put('/news-bookings/{id}', [NewsBookingController::class, 'update'])->name('newsBooking.update');
 Route::delete('/news-bookings/{id}', [NewsBookingController::class, 'destroy'])->name('newsBookings.destroy');
 
 
@@ -130,11 +131,10 @@ Route::delete('/restaurant/unlike/{postId}', [RestaurantLikeController::class, '
 
 
 Route::get('/calendar', [NewsCalendarController::class, 'view'])->name('calendar.view');
-Route::get('/calendar/search', [NewsCalendarController::class, 'search'])->name('calendar.search');
+Route::get('/calendar/search', [ExperienceController::class, 'search'])->name('calendar.search');
 
 Route::prefix('comments')->group(function () {
     Route::post('/', [RestaurantCommentsController::class, 'store'])->name('restaurant_comments.store');
     Route::put('/{restaurantComment}', [RestaurantCommentsController::class, 'update'])->name('comments.update');
-    Route::delete('/{restaurantComment}', [RestaurantCommentsController::class, 'destroy'])->name('comments.destroy');
+    Route::delete('/{restaurantComment}', [RestaurantCommentsController::class, 'destroy'])->name('restaurant_comments.destroy');
 });
-

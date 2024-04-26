@@ -27,11 +27,11 @@ class RbookingController extends Controller
     // }
 
 
-    public function edit(string $id)
-    {
-        $restaurantForm =  RestaurantForm::findorFail($id);
-        return view('rbooking.edit', compact('restaurantForm'));
-    }
+    // public function edit(string $id)
+    // {
+    //     $restaurantForm =  RestaurantForm::findorFail($id);
+    //     return view('rbooking.edit', compact('restaurantForm'));
+    // }
 
     public function update(Request $request, $id)
     {
@@ -48,7 +48,7 @@ class RbookingController extends Controller
             'number_guests' => $request->number_guests,
             'memo' => $request->memo,
         ]);
-        return redirect()->route('rbooking.index');
+        return redirect()->route('rbooking.index')->with('success', '予約情報の変更が完了しました。');
     }
 
     public function destroy($id)
