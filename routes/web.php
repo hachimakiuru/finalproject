@@ -136,5 +136,5 @@ Route::get('/calendar/search', [ExperienceController::class, 'search'])->name('c
 Route::prefix('comments')->group(function () {
     Route::post('/', [RestaurantCommentsController::class, 'store'])->name('restaurant_comments.store');
     Route::put('/{restaurantComment}', [RestaurantCommentsController::class, 'update'])->name('comments.update');
-    Route::delete('/{restaurantComment}', [RestaurantCommentsController::class, 'destroy'])->name('comments.destroy');
+    Route::delete('/{restaurantComment}', [RestaurantCommentsController::class, 'destroy'])->name('restaurant_comments.destroy');
 });
