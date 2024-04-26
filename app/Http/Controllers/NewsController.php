@@ -61,8 +61,8 @@ class NewsController extends Controller
             'title' => 'required|string',
             'content' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'day' => 'required',
-            'price' => 'required|numeric',
+            'start' => 'required',
+            'price' => 'required|string',
             'place' => 'required|string',
             'others' => 'nullable|string',
             'genre_id' => 'required',
@@ -72,7 +72,7 @@ class NewsController extends Controller
             'user_id' => Auth::user()->id,
             'title' => $request->input('title'),
             'content' => $request->input('content'),
-            'day' => $request->input('day'),
+            'start' => $request->input('start'),
             'price' => $request->input('price'),
             'place' => $request->input('place'),
             'others' => $request->input('others'),
@@ -125,7 +125,7 @@ class NewsController extends Controller
         $newsTimeLine -> place = $request -> place;
         $newsTimeLine -> price  = $request -> price ;
         $newsTimeLine -> others = $request -> others;
-        $newsTimeLine -> day = $request -> day;
+        $newsTimeLine -> start = $request -> start;
         // $newsTimeLine -> image = $request -> image;
 
         // 画像がアップロードされた場合は保存してデータベースにファイル名を更新
