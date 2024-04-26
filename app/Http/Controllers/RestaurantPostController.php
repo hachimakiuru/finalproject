@@ -12,7 +12,11 @@ class RestaurantPostController extends Controller
 {
     public function index()
     {
-        $restaurants = RestaurantPost::all();
+        // $restaurants = RestaurantPost::all();
+
+        $restaurants = RestaurantPost::withCount('comments')
+        ->orderByDesc('comments_count') // コメント数が多い順に並べ替え
+        ->get();
 
 
         if($restaurants ) {
@@ -26,7 +30,6 @@ class RestaurantPostController extends Controller
         }
 
         return view('restaurants.index', compact('restaurants'));
-
     }
 
 
