@@ -14,7 +14,8 @@ class NewsTimeLine  extends Model
         'title',
         'content',
         'image',
-        'day',
+        'start',
+        'end',
         'price',
         'place',
         'others',
@@ -27,7 +28,8 @@ class NewsTimeLine  extends Model
      * @var array
      */
     protected $casts = [
-        'price' => 'decimal:2', // 金額を小数点以下2桁までキャストする例
+        'price' => 'integer',
+        // 'start' => 'datetime', 
     ];
 
     /**
@@ -41,4 +43,6 @@ class NewsTimeLine  extends Model
     {
         return $this->hasMany(NewsBooking::class);
     }
+
+ 
 }

@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="start" class="form-label">開催日</label>
-                                        <input type="date" id="start" name="start" class="form-control @error('start') is-invalid @enderror" value="{{ $newsTimeLine->start }}">
+                                        <input type="date" id="start" name="start" class="form-control @error('start') is-invalid @enderror" value="{{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }}">
                                         @error('start')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
