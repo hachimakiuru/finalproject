@@ -8,9 +8,23 @@
 @include('parts.success-message')
 <body>
   <div><a href="{{ route('admin.dashboard') }}">Admin Page</a></div>
-  <button type="submit" class="btn-create-user">
-    <a href="{{ route('register') }}">新規アカウントを追加</a>
-  </button>
+  <div class="dashboard-nav">
+    <button type="submit" class="btn-create-user">
+      <a href="{{ route('register') }}">新規アカウントを追加</a>
+    </button>
+    {{-- role別のフィルタリングの検索記述 --}}
+    <form action="{{ route('admin.dashboard') }}" method="GET">
+      <label for="role">Authority:</label>
+      <select name="role" id="role">
+          <option value="">All</option>
+          <option value="1">Admin</option>
+          <option value="2">Employee</option>
+          <option value="3">Guest</option>
+      </select>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
   <table class="table">
     <thead>
       <tr>
@@ -20,6 +34,8 @@
         <th scope="col">RoomNo.</th>
         <th scope="col">Created At</th>
         <th scope="col">Authority</th>
+        <th scope="col">Total Posts</th>
+        <th scope="col">Total Likes</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
       </tr>
@@ -30,8 +46,10 @@
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->room_number }}</td>
-        <td>{{ $user->created_at }}</td>
+        <td>{{ $user->created_at->format('Y-m-d') }}</td>
         <td>{{ $user->role ? $user->role->name : 'No Role' }}</td>
+        <td>10</td>
+        <td>3</td>
         <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $user->id }} ">Edit</button></td>
         <td>
           <form method="POST" action="{{ route('user.destroy', $user->id) }}">

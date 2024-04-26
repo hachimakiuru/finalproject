@@ -5,6 +5,12 @@ body {
   }
 }
 
+.dashboard-nav {
+  display: flex;
+  gap: 50px;
+  margin-top: 20px;
+}
+
 .btn-create-user {
   display: flex;
   align-items: center;
@@ -22,5 +28,8 @@ body {
   background-color: #ffffff00;
 }
 
+table {
+  margin-top: 30px;
+}
 
 
