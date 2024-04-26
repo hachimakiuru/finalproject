@@ -75,28 +75,49 @@
                                                 <label for="genre_place" class="col-sm-2 col-form-label">場所</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_place') is-invalid @enderror" id="genre_place" name="genre_place">
-                                                        <option selected disabled>選択してください</option>
-                                                        <option value="新宿">新宿</option>
-                                                        <option value="代々木">代々木</option>
-                                                        <option value="浅草">浅草</option>
-                                                        <option value="筑地">筑地</option>
-                                                        <option value="渋谷">渋谷</option>
-                                                        <option value="池袋">池袋</option>
-                                                        <option value="秋葉原">秋葉原</option>
-                                                        <option value="原宿">原宿</option>
-                                                        <option value="銀座">銀座</option>
-                                                        <option value="上野">上野</option>
-                                                        <option value="東京駅周辺">東京駅周辺</option>
-                                                        <option value="六本木">六本木</option>
-                                                        <option value="品川">品川</option>
-                                                        <option value="赤坂">赤坂</option>
-                                                        <option value="自由ヶ丘">自由ヶ丘</option>
-                                                        <option value="恵比寿">恵比寿</option>
-                                                        <option value="吉祥寺">吉祥寺</option>
-                                                        <option value="中野">中野</option>
-                                                        <option value="月島">月島</option>
-                                                        <option value="お台場">お台場</option>
-                                                        <option value="下北沢">下北沢</option>
+                                                        <option selected disabled>Please select</option>
+                                                        <option value="Chiyoda">Chiyoda</option>
+                                                        <option value="Chuo">Chuo</option>
+                                                        <option value="Minato">Minato</option>
+                                                        <option value="Shinjuku">Shinjuku</option>
+                                                        <option value="Bunkyō">Bunkyō</option>
+                                                        <option value="Taitō">Taitō</option>
+                                                        <option value="Sumida">Sumida</option>
+                                                        <option value="Kōtō">Kōtō</option>
+                                                        <option value="Shinagawa">Shinagawa</option>
+                                                        <option value="Meguro">Meguro</option>
+                                                        <option value="Ōta">Ōta</option>
+                                                        <option value="Setagaya">Setagaya</option>
+                                                        <option value="Shibuya">Shibuya</option>
+                                                        <option value="Nakano">Nakano</option>
+                                                        <option value="Suginami">Suginami</option>
+                                                        <option value="Toshima">Toshima</option>
+                                                        <option value="Kita">Kita</option>
+                                                        <option value="Arakawa">Arakawa</option>
+                                                        <option value="Itabashi">Itabashi</option>
+                                                        <option value="Nerima">Nerima</option>
+                                                        <option value="Adachi">Adachi</option>
+                                                        <option value="Katsushika">Katsushika</option>
+                                                        <option value="Edogawa">Edogawa</option>
+                                                        <option value="Tokyo Station">Tokyo Station</option>
+                                                        <option value="Shibuya Station">Shibuya Station</option>
+                                                        <option value="Shinjuku Station">Shinjuku Station</option>
+                                                        <option value="Ikebukuro Station">Ikebukuro Station</option>
+                                                        <option value="Shinagawa Station">Shinagawa Station</option>
+                                                        <option value="Ueno Station">Ueno Station</option>
+                                                        <option value="Harajuku">Harajuku</option>
+                                                        <option value="Roppongi">Roppongi</option>
+                                                        <option value="Ginza">Ginza</option>
+                                                        <option value="Akihabara">Akihabara</option>
+                                                        <option value="Asakusa">Asakusa</option>
+                                                        <option value="Odaiba">Odaiba</option>
+                                                        <option value="Yoyogi">Yoyogi</option>
+                                                        <option value="Tsukiji">Tsukiji</option>
+                                                        <option value="Marunouchi">Marunouchi</option>
+                                                        <option value="Yurakucho">Yurakucho</option>
+                                                        <option value="Ebisu">Ebisu</option>
+                                                        <option value="Shimokitazawa">Shimokitazawa</option>
+                                                        
                                                         <!-- 他のオプションを追加 -->
                                                     </select>
                                                     @error('genre_place')
@@ -242,8 +263,20 @@
                                                                                 <div class="col-md-13">
                                                                                     <!-- 写真と詳細情報 -->
                                                                                     <div class="text-center">
-                                                                                        <img src="{{ Storage::url($restaurant->image_path) }}" class="img-fluid rounded shadow-lg" alt="restaurant photo">
+                                                                                        <div class="text-center">
+                                                                                            <!-- インラインスタイルでホバー時の拡大表示を設定 -->
+                                                                                            <img src="{{ Storage::url($restaurant->image_path) }}" class="img-fluid rounded shadow-lg" alt="restaurant photo" style="transition: transform 0.3s ease;">
+                                                                                        
+                                                                                            <!-- ホバー時のスタイル -->
+                                                                                            <style>
+                                                                                                .img-fluid.rounded.shadow-lg:hover {
+                                                                                                    transform: scale(1.5); /* 1.1倍に拡大 */
+                                                                                                }
+                                                                                            </style>
+                                                                                        </div>
+                                                                                        
                                                                                     </div>
+                                                                                    
                                                                                     <p><strong>ユーザー名:</strong> {{ $restaurant->user->name }}</p>
                                                                                     <p><strong>店舗名:</strong> {{ $restaurant->name }}</p>
                                                                                     <p><strong>住所:</strong> {{ $restaurant->address }}</p>

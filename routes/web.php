@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 
+use App\Http\Controllers\RbookingController;
 
 use App\Http\Controllers\ExperienceController;
 
@@ -21,7 +22,6 @@ use App\Http\Controllers\LikeController;
 
 use App\Http\Controllers\NewsBookingController;
 
-use App\Http\Controllers\RbookingController;
 
 use App\Http\Controllers\RestaurantLikeController;
 use App\Http\Controllers\RestaurantCommentsController;
