@@ -1,7 +1,7 @@
         /* レイアウト全体のスタイル */
         .container {
             display: flex;
-            height: 100vh; /* 画面全体の高さに合わせる */
+            height: calc(100vh - 50px)!important; /* 画面全体の高さに合わせる */
         }
 
         /* */
@@ -9,23 +9,37 @@
             width: 50%; /* 画面の半分 */
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
 
         /* カレンダー機能*/
         .left .top-box {
-            flex: 4; /* 40% */
+            /* flex: 4; 40% */
             background-color: lightblue;
+            height: 50%;
         }
+
+        
 
         /* ニュース*/
         .left .bottom-box {
-            flex: 6; /* 60% */
+            /* flex: 6; 60% */
             background-color: lightgreen;
+            height: 50%;
         }
 
         /* アクティビティ機能 */
         .right {
             width: 50%; /* 画面の半分 */
             background-color: lightcoral;
+            height: 100%;
         }
 
+        #dateResult .parent:not(:last-of-type) {
+            border-bottom: 1px solid green!important;
+        }
+
+        .fc .fc-daygrid-day-frame {
+            height: 8px!important;
+            overflow: hidden;
+        }

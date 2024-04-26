@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ExperiencePost;
 use App\Models\Like;
+use App\Models\NewsCalendar;
+use App\Models\NewsTimeLine;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -77,7 +79,7 @@ class ExperienceController extends Controller
             $experience->save();
         
             Session::flash('success', 'Image uploaded successfully.');
-            return redirect()->route('experience.index');
+            return back();
         }
             return response()->json(['error' => 'No image uploaded'], 400);
         }
@@ -125,7 +127,7 @@ class ExperienceController extends Controller
         $experience->ig_account = $request->instagramaccount; 
         $experience->save();
         
-        return redirect()->route('experience.index')->with('success', '投稿が更新されました。');
+        return back()->with('success', '投稿が更新されました。');
     }
     
 
@@ -148,4 +150,34 @@ public function destroy(Request $request, $id)
 
     return redirect()->back()->with('success', '投稿が削除されました。');
 }
+
+    public function activityDashboard()
+    {
+        $events = NewsTimeLine::all();
+        $experiences = ExperiencePost::all(); // あなたのアプリケーションに適した方法でデータを取得してください
+        
+        if($experiences) {
+            foreach($experiences as $experience) {
+                // $experience['isLike'] = 
+                $likes = Like::where('user_id', Auth::user()->id)
+                    ->where('experience_post_id', $experience->id)
+                    ->get();
+                $experience['isLike'] = count($likes) > 0 ? true : false;
+            }
+        }
+
+        return view('activity-dashboard', compact('experiences', 'events'));
+    }
+
+    public function search(Request $request) 
+    {
+        $resultArr = array();
+        $results = NewsTimeLine::whereDate('start', $request->date)->get();
+        foreach($results as $item)
+        {
+            array_push($resultArr, $item);
+        }
+        return $resultArr;
+    }
+    
 }

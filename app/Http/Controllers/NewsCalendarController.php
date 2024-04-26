@@ -23,4 +23,6 @@ class NewsCalendarController extends Controller
         }
         return $resultArr;
     }
+
+    
 }

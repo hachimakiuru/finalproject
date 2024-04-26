@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Final Project</title>
-    {{-- 独自cssの読み込み --}}
+    独自cssの読み込み
     <link rel="stylesheet" href="{{ asset('/css/global/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/global/header-blade.css') }}">
 
-    {{-- Bootstrap5のCDN読み込み記述 --}}
+    Bootstrap5のCDN読み込み記述
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -20,10 +20,13 @@
     />
     <link rel="stylesheet" href="{{ asset('/css/experience_blade.css') }}">
 
-</head>
+</head> --}}
 
 
 <body>
+
+    
+    
 @include('layouts.header')
 <div>
     @yield('content')
@@ -297,4 +300,4 @@
 
 
 </body>
-</html>
+{{-- </html> --}}
