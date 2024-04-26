@@ -1,51 +1,3 @@
-{{-- <form action="{{ route('news.update',$newsTimeLine -> id) }}" method="POST">
-    @csrf
-    @method('put')
-
-    <div>
-        <div>
-            <label for="title">タイトル</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ $newsTimeLine->title }}">
-        </div>
-        <div>
-            <label for="content">内容</label>
-            <input type="text" class="form-control" id="content" name="content" value="{{ $newsTimeLine->content }}">
-        </div>
-        <div>
-            <label for="place">場所</label>
-            <input type="text" class="form-control" id="place" name="place" value="{{ $newsTimeLine->place }}">
-        </div>
-        <div>
-            <label for="price">値段</label>
-            <input type="number" class="form-control" id="price" name="price" value="{{ $newsTimeLine->price }}">
-        </div>
-        <div>
-            <label for="others">その他</label>
-            <input type="text" class="form-control" id="others" name="others" value="{{ $newsTimeLine->others }}">
-        </div>
-        <div>
-            <label for="day">日付</label>
-            <input type="text" class="form-control" id="day" name="day" value="{{ $newsTimeLine->day }}">
-        </div>
-        <div>
-            <label for="image">写真を選択してください：</label>
-            <input type="file" id="image" name="image">
-            @if($newsTimeLine->image)
-                <div>
-                    現在の写真:
-                    <img src="{{ asset('storage/img/' . $newsTimeLine->image) }}" alt="" width="100" height="100">
-                </div>
-            @else
-                <div>写真はありません。</div>
-            @endif
-        </div>
-    </div>
-
-    <button type="submit">更新</button>
-   
-</form> --}}
-
-
 
 @extends('layouts.layout')
 @section('content')
@@ -83,9 +35,9 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="day" class="form-label">開催日</label>
-                                        <input type="text" id="day" name="day" class="form-control @error('day') is-invalid @enderror" value="{{ $newsTimeLine->day }}">
-                                        @error('day')
+                                        <label for="start" class="form-label">開催日</label>
+                                        <input type="date" id="start" name="start" class="form-control @error('start') is-invalid @enderror" value="{{ $newsTimeLine->start }}">
+                                        @error('start')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -105,7 +57,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="price" class="form-label">金額</label>
-                                        <input type="number" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ $newsTimeLine->price }}">
+                                        <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ $newsTimeLine->price }}">
                                         @error('price')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror

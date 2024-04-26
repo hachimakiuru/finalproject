@@ -1,4 +1,5 @@
 
+
 @extends('layouts.layout')
 
 @section('content')
@@ -43,10 +44,10 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="day" class="col-sm-2 col-form-label">開催日</label>
+                                                <label for="start" class="col-sm-2 col-form-label">開催日</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" id="day" name="day" class="form-control @error('day') is-invalid @enderror" value="">
-                                                    @error('day')
+                                                    <input type="date" id="start" name="start" class="form-control @error('start') is-invalid @enderror" value="">
+                                                    @error('start')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
@@ -72,7 +73,7 @@
                                             <div class="mb-3 row">
                                                 <label for="price" class="col-sm-2 col-form-label">金額</label>
                                                 <div class="col-sm-10">
-                                                    <input type="number" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="">
+                                                    <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="">
                                                     @error('price')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -95,12 +96,6 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                {{-- <div class="mb-3">
-                                                    <label for="image" class="form-label">写真</label>
-                                                    <div class="input-group" style="width: 100%;">
-                                                        <input type="file" id="image" name="image" style="width: 100%;">
-                                                    </div>
-                                                </div> --}}
                                             </div>
                                             <div class="mb-3">
                                                 <label for="genre" class="form-label">ジャンル</label>
@@ -131,10 +126,10 @@
                                 <li class="list-group-item" style="background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 8px;">
                                     <div class="row align-items-center">
                                         <div class="col-md-4">
-                                            <img src="{{ asset('storage/img/' . $newsTimeLine->image)}}" class="img-thumbnail" alt="restaurant photo" style="width: 100%; height: auto; border-radius: 8px;">
+                                            <img src="{{ asset('storage/img/' . $newsTimeLine->image)}}" class="img-thumbnail" alt="restaurant photo" style="width: 50%; height: auto; border-radius: 8px;">
                                         </div>
                                         <div class="col-md-8">
-                                            <h5>{{ $newsTimeLine->day }} - {{ $newsTimeLine->title }}</h5>
+                                            <h5>{{ $newsTimeLine->start }} - {{ $newsTimeLine->title }}</h5>
                                             <p>{{ $newsTimeLine->place }}</p>
                                             <!-- モーダルトリガーボタン -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $newsTimeLine->id }}">
@@ -158,10 +153,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <img src="{{asset('storage/img/' . $newsTimeLine->image)}}" class="img-fluid rounded shadow-lg" alt="restaurant photo">
+                                    <img src="{{asset('storage/img/' . $newsTimeLine->image)}}" class="img-fluid rounded shadow-lg" alt="restaurant photo" style="max-width: 200px;">
                                 </div>
                                 <p><strong>ユーザー名:</strong> {{ $newsTimeLine->user->name }}</p>
-                                <p><strong>開催日:</strong> {{ $newsTimeLine->day }}</p>
+                                <p><strong>開催日:</strong> {{ $newsTimeLine->start }}</p>
                                 <p><strong>場所:</strong>{{ $newsTimeLine->content }}</p>
                                 <p><strong>内容:</strong> {{ $newsTimeLine->place}}</p>
                                 <p><strong>金額:</strong> {{ $newsTimeLine->price  }}</p>
