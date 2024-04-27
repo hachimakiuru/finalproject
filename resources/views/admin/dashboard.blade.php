@@ -10,7 +10,7 @@
   <div><a href="{{ route('admin.dashboard') }}">Admin Page</a></div>
   <div class="dashboard-nav">
     <button type="submit" class="btn-create-user">
-      <a href="{{ route('register') }}">新規アカウントを追加</a>
+      <a href="{{ route('register') }}">Create New Account</a>
     </button>
     {{-- role別のフィルタリングの検索記述 --}}
     <form action="{{ route('admin.dashboard') }}" method="GET">
@@ -28,16 +28,16 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">RoomNo.</th>
-        <th scope="col">Created At</th>
-        <th scope="col">Authority</th>
-        <th scope="col">Total Posts</th>
-        <th scope="col">Total Likes</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+        <th scope="col" class="col-id">ID</th>
+        <th scope="col" class="col-name">Name</th>
+        <th scope="col" class="col-email">Email</th>
+        <th scope="col" class="col-roomNo">RoomNo.</th>
+        <th scope="col" class="col-create">Created At</th>
+        <th scope="col" class="col-role">Authority</th>
+        <th scope="col" class="col-width">Posts</th>
+        <th scope="col" class="col-width">Likes</th>
+        <th scope="col" class="col-edit">Edit</th>
+        <th scope="col" class="col-delete">Delete</th>
       </tr>
     <tbody>
       @foreach ($users as $user)
