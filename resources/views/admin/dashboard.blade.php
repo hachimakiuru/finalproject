@@ -28,16 +28,16 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">RoomNo.</th>
-        <th scope="col">Created At</th>
-        <th scope="col">Authority</th>
-        <th scope="col">Total Posts</th>
-        <th scope="col">Total Likes</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+        <th scope="col" class="col-id">ID</th>
+        <th scope="col" class="col-name">Name</th>
+        <th scope="col" class="col-email">Email</th>
+        <th scope="col" class="col-roomNo">RoomNo.</th>
+        <th scope="col" class="col-create">Created At</th>
+        <th scope="col" class="col-role">Authority</th>
+        <th scope="col" class="col-width">Posts</th>
+        <th scope="col" class="col-width">Likes</th>
+        <th scope="col" class="col-edit">Edit</th>
+        <th scope="col" class="col-delete">Delete</th>
       </tr>
     <tbody>
       @foreach ($users as $user)
