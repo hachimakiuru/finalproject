@@ -10,7 +10,7 @@
   <div><a href="{{ route('admin.dashboard') }}">Admin Page</a></div>
   <div class="dashboard-nav">
     <button type="submit" class="btn-create-user">
-      <a href="{{ route('register') }}">新規アカウントを追加</a>
+      <a href="{{ route('register') }}">Create New Account</a>
     </button>
     {{-- role別のフィルタリングの検索記述 --}}
     <form action="{{ route('admin.dashboard') }}" method="GET">
