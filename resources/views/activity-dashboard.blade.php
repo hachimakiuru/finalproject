@@ -54,25 +54,25 @@
                 </div>
               
                 <!-- ポンポン投稿カードのコメント -->
-                <div class="d-flex flex-wrap">
+                <div class="d-flex flex-wrap justify-content-center gap-3">
                     @foreach($experiences->reverse() as $key => $experience)
-                    <div class="col">
+                    <div class="col" style="flex: unset">
                         <div class="card custom-card">
                             <div class='postimg'>
                                 <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">タイトルは：{{ $experience->title }}</h5>
-                                <h5 class="card-updatedat">更新日：{{ $experience->updated_at }}</h5>
-                                <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
-                                <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger delete-button">削除</button>
-                                </form>
-                                <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
-                
-                
+                                @if(Auth::user()->role_id == 1)
+                                    <h5 class="card-updatedat">更新日：{{ $experience->updated_at }}</h5>
+                                    <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
+                                    <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger delete-button">削除</button>
+                                    </form>
+                                    <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
+                                @endif
                                 {{-- likeボタンの作成 --}}
                                 <div class="btn-container" id="target{{ $experience->id }}">
                                     @if ($experience->isLike)
@@ -340,8 +340,16 @@
                         var $place = $('<div></div>').addClass('item').text("Place: " + d.place);   
                         var $others = $('<div></div>').addClass('item').text("Others: " + d.others);   
                         
-                        var $btn = $('<a></a>').addClass('item').text('reservation').attr({
-                            'href': '#exampleModal',
+                        // var $btn = $('<a></a>').addClass('item').text('reservation').attr({
+                        //     'href': '#exampleModal',
+                        //     'data-bs-toggle': 'modal',
+                        //     'data-bs-target': '#exampleModal'
+                        // });
+
+                        var $btn = $('<button></button>') // Changed from <a></a> to <button></button>
+                        .addClass('btn btn-warning item') // Add Bootstrap button classes
+                        .text('Reservation')
+                        .attr({
                             'data-bs-toggle': 'modal',
                             'data-bs-target': '#exampleModal'
                         });
