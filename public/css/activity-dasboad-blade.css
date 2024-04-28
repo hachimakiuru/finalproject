@@ -19,7 +19,7 @@
         /* カレンダー機能*/
         .left .top-box {
             /* flex: 4; 40% */
-            background-color: lightblue;
+
             height: 50%;
         }
 
@@ -28,14 +28,12 @@
         /* ニュース*/
         .left .bottom-box {
             /* flex: 6; 60% */
-            background-color: lightgreen;
             height: 50%;
         }
 
         /* アクティビティ機能 */
         .right {
             width: 50%; /* 画面の半分 */
-            background-color: lightcoral;
             height: 100%;
         }
 

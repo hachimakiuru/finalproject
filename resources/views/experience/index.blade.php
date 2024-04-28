@@ -1,32 +1,6 @@
-{{-- <!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Final Project</title>
-    独自cssの読み込み
-    <link rel="stylesheet" href="{{ asset('/css/global/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/global/header-blade.css') }}">
-
-    Bootstrap5のCDN読み込み記述
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <link
-        href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
-        rel="stylesheet"
-    />
-    <link rel="stylesheet" href="{{ asset('/css/experience_blade.css') }}">
-
-</head>
-<body> --}}
-
 
     {{-- レイアウトのお試し --}}
 @extends('layouts.layout')
-@section('content')  
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('/css/experience_blade.css') }}">
@@ -37,13 +11,14 @@
         }
     </style>
 @endpush
+@section('content')  
+
+
 
     
     
 @include('layouts.header')
-<div>
-    @yield('content')
-</div>
+
 
 <div class="d-flex justify-content-center p-3">
     <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal">写真投稿はこちら!</button>
@@ -249,6 +224,9 @@
 
 
 <script>
+    
+
+
     $('.detail-button').click(function() {
         var title = $(this).data('title');
         var address = $(this).data('address');
@@ -306,6 +284,14 @@
             }
         });
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        const header = $('.header')
+        header[1].style.display = "none"
+    });
+
 </script>
     
 
