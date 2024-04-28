@@ -9,8 +9,166 @@
 <div class="container-fluid mt-3">
 
 
+
     <div class="row">
         <div class="col-md-4">
+    <div class="card">
+        <div class="card-header" id="searchHeading">
+            <h5 class="mb-0">
+                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#searchFormCollapse" aria-expanded="false" aria-controls="searchFormCollapse" id="searchFormButton">
+                    <i class="bi bi-search"></i> Filter
+                </button>             
+            </h5>
+        </div>
+        <div id="searchFormCollapse" class="collapse" aria-labelledby="searchHeading">
+            <div class="card-body">
+                <form method="GET">
+                    <div class="row mb-3">
+                        <label for="genre_place" class="col-sm-2 col-form-label">Location</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" id="genre_place" name="genre_place">
+                                <option selected disabled>選択してください</option>
+                                <option value="新宿">新宿</option>
+                                 <option value="代々木">代々木</option>
+                                 <option value="浅草">浅草</option>
+                                 <option value="筑地">筑地</option>
+                                 <option value="渋谷">渋谷</option>
+                                 <option value="池袋">池袋</option>
+                                 <option value="秋葉原">秋葉原</option>
+                                 <option value="原宿">原宿</option>
+                                 <option value="銀座">銀座</option>
+                                 <option value="上野">上野</option>
+                                 <option value="東京駅周辺">東京駅周辺</option>
+                                 <option value="六本木">六本木</option>
+                                 <option value="品川">品川</option>
+                                 <option value="赤坂">赤坂</option>
+                                 <option value="自由ヶ丘">自由ヶ丘</option>
+                                 <option value="恵比寿">恵比寿</option>
+                                 <option value="吉祥寺">吉祥寺</option>
+                                 <option value="中野">中野</option>
+                                 <option value="月島">月島</option>
+                                 <option value="お台場">お台場</option>
+                                 <option value="下北沢">下北沢</option>
+                                 <!-- 他のオプションを追加 -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="genre_variety" class="col-sm-2 col-form-label">Variety</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" id="genre_variety" name="genre_variety">
+                                <option selected disabled>選択してください</option>
+                                <option value="寿司">寿司</option>
+                                <option value="天ぷら">天ぷら</option>
+                                <option value="すき焼き">すき焼き</option>
+                                <option value="しゃぶしゃぶ">しゃぶしゃぶ</option>
+                                <option value="ラーメン">ラーメン</option>
+                                <option value="お好み焼き">お好み焼き</option>
+                                <option value="たこ焼き">たこ焼き</option>
+                                <option value="和牛">和牛</option>
+                                <option value="そば">そば</option>
+                                <option value="うどん">うどん</option>
+                                <option value="和菓子">和菓子</option>
+                                <option value="焼き鳥">焼き鳥</option>
+                                <option value="刺身">刺身</option>
+                                <option value="おせち料理">おせち料理</option>
+                                <option value="カツ丼">カツ丼</option>
+                                <option value="イタリア料理">イタリア料理</option>
+                                <option value="フランス料理">フランス料理</option>
+                                <option value="スペイン料理">スペイン料理</option>
+                                <option value="ドイツ料理">ドイツ料理</option>
+                                <option value="中国料理">中国料理</option>
+                                <option value="インド料理">インド料理</option>
+                                <!-- 他のオプションを追加 -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="genre_religion" class="col-sm-2 col-form-label">Limitation</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" id="genre_religion" name="genre_religion">
+                                <option selected disabled>選択してください</option>
+                                <option value="ベジタリアン対応">ベジタリアン対応</option>
+                                <option value="ヴィーガン対応">ヴィーガン対応</option>
+                                <option value="ハラルフード（ムスリム）">ハラルフード（ムスリム）</option>
+                                <option value="コーシャフード（ユダヤ教）">コーシャフード（ユダヤ教）</option>
+                                <option value="サトウキビ不使用">サトウキビ不使用</option>
+                                <option value="グルテンフリー">グルテンフリー</option>
+                                <option value="ラクトオボベジタリアン">ラクトオボベジタリアン</option>
+                                <option value="オーガニックフード">オーガニックフード</option>
+                                <option value="無添加食品">無添加食品</option>
+                                <option value="特になし">特に無し</option>
+                                <!-- 他のオプションを追加 -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="genre_payment" class="col-sm-2 col-form-label">How to pay</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" id="genre_payment" name="genre_payment">
+                                <option selected disabled>選択してください</option>
+                                <option value="なんでもok">なんでもok</option>
+                                <option value="現金のみ">現金のみ</option>
+                                <option value="クレジットカード">クレジットカード不可</option>
+                                <option value="電子マネー">電子マネー不可</option>
+                                <!-- 他のオプションを追加 -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <a href="{{ route('restaurants.index') }}" class="btn btn-secondary">すべて表示</a>
+                            <button type="submit" class="btn btn-primary">検索</button>
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var searchFormCollapse = document.getElementById('searchFormCollapse');
+            var searchFormButton = document.querySelector('[data-bs-target="#searchFormCollapse"]');
+            var isCollapsed = true; // フォームが閉じているかどうかを追跡する変数
+    
+            document.addEventListener('click', function(event) {
+                var isClickInsideForm = searchFormCollapse.contains(event.target);
+                var isClickOnButton = event.target === searchFormButton;
+    
+                // フォームが展開されており、かつボタンの外側をクリックした場合は閉じる
+                if (!isClickInsideForm && !isClickOnButton && !isCollapsed) {
+                    var bsCollapse = new bootstrap.Collapse(searchFormCollapse);
+                    bsCollapse.hide();
+                    isCollapsed = true; // フォームを閉じたことを更新
+                }
+            });
+    
+            searchFormButton.addEventListener('click', function() {
+                if (isCollapsed) {
+                    // フォームが閉じている場合は展開する
+                    var bsCollapse = new bootstrap.Collapse(searchFormCollapse);
+                    bsCollapse.show();
+                    isCollapsed = false; // フォームを展開したことを更新
+                } else {
+                    // フォームが展開されている場合は閉じる
+                    var bsCollapse = new bootstrap.Collapse(searchFormCollapse);
+                    bsCollapse.hide();
+                    isCollapsed = true; // フォームを閉じたことを更新
+                }
+            });
+        });
+    </script>
+    
+        
+
+
+
+    
+    <div class="row mt-2">
+        <div class="col-md-3">
             <div class="restaurant-dashboard-container">
                 <div class="restaurant-dashboard-right">
                     <h6>mapping</h6>

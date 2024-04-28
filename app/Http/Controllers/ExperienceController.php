@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ExperiencePost;
 use App\Models\Like;
+use App\Models\NewsBooking;
 use App\Models\NewsCalendar;
 use App\Models\NewsTimeLine;
 use Illuminate\Support\Facades\Auth;
@@ -154,6 +155,7 @@ public function destroy(Request $request, $id)
     public function activityDashboard()
     {
         $events = NewsTimeLine::all();
+        $newsBooking = NewsBooking::all();
         $experiences = ExperiencePost::all(); // あなたのアプリケーションに適した方法でデータを取得してください
         
         if($experiences) {
@@ -166,7 +168,7 @@ public function destroy(Request $request, $id)
             }
         }
 
-        return view('activity-dashboard', compact('experiences', 'events'));
+        return view('activity-dashboard', compact('experiences', 'events', 'newsBooking'));
     }
 
     public function search(Request $request) 
