@@ -112,10 +112,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 d-flex justify-content-end">
+                        <div class="col-md-12 d-flex justify-content-between">
+                            <a href="{{ route('restaurants.index') }}" class="btn btn-secondary">すべて表示</a>
                             <button type="submit" class="btn btn-primary">検索</button>
                         </div>
-                    </div>
+                    </div>                    
                 </form>
             </div>
         </div>
