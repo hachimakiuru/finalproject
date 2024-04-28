@@ -42,6 +42,7 @@ Route::get('/welcome', function () {
 
 Route::get('/activity-dashboard', [ExperienceController::class, 'activityDashboard'])->name('activity.dashboard');
 
+Route::post('/activity-dashboard-booking', [NewsBookingController::class, 'newsBookingStore'])->name('activity.dashboard.store');
 
 
 //News.index
