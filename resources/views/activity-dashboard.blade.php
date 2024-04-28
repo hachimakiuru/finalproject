@@ -318,6 +318,11 @@
                 },
                 success: function(data) {
                     $('#dateResult').empty();
+
+                    if (data.length === 0) {
+                    // データが空の場合
+                    $('#dateResult').append('<div class="no-information">NO EVENTS TODAY</div>');
+                    } else {
                     data.forEach(d => {
                         var $container = $('<div></div>').addClass('parent');
 
@@ -352,6 +357,7 @@
                         $container.append($btn);
                         $('#dateResult').append($container);
                     });
+                }
                     $('#eventsModal').modal('toggle');
                 },
                 error: function(error) {
