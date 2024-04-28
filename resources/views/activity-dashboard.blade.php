@@ -45,14 +45,14 @@
         <!-- アクティビティ -->
             <div class="right overflow-scroll">
                 <div class="d-flex justify-content-center p-3">
-                    <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal">写真投稿はこちらですよ!</button>
+                    <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#test">写真投稿はこちらですよ!</button>
                 </div>
                 <div>
                     <p class='experience-index-instagram'>ホテル公式アカウントはこちら
                         <a href="https://www.instagram.com/hoshinoresorts.official/" target="blank" style="text-decoration: none;"><i class="ri-instagram-line" style="color: #colorcode;"></i></a>
                     </p>
                 </div>
-              
+
                 <!-- ポンポン投稿カードのコメント -->
                 <div class="d-flex flex-wrap justify-content-center gap-3">
                     @foreach($experiences->reverse() as $key => $experience)
@@ -62,7 +62,7 @@
                                 <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">タイトルは：{{ $experience->title }}</h5>
+                                <h5 class="card-title">comment：{{ $experience->title }}</h5>
                                 @if(Auth::user()->role_id == 1)
                                     <h5 class="card-updatedat">更新日：{{ $experience->updated_at }}</h5>
                                     <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
@@ -272,6 +272,71 @@
                 </div>
             </div>
             <!-- モーダル終 -->
+
+              <!-- Modal -->
+              <div class="modal fade" id="test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">ポンポンしちゃお〜〜</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('experience.store') }}" method="POST" enctype="multipart/form-data"> <!-- formタグの開始を修正 -->
+                            @csrf
+                            <div class="mb-3">
+                                <label for="image" class="form-label">画像を選択してください</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                                    {{-- <button type="submit" class="uploadbutton">＋</button> --}}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="title" class="form-label">title :</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="text" id="title" name="title"  style="width: 100%;">
+                                </div>
+                            </div>
+            
+                            <div class="mb-3">
+                                <label for="address" class="form-label">address :</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="text" id="address" name="address"  style="width: 100%;">
+                                </div>
+                            </div>
+            
+                            <div class="mb-3">
+                                <label for="content" class="form-label">comment :</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="text" id="content" name="content"  style="width: 100%;">
+                                </div>
+                            </div>
+            
+            
+                            <div class="mb-3">
+                                <span class="form-label">instagram permission :</span>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="checkbox" id="instagram_permission" name="instagrampermission"  style="width: 100%;">
+                                    <label for="instagram_permission" class="btn ig-permission">投稿可能な場合はこちらをクリック</label>
+                                    
+                                </div>
+                            </div>
+            
+                            <div class="mb-3">
+                                <label for="instagram_account" class="form-label">instagram account:</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="text" id="instagramaccount" name="instagramaccount"  style="width: 100%;">
+
+
+
+
+                                </div>
+                            </div>
+            
+                            <div class="mb-3">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">投稿！</button>
         </div>
     </div>
 
