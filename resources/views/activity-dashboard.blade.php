@@ -26,7 +26,7 @@
                 @include('news.news-dashboard')
             </div>
         </div>
-            <!-- カレンダー -->
+            <!-- カレンダー詳細モーダル-->
             <div class="modal fade" id="eventsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
@@ -321,14 +321,19 @@
                     data.forEach(d => {
                         var $container = $('<div></div>').addClass('parent');
 
-                        var $user_id = $('<div></div>').addClass('item').text(d.user_id);
-                        var $title = $('<div></div>').addClass('item').text(d.title);
-                        var $content = $('<div></div>').addClass('item').text(d.content);   
+                        // 日付のみを取得して表示するように修正
+                        var dateParts = d.start.split(' '); // 空白で日付と時間を分割
+                        var dateOnly = dateParts[0]; // 日付部分のみを取得 ("YYYY-MM-DD")
+                        var $start = $('<div></div>').addClass('item').text("Start Date: " + dateOnly);
+
+
+                        var $user_id = $('<div></div>').addClass('item');
+                        var $title = $('<div></div>').addClass('item').text("Title: " + d.title);
+                        var $content = $('<div></div>').addClass('item').text("Content: " + d.content);   
                         var $image = $('<div></div>').addClass('item').text(d.image);
-                        var $start = $('<div></div>').addClass('item').text(d.start);   
-                        var $price = $('<div></div>').addClass('item').text(d.price);   
-                        var $place = $('<div></div>').addClass('item').text(d.place);   
-                        var $others = $('<div></div>').addClass('item').text(d.others);   
+                        var $price = $('<div></div>').addClass('item').text("Price: " + d.price);   
+                        var $place = $('<div></div>').addClass('item').text("Place: " + d.place);   
+                        var $others = $('<div></div>').addClass('item').text("Others: " + d.others);   
                         
                         var $btn = $('<a></a>').addClass('item').text('reservation').attr({
                             'href': '#exampleModal',
