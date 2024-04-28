@@ -20,7 +20,6 @@
                 カレンダー機能
 
             <div id='calendar'></div>
-                {{-- @include('restaurants.index') --}}
             </div>
             <!-- ニュース -->
             <div class="bottom-box">
@@ -28,28 +27,25 @@
             </div>
         </div>
 
-        
-          <!-- カレンダー -->
-        <div class="modal fade" id="eventsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Events</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            
+            <!-- カレンダー -->
+            <div class="modal fade" id="eventsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Events</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="dateResult">       
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
-                <div class="modal-body" id="dateResult">       
                 </div>
-                <div class="modal-footer">
-                  {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-                  {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-                </div>
-              </div>
             </div>
-          </div>
         
         <!-- アクティビティ -->
         <div class="right overflow-scroll">
-            {{-- @foreach($experiences->reverse() as $key => $experience) --}}
             <div class="d-flex justify-content-center p-3">
                 <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal">写真投稿はこちら!</button>
             </div>
@@ -84,16 +80,9 @@
                             {{-- likeボタンの作成 --}}
                             <div class="btn-container" id="target{{ $experience->id }}">
                                 @if ($experience->isLike)
-                                    {{-- <form action="{{ route('like.destroy', $experience->id) }}" method="POST" class="likebutton">
-                                        @csrf
-                                        @method('DELETE') --}}
                                         <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
-                                    {{-- </form> --}}
                                 @else
-                                    {{-- <form action="{{ route('like.store', $experience->id) }}" method="POST" class="likebutton"> --}}
-                                        {{-- @csrf --}}
                                         <button id="like" onclick="like({{ $experience->id }})"><i class="ri-heart-line"></i></button>
-                                    {{-- </form> --}}
                                 @endif
                             </div>
                             
@@ -192,7 +181,6 @@
                                 <label for="image" class="form-label">画像を選択してください</label>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="file" name="image" id="image" class="form-control" accept="image/*">
-                                    {{-- <button type="submit" class="uploadbutton">＋</button> --}}
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -271,7 +259,6 @@
         // initialView: 'dayGridWeek',
         displayEventTime : false,
         dateClick: function(info) {
-            // $('#exampleModal').modal('toggle');
             calendar.updateSize()
             $.ajaxSetup({
                 headers: {
@@ -298,13 +285,10 @@
                     date: newDate
                 },
                 success: function(data) {
-                    // console.log(data)
-                    $('#result').empty();
+                    $('#dateResult').empty();
                     data.forEach(d => {
-                        // Create the container div
                         var $container = $('<div></div>').addClass('parent');
 
-                        // Create the item div
                         var $user_id = $('<div></div>').addClass('item').text(d.user_id);
                         var $title = $('<div></div>').addClass('item').text(d.title);
                         var $content = $('<div></div>').addClass('item').text(d.content);   
@@ -313,16 +297,13 @@
                         var $price = $('<div></div>').addClass('item').text(d.price);   
                         var $place = $('<div></div>').addClass('item').text(d.place);   
                         var $others = $('<div></div>').addClass('item').text(d.others);   
-                        // var $btn = $('<a></a>').addClass('item').text('show').attr('href', 'https://www.example.com');   
-
-                        // var $btn = $('<a></a>').addClass('item').text('reservation').attr('href', 'https://www.example.com');   
+                        
                         var $btn = $('<a></a>').addClass('item').text('reservation').attr({
                             'href': '#exampleModal',
                             'data-bs-toggle': 'modal',
                             'data-bs-target': '#exampleModal'
                         });
 
-                        // Append the item div to the container
                         $container.append($user_id);
                         $container.append($title);
                         $container.append($content);
