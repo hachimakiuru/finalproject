@@ -20,10 +20,23 @@
     />
     <link rel="stylesheet" href="{{ asset('/css/experience_blade.css') }}">
 
-</head> --}}
+</head>
+<body> --}}
 
 
-<body>
+    {{-- レイアウトのお試し --}}
+@extends('layouts.layout')
+@section('content')  
+
+@push('css')
+    <link rel="stylesheet" href="{{ asset('/css/experience_blade.css') }}">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <style>
+        header {
+            position: unset!important;
+        }
+    </style>
+@endpush
 
     
     
@@ -299,5 +312,5 @@
 
 
 
-</body>
+{{-- </body> --}}
 {{-- </html> --}}
