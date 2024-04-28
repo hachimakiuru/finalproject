@@ -61,8 +61,10 @@
                             <div class='postimg'>
                                 <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title">comment：{{ $experience->title }}</h5>
+                            {{-- <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">comment：{{ $experience->title }}</h5>
+                                <div class="btn-container" id="target{{ $experience->id }}">
                                 @if(Auth::user()->role_id == 1)
                                     <h5 class="card-updatedat">更新日：{{ $experience->updated_at }}</h5>
                                     <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
@@ -73,8 +75,12 @@
                                     </form>
                                     <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
                                 @endif
+                            </div> --}}
+
+{{--                             
+                        </div>
                                 {{-- likeボタンの作成 --}}
-                                <div class="btn-container" id="target{{ $experience->id }}">
+                                {{-- <div class="btn-container" id="target{{ $experience->id }}">
                                     @if ($experience->isLike)
                                             <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
                                     @else
@@ -82,8 +88,31 @@
                                     @endif
                                 </div>
                                 
+                            </div> --}}
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">comment：{{ $experience->title }}</h5> <!-- mb-0 removes the bottom margin -->
+                                    <div class="btn-container" id="target{{ $experience->id }}">
+                                        @if ($experience->isLike)
+                                            <button id="unlike" onclick="unlike({{ $experience->id }})" class="btn"><i class="ri-heart-fill"></i></button>
+                                        @else
+                                            <button id="like" onclick="like({{ $experience->id }})" class="btn"><i class="ri-heart-line"></i></button>
+                                        @endif
+                                    </div>
+                                </div>
+                                @if(Auth::user()->role_id == 1)
+                                    <h5 class="card-updatedat">更新日：{{ $experience->updated_at }}</h5>
+                                    <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
+                                    <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger delete-button">削除</button>
+                                    </form>
+                                    <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
+                                @endif
                             </div>
-                        </div>
+                            
+                        </div> 
                 </div>
                 
                 <!-- 更新用のモーダル -->
@@ -273,7 +302,7 @@
             </div>
             <!-- モーダル終 -->
 
-              <!-- Modal -->
+              <!-- ポンポン投稿用のモーダル-->
               <div class="modal fade" id="test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
