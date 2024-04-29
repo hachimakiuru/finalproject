@@ -76,9 +76,9 @@
                             <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger delete-button">削除</button>
+                                <button type="submit" class="btn btn-danger delete-button"><i class="ri-delete-bin-line"></i></button>
                             </form>
-                            <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
+                            <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}"><i class="ri-edit-2-line"></i></button>
             
             
                             {{-- likeボタンの作成 --}}

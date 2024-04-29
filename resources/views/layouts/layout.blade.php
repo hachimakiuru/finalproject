@@ -14,10 +14,12 @@
   <link rel="stylesheet" href="{{ asset('/css/global/common.css')  }}" >
 
 
+
   
   <link rel="stylesheet" href="{{ asset('/css/restaurant-dashboard.css')  }}" >
   <link rel="stylesheet" href="{{ asset('/css/rest-index.css')  }}" >
   <link rel="stylesheet" href="{{ asset('/css/rest-post.css')  }}" >
+  <link rel="stylesheet" href="{{ asset('/css/news-index-blade.css')  }}" >
   @stack('css')
 
   {{-- Bootstrap5のCDN読み込み記述 --}}

@@ -132,9 +132,14 @@
                                             <h5> {{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }} - {{ $newsTimeLine->title }}</h5>
                                             <p>{{ $newsTimeLine->place }}</p>
                                             <!-- モーダルトリガーボタン -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $newsTimeLine->id }}">
+                                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $newsTimeLine->id }}">
                                                 詳細&予約フォーム
+                                            </button> --}}
+                                            <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $newsTimeLine->id }}">
+                                                Details & Reservation Form >
                                             </button>
+
+                                            {{-- <a href=""></a>  --}}
 
 
 <!-- 詳細モーダル始 -->
@@ -284,12 +289,12 @@
                         <div class="col-md-12">
                             <div class="d-flex justify-content-between align-items-center">
                                 <!-- 編集ボタン -->
-                                <a href="{{ route('news.news-edit' , $newsTimeLine -> id) }}" class="btn btn-primary">編集</a>
+                                <a href="{{ route('news.news-edit' , $newsTimeLine -> id) }}" class="btn btn-primary"><i class="ri-edit-2-line"></i></a>
                                 <!-- 削除ボタン -->
                                 <form action="{{ route('news.destroy', $newsTimeLine -> id) }}" method="POST" onsubmit="return confirm('本当に削除しますか？')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">削除</button>
+                                    <button type="submit" class="btn btn-danger"><i class="ri-delete-bin-line"></i></button>
                                 </form>
                             </div>
                         </div>
