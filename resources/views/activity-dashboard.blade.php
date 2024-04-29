@@ -45,12 +45,18 @@
         <!-- アクティビティ -->
             <div class="right overflow-scroll">
                 <div class="d-flex justify-content-center p-3">
-                    <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#test">写真投稿はこちらですよ!</button>
+                    <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#test">share your memories!!</button>
                 </div>
                 <div>
-                    <p class='experience-index-instagram'>ホテル公式アカウントはこちら
+                    <p class='experience-index-instagram'>Check our officieal Instagram
                         <a href="https://www.instagram.com/hoshinoresorts.official/" target="blank" style="text-decoration: none;"><i class="ri-instagram-line" style="color: #colorcode;"></i></a>
                     </p>
+                </div>
+
+                <div class="moreposts">
+                    <p class='experience-index-instagram'>check more posts
+                    <a href="{{ route('experience.index') }}" ><i class= "ri-gallery-line" style="color: #colorcode;"></i>
+                    </a>
                 </div>
 
                 <!-- ポンポン投稿カードのコメント -->
@@ -94,21 +100,26 @@
         <h5 class="card-title mb-0">comment：{{ $experience->title }}</h5> <!-- mb-0 removes the bottom margin -->
         <div class="btn-container" id="target{{ $experience->id }}">
             @if ($experience->isLike)
-                <button id="unlike" onclick="unlike({{ $experience->id }})" class="btn"><i class="ri-heart-fill"></i></button>
+                <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
             @else
-                <button id="like" onclick="like({{ $experience->id }})" class="btn"><i class="ri-heart-line"></i></button>
+                <button id="like" onclick="like({{ $experience->id }})"><i class="ri-heart-line"></i></button>
             @endif
         </div>
     </div>
+
+    <div>
+        <h1 class="modalforpostnumber fs-5" id="exampleModalLabel{{ $key }}"># {{ $experience->id }}</h1>
+    </div>
+
     @if(Auth::user()->role_id == 1)
-        <h5 class="card-updatedat">更新日：{{ $experience->updated_at }}</h5>
-        <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
+        <h5 class="card-updatedat">Update date：{{ $experience->updated_at }}</h5>
+        <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">Details</button>
         <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger delete-button">削除</button>
+            <button type="submit" class="btn btn-danger delete-button">Delete</button>
         </form>
-        <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
+        <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">Update</button>
     @endif
 </div>
 
@@ -307,14 +318,14 @@
                 <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">ポンポンしちゃお〜〜</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">share your memories!</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('experience.store') }}" method="POST" enctype="multipart/form-data"> <!-- formタグの開始を修正 -->
                             @csrf
                             <div class="mb-3">
-                                <label for="image" class="form-label">画像を選択してください</label>
+                                <label for="image" class="form-label">Pick your mamory</label>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="file" name="image" id="image" class="form-control" accept="image/*">
                                     {{-- <button type="submit" class="uploadbutton">＋</button> --}}
@@ -328,7 +339,7 @@
                             </div>
             
                             <div class="mb-3">
-                                <label for="address" class="form-label">address :</label>
+                                <label for="address" class="form-label">location :</label>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="text" id="address" name="address"  style="width: 100%;">
                                 </div>
@@ -343,10 +354,10 @@
             
             
                             <div class="mb-3">
-                                <span class="form-label">instagram permission :</span>
+                                <span class="form-label">instagram permission *click the button if you don't mind :</span>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="checkbox" id="instagram_permission" name="instagrampermission"  style="width: 100%;">
-                                    <label for="instagram_permission" class="btn ig-permission">投稿可能な場合はこちらをクリック</label>
+                                    <label for="instagram_permission" class="btn ig-permission">share my memory on Instagram</label>
                                     
                                 </div>
                             </div>
@@ -365,7 +376,7 @@
                             <div class="mb-3">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">投稿！</button>
+                                    <button type="submit" class="btn btn-primary">Post！</button>
         </div>
     </div>
 
@@ -423,15 +434,15 @@
                         // 日付のみを取得して表示するように修正
                         var dateParts = d.start.split(' '); // 空白で日付と時間を分割
                         var dateOnly = dateParts[0]; // 日付部分のみを取得 ("YYYY-MM-DD")
-                        var $start = $('<div></div>').addClass('item').text("Start Date: " + dateOnly);
+                        var $start = $('<div></div>').addClass('item').text("Event Date: " + dateOnly);
 
 
                         var $user_id = $('<div></div>').addClass('item');
                         var $title = $('<div></div>').addClass('item').text("Title: " + d.title);
-                        var $content = $('<div></div>').addClass('item').text("Content: " + d.content);   
+                        var $content = $('<div></div>').addClass('item').text("Details: " + d.content);   
                         var $image = $('<div></div>').addClass('item').text(d.image);
-                        var $price = $('<div></div>').addClass('item').text("Price: " + d.price);   
-                        var $place = $('<div></div>').addClass('item').text("Place: " + d.place);   
+                        var $price = $('<div></div>').addClass('item').text("Price(¥): " + d.price);   
+                        var $place = $('<div></div>').addClass('item').text("Location: " + d.place);   
                         var $others = $('<div></div>').addClass('item').text("Others: " + d.others);   
                         
                         // var $btn = $('<a></a>').addClass('item').text('reservation').attr({

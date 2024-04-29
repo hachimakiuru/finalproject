@@ -38,7 +38,7 @@
         }
 
         #dateResult .parent:not(:last-of-type) {
-            border-bottom: 1px solid green!important;
+            border-bottom: 1px solid black!important;
         }
 
         .fc .fc-daygrid-day-frame {

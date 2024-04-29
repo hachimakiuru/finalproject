@@ -3,7 +3,8 @@
 @extends('layouts.layout')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('/css/experience_blade.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('/css/experience_blade.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('/css/onepage_experience_blade.css') }}">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <style>
         header {
@@ -21,34 +22,35 @@
 
 
 <div class="d-flex justify-content-center p-3">
-    <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal">写真投稿はこちら!</button>
+    <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#test">share your memories here!</button>
 </div>
 <div>
-    <p class='experience-index-instagram'>ホテル公式アカウントはこちら
+    <p class='experience-index-instagram'>Check our officieal Instagram
         <a href="https://www.instagram.com/hoshinoresorts.official/" target="blank" style="text-decoration: none;"><i class="ri-instagram-line" style="color: #colorcode;"></i></a>
     </p>
 </div>
 
 
 
-
-<div class="row row-cols-1 row-cols-md-4 g-4 ">
-    @foreach($experiences->reverse() as $key => $experience)
+<div class="container">
+<div class="row row-cols-1 row-cols-md-5 gx-1 g-4 ">
+    @foreach($experiences as $key => $experience)
     <div class="col">
         <div class="card custom-card">
             <div class='postimg'>
                 <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
             </div>
             <div class="card-body">
-                <h5 class="card-title">タイトル：{{ $experience->title }}</h5>
-                <h5 class="card-updatedat">更新日：{{ $experience->updated_at }}</h5>
-                <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
+                <h5 class="card-title">comment：{{ $experience->content }}</h5>
+                <h5 class="card-title">post number：{{ $experience->id }}</h5>
+                <h5 class="card-updatedat">update date：{{ $experience->updated_at }}</h5>
+                <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">details</button>
                 <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger delete-button">削除</button>
+                    <button type="submit" class="btn btn-danger delete-button">delete</button>
                 </form>
-                <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">更新</button>
+                <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">update</button>
 
 
                 {{-- likeボタンの作成 --}}
@@ -76,7 +78,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="updateModalLabel{{ $key }}">投稿を更新する</h5>
+                <h5 class="modal-title" id="updateModalLabel{{ $key }}">Update this posting</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -84,36 +86,36 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="updateTitle{{ $key }}">タイトル</label>
+                        <label for="updateTitle{{ $key }}">いらん</label>
                         <input type="text" class="form-control" id="updateTitle{{ $key }}" name="title" value="{{ $experience->title }}">
                     </div>
                     <div class="form-group">
-                        <label for="updateAddress{{ $key }}">住所</label>
+                        <label for="updateAddress{{ $key }}">location</label>
                         <input type="text" class="form-control" id="updateAddress{{ $key }}" name="address" value="{{ $experience->address }}">
                     </div>
                     <div class="form-group">
-                        <label for="updateContent{{ $key }}">内容</label>
+                        <label for="updateContent{{ $key }}">comment</label>
                         <textarea class="form-control" id="updateContent{{ $key }}" name="content" rows="3">{{ $experience->content }}</textarea>
                     </div>
 
                     <div class="mb-3">
-                        <span class="form-label">instagram permission :</span>
+                        <span class="form-label">instagram permission *click the button if you don't mind :</span>
                         <div class="input-group" style="width: 100%;">
                             <input type="checkbox" id="instagram_permission{{ $experience->id }}" name="instagrampermission"  style="width: 100%;" @if ($experience->ig_permission)
                                 checked
                             @endif>
-                            <label for="instagram_permission{{ $experience->id }}" class="btn ig-permission">投稿可能な場合はこちらをクリック</label>
+                            <label for="instagram_permission{{ $experience->id }}" class="btn ig-permission">share my memory on Instagram</label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="updateImage{{ $key }}">画像を選択してください</label>
+                        <label for="updateImage{{ $key }}">Pick your memory</label>
                         <input type="file" class="form-control" id="updateImage{{ $key }}" name="image" accept="image/*">
                     </div>
                 </br>
                     <div class="mb-3">
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">更新</button>
+                            <button type="submit" class="btn btn-primary">update</button>
                         </div>
                     </div>
                 </div>
@@ -128,54 +130,56 @@
     
 
 
-    <!-- Modal -->
+    <!-- 詳細のためのモーダル -->
     <div class="modal fade" id="exampleModal{{ $key }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $key }}" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">{{ $experience->title }}</h1>
+
+                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">Post number： {{ $experience->id }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
-                    <p><strong>Address:</strong> {{ $experience->address }}</p>
-                    <p><strong>Content:</strong> {{ $experience->content }}</p>
+                    <p><strong>Comment:</strong> {{ $experience->content }}</p>
+                    <p><strong>location:</strong> {{ $experience->address }}</p>
+                    <p><strong>Instagram account:</strong> {{ $experience->ig_account }}</p>
                 </div>
             </div>
         </div>
     </div>
     @endforeach
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            {{ $experiences->links() }} {{-- ページネーションリンクの表示 --}}
+        </div>
+    </div>
 </div>
-  
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!-- 新規投稿のためのモーダル -->
+<div class="modal fade" id="test" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">ポンポンしちゃお〜〜</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">share your memories!</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <form action="{{ route('experience.store') }}" method="POST" enctype="multipart/form-data"> <!-- formタグの開始を修正 -->
                 @csrf
                 <div class="mb-3">
-                    <label for="image" class="form-label">画像を選択してください</label>
+                    <label for="image" class="form-label">Pick your memory</label>
                     <div class="input-group" style="width: 100%;">
                         <input type="file" name="image" id="image" class="form-control" accept="image/*">
                         {{-- <button type="submit" class="uploadbutton">＋</button> --}}
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="title" class="form-label">title :</label>
+                    <label for="title" class="form-label">あとでけす:</label>
                     <div class="input-group" style="width: 100%;">
                         <input type="text" id="title" name="title"  style="width: 100%;">
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="address" class="form-label">address :</label>
-                    <div class="input-group" style="width: 100%;">
-                        <input type="text" id="address" name="address"  style="width: 100%;">
                     </div>
                 </div>
 
@@ -185,13 +189,19 @@
                         <input type="text" id="content" name="content"  style="width: 100%;">
                     </div>
                 </div>
-
+                
+                <div class="mb-3">
+                    <label for="address" class="form-label">location :</label>
+                    <div class="input-group" style="width: 100%;">
+                        <input type="text" id="address" name="address"  style="width: 100%;">
+                    </div>
+                </div>
 
                 <div class="mb-3">
-                    <span class="form-label">instagram permission :</span>
+                    <span class="form-label">instagram permission *click the button if you don't mind :</span>
                     <div class="input-group" style="width: 100%;">
                         <input type="checkbox" id="instagram_permission" name="instagrampermission"  style="width: 100%;">
-                        <label for="instagram_permission" class="btn ig-permission">投稿可能な場合はこちらをクリック</label>
+                        <label for="instagram_permission" class="btn ig-permission">share my memory on Instagram</label>
                         
                     </div>
                 </div>
@@ -206,7 +216,7 @@
                 <div class="mb-3">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">投稿！</button>
+                        <button type="submit" class="btn btn-primary">Post!</button>
                     </div>
                 </div>
 
