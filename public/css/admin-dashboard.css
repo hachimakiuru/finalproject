@@ -32,4 +32,24 @@ table {
   margin-top: 30px;
 }
 
-
+.col-id{
+  width: 30px;
+}
+.col-roomNo {
+  width: 50px;
+}
+.col-create {
+  width: 120px;
+}
+.col-role {
+  width: 70px;
+}
+.col-edit{
+  width: 60px;
+}
+.col-delete{
+  width: 60px;
+}
+.col-width {
+  width: 70px;
+}
