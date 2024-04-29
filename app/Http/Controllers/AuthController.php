@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChFavorite;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,6 +39,15 @@ class AuthController extends Controller
                 'password' => Hash::make($valideaed['password']),
             ]
         );
+
+        $user = User::orderBy('id', 'DESC')->first();
+
+
+
+        ChFavorite::create([
+            'user_id' => $user->id,
+            'favorite_id' => 1,
+        ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'アカウント追加が完了しました！');
     }
