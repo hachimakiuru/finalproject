@@ -8,6 +8,7 @@
 
 
   <title>Final Project</title>
+  
   {{-- 独自cssの読み込み --}}
   <link rel="stylesheet" href="{{ asset('/css/global/reset.css')  }}" >
   <link rel="stylesheet" href="{{ asset('/css/global/header-blade.css')  }}" >

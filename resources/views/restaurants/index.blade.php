@@ -1,14 +1,12 @@
 @extends('layouts.layout')
 @section('content')
 @push('css')
-{{-- <link rel="stylesheet" href="{{ asset('/css/restaurant/google-map.css')  }}" >  --}}
+    <link rel="stylesheet" href="{{ asset('/css/restaurant/google-map.css')  }}" >
 @endpush
 
 
 @include('parts.success-message')
 <div class="container-fluid mt-3">
-
-
     <div class="row">
         <div class="col-md-4">
             <div class="restaurant-dashboard-container">
@@ -58,17 +56,30 @@
                                             <div class="mb-3 row">
                                                 <label for="address-form" class="col-sm-2 col-form-label">Address</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" id="address-form" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }} "placeholder="Enter the location">
-                                                    <div id="map" style="display: none;"></div>
+                                                    {{-- GoogleApi AutoComplete --}}
+                                                    <div id="pac-container">
+                                                        <input type="text" id="address-form" name="pac-input" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }} "placeholder="Enter the full-location">
+                                                        <div id="map" style="display: none;"></div>
+                                                    </div>
+                                                    <div id="infowindow-content" style="display: none;">
+                                                        <img src="" width="16" height="16" id="place-icon" />
+                                                        <span id="place-name" class="title"></span><br />
+                                                        <span id="place-address"></span>
+                                                    </div>
+                                                    {{-- 非表示の経緯緯度 --}}
+                                                    {{-- <input type="text" id="address-form" name="pac-input" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" placeholder="Enter the full location">
+                                                    <input type="text" id="address-form" name="pac-input" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" placeholder="Enter the full location"> --}}
+
+                                                    <input class="form-control" type="" id="latitude" name="latitude">
+                                                    <input class="form-control" type="" id="longitude" name="longitude">
+                                                    
+                                                    
                                                     @error('address')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
-                                            {{-- <div id="pac-container">
-                                                <input id="pac-input" type="text" placeholder="Enter a location" />
-                                                <div id="map" style="display: none;"></div>
-                                            </div> --}}
+
                                             <div class="mb-3 row">
                                                 <label for="image" class="col-sm-2 col-form-label">Image</label>
                                                 <div class="col-sm-10">
@@ -445,23 +456,26 @@
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-@endsection
 
-
-@push('js')
+{{-- GoogleMap Autocomplete --}}
 <script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbtmHh4zHJMzxxH7893O9DmuaNWZQewy0&callback=initMap&libraries=places&v=weekly"
-defer
-></script>
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbtmHh4zHJMzxxH7893O9DmuaNWZQewy0&callback=initMap&libraries=places&v=weekly"
+     async defer
+    ></script>
 
-
-<script>
+ {{-- GoogleMap Autocomplete --}}
+ <script async>
+    // This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 function initMap() {
 const map = new google.maps.Map(document.getElementById("map"), {
-center: { lat: 50.064192, lng: -130.605469 },
-zoom: 3,
+  // center: { lat: 50.064192, lng: -130.605469 },
+  center: { lat: 35.6895, lng: 139.6917 }, // 東京の座標を設定
+  // zoom: 3,
+  zoom: 6, // 適切なズームレベルを設定
 });
+
 const card = document.getElementById("pac-card");
 
 map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
@@ -469,24 +483,25 @@ map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 const center = { lat: 50.064192, lng: -130.605469 };
 // Create a bounding box with sides ~10km away from the center point
 const defaultBounds = {
-north: center.lat + 0.1,
-south: center.lat - 0.1,
-east: center.lng + 0.1,
-west: center.lng - 0.1,
+  north: center.lat + 0.1,
+  south: center.lat - 0.1,
+  east: center.lng + 0.1,
+  west: center.lng - 0.1,
 };
-// const input = document.getElementById("pac-input");
 const input = document.getElementById("address-form");
 const options = {
-bounds: defaultBounds,
-componentRestrictions: { country: "us" },
-fields: ["address_components", "geometry", "icon", "name"],
-strictBounds: false,
+  bounds: defaultBounds,
+  // componentRestrictions: { country: "us" },
+  componentRestrictions: { country: "jp" },
+  fields: ["address_components", "geometry", "icon", "name"],
+  strictBounds: false,
 };
 const autocomplete = new google.maps.places.Autocomplete(input, options);
 
 // Set initial restriction to the greater list of countries.
 autocomplete.setComponentRestrictions({
-country: ["us", "pr", "vi", "gu", "mp"],
+  // country: ["us", "pr", "vi", "gu", "mp"],
+  country: ["jp"],
 });
 
 const southwest = { lat: 5.6108, lng: 136.589326 };
@@ -501,77 +516,96 @@ const infowindowContent = document.getElementById("infowindow-content");
 infowindow.setContent(infowindowContent);
 
 const marker = new google.maps.Marker({
-map,
-anchorPoint: new google.maps.Point(0, -29),
+  map,
+  anchorPoint: new google.maps.Point(0, -29),
 });
 
 autocomplete.addListener("place_changed", () => {
-infowindow.close();
-marker.setVisible(false);
+  infowindow.close();
+  marker.setVisible(false);
 
-const place = autocomplete.getPlace();
+  const place = autocomplete.getPlace();
 
-if (!place.geometry || !place.geometry.location) {
-// User entered the name of a Place that was not suggested and
-// pressed the Enter key, or the Place Details request failed.
-window.alert("No details available for input: '" + place.name + "'");
-return;
-}
+  if (!place.geometry || !place.geometry.location) {
+    // User entered the name of a Place that was not suggested and
+    // pressed the Enter key, or the Place Details request failed.
+    window.alert("No details available for input: '" + place.name + "'");
+    return;
+  }
 
-// If the place has a geometry, then present it on a map.
-if (place.geometry.viewport) {
-map.fitBounds(place.geometry.viewport);
-} else {
-map.setCenter(place.geometry.location);
-map.setZoom(17); // Why 17? Because it looks good.
-}
+  // If the place has a geometry, then present it on a map.
+  if (place.geometry.viewport) {
+    map.fitBounds(place.geometry.viewport);
+  } else {
+    map.setCenter(place.geometry.location);
+    map.setZoom(17); // Why 17? Because it looks good.
+  }
 
-marker.setPosition(place.geometry.location);
-marker.setVisible(true);
+  marker.setPosition(place.geometry.location);
+  marker.setVisible(true);
 
-let address = "";
+  let address = "";
 
-if (place.address_components) {
-address = [
-  (place.address_components[0] &&
-    place.address_components[0].short_name) ||
-    "",
-  (place.address_components[1] &&
-    place.address_components[1].short_name) ||
-    "",
-  (place.address_components[2] &&
-    place.address_components[2].short_name) ||
-    "",
-].join(" ");
-}
+  if (place.address_components) {
+    address = [
+      (place.address_components[0] &&
+        place.address_components[0].short_name) ||
+        "",
+      (place.address_components[1] &&
+        place.address_components[1].short_name) ||
+        "",
+      (place.address_components[2] &&
+        place.address_components[2].short_name) ||
+        "",
+    ].join(" ");
+  }
 
-infowindowContent.children["place-icon"].src = place.icon;
-infowindowContent.children["place-name"].textContent = place.name;
-infowindowContent.children["place-address"].textContent = address;
-infowindow.open(map, marker);
+  infowindowContent.children["place-icon"].src = place.icon;
+  infowindowContent.children["place-name"].textContent = place.name;
+  infowindowContent.children["place-address"].textContent = address;
+  infowindow.open(map, marker);
 });
 
 // Sets a listener on a given radio button. The radio buttons specify
 // the countries used to restrict the autocomplete search.
 function setupClickListener(id, countries) {
-const radioButton = document.getElementById(id);
+  const radioButton = document.getElementById(id);
 
-radioButton.addEventListener("click", () => {
-autocomplete.setComponentRestrictions({ country: countries });
-});
+  radioButton.addEventListener("click", () => {
+    autocomplete.setComponentRestrictions({ country: countries });
+  });
 }
 
 setupClickListener("changecountry-usa", "us");
 setupClickListener("changecountry-usa-and-uot", [
-"us",
-"pr",
-"vi",
-"gu",
-"mp",
+  "us",
+  "pr",
+  "vi",
+  "gu",
+  "mp",
 ]);
 }
 
 window.initMap = initMap;
+  </script>
+
+<script>
+    function initMap() {
+        var input = document.getElementById('address-form');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+            var latitude = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();
+            document.getElementById('latitude').value = latitude;
+            document.getElementById('longitude').value = longitude;
+        });
+    }
 </script>
-    
-@endpush
+
+
+@endsection

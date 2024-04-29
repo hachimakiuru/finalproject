@@ -27,6 +27,7 @@ use App\Http\Controllers\RestaurantLikeController;
 use App\Http\Controllers\RestaurantCommentsController;
 
 use App\Http\Controllers\NewsCalendarController;
+use App\Http\Controllers\RgoogleMapController;
 use App\Models\NewsBooking;
 
 Route::get('/', function () {
@@ -111,6 +112,9 @@ Route::get('/rbooking', [RbookingController::class, 'index'])->name('rbooking.in
 Route::post('/rbooking', [RbookingController::class, 'store'])->name('rbooking.store');
 Route::put('/rbooking/{id}', [RbookingController::class, 'update'])->name('rbooking.update');
 Route::delete('/rbooking/{id}', [RbookingController::class, 'destroy'])->name('rbooking.destroy');
+
+// restaurant-google-map
+Route::get('/rgooglemap', [RgoogleMapController::class, 'index'])->name('rgooglemap.index');
 
 
 // News Bookings一覧
