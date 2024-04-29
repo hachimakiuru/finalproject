@@ -20,8 +20,8 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        $experiences = ExperiencePost::all(); // あなたのアプリケーションに適した方法でデータを取得してください
-        
+        // $experiences = ExperiencePost::all(); // あなたのアプリケーションに適した方法でデータを取得してください
+        $experiences = ExperiencePost::orderBy('created_at', 'desc')->paginate(5);
         if($experiences) {
             foreach($experiences as $experience) {
                 // $experience['isLike'] = 
@@ -156,7 +156,7 @@ public function destroy(Request $request, $id)
     {
         $events = NewsTimeLine::all();
         $newsBooking = NewsBooking::all();
-        $experiences = ExperiencePost::all(); // あなたのアプリケーションに適した方法でデータを取得してください
+        $experiences = ExperiencePost::latest()->paginate(9); // あなたのアプリケーションに適した方法でデータを取得してください
         
         if($experiences) {
             foreach($experiences as $experience) {

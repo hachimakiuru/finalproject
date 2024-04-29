@@ -5,8 +5,10 @@
         <li><a href="{{ route('welcome') }}">Home</a></li>
         <li><a href="{{ route('restaurants.index') }}">Gourmet</a></li>
         <li><a href="{{ route('activity.dashboard') }}">Activity</a></li>
+        {{-- <li><a href="#">Chat</a></li> --}}
         <li><a href="{{ route('chatify') }}">Chat</a></li>
         <li><a href="#">Calender</a></li>
+        <li><a href="{{ route('experience.index') }}">Posting</a></li>
         @auth
         @if(auth()->user()->role_id === 1)
         <li><a href="{{ route('admin.dashboard') }}">Admin Page</a></li>

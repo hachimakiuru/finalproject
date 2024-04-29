@@ -1,17 +1,13 @@
 @extends('layouts.layout')
 @section('content')
-@push('css')
-{{-- <link rel="stylesheet" href="{{ asset('/css/restaurant/google-map.css')  }}" >  --}}
-@endpush
+
+    
 
 
 @include('parts.success-message')
+
 <div class="container-fluid mt-3">
 
-
-
-    <div class="row">
-        <div class="col-md-4">
     <div class="card">
         <div class="card-header" id="searchHeading">
             <h5 class="mb-0">
@@ -116,11 +112,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 d-flex justify-content-between">
-                            <a href="{{ route('restaurants.index') }}" class="btn btn-secondary">すべて表示</a>
+                        <div class="col-md-12 d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary">検索</button>
                         </div>
-                    </div>                    
+                    </div>
                 </form>
             </div>
         </div>
@@ -175,17 +170,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="restaurant-dashboard-container">
                 <div class="restaurant-dashboard-center">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4>レストラン一覧</h4>
-
-                            <button type="button" class="btn-1 btn-border-shadow-1 btn-border-shadow--color2-1 custom-btn1" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Post ></button>
-
-                 
-
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">投稿</button>
                         </div>
 
                         {{-- 投稿モーダル --}}
@@ -193,14 +184,14 @@
                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Restaurant Feedback</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">レストラン投稿</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form action="{{ route('restaurants.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="mb-3 row">
-                                                <label for="username" class="col-sm-2 col-form-label">User Name</label>
+                                                <label for="username" class="col-sm-2 col-form-label">ユーザー名</label>
                                                 <div class="col-sm-10">
                                                     <p>{{Auth::user()->name }}</p>
                                                     @error('user_id')
@@ -209,7 +200,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="storename" class="col-sm-2 col-form-label">Restaurant Name</label>
+                                                <label for="storename" class="col-sm-2 col-form-label">店舗名</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" id="storename" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                                                     @error('name')
@@ -218,21 +209,16 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="address-form" class="col-sm-2 col-form-label">Address</label>
+                                                <label for="address" class="col-sm-2 col-form-label">住所</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" id="address-form" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }} "placeholder="Enter the location">
-                                                    <div id="map" style="display: none;"></div>
+                                                    <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}">
                                                     @error('address')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
-                                            {{-- <div id="pac-container">
-                                                <input id="pac-input" type="text" placeholder="Enter a location" />
-                                                <div id="map" style="display: none;"></div>
-                                            </div> --}}
                                             <div class="mb-3 row">
-                                                <label for="image" class="col-sm-2 col-form-label">Image</label>
+                                                <label for="image" class="col-sm-2 col-form-label">写真</label>
                                                 <div class="col-sm-10">
                                                     <input type="file" id="image" name="image_path" class="form-control @error('image_path') is-invalid @enderror" value="{{ old('image_path') }}">
                                                     @error('image_path')
@@ -241,10 +227,10 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_place" class="col-sm-2 col-form-label">Place</label>
+                                                <label for="genre_place" class="col-sm-2 col-form-label">場所</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_place') is-invalid @enderror" id="genre_place" name="genre_place">
-                                                        <option selected disabled>Slect the Placec</option>
+                                                        <option selected disabled>選択してください</option>
                                                         <option value="新宿">新宿</option>
                                                         <option value="代々木">代々木</option>
                                                         <option value="浅草">浅草</option>
@@ -274,7 +260,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_variety" class="col-sm-2 col-form-label">Food Type</label>
+                                                <label for="genre_variety" class="col-sm-2 col-form-label">種類</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_variety') is-invalid @enderror" id="genre_variety" name="genre_variety">
                                                         <option selected disabled>選択してください</option>
@@ -307,7 +293,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_religion" class="col-sm-2 col-form-label">Dietary Restrictions</label>
+                                                <label for="genre_religion" class="col-sm-2 col-form-label">食事制限</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_religion') is-invalid @enderror" id="genre_religion" name="genre_religion">
                                                         <option selected disabled>選択してください</option>
@@ -329,7 +315,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_payment" class="col-sm-2 col-form-label">Payment</label>
+                                                <label for="genre_payment" class="col-sm-2 col-form-label">支払方法</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_payment') is-invalid @enderror" id="genre_payment" name="genre_payment">
                                                         <option selected disabled>選択してください</option>
@@ -345,7 +331,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Post</button>
+                                                <button type="submit" class="btn btn-primary">保存する</button>
                                             </div>
                                         </form>
                                     </div>
@@ -364,15 +350,12 @@
                                             <img src="{{ Storage::url($restaurant->image_path) }}" class="img-thumbnail" alt="restaurant photo" style="width: 100%; height: auto; border-radius: 8px;">
                                         </div>
                                         <div class="col-md-8">
-                                            <h2>{{ $restaurant->name }}</h2>
+                                            <h5>{{ $restaurant->name }}</h5>
                                             <p>{{ $restaurant->address }}</p>
                                             <p>{{ $restaurant->genre_place }}</p>
                                             <!-- モーダルトリガーボタン -->
-                                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
                                                 詳細&予約フォーム
-                                            </button> --}}
-                                            <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
-                                                Details & Reservation Form >
                                             </button>
 
 
@@ -495,14 +478,17 @@
                                                                                                     <label for="comment" class="form-label"><h3>コメント</h3></label>
                                                                                                     <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="コメントを入力してください"></textarea>
                                                                                                 </div>
-                                                                                                {{-- <button type="submit" class="btn btn-primary">コメントする</button> --}}
-                                                                                                <button type="submit" class="btn btn-border">Comment</button>
+                                                                                                <button type="submit" class="btn btn-primary">コメントする</button>
                                                                                             </form>
                                                                                         @else
                                                                                             <p>コメントを投稿するにはログインしてください。</p>
                                                                                         @endif
                                                                                     </div>
                                                                                 </div>
+                                                                                
+                                                                                
+                                                                                
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -559,8 +545,7 @@
                                                                                 </div>
                                                                                 
                                                                                 <div class="d-grid">
-                                                                                    {{-- <button type="submit" class="btn btn-primary">予約する</button> --}}
-                                                                                    <button type="submit" class="btn btn-border">Reservation</button>
+                                                                                    <button type="submit" class="btn btn-primary">予約する</button>
                                                                                 </div>
                                                                                 
                                                                             </form>
@@ -613,132 +598,58 @@
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-@endsection
-
-
-@push('js')
-<script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbtmHh4zHJMzxxH7893O9DmuaNWZQewy0&callback=initMap&libraries=places&v=weekly"
-defer
-></script>
 
 
 <script>
-function initMap() {
-const map = new google.maps.Map(document.getElementById("map"), {
-center: { lat: 50.064192, lng: -130.605469 },
-zoom: 3,
-});
-const card = document.getElementById("pac-card");
-
-map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
-
-const center = { lat: 50.064192, lng: -130.605469 };
-// Create a bounding box with sides ~10km away from the center point
-const defaultBounds = {
-north: center.lat + 0.1,
-south: center.lat - 0.1,
-east: center.lng + 0.1,
-west: center.lng - 0.1,
-};
-// const input = document.getElementById("pac-input");
-const input = document.getElementById("address-form");
-const options = {
-bounds: defaultBounds,
-componentRestrictions: { country: "us" },
-fields: ["address_components", "geometry", "icon", "name"],
-strictBounds: false,
-};
-const autocomplete = new google.maps.places.Autocomplete(input, options);
-
-// Set initial restriction to the greater list of countries.
-autocomplete.setComponentRestrictions({
-country: ["us", "pr", "vi", "gu", "mp"],
+    $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
 
-const southwest = { lat: 5.6108, lng: 136.589326 };
-const northeast = { lat: 61.179287, lng: 2.64325 };
-const newBounds = new google.maps.LatLngBounds(southwest, northeast);
 
-autocomplete.setBounds(newBounds);
-
-const infowindow = new google.maps.InfoWindow();
-const infowindowContent = document.getElementById("infowindow-content");
-
-infowindow.setContent(infowindowContent);
-
-const marker = new google.maps.Marker({
-map,
-anchorPoint: new google.maps.Point(0, -29),
-});
-
-autocomplete.addListener("place_changed", () => {
-infowindow.close();
-marker.setVisible(false);
-
-const place = autocomplete.getPlace();
-
-if (!place.geometry || !place.geometry.location) {
-// User entered the name of a Place that was not suggested and
-// pressed the Enter key, or the Place Details request failed.
-window.alert("No details available for input: '" + place.name + "'");
-return;
-}
-
-// If the place has a geometry, then present it on a map.
-if (place.geometry.viewport) {
-map.fitBounds(place.geometry.viewport);
-} else {
-map.setCenter(place.geometry.location);
-map.setZoom(17); // Why 17? Because it looks good.
-}
-
-marker.setPosition(place.geometry.location);
-marker.setVisible(true);
-
-let address = "";
-
-if (place.address_components) {
-address = [
-  (place.address_components[0] &&
-    place.address_components[0].short_name) ||
-    "",
-  (place.address_components[1] &&
-    place.address_components[1].short_name) ||
-    "",
-  (place.address_components[2] &&
-    place.address_components[2].short_name) ||
-    "",
-].join(" ");
-}
-
-infowindowContent.children["place-icon"].src = place.icon;
-infowindowContent.children["place-name"].textContent = place.name;
-infowindowContent.children["place-address"].textContent = address;
-infowindow.open(map, marker);
-});
-
-// Sets a listener on a given radio button. The radio buttons specify
-// the countries used to restrict the autocomplete search.
-function setupClickListener(id, countries) {
-const radioButton = document.getElementById(id);
-
-radioButton.addEventListener("click", () => {
-autocomplete.setComponentRestrictions({ country: countries });
-});
-}
-
-setupClickListener("changecountry-usa", "us");
-setupClickListener("changecountry-usa-and-uot", [
-"us",
-"pr",
-"vi",
-"gu",
-"mp",
-]);
-}
-
-window.initMap = initMap;
-</script>
+function like(id) {
     
-@endpush
+
+    $.ajax({
+        type: 'POST',
+        url: `/restaurant/like/${id}`,
+        success: function(data) {
+            $(`#target${id}`).empty();
+            var $button = $('<button></button>', {
+                id: 'unlike',
+                html: '<i class="ri-heart-fill"></i>',
+                click: function() { unlike(id); }
+            });
+            $(`#target${id}`).append($button);
+        },
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
+}
+
+function unlike(id) {
+
+    $.ajax({
+        type: 'DELETE',
+        url: `/restaurant/unlike/${id}`,
+        success: function(data) {
+            $(`#target${id}`).empty();
+            var $button = $('<button></button>', {
+                id: 'like',
+                html: '<i class="ri-heart-line"></i>',
+                click: function() { like(id); }
+            });
+            $(`#target${id}`).append($button);
+        },
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
+}
+</script>
+
+@endsection
