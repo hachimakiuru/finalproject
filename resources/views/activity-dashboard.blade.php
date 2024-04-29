@@ -43,9 +43,59 @@
             </div>
         
         <!-- アクティビティ -->
-            <div class="right overflow-scroll">
-                <div class="d-flex justify-content-center p-3">
-                    <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal">写真投稿はこちらですよ!</button>
+
+        <div class="right overflow-scroll">
+            {{-- @foreach($experiences->reverse() as $key => $experience) --}}
+            <div class="d-flex justify-content-center p-3">
+                <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#exampleModal">写真投稿はこちら!</button>
+            </div>
+            <div>
+                <p class='experience-index-instagram'>ホテル公式アカウントはこちら
+                    <a href="https://www.instagram.com/hoshinoresorts.official/" target="blank" style="text-decoration: none;"><i class="ri-instagram-line" style="color: #colorcode;"></i></a>
+                </p>
+            </div>
+            
+            
+            
+            
+            <div class="d-flex flex-wrap">
+                @foreach($experiences->reverse() as $key => $experience)
+                <div class="col">
+                    <div class="card custom-card">
+                        <div class='postimg'>
+                            <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">タイトル：{{ $experience->title }}</h5>
+                            <h5 class="card-updatedat">更新日：{{ $experience->updated_at }}</h5>
+                            <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">詳細</button>
+                            <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger delete-button"><i class="ri-delete-bin-line"></i></button>
+                            </form>
+                            <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}"><i class="ri-edit-2-line"></i></button>
+            
+            
+                            {{-- likeボタンの作成 --}}
+                            <div class="btn-container" id="target{{ $experience->id }}">
+                                @if ($experience->isLike)
+                                    {{-- <form action="{{ route('like.destroy', $experience->id) }}" method="POST" class="likebutton">
+                                        @csrf
+                                        @method('DELETE') --}}
+                                        <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
+                                    {{-- </form> --}}
+                                @else
+                                    {{-- <form action="{{ route('like.store', $experience->id) }}" method="POST" class="likebutton"> --}}
+                                        {{-- @csrf --}}
+                                        <button id="like" onclick="like({{ $experience->id }})"><i class="ri-heart-line"></i></button>
+                                    {{-- </form> --}}
+                                @endif
+                            </div>
+                            
+                        </div>
+                    </div>
+
                 </div>
                 <div>
                     <p class='experience-index-instagram'>ホテル公式アカウントはこちら

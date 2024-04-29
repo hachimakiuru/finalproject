@@ -181,7 +181,11 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4>レストラン一覧</h4>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Post</button>
+
+                            <button type="button" class="btn-1 btn-border-shadow-1 btn-border-shadow--color2-1 custom-btn1" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Post ></button>
+
+                 
+
                         </div>
 
                         {{-- 投稿モーダル --}}
@@ -360,12 +364,15 @@
                                             <img src="{{ Storage::url($restaurant->image_path) }}" class="img-thumbnail" alt="restaurant photo" style="width: 100%; height: auto; border-radius: 8px;">
                                         </div>
                                         <div class="col-md-8">
-                                            <h5>{{ $restaurant->name }}</h5>
+                                            <h2>{{ $restaurant->name }}</h2>
                                             <p>{{ $restaurant->address }}</p>
                                             <p>{{ $restaurant->genre_place }}</p>
                                             <!-- モーダルトリガーボタン -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
+                                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
                                                 詳細&予約フォーム
+                                            </button> --}}
+                                            <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
+                                                Details & Reservation Form >
                                             </button>
 
 
@@ -488,7 +495,8 @@
                                                                                                     <label for="comment" class="form-label"><h3>コメント</h3></label>
                                                                                                     <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="コメントを入力してください"></textarea>
                                                                                                 </div>
-                                                                                                <button type="submit" class="btn btn-primary">コメントする</button>
+                                                                                                {{-- <button type="submit" class="btn btn-primary">コメントする</button> --}}
+                                                                                                <button type="submit" class="btn btn-border">Comment</button>
                                                                                             </form>
                                                                                         @else
                                                                                             <p>コメントを投稿するにはログインしてください。</p>
@@ -551,7 +559,8 @@
                                                                                 </div>
                                                                                 
                                                                                 <div class="d-grid">
-                                                                                    <button type="submit" class="btn btn-primary">予約する</button>
+                                                                                    {{-- <button type="submit" class="btn btn-primary">予約する</button> --}}
+                                                                                    <button type="submit" class="btn btn-border">Reservation</button>
                                                                                 </div>
                                                                                 
                                                                             </form>
