@@ -20,7 +20,7 @@
                 <div class="restaurant-dashboard-center">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4>レストラン一覧</h4>
+                            <h4>Food & Beverage</h4>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Post</button>
                         </div>
 
@@ -63,15 +63,11 @@
                                                     </div>
                                                     <div id="infowindow-content" style="display: none;">
                                                         <img src="" width="16" height="16" id="place-icon" />
-                                                        <span id="place-name" class="title"></span><br />
+                                                        <span id="place-name" class="title"></span><br/>
                                                         <span id="place-address"></span>
                                                     </div>
-                                                    {{-- 非表示の経緯緯度 --}}
-                                                    {{-- <input type="text" id="address-form" name="pac-input" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" placeholder="Enter the full location">
-                                                    <input type="text" id="address-form" name="pac-input" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" placeholder="Enter the full location"> --}}
-
-                                                    <input class="form-control" type="" id="latitude" name="latitude">
-                                                    <input class="form-control" type="" id="longitude" name="longitude">
+                                                    <input class="form-control" type="" id="latitude" name="latitude" value="{{ old('latitude') }}">
+                                                    <input class="form-control" type="" id="longitude" name="longitude" value="{{ old('longitude') }}">
                                                     
                                                     
                                                     @error('address')

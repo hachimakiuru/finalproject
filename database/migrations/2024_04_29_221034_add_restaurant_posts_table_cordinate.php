@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('restaurant_post', function (Blueprint $table) {
-            //
+        Schema::table('restaurant_posts', function (Blueprint $table) {
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
         });
     }
 
@@ -21,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('restaurant_post', function (Blueprint $table) {
+        Schema::table('restaurant_posts', function (Blueprint $table) {
             //
         });
     }

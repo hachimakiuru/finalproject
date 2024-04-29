@@ -15,12 +15,12 @@ class RestaurantPostController extends Controller
         // $restaurants = RestaurantPost::all();
 
         $restaurants = RestaurantPost::withCount('comments')
-        ->orderByDesc('comments_count') // コメント数が多い順に並べ替え
-        ->get();
+            ->orderByDesc('comments_count') // コメント数が多い順に並べ替え
+            ->get();
 
 
-        if($restaurants ) {
-            foreach($restaurants  as $restaurant) { 
+        if ($restaurants) {
+            foreach ($restaurants  as $restaurant) {
 
                 $likes = RestaurantLike::where('user_id', Auth::user()->id)
                     ->where('restaurant_post_id', $restaurant->id)
@@ -41,12 +41,16 @@ class RestaurantPostController extends Controller
     {
         $Data = $request->validate([
             'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'pac-input' => 'required|string|max:255',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'genre_place' => 'required',
             'genre_variety' => 'required',
             'genre_religion' => 'required',
             'genre_payment' => 'required',
+            // 'genre_payment' => 'required',
+            // 'genre_payment' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
 
         $image = $request->file('image_path');
@@ -58,12 +62,15 @@ class RestaurantPostController extends Controller
         $restaurant = new RestaurantPost($Data);
         $restaurant->user_id = $user_id;
         $restaurant->name = $Data['name'];
-        $restaurant->address = $Data['address'];
+        // $restaurant->address = $Data['address'];
+        $restaurant->address = $Data['pac-input'];
         $restaurant->image_path = 'restaurant_images/' . $imageName;
         $restaurant->genre_place = $Data['genre_place'];
         $restaurant->genre_variety = $Data['genre_variety'];
         $restaurant->genre_religion = $Data['genre_religion'];
         $restaurant->genre_payment = $Data['genre_payment'];
+        $restaurant->latitude = $Data['latitude'];
+        $restaurant->longitude = $Data['longitude'];
         $restaurant->save();
 
         // データベースからすべてのレストランポストを取得
@@ -87,6 +94,8 @@ class RestaurantPostController extends Controller
             'genre_variety' => 'required',
             'genre_religion' => 'required',
             'genre_payment' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ]);
 
         if ($request->hasFile('image_path')) {
@@ -111,5 +120,4 @@ class RestaurantPostController extends Controller
         $restaurant = RestaurantPost::findOrFail($id);
         return view('restaurants.show', ['restaurant' => $restaurant]);
     }
-
 }
