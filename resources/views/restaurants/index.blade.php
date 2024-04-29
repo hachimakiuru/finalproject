@@ -1,13 +1,17 @@
 @extends('layouts.layout')
 @section('content')
-
-    
+@push('css')
+{{-- <link rel="stylesheet" href="{{ asset('/css/restaurant/google-map.css')  }}" >  --}}
+@endpush
 
 
 @include('parts.success-message')
-
 <div class="container-fluid mt-3">
 
+
+
+    <div class="row">
+        <div class="col-md-4">
     <div class="card">
         <div class="card-header" id="searchHeading">
             <h5 class="mb-0">
@@ -171,13 +175,17 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="restaurant-dashboard-container">
                 <div class="restaurant-dashboard-center">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4>レストラン一覧</h4>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">投稿</button>
+
+                            <button type="button" class="btn-1 btn-border-shadow-1 btn-border-shadow--color2-1 custom-btn1" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Post ></button>
+
+                 
+
                         </div>
 
                         {{-- 投稿モーダル --}}
@@ -185,14 +193,14 @@
                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">レストラン投稿</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Restaurant Feedback</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form action="{{ route('restaurants.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="mb-3 row">
-                                                <label for="username" class="col-sm-2 col-form-label">ユーザー名</label>
+                                                <label for="username" class="col-sm-2 col-form-label">User Name</label>
                                                 <div class="col-sm-10">
                                                     <p>{{Auth::user()->name }}</p>
                                                     @error('user_id')
@@ -201,7 +209,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="storename" class="col-sm-2 col-form-label">店舗名</label>
+                                                <label for="storename" class="col-sm-2 col-form-label">Restaurant Name</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" id="storename" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                                                     @error('name')
@@ -210,16 +218,21 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="address" class="col-sm-2 col-form-label">住所</label>
+                                                <label for="address-form" class="col-sm-2 col-form-label">Address</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}">
+                                                    <input type="text" id="address-form" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }} "placeholder="Enter the location">
+                                                    <div id="map" style="display: none;"></div>
                                                     @error('address')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
+                                            {{-- <div id="pac-container">
+                                                <input id="pac-input" type="text" placeholder="Enter a location" />
+                                                <div id="map" style="display: none;"></div>
+                                            </div> --}}
                                             <div class="mb-3 row">
-                                                <label for="image" class="col-sm-2 col-form-label">写真</label>
+                                                <label for="image" class="col-sm-2 col-form-label">Image</label>
                                                 <div class="col-sm-10">
                                                     <input type="file" id="image" name="image_path" class="form-control @error('image_path') is-invalid @enderror" value="{{ old('image_path') }}">
                                                     @error('image_path')
@@ -228,10 +241,10 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_place" class="col-sm-2 col-form-label">場所</label>
+                                                <label for="genre_place" class="col-sm-2 col-form-label">Place</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_place') is-invalid @enderror" id="genre_place" name="genre_place">
-                                                        <option selected disabled>選択してください</option>
+                                                        <option selected disabled>Slect the Placec</option>
                                                         <option value="新宿">新宿</option>
                                                         <option value="代々木">代々木</option>
                                                         <option value="浅草">浅草</option>
@@ -261,7 +274,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_variety" class="col-sm-2 col-form-label">種類</label>
+                                                <label for="genre_variety" class="col-sm-2 col-form-label">Food Type</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_variety') is-invalid @enderror" id="genre_variety" name="genre_variety">
                                                         <option selected disabled>選択してください</option>
@@ -294,7 +307,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_religion" class="col-sm-2 col-form-label">食事制限</label>
+                                                <label for="genre_religion" class="col-sm-2 col-form-label">Dietary Restrictions</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_religion') is-invalid @enderror" id="genre_religion" name="genre_religion">
                                                         <option selected disabled>選択してください</option>
@@ -316,7 +329,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_payment" class="col-sm-2 col-form-label">支払方法</label>
+                                                <label for="genre_payment" class="col-sm-2 col-form-label">Payment</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_payment') is-invalid @enderror" id="genre_payment" name="genre_payment">
                                                         <option selected disabled>選択してください</option>
@@ -332,7 +345,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">保存する</button>
+                                                <button type="submit" class="btn btn-primary">Post</button>
                                             </div>
                                         </form>
                                     </div>
@@ -351,12 +364,15 @@
                                             <img src="{{ Storage::url($restaurant->image_path) }}" class="img-thumbnail" alt="restaurant photo" style="width: 100%; height: auto; border-radius: 8px;">
                                         </div>
                                         <div class="col-md-8">
-                                            <h5>{{ $restaurant->name }}</h5>
+                                            <h2>{{ $restaurant->name }}</h2>
                                             <p>{{ $restaurant->address }}</p>
                                             <p>{{ $restaurant->genre_place }}</p>
                                             <!-- モーダルトリガーボタン -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
+                                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
                                                 詳細&予約フォーム
+                                            </button> --}}
+                                            <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
+                                                Details & Reservation Form >
                                             </button>
 
 
@@ -479,17 +495,14 @@
                                                                                                     <label for="comment" class="form-label"><h3>コメント</h3></label>
                                                                                                     <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="コメントを入力してください"></textarea>
                                                                                                 </div>
-                                                                                                <button type="submit" class="btn btn-primary">コメントする</button>
+                                                                                                {{-- <button type="submit" class="btn btn-primary">コメントする</button> --}}
+                                                                                                <button type="submit" class="btn btn-border">Comment</button>
                                                                                             </form>
                                                                                         @else
                                                                                             <p>コメントを投稿するにはログインしてください。</p>
                                                                                         @endif
                                                                                     </div>
                                                                                 </div>
-                                                                                
-                                                                                
-                                                                                
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -546,7 +559,8 @@
                                                                                 </div>
                                                                                 
                                                                                 <div class="d-grid">
-                                                                                    <button type="submit" class="btn btn-primary">予約する</button>
+                                                                                    {{-- <button type="submit" class="btn btn-primary">予約する</button> --}}
+                                                                                    <button type="submit" class="btn btn-border">Reservation</button>
                                                                                 </div>
                                                                                 
                                                                             </form>
@@ -598,7 +612,7 @@
         </div>
     </div>
 </div>
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 <script>
@@ -651,6 +665,6 @@ function unlike(id) {
         }
     });
 }
-</script> --}}
+</script>
 
 @endsection

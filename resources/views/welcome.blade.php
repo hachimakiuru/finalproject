@@ -9,7 +9,7 @@
 <div class="body">
   <div class="welcome_container">
     <div class="h1-text">
-      <h1>What's on your mind?</h1>
+      <h1 class="h1-text-main">What's on your mind?</h1>
     </div>
     <div class="welcome_box box1"> 
       <a href="{{ route('activity.dashboard') }}"> 
@@ -27,7 +27,7 @@
       <a href="{{ route('restaurants.index') }}"> 
         <div class="welcome_box-img">
           <img src="{{ asset('/img/gourmet.jpg') }}" alt="">
-          <span class="welcome_box-title">Gourmet</span>
+          <span class="welcome_box-title">Food & Beverage</span>
         </div>
         <div class="welcome_box-text">
           <p class="welcome_text">↑ Go and check our posts ↑</p>
