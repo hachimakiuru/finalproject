@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RestaurantPostsTableSeeder::class,
             NewsPostsTableSeeder::class,
+            FavoriteSeeder::class
         ]);
     }
 }
