@@ -21,7 +21,7 @@ class ExperienceController extends Controller
     public function index()
     {
         // $experiences = ExperiencePost::all(); // あなたのアプリケーションに適した方法でデータを取得してください
-        $experiences = ExperiencePost::orderBy('created_at', 'desc')->paginate(10);
+        $experiences = ExperiencePost::orderBy('created_at', 'desc')->paginate(5);
         if($experiences) {
             foreach($experiences as $experience) {
                 // $experience['isLike'] = 
