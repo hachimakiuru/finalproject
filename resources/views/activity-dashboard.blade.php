@@ -104,9 +104,10 @@
             @else
                 <button id="like" onclick="like({{ $experience->id }})"><i class="ri-heart-line"></i></button>
             @endif
-        </div>
-    </div>
 
+        </div>
+    
+    </div>
     <div>
         <h1 class="modalforpostnumber fs-5" id="exampleModalLabel{{ $key }}"># {{ $experience->id }}</h1>
     </div>
@@ -122,7 +123,6 @@
         <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">Update</button>
     @endif
 </div>
-
                         </div> 
                 </div>
                 
@@ -310,6 +310,7 @@
                                 
                     </div>
                 </div>
+                
             </div>
             <!-- モーダル終 -->
 
@@ -378,6 +379,7 @@
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Post！</button>
         </div>
+
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
