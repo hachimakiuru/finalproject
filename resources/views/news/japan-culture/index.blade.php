@@ -129,8 +129,8 @@
                                             <img src="{{ asset('storage/img/' . $newsTimeLine->image)}}" class="img-thumbnail" alt="restaurant photo" style="width: 50%; height: auto; border-radius: 8px;">
                                         </div>
                                         <div class="col-md-8">
-                                            <h5>{{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }} - {{ $newsTimeLine->title }}</h5>
-                                            <p>{{ $newsTimeLine->place }}</p>
+                                            <h3 class="news-title1"> Event Date:{{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }} -Title: {{ $newsTimeLine->title }}</h3>
+                                            <p class="news-title2">Place:{{ $newsTimeLine->place }}</p>
                                             <!-- モーダルトリガーボタン -->
                                             <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $newsTimeLine->id }}">
                                                 Details & Reservation Form >
