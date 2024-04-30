@@ -435,7 +435,7 @@
                                                                                                                 </div>
 
                                                                                                                 </div>
-                                                                                                                @if (Auth::check() && Auth::user()->id === $comment->user_id)
+                                                                                                                @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
                                                                                                                     <form method="POST" action="{{ route('restaurant_comments.destroy', $comment->id) }}">
                                                                                                                         @csrf
                                                                                                                         @method('DELETE')
@@ -596,18 +596,20 @@
                                                         </div>
                                                         {{-- footer --}}
                                                         <div class="modal-footer">
-                                                            <!-- フッターの内容 -->
                                                             <div class="container-fluid">
                                                                 <div class="row justify-content-between align-items-center">
                                                                     <div class="col-md-auto">
+                                                                        @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
                                                                         <form action="{{ route('restaurants.edit', ['restaurant' => $restaurant]) }}">
                                                                             <button type="submit" class="btn btn-primary" data-bs-target="#editModal_{{ $restaurant->id }}">
                                                                                 <i class="ri-edit-2-line"></i>
                                                                             </button>
                                                                         </form>
+                                                                        @endif
                                                                     </div>                                                        
                                                                     <div class="col-md-auto">
                                                                         <div class="btn-group" role="group" aria-label="アクション">
+                                                                            @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
                                                                             <form action="{{ route('restaurants.destroy', ['restaurant' => $restaurant]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？')">
                                                                                 @csrf
                                                                                 @method('DELETE')
@@ -615,11 +617,13 @@
                                                                                     <i class="ri-delete-bin-line"></i>
                                                                                 </button>
                                                                             </form>
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
