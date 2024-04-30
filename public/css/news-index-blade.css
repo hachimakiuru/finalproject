@@ -136,3 +136,13 @@ button.btn-border-shadow--color2-1:before {
   -webkit-box-shadow: 3px 3px 0 #78e5e5;
   box-shadow: 3px 3px 0 #78e5e5;
 } 
+
+.news-title1{
+  font-size: 35px;
+
+}
+
+.news-title2{
+  font-size: 20px;
+
+}
