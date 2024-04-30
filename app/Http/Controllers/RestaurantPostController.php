@@ -10,18 +10,34 @@ use Illuminate\Support\Facades\Auth;
 
 class RestaurantPostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $restaurants = RestaurantPost::all();
+        $query = RestaurantPost::withCount('comments')
+            ->orderByDesc('comments_count'); // コメント数が多い順に並べ替え
 
-        $restaurants = RestaurantPost::withCount('comments')
-            ->orderByDesc('comments_count') // コメント数が多い順に並べ替え
-            ->get();
+        // フィルターの条件を受け取り、クエリを調整
+        if ($request->has('genre_place')) {
+            $query->where('genre_place', $request->genre_place);
+        }
 
+        if ($request->has('genre_variety')) {
+            $query->where('genre_variety', $request->genre_variety);
+        }
+
+        if ($request->has('genre_religion')) {
+            $query->where('genre_religion', $request->genre_religion);
+        }
+
+        if ($request->has('genre_payment')) {
+            $query->where('genre_payment', $request->genre_payment);
+        }
+
+        // 他のフィルタリング条件を追加する場合はここに追加
+
+        $restaurants = $query->get();
 
         if ($restaurants) {
-            foreach ($restaurants  as $restaurant) {
-
+            foreach ($restaurants as $restaurant) {
                 $likes = RestaurantLike::where('user_id', Auth::user()->id)
                     ->where('restaurant_post_id', $restaurant->id)
                     ->get();
@@ -31,6 +47,7 @@ class RestaurantPostController extends Controller
 
         return view('restaurants.index', compact('restaurants'));
     }
+
 
 
     public function create()

@@ -51,6 +51,7 @@ class NewsBookingController extends Controller
                 'number_guests' => $request->input('number_guests'),
                 'memo' => $request->input('memo'),
             ]);
+           //dd($newsBooking);
 
 
             // レコードを保存
