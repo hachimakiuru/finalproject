@@ -58,7 +58,7 @@ class RestaurantPostController extends Controller
     {
         $Data = $request->validate([
             'name' => 'required|string|max:255',
-            'pac-input' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'genre_place' => 'required',
             'genre_variety' => 'required',
@@ -77,7 +77,7 @@ class RestaurantPostController extends Controller
         $restaurant = new RestaurantPost($Data);
         $restaurant->user_id = $user_id;
         $restaurant->name = $Data['name'];
-        $restaurant->address = $Data['pac-input'];
+        $restaurant->address = $Data['address'];
         $restaurant->image_path = 'restaurant_images/' . $imageName;
         $restaurant->genre_place = $Data['genre_place'];
         $restaurant->genre_variety = $Data['genre_variety'];

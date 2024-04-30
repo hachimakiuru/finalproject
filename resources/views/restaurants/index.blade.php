@@ -1,7 +1,9 @@
 @extends('layouts.layout')
 @section('content')
-
+@push('css')
+<link rel="stylesheet" href="{{ asset('/css/restaurant/google-map.css')  }}" >
     
+@endpush
 
 
 @include('parts.success-message')
@@ -209,9 +211,10 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="address" class="col-sm-2 col-form-label">住所</label>
+                                                <label for="pac-input" class="col-sm-2 col-form-label">住所</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}">
+                                                    {{-- GoogleAPI Autcomplete --}}
+                                                    <input type="text" id="pac-input" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}"placeholder="Enter the full-location">
                                                     @error('address')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -219,6 +222,15 @@
                                                 <input class="form-control" type="" id="latitude" name="latitude" value="{{ old('latitude') }}">
                                                 <input class="form-control" type="" id="longitude" name="longitude" value="{{ old('longitude') }}">
                                             </div>
+                                            <div id="pac-container">
+                                                <div id="map" style="display: none;"></div>
+                                            </div>
+                                            <div id="infowindow-content" style="display: none;">
+                                                <img src="" width="16" height="16" id="place-icon" />
+                                                <span id="place-name" class="title"></span><br/>
+                                                <span id="place-address"></span>
+                                            </div>
+                                            {{-- ------------------ --}}
                                             <div class="mb-3 row">
                                                 <label for="image" class="col-sm-2 col-form-label">写真</label>
                                                 <div class="col-sm-10">
@@ -644,6 +656,178 @@
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+{{-- GoogleMap Autocomplete --}}
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbtmHh4zHJMzxxH7893O9DmuaNWZQewy0&callback=initMap&libraries=places&v=weekly"
+     async defer
+    ></script>
+    
+    {{-- GoogleMap Autocomplete --}}
+ <script async>
+    // This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+function initMap() {
+const map = new google.maps.Map(document.getElementById("map"), {
+  // center: { lat: 50.064192, lng: -130.605469 },
+  center: { lat: 35.6895, lng: 139.6917 }, // 東京の座標を設定
+  // zoom: 3,
+  zoom: 6, // 適切なズームレベルを設定
+});
+
+const card = document.getElementById("pac-card");
+
+map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+const center = { lat: 50.064192, lng: -130.605469 };
+// Create a bounding box with sides ~10km away from the center point
+const defaultBounds = {
+  north: center.lat + 0.1,
+  south: center.lat - 0.1,
+  east: center.lng + 0.1,
+  west: center.lng - 0.1,
+};
+const input = document.getElementById("pac-input");
+const options = {
+  bounds: defaultBounds,
+  // componentRestrictions: { country: "us" },
+  componentRestrictions: { country: "jp" },
+  fields: ["address_components", "geometry", "icon", "name"],
+  strictBounds: false,
+};
+const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+// Set initial restriction to the greater list of countries.
+autocomplete.setComponentRestrictions({
+  // country: ["us", "pr", "vi", "gu", "mp"],
+  country: ["jp"],
+});
+
+const southwest = { lat: 5.6108, lng: 136.589326 };
+const northeast = { lat: 61.179287, lng: 2.64325 };
+const newBounds = new google.maps.LatLngBounds(southwest, northeast);
+
+autocomplete.setBounds(newBounds);
+
+const infowindow = new google.maps.InfoWindow();
+const infowindowContent = document.getElementById("infowindow-content");
+
+infowindow.setContent(infowindowContent);
+
+const marker = new google.maps.Marker({
+  map,
+  anchorPoint: new google.maps.Point(0, -29),
+});
+
+autocomplete.addListener("place_changed", () => {
+  infowindow.close();
+  marker.setVisible(false);
+
+  const place = autocomplete.getPlace();
+
+  if (!place.geometry || !place.geometry.location) {
+    // User entered the name of a Place that was not suggested and
+    // pressed the Enter key, or the Place Details request failed.
+    window.alert("No details available for input: '" + place.name + "'");
+    return;
+  }
+
+  // If the place has a geometry, then present it on a map.
+  if (place.geometry.viewport) {
+    map.fitBounds(place.geometry.viewport);
+  } else {
+    map.setCenter(place.geometry.location);
+    map.setZoom(17); // Why 17? Because it looks good.
+  }
+
+  marker.setPosition(place.geometry.location);
+  marker.setVisible(true);
+
+  let address = "";
+
+  if (place.address_components) {
+    address = [
+      (place.address_components[0] &&
+        place.address_components[0].short_name) ||
+        "",
+      (place.address_components[1] &&
+        place.address_components[1].short_name) ||
+        "",
+      (place.address_components[2] &&
+        place.address_components[2].short_name) ||
+        "",
+    ].join(" ");
+  }
+
+  infowindowContent.children["place-icon"].src = place.icon;
+  infowindowContent.children["place-name"].textContent = place.name;
+  infowindowContent.children["place-address"].textContent = address;
+  infowindow.open(map, marker);
+//   追加
+  document.getElementById('latitude').value = place.geometry.location.lat();
+  document.getElementById('longitude').value = place.geometry.location.lng();
+});
+
+
+// Sets a listener on a given radio button. The radio buttons specify
+// the countries used to restrict the autocomplete search.
+function setupClickListener(id, countries) {
+  const radioButton = document.getElementById(id);
+
+  radioButton.addEventListener("click", () => {
+    autocomplete.setComponentRestrictions({ country: countries });
+  });
+}
+
+setupClickListener("changecountry-usa", "us");
+setupClickListener("changecountry-usa-and-uot", [
+  "us",
+  "pr",
+  "vi",
+  "gu",
+  "mp",
+]);
+}
+
+window.initMap = initMap;
+  </script>
+
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbtmHh4zHJMzxxH7893O9DmuaNWZQewy0&callback=initMap&libraries=places&v=weekly"
+    async
+    defer
+    ></script>
+    {{-- <script>
+
+        var map
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+            center: new google.maps.LatLng(-34.397, 150.644),
+            zoom: 5,
+            });
+
+
+        }
+        google.maps.event.addDomListener(window, 'load', initMap)
+
+        function getDirection(lat, lng) {
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 20,
+                center: { lat: lat, lng: lng },
+            })
+
+            const marker = new google.maps.Marker({
+            map,
+            });
+
+            marker.setPosition({lat, lng});
+            marker.setVisible(true);
+
+
+        }
+    </script> --}}
 
 
 <script>
