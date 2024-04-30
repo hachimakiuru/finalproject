@@ -176,7 +176,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4>レストラン一覧</h4>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">投稿</button>
+                            <button type="button" class="btn btn-border-shadow-1 btn-border-shadow--color2-1 custom-btn-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Post ></button>
                         </div>
 
                         {{-- 投稿モーダル --}}
@@ -331,7 +331,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">保存する</button>
+                                                <button type="submit" class="btn-border">Save</button>
                                             </div>
                                         </form>
                                     </div>
@@ -354,8 +354,8 @@
                                             <p>{{ $restaurant->address }}</p>
                                             <p>{{ $restaurant->genre_place }}</p>
                                             <!-- モーダルトリガーボタン -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
-                                                詳細&予約フォーム
+                                            <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
+                                                Details & Reservation Form >
                                             </button>
 
 
@@ -478,7 +478,7 @@
                                                                                                     <label for="comment" class="form-label"><h3>コメント</h3></label>
                                                                                                     <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="コメントを入力してください"></textarea>
                                                                                                 </div>
-                                                                                                <button type="submit" class="btn btn-primary">コメントする</button>
+                                                                                                <button type="submit" class="btn-border">Comment</button>
                                                                                             </form>
                                                                                         @else
                                                                                             <p>コメントを投稿するにはログインしてください。</p>
@@ -545,7 +545,7 @@
                                                                                 </div>
                                                                                 
                                                                                 <div class="d-grid">
-                                                                                    <button type="submit" class="btn btn-primary">予約する</button>
+                                                                                    <button type="submit" class="btn-border">Make a Reservation</button>
                                                                                 </div>
                                                                                 
                                                                             </form>
