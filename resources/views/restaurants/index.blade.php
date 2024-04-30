@@ -216,6 +216,8 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
+                                                <input class="form-control" type="" id="latitude" name="latitude" value="{{ old('latitude') }}">
+                                                <input class="form-control" type="" id="longitude" name="longitude" value="{{ old('longitude') }}">
                                             </div>
                                             <div class="mb-3 row">
                                                 <label for="image" class="col-sm-2 col-form-label">写真</label>
