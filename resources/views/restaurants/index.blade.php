@@ -169,6 +169,7 @@
             <div class="restaurant-dashboard-container">
                 <div class="restaurant-dashboard-right">
                     <h6>mapping</h6>
+                    <div id="map1" style="height: 600px; width: 100%"></div>
                 </div>
             </div>
         </div>
@@ -371,6 +372,7 @@
                                             <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
                                                 Details & Reservation Form >
                                             </button>
+                                            <button onclick="getDirection({{ $restaurant->latitude }}, {{ $restaurant->longitude }})">Click</button>
 
 
 
@@ -793,41 +795,43 @@ setupClickListener("changecountry-usa-and-uot", [
 window.initMap = initMap;
   </script>
 
+  <script>
+
+var map
+
+function test() {
+    map = new google.maps.Map(document.getElementById("map1"), {
+    center: new google.maps.LatLng(-34.397, 150.644),
+    zoom: 5,
+    });
+
+
+}
+google.maps.event.addDomListener(window, 'load', test)
+
+function getDirection(lat, lng) {
+    map = new google.maps.Map(document.getElementById("map1"), {
+        zoom: 20,
+        center: { lat: lat, lng: lng },
+    })
+
+    const marker = new google.maps.Marker({
+    map,
+    });
+
+    marker.setPosition({lat, lng});
+    marker.setVisible(true);
+
+
+}
+  </script>
+
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbtmHh4zHJMzxxH7893O9DmuaNWZQewy0&callback=initMap&libraries=places&v=weekly"
     async
     defer
     ></script>
-    {{-- <script>
-
-        var map
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-            center: new google.maps.LatLng(-34.397, 150.644),
-            zoom: 5,
-            });
-
-
-        }
-        google.maps.event.addDomListener(window, 'load', initMap)
-
-        function getDirection(lat, lng) {
-            map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 20,
-                center: { lat: lat, lng: lng },
-            })
-
-            const marker = new google.maps.Marker({
-            map,
-            });
-
-            marker.setPosition({lat, lng});
-            marker.setVisible(true);
-
-
-        }
-    </script> --}}
+    
 
 
 <script>
