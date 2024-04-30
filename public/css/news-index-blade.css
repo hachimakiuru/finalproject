@@ -81,11 +81,13 @@ button.btn-border {
     border: 2px solid #000;
     border-radius: 0;
     background: #fff;
+    border-radius: 1vh;
   }
   
 button.btn-border:hover {
     color: #fff;
     background: #000;
+    border-radius: 1vh;
   }
 
 /* レストランの投稿ボタン */

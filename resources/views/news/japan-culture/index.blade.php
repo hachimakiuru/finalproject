@@ -257,7 +257,7 @@
                                     </div>
 
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">予約する</button>
+                                        <button type="submit" class="btn-border">Make a Reservation</button>
                                     </div>
 
                                 </form>

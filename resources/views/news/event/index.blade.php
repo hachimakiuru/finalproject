@@ -132,14 +132,11 @@
                                             <h3 class="news-title1"> Event Date:{{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }} -Title: {{ $newsTimeLine->title }}</h3>
                                             <p class="news-title2">Place:{{ $newsTimeLine->place }}</p>
                                             <!-- モーダルトリガーボタン -->
-                                            {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $newsTimeLine->id }}">
-                                                詳細&予約フォーム
-                                            </button> --}}
                                             <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $newsTimeLine->id }}">
                                                 Details & Reservation Form >
                                             </button>
 
-                                            {{-- <a href=""></a>  --}}
+                                     
 
 
 <!-- 詳細&予約モーダル始 -->
@@ -262,7 +259,8 @@
                                     </div>
 
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">予約する</button>
+                                        
+                                        <button type="submit" class="btn-border">Make a Reservation</button>
                                     </div>
 
                                 </form>
