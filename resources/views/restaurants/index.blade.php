@@ -366,12 +366,12 @@
                                                     {{-- <form action="{{ route('like.destroy', $restaurant->id) }}" method="POST" class="likebutton">
                                                         @csrf
                                                         @method('DELETE') --}}
-                                                        <button id="unlike" onclick="unlike({{ $restaurant->id }})"><i class="ri-heart-fill"></i></button>
+                                                        <button id="unlike"  onclick="unlikeRestaurant({{ $restaurant->id }})"><i class="ri-heart-fill"></i></button>
                                                     {{-- </form> --}}
                                                 @else
                                                     {{-- <form action="{{ route('like.store', $restaurant->id) }}" method="POST" class="likebutton"> --}}
                                                         {{-- @csrf --}}
-                                                        <button id="like" onclick="like({{ $restaurant->id }})"><i class="ri-heart-line"></i></button>
+                                                        <button id="like" class="unlike" onclick="likeRestaurant({{ $restaurant->id }})"><i class="ri-heart-line"></i></button>
                                                     {{-- </form> --}}
                                                 @endif
                                             </div>
@@ -610,7 +610,7 @@
 });
 
 
-function like(id) {
+function likeRestaurant(id) {
     
 
     $.ajax({
@@ -631,7 +631,7 @@ function like(id) {
     });
 }
 
-function unlike(id) {
+function unlikeRestaurant(id) {
 
     $.ajax({
         type: 'DELETE',
