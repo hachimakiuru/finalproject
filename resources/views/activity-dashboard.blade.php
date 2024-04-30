@@ -59,9 +59,13 @@
                     </a>
                 </div>
 
+
+
                 <!-- ポンポン投稿カードのコメント -->
                 <div class="d-flex flex-wrap justify-content-center custom-container">
-                    @foreach($experiences->reverse() as $key => $experience)
+                    {{-- @foreach($experiences->reverse() as $key => $experience) --}}
+                    @foreach($experiences as $key => $experience)
+
                     <div class="col custom-col">
                         <div class="card custom-card">
                             <div class='postimg'>
@@ -95,22 +99,23 @@
                                 </div>
                                 
                             </div> --}}
+                            
                             <div class="card-body">
-    <div class="d-flex justify-content-between align-items-center">
-        <h5 class="card-title mb-0">comment：{{ $experience->title }}</h5> <!-- mb-0 removes the bottom margin -->
-        <div class="btn-container" id="target{{ $experience->id }}">
-            @if ($experience->isLike)
-                <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
-            @else
-                <button id="like" onclick="like({{ $experience->id }})"><i class="ri-heart-line"></i></button>
-            @endif
-
-        </div>
-    
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">comment：{{ $experience->title }}</h5> <!-- mb-0 removes the bottom margin -->
+                            <div class="btn-container" id="target{{ $experience->id }}">
+                                @if ($experience->isLike)
+                                    <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
+                                @else
+                                    <button id="like" onclick="like({{ $experience->id }})"><i class="ri-heart-line"></i></button>
+                                @endif
+                        </div>
     </div>
     <div>
         <h1 class="modalforpostnumber fs-5" id="exampleModalLabel{{ $key }}"># {{ $experience->id }}</h1>
     </div>
+
+
 
     @if(Auth::user()->role_id == 1)
         <h5 class="card-updatedat">Update date：{{ $experience->updated_at }}</h5>
@@ -196,6 +201,15 @@
                         </div>
                     </div>
                     @endforeach
+
+
+                    {{-- Postingpageへの導線ボタン --}}
+                    <div class="moreposts">
+                        <p class='experience-index-instagram'>check more posts
+                        <a href="{{ route('experience.index') }}" ><i class= "ri-gallery-line" style="color: #colorcode;"></i></a>
+                        </p>
+                    </div>
+
             </div>
 
             <!-- 詳細モーダル始 -->
