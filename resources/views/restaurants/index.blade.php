@@ -510,6 +510,26 @@
                                                                                     <label for="time1">第一希望時間:</label>
                                                                                     <select id="time1" name="time1" class="form-control" required>
                                                                                         <option value="">-- 時間を選択してください --</option>
+                                                                                        <optgroup label="朝 (6:00 - 11:59)">
+                                                                                            @for ($hour = 6; $hour < 12; $hour++)
+                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                            @endfor
+                                                                                        </optgroup>
+                                                                                        <optgroup label="昼 (12:00 - 17:59)">
+                                                                                            @for ($hour = 12; $hour < 18; $hour++)
+                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                            @endfor
+                                                                                        </optgroup>
+                                                                                        <optgroup label="夕方 (18:00 - 21:59)">
+                                                                                            @for ($hour = 18; $hour < 22; $hour++)
+                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                            @endfor
+                                                                                        </optgroup>
+                                                                                        <optgroup label="夜 (22:00 - 23:59)">
+                                                                                            @for ($hour = 22; $hour < 24; $hour++)
+                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                            @endfor
+                                                                                        </optgroup>
                                                                                         <!-- 時間のオプション -->
                                                                                     </select>
                                                                                 </div>
@@ -518,6 +538,26 @@
                                                                                     <label for="time2">第二希望時間:</label>
                                                                                     <select id="time2" name="time2" class="form-control" required>
                                                                                         <option value="">-- 時間を選択してください --</option>
+                                                                                        <optgroup label="朝 (6:00 - 11:59)">
+                                                                                            @for ($hour = 6; $hour < 12; $hour++)
+                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                            @endfor
+                                                                                        </optgroup>
+                                                                                        <optgroup label="昼 (12:00 - 17:59)">
+                                                                                            @for ($hour = 12; $hour < 18; $hour++)
+                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                            @endfor
+                                                                                        </optgroup>
+                                                                                        <optgroup label="夕方 (18:00 - 21:59)">
+                                                                                            @for ($hour = 18; $hour < 22; $hour++)
+                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                            @endfor
+                                                                                        </optgroup>
+                                                                                        <optgroup label="夜 (22:00 - 23:59)">
+                                                                                            @for ($hour = 22; $hour < 24; $hour++)
+                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                            @endfor
+                                                                                        </optgroup>
                                                                                         <!-- 時間のオプション -->
                                                                                     </select>
                                                                                 </div>
