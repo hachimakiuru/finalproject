@@ -101,11 +101,12 @@ class RestaurantPostController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            
+            'address' => 'required|string|max:255',
             'image_path' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'genre_place' => 'required',
             'genre_variety' => 'required',
-          
+            'genre_religion' => 'required',
+            'genre_payment' => 'required',
         ]);
 
         if ($request->hasFile('image_path')) {
