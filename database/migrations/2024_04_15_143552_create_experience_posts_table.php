@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Auto-increment primary key
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->string('image_path');
             $table->string('address')->nullable();
             $table->boolean('ig_permission');

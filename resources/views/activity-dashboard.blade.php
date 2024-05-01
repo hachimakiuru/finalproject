@@ -102,7 +102,7 @@
                             <div class="card-body">
                                 
                         <div class="d-flex justify-content-between align-items-center">
-                            <h1 class="card-title mb-0">{{ $experience->title }}</h1> <!-- mb-0 removes the bottom margin -->
+                            <h1 class="card-title mb-0">{{ $experience->title }}</h1> 
                             <div class="btn-container" id="target{{ $experience->id }}">
                                 @if ($experience->isLike)
                                     <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
@@ -339,36 +339,36 @@
                         <form action="{{ route('experience.store') }}" method="POST" enctype="multipart/form-data"> <!-- formタグの開始を修正 -->
                             @csrf
                             <div class="mb-3">
-                                <label for="image" class="form-label">Pick your mamory</label>
+                                <label for="image" class="form-label">Pick your memory</label>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="file" name="image" id="image" class="form-control" accept="image/*">
-                                    {{-- <button type="submit" class="uploadbutton">＋</button> --}}
+                                
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="title" class="form-label">title :</label>
-                                <div class="input-group" style="width: 100%;">
-                                    <input type="text" id="title" name="title"  style="width: 100%;">
-                                </div>
-                            </div>
-            
-                            <div class="mb-3">
-                                <label for="address" class="form-label">location :</label>
-                                <div class="input-group" style="width: 100%;">
-                                    <input type="text" id="address" name="address"  style="width: 100%;">
+                                <label for="title" class="form-label">Post:</label>
+                                {{-- <div class="input-group" style="width: 100%;"> --}}
+                                    <div class="input-group" style="width: 100%;">
+                                    {{-- <input type="text" id="title" name="title"  style="width: 100%;"> --}}
+                                    <textarea placeholder="e.g. I wennt to Disney land" name="title" id="title" cols="100" rows="5"></textarea>
                                 </div>
                             </div>
             
                             <div class="mb-3">
+                                <label for="address" class="form-label">Location :</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="text" id="address" name="address"  style="width: 100%;" placeholder="e.g. Disney land">
+                            </div>
+            
+                            {{-- <div class="mb-3">
                                 <label for="content" class="form-label">comment :</label>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="text" id="content" name="content"  style="width: 100%;">
-                                </div>
-                            </div>
-            
-            
+                                </div>--}}
+                            </div> 
                             <div class="mb-3">
-                                <span class="form-label">instagram permission *click the button if you don't mind :</span>
+                                <label  class="form-label" for=""> Instagram Permission: </label>
+                                <h6 class=" text-sm fs-6 text-danger" >*click the button if you don't mind :</h6>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="checkbox" id="instagram_permission" name="instagrampermission"  style="width: 100%;">
                                     <label for="instagram_permission" class="btn ig-permission">share my memory on Instagram</label>
@@ -377,9 +377,9 @@
                             </div>
             
                             <div class="mb-3">
-                                <label for="instagram_account" class="form-label">instagram account:</label>
+                                <label for="instagram_account" class="form-label">Instagram Account:</label>
                                 <div class="input-group" style="width: 100%;">
-                                    <input type="text" id="instagramaccount" name="instagramaccount"  style="width: 100%;">
+                                    <input type="text" id="instagramaccount" name="instagramaccount"  style="width: 100%;" placeholder="e.g. @hoshinoresorts.official">
 
 
 
