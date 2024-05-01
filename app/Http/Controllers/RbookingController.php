@@ -48,7 +48,7 @@ class RbookingController extends Controller
             'number_guests' => $request->number_guests,
             'memo' => $request->memo,
         ]);
-        return redirect()->route('rbooking.index')->with('success', '予約情報の変更が完了しました。');
+        return redirect()->route('rbooking.index')->with('success', 'The booking information has been updated');
     }
 
     public function destroy($id)
@@ -56,7 +56,7 @@ class RbookingController extends Controller
         // dd('test');
         RestaurantForm::find($id)->delete();
 
-        return redirect()->route('rbooking.index')->with('success', '削除ができました');
+        return redirect()->route('rbooking.index')->with('success', 'The booking request has been deleted');
     }
 
 
@@ -97,7 +97,7 @@ class RbookingController extends Controller
 
 
 
-            return redirect()->route('restaurants.index')->with('success', '予約フォームの送信が完了しました。');
+            return redirect()->route('restaurants.index')->with('success', 'Booking request has been succesfully sent');
         } catch (\Exception $e) {
             // 例外が発生した場合はエラーメッセージを表示し、フォーム入力を再表示
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);

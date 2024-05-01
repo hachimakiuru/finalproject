@@ -48,8 +48,8 @@
         <td>{{ $user->room_number }}</td>
         <td>{{ $user->created_at->format('Y-m-d') }}</td>
         <td>{{ $user->role ? $user->role->name : 'No Role' }}</td>
-        <td>10</td>
-        <td>3</td>
+        <td>-</td>
+        <td>-</td>
         <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $user->id }} ">Edit</button></td>
         <td>
           <form method="POST" action="{{ route('user.destroy', $user->id) }}">
@@ -106,7 +106,7 @@
                       <label class="form-check-label" for="role_id_{{ $role->id }}">{{ $role->name }}</label>
                       @endforeach
                       <div class="form-group mt-3">
-                        <label for="room_number" class="text-dark">Passward:</label><br>
+                        <label for="password" class="text-dark">Passward:</label><br>
                         <input type="password" name="password" id="password" class="form-control" value="{{ $user->password }}">
                         @error('password')
                         <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>

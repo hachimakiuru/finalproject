@@ -51,7 +51,7 @@ class NewsBookingController extends Controller
                 'number_guests' => $request->input('number_guests'),
                 'memo' => $request->input('memo'),
             ]);
-           //dd($newsBooking);
+            //dd($newsBooking);
 
 
             // レコードを保存
@@ -95,7 +95,7 @@ class NewsBookingController extends Controller
             'number_guests' => $request->number_guests,
             'memo' => $request->memo,
         ]);
-        return redirect()->route('newsBookings.index')->with('success', '予約情報の変更が完了しました。');
+        return redirect()->route('newsBookings.index')->with('success', 'The booking information has been successsully updated');
     }
 
     /**
@@ -105,6 +105,6 @@ class NewsBookingController extends Controller
     {
         NewsBooking::find($id)->delete();
 
-        return redirect()->route('newsBookings.index')->with('success', '削除ができました');
+        return redirect()->route('newsBookings.index')->with('success', 'The booking request has been deleted');
     }
 }

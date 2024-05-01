@@ -39,6 +39,7 @@
                   <input type="submit" name="submit" class="btn btn-dark btn-md" value="Login">
               </div>
           </form>
+          <button class="btn-passwordChange mt-3"><a href="{{ route('password.change.form') }}">Click to change your password</a></button>
       </div>
   </div>
 
