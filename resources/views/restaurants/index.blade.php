@@ -217,8 +217,11 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
+                                              
+
                                                 <input type="" id="latitude" name="latitude" value="{{ old('latitude') }}" style="display: none;">
                                                 <input type="" id="longitude" name="longitude" value="{{ old('longitude')}}" style="display: none;">
+
                                             </div>
                                             <div id="pac-container">
                                                 <div id="map" style="display: none;"></div>
