@@ -11,18 +11,16 @@
         }
     </style>
 @endpush
-
-    <div class="container">
+<div class="containerfullpage" style="paddin-inline: 50px;">
+    <div class="container" style="gap:17px;">
         <!-- 左半分 -->
         <div class="left">
             <!-- カレンダー -->
             <div class="top-box">
-                カレンダー機能
-
             <div id='calendar'></div>
             </div>
             <!-- ニュース -->
-            <div class="bottom-box">
+            <div class="bottom-box" style="margin:17px 0px 10px 0px;">
                 @include('news.news-dashboard')
             </div>
         </div>
@@ -52,17 +50,18 @@
                         <a href="https://www.instagram.com/hoshinoresorts.official/" target="blank" style="text-decoration: none;"><i class="ri-instagram-line" style="color: #colorcode;"></i></a>
                     </p>
                 </div>
-
+{{-- 
                 <div class="moreposts">
                     <p class='experience-index-instagram'>check more posts
                     <a href="{{ route('experience.index') }}" ><i class= "ri-gallery-line" style="color: #colorcode;"></i>
                     </a>
-                </div>
+                </div>  --}}
 
 
 
                 <!-- ポンポン投稿カードのコメント -->
-                <div class="d-flex flex-wrap justify-content-center custom-container">
+                {{-- <div class="d-flex flex-wrap justify-content-center custom-container"> --}}
+                    <div class="postgaps custom-container"> 
                     {{-- @foreach($experiences->reverse() as $key => $experience) --}}
                     @foreach($experiences as $key => $experience)
 
@@ -101,8 +100,9 @@
                             </div> --}}
                             
                             <div class="card-body">
+                                
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">comment：{{ $experience->title }}</h5> <!-- mb-0 removes the bottom margin -->
+                            <h1 class="card-title mb-0">{{ $experience->title }}</h1> 
                             <div class="btn-container" id="target{{ $experience->id }}">
                                 @if ($experience->isLike)
                                     <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
@@ -118,7 +118,7 @@
 
 
     @if(Auth::user()->role_id == 1)
-        <h5 class="card-updatedat">Update date：{{ $experience->updated_at }}</h5>
+        <h5 class="card-updatedat">Update date：{{ $experience->updated_at->format('F j, Y') }}</h5>
         <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">Details</button>
         <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
             @csrf
@@ -189,27 +189,26 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">{{ $experience->title }}</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">＃{{ $experience->id }}</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
-                                    <p><strong>Address:</strong> {{ $experience->address }}</p>
-                                    <p><strong>Content:</strong> {{ $experience->content }}</p>
+                                    <p><strong></strong> {{ $experience->content }}</p>
+                                    <p><strong>location:</strong> {{ $experience->address }}</p>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     @endforeach
 
+            </div>
 
-                    {{-- Postingpageへの導線ボタン --}}
-                    <div class="moreposts">
-                        <p class='experience-index-instagram'>check more posts
-                        <a href="{{ route('experience.index') }}" ><i class= "ri-gallery-line" style="color: #colorcode;"></i></a>
-                        </p>
-                    </div>
-
+            <div class="moreposts">
+                <p class='experience-index-instagram text-center d-flex justify-content-center'>check more posts
+                <a href="{{ route('experience.index') }}" ><i class= "ri-gallery-line" style="color: #colorcode;"></i></a>
+                </p>
             </div>
 
             <!-- 詳細モーダル始 -->
@@ -340,36 +339,36 @@
                         <form action="{{ route('experience.store') }}" method="POST" enctype="multipart/form-data"> <!-- formタグの開始を修正 -->
                             @csrf
                             <div class="mb-3">
-                                <label for="image" class="form-label">Pick your mamory</label>
+                                <label for="image" class="form-label">Pick your memory</label>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="file" name="image" id="image" class="form-control" accept="image/*">
-                                    {{-- <button type="submit" class="uploadbutton">＋</button> --}}
+                                
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="title" class="form-label">title :</label>
-                                <div class="input-group" style="width: 100%;">
-                                    <input type="text" id="title" name="title"  style="width: 100%;">
-                                </div>
-                            </div>
-            
-                            <div class="mb-3">
-                                <label for="address" class="form-label">location :</label>
-                                <div class="input-group" style="width: 100%;">
-                                    <input type="text" id="address" name="address"  style="width: 100%;">
+                                <label for="title" class="form-label">Post:</label>
+                                {{-- <div class="input-group" style="width: 100%;"> --}}
+                                    <div class="input-group" style="width: 100%;">
+                                    {{-- <input type="text" id="title" name="title"  style="width: 100%;"> --}}
+                                    <textarea placeholder="e.g. I wennt to Disney land" name="title" id="title" cols="100" rows="5"></textarea>
                                 </div>
                             </div>
             
                             <div class="mb-3">
+                                <label for="address" class="form-label">Location :</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <input type="text" id="address" name="address"  style="width: 100%;" placeholder="e.g. Disney land">
+                            </div>
+            
+                            {{-- <div class="mb-3">
                                 <label for="content" class="form-label">comment :</label>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="text" id="content" name="content"  style="width: 100%;">
-                                </div>
-                            </div>
-            
-            
+                                </div>--}}
+                            </div> 
                             <div class="mb-3">
-                                <span class="form-label">instagram permission *click the button if you don't mind :</span>
+                                <label  class="form-label" for=""> Instagram Permission: </label>
+                                <h6 class=" text-sm fs-6 text-danger" >*click the button if you don't mind :</h6>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="checkbox" id="instagram_permission" name="instagrampermission"  style="width: 100%;">
                                     <label for="instagram_permission" class="btn ig-permission">share my memory on Instagram</label>
@@ -378,9 +377,9 @@
                             </div>
             
                             <div class="mb-3">
-                                <label for="instagram_account" class="form-label">instagram account:</label>
+                                <label for="instagram_account" class="form-label">Instagram Account:</label>
                                 <div class="input-group" style="width: 100%;">
-                                    <input type="text" id="instagramaccount" name="instagramaccount"  style="width: 100%;">
+                                    <input type="text" id="instagramaccount" name="instagramaccount"  style="width: 100%;" placeholder="e.g. @hoshinoresorts.official">
 
 
 
@@ -395,6 +394,7 @@
         </div>
 
     </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

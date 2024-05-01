@@ -33,7 +33,7 @@
 
 
 <div class="container">
-<div class="row row-cols-1 row-cols-md-5 gx-1 g-4 ">
+<div class="row row-cols-1 row-cols-md-5 gx-1 g-4 mb-3 ">
     @foreach($experiences as $key => $experience)
     <div class="col">
         <div class="card custom-card">
@@ -41,9 +41,9 @@
                 <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
             </div>
             <div class="card-body">
-                <h5 class="card-title">comment：{{ $experience->content }}</h5>
-                <h5 class="card-title">post number：{{ $experience->id }}</h5>
-                <h5 class="card-updatedat">update date：{{ $experience->updated_at }}</h5>
+                <h5 class="card-title">{{ $experience->title }}</h5>
+                <h5 class="modalforpostnumber">#{{ $experience->id }}</h5>
+                <h5 class="card-updatedat">update date：{{ $experience->updated_at ->format('F j, Y')}}</h5>
                 <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}"><i class="ri-more-line"></i></button>
                
                 {{-- 投稿者のみ更新・削除ボタンを表示開始 --}}
@@ -93,17 +93,18 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="updateTitle{{ $key }}">いらん</label>
-                        <input type="text" class="form-control" id="updateTitle{{ $key }}" name="title" value="{{ $experience->title }}">
+                        <label for="updateTitle{{ $key }}">Post</label>
+                        {{-- <input type="text" class="form-control" id="updateTitle{{ $key }}" name="title" value="{{ $experience->title }}"> --}}
+                        <textarea placeholder="e.g. I wennt to Disney land" name="title" id="updateTitle{{ $key }}" class="form-control" cols="100" rows="5">{{ $experience->title }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="updateAddress{{ $key }}">location</label>
                         <input type="text" class="form-control" id="updateAddress{{ $key }}" name="address" value="{{ $experience->address }}">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="updateContent{{ $key }}">comment</label>
                         <textarea class="form-control" id="updateContent{{ $key }}" name="content" rows="3">{{ $experience->content }}</textarea>
-                    </div>
+                    </div> --}}
 
                     <div class="mb-3">
                         <span class="form-label">instagram permission *click the button if you don't mind :</span>
@@ -143,12 +144,12 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">Post number： {{ $experience->id }}</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">＃{{ $experience->id }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
-                    <p><strong>Comment:</strong> {{ $experience->content }}</p>
+                    <p><strong></strong> {{ $experience->title }}</p>
                     <p><strong>location:</strong> {{ $experience->address }}</p>
                     <p><strong>Instagram account:</strong> {{ $experience->ig_account }}</p>
                 </div>
@@ -184,23 +185,24 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="title" class="form-label">あとでけす:</label>
+                    <label for="title" class="form-label">Post:</label>
                     <div class="input-group" style="width: 100%;">
-                        <input type="text" id="title" name="title"  style="width: 100%;">
+                        {{-- <input type="text" id="title" name="title"  style="width: 100%;"> --}}
+                        <textarea placeholder="e.g. I wennt to Disney land" name="title" id="title" cols="100" rows="5"></textarea>
                     </div>
                 </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="content" class="form-label">comment :</label>
                     <div class="input-group" style="width: 100%;">
                         <input type="text" id="content" name="content"  style="width: 100%;">
                     </div>
-                </div>
+                </div> --}}
                 
                 <div class="mb-3">
                     <label for="address" class="form-label">location :</label>
                     <div class="input-group" style="width: 100%;">
-                        <input type="text" id="address" name="address"  style="width: 100%;">
+                        <input type="text" id="address" name="address"  style="width: 100%;" placeholder="e.g. Disney land">
                     </div>
                 </div>
 
@@ -216,7 +218,7 @@
                 <div class="mb-3">
                     <label for="instagram_account" class="form-label">instagram account:</label>
                     <div class="input-group" style="width: 100%;">
-                        <input type="text" id="instagramaccount" name="instagramaccount"  style="width: 100%;">
+                        <input type="text" id="instagramaccount" name="instagramaccount"  style="width: 100%;" placeholder="e.g. @hoshinoresorts.official">
                     </div>
                 </div>
 

@@ -3,8 +3,9 @@
             display: flex;
             height: calc(100vh - 50px)!important; /* 画面全体の高さに合わせる */
             max-width: 100vw!important;
-            padding-right: 0!important;
-            padding-left: 0!important;
+            padding-block: 10px;
+            /* padding-right: 0!important;
+            padding-left: 0!important; */
 
         }
 
@@ -47,6 +48,6 @@
         }
 
 
-        /* #calendar{
+      #calendar{
             height: 100%!important;
-        } */
+        }     
