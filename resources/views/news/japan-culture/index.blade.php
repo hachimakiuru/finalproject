@@ -13,8 +13,9 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                            <a href="{{ route('news.others') }}">←</a> <h4>日本文化</h4><a href="{{ route('news.hotel-info') }}">→</a>
-                        
+                           @if (Auth::user()->role_id == 1)  
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">投稿</button>
+                           @endif
                         </div>
 
                         {{-- 投稿モーダル --}}
@@ -275,6 +276,7 @@
             {{-- footer --}}
             <div class="modal-footer">
                 <!-- フッターの内容 -->
+                @if (Auth::user()->role_id == 1 || Auth::id() == $newsTimeLine->user_id)  
                 <div class="container-fluid">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-md-auto">
@@ -297,6 +299,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
