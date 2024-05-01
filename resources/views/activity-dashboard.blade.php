@@ -11,7 +11,7 @@
         }
     </style>
 @endpush
-<div class="containerfullpage" style="margin:10px 50px 0px 50px;">
+<div class="containerfullpage" style="paddin-inline: 50px;">
     <div class="container" style="gap:17px;">
         <!-- 左半分 -->
         <div class="left">
@@ -20,7 +20,7 @@
             <div id='calendar'></div>
             </div>
             <!-- ニュース -->
-            <div class="bottom-box">
+            <div class="bottom-box" style="margin:17px 0px 10px 0px;">
                 @include('news.news-dashboard')
             </div>
         </div>
