@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('12345678'), // You may use Hash::make() instead of bcrypt() depending on your Laravel version
                 'room_number' => '0',
                 'role_id' => 1, // Assuming 1 is the ID of the 'Admin' role
+                'login_count' => 2,
             ],
             [
                 'name' => 'Guest User',
@@ -27,6 +28,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'room_number' => '0',
                 'role_id' => 3, // Assuming 3 is the ID of the 'Guest' role
+                'login_count' => 2,
             ],
             [
                 'name' => 'Employee User',
@@ -34,6 +36,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'room_number' => '0',
                 'role_id' => 2, // Assuming 2 is the ID of the 'Employee' role
+                'login_count' => 2,
             ],
         ];
 
