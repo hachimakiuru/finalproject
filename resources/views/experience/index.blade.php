@@ -44,14 +44,21 @@
                 <h5 class="card-title">comment：{{ $experience->content }}</h5>
                 <h5 class="card-title">post number：{{ $experience->id }}</h5>
                 <h5 class="card-updatedat">update date：{{ $experience->updated_at }}</h5>
-                <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">details</button>
+                <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}"><i class="ri-more-line"></i></button>
+               
+                {{-- 投稿者のみ更新・削除ボタンを表示開始 --}}
+                @if (Auth::user()->role_id == 1 || Auth::id() == $experience->user_id)                    
+               
                 <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger delete-button">delete</button>
+                    <button type="submit" class="btn btn-danger delete-button"><i class="ri-delete-bin-line"></i></button>
                 </form>
-                <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}">update</button>
 
+                <button type="button" class="btn btn-primary update-button" data-bs-toggle="modal" data-bs-target="#updateModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}" data-id="{{ $experience->id }}"><i class="ri-edit-2-line"></i></button>
+                @endif
+
+                {{-- 投稿者のみ更新・削除ボタンを表示開始 --}}
 
                 {{-- likeボタンの作成 --}}
                 <div class="btn-container" id="target{{ $experience->id }}">
