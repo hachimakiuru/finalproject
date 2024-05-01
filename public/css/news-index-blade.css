@@ -186,3 +186,19 @@ button.btn-border-shadow--color2-1:before {
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
 }
+
+.ri-arrow-left-fill{
+  text-decoration: none; 
+  font-size: 24px; 
+  color: black; 
+}
+
+a{
+  text-decoration: none!important;
+}
+
+.ri-arrow-right-fill{
+  text-decoration: none; 
+  font-size: 24px; 
+  color: black; 
+}

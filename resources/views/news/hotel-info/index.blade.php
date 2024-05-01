@@ -12,9 +12,10 @@
                 <div class="restaurant-dashboard-center">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <a href="{{ route('news.japan-culture') }}">←</a><h4>ホテルからのお知らせ</h4><a href="{{ route('news.event') }}">→</a>
-
+                            <a href="{{ route('news.japan-culture') }}"><i class="ri-arrow-left-fill"></i></a><h4>ホテルからのお知らせ</h4><a href="{{ route('news.event') }}"><i class="ri-arrow-right-fill"></i></a>
+                            @if (Auth::user()->role_id == 1)  
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">投稿</button>
+                            @endif
                         </div>
 
                         {{-- 投稿モーダル --}}
@@ -275,6 +276,7 @@
             {{-- footer --}}
             <div class="modal-footer">
                 <!-- フッターの内容 -->
+                @if (Auth::user()->role_id == 1 || Auth::id() == $newsTimeLine->user_id)  
                 <div class="container-fluid">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-md-auto">
@@ -297,6 +299,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
