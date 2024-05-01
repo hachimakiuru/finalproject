@@ -667,6 +667,7 @@
     
     {{-- GoogleMap Autocomplete --}}
  <script async>
+    var map1
     // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
@@ -677,6 +678,11 @@ const map = new google.maps.Map(document.getElementById("map"), {
   // zoom: 3,
   zoom: 6, // 適切なズームレベルを設定
 });
+
+map1 = new google.maps.Map(document.getElementById("map1"), {
+    center: new google.maps.LatLng(35.6895, 139.6917),
+    zoom: 7,
+    });
 
 const card = document.getElementById("pac-card");
 
@@ -721,6 +727,9 @@ const marker = new google.maps.Marker({
   map,
   anchorPoint: new google.maps.Point(0, -29),
 });
+
+
+
 
 autocomplete.addListener("place_changed", () => {
   infowindow.close();
@@ -792,7 +801,29 @@ setupClickListener("changecountry-usa-and-uot", [
 ]);
 }
 
+
+
 window.initMap = initMap;
+
+function getDirection(lat, lng) {
+    map1 = new google.maps.Map(document.getElementById("map1"), {
+        zoom: 13,
+        center: { lat: lat, lng: lng },
+    })
+
+    const marker1 = new google.maps.Marker({
+    map1,
+    });
+
+    marker1.setPosition({lat, lng});
+    marker1.setVisible(true);
+    marker1.setMap(map1)
+
+
+    console.log(marker1)
+
+
+}
   </script>
 
   <script>
@@ -800,37 +831,20 @@ window.initMap = initMap;
 var map
 
 function test() {
-    map = new google.maps.Map(document.getElementById("map1"), {
-    center: new google.maps.LatLng(-34.397, 150.644),
-    zoom: 5,
-    });
+
 
 
 }
 google.maps.event.addDomListener(window, 'load', test)
 
-function getDirection(lat, lng) {
-    map = new google.maps.Map(document.getElementById("map1"), {
-        zoom: 20,
-        center: { lat: lat, lng: lng },
-    })
 
-    const marker = new google.maps.Marker({
-    map,
-    });
-
-    marker.setPosition({lat, lng});
-    marker.setVisible(true);
-
-
-}
   </script>
 
-  <script
+  {{-- <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbtmHh4zHJMzxxH7893O9DmuaNWZQewy0&callback=initMap&libraries=places&v=weekly"
     async
     defer
-    ></script>
+    ></script> --}}
     
 
 
