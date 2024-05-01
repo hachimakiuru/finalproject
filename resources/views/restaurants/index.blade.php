@@ -165,15 +165,17 @@
 
     
     <div class="row mt-2">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="restaurant-dashboard-container">
                 <div class="restaurant-dashboard-right">
-                    <h6>mapping</h6>
+                    <div class="card">
+                        <h6 class="card-header card-header-gmap"><i class="ri-map-pin-fill" style="margin-right: 5px;"></i>Get the Location</h6>
+                    </div>
                     <div id="map1" style="height: 600px; width: 100%"></div>
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="restaurant-dashboard-container">
                 <div class="restaurant-dashboard-center">
                     <div class="card">
@@ -220,8 +222,8 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                <input class="form-control" type="" id="latitude" name="latitude" value="{{ old('latitude') }}">
-                                                <input class="form-control" type="" id="longitude" name="longitude" value="{{ old('longitude') }}">
+                                                <input type="" id="latitude" name="latitude" value="{{ old('latitude') }}" style="display: none;">
+                                                <input type="" id="longitude" name="longitude" value="{{ old('longitude')}}" style="display: none;">
                                             </div>
                                             <div id="pac-container">
                                                 <div id="map" style="display: none;"></div>
@@ -366,13 +368,15 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h5>{{ $restaurant->name }}</h5>
-                                            <p>{{ $restaurant->address }}</p>
-                                            <p>{{ $restaurant->genre_place }}</p>
+                                            <button class="btnGetDirection" onclick="getDirection({{ $restaurant->latitude }}, {{ $restaurant->longitude }})"><i class="ri-map-pin-fill"></i>{{ $restaurant->address }}</button>
+                                            
+                                            <p style="margin-left: 20px;">{{ $restaurant->genre_place }}</p>
                                             <!-- モーダルトリガーボタン -->
                                             <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
                                                 Details & Reservation Form >
                                             </button>
-                                            <button onclick="getDirection({{ $restaurant->latitude }}, {{ $restaurant->longitude }})">Click</button>
+                                            
+                                            
 
 
 
