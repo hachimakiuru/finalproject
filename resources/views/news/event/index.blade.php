@@ -3,6 +3,9 @@
 @extends('layouts.layout')
 
 @section('content')
+
+@include('parts.success-message')
+
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col-md-15">
@@ -10,7 +13,8 @@
                 <div class="restaurant-dashboard-center">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4>ローカルイベント</h4>
+                           <a href="{{ route('news.hotel-info') }}">←</a> <h4>ローカルイベント</h4><a href="{{ route('news.others') }}">→</a>
+                       
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">投稿</button>
                         </div>
 
@@ -33,6 +37,15 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
+                                            </div>
+                                            <div class="news-option">
+                                                <label for="genre" class="news-option-form">ジャンル</label>
+                                                <select name="genre_id" id="genre">
+                                                    <option value="3">日本文化</option>
+                                                    <option value="2">ホテルからのお知らせ</option>
+                                                    <option value="4">その他おすすめ情報</option>
+                                                    <option value="1">ローカルイベント</option>
+                                                </select>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label for="title" class="col-sm-2 col-form-label">タイトル</label>
@@ -73,7 +86,7 @@
                                             <div class="mb-3 row">
                                                 <label for="price" class="col-sm-2 col-form-label">金額</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" id="price" name="price"  placeholder="type the price with number" class="form-control @error('price') is-invalid @enderror" value="">
+                                                    <input type="text" id="price" name="price"  placeholder="~yen ＊rough price" class="form-control @error('price') is-invalid @enderror" value="">
                                                     @error('price')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -96,15 +109,6 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="genre" class="form-label">ジャンル</label>
-                                                <select name="genre_id" id="genre">
-                                                    <option value="3">日本文化</option>
-                                                    <option value="2">ホテルからのお知らせ</option>
-                                                    <option value="4">その他おすすめ情報</option>
-                                                    <option value="1">ローカルイベント</option>
-                                                </select>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">保存する</button>
@@ -129,8 +133,9 @@
                                             <img src="{{ asset('storage/img/' . $newsTimeLine->image)}}" class="img-thumbnail" alt="restaurant photo" style="width: 50%; height: auto; border-radius: 8px;">
                                         </div>
                                         <div class="col-md-8">
-                                            <h3 class="news-title1"> Event Date:{{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }} -Title: {{ $newsTimeLine->title }}</h3>
-                                            <p class="news-title2">Place:{{ $newsTimeLine->place }}</p>
+                                            <h3 class="news-title1">{{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }}</h3>
+                                            <p class="news-title2">{{ $newsTimeLine->title }}</p>
+                                            <p class="news-title2">{{ $newsTimeLine->place }}</p>
                                             <!-- モーダルトリガーボタン -->
                                             <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $newsTimeLine->id }}">
                                                 Details & Reservation Form >
@@ -163,7 +168,7 @@
                                     <p><strong>開催日:</strong> {{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }}</p>
                                     <p><strong>場所:</strong> {{ $newsTimeLine->content }}</p>
                                     <p><strong>内容:</strong> {{ $newsTimeLine->place }}</p>
-                                    <p><strong>金額:</strong> {{ $newsTimeLine->price }}</p>
+                                    <p><strong>金額:</strong> {{ $newsTimeLine->price }}~yen ＊rough pric</p>
                                     <p><strong>その他:</strong> {{ $newsTimeLine->others }}</p>
                                 </div>
                             </div>

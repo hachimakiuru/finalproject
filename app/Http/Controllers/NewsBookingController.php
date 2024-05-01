@@ -64,7 +64,8 @@ class NewsBookingController extends Controller
 
 
 
-            return redirect()->route('newsBookings.index')->with('success', '予約フォームの送信が完了しました。');
+            // return redirect()->route('newsBookings.index')->with('success', '予約フォームの送信が完了しました。');
+            return back()->with('success', '予約フォームの送信が完了しました。');
         } catch (\Exception $e) {
             // 例外が発生した場合はエラーメッセージを表示し、フォーム入力を再表示
             return back()->withInput()->withErrors(['error' => $e->getMessage()]);

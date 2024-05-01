@@ -88,3 +88,53 @@ input[type="checkbox"] + label {
 .modalforpostnumber{
   justify-content: right;
 }
+
+.postgaps{
+  /* justify-content: center !important; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.moreposts{
+  display: flex;
+  justify-content: center!important;
+} 
+
+.card-title{
+  font-size: 25px; 
+  font-weight: 50; 
+}
+
+.modalforpostnumber{
+  font-size: 15px; 
+  font-weight: 50; 
+}
+
+.custom-card {
+  position: relative; /* 親要素を相対位置に設定 */
+}
+
+.card-bottom-right {
+  position: absolute; /* 絶対位置で配置 */
+  right: 10px; /* 右から10pxの位置 */
+  bottom: 10px; /* 下から10pxの位置 */
+  padding: 5px 10px; /* パディング */
+  background-color: #f8f9fa; /* 背景色 */
+  border-radius: 5px; /* 角丸設定 */
+  font-size: 0.875rem; /* フォントサイズ */
+}
+
+.card-body{
+  padding: 1px !important;
+}
+
+.card-updatedat{
+  font-size: 15px; 
+  font-weight: 50; 
+}
+
+
+.card.custom-card {
+  margin: 3px 0px 3px 0px;
+}
