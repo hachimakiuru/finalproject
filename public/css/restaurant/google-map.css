@@ -63,7 +63,7 @@ body {
   font-weight: 300;
 }
 
-#pac-input {
+/* #pac-input {
   background-color: #fff;
   font-family: Roboto;
   font-size: 15px;
@@ -72,7 +72,7 @@ body {
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
   width: 400px;
-}
+} */
 
 #pac-input:focus {
   border-color: #4d90fe;
@@ -89,3 +89,27 @@ body {
 .pac-container {
   z-index: 10000 !important;
 }
+
+.card-header-gmap {
+  font-size: 20px!important;
+  font-weight: normal!important;
+  padding-block: 17px!important;
+  /* text-align: center!important; */
+}
+.btn-flex{
+  display: flex;
+}
+.btnGetDirection {
+  /* display: inline; */
+  padding: 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background: none
+}
+.ri-map-pin-fill {
+  font-size: 20px;
+  
+}
+  
