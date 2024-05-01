@@ -12,7 +12,7 @@
                 <div class="restaurant-dashboard-center">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                           <a href="{{ route('news.others') }}">←</a> <h4>日本文化</h4><a href="{{ route('news.hotel-info') }}">→</a>
+                           <a href="{{ route('news.others') }}"><i class="ri-arrow-left-fill"></i></a> <h4>日本文化</h4><a href="{{ route('news.hotel-info') }}"><i class="ri-arrow-right-fill"></i></a>
                            @if (Auth::user()->role_id == 1)  
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">投稿</button>
                            @endif
