@@ -33,7 +33,7 @@
 
 
 <div class="container">
-<div class="row row-cols-1 row-cols-md-5 gx-1 g-4 ">
+<div class="row row-cols-1 row-cols-md-5 gx-1 g-4 mb-3 ">
     @foreach($experiences as $key => $experience)
     <div class="col">
         <div class="card custom-card">
@@ -41,9 +41,9 @@
                 <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
             </div>
             <div class="card-body">
-                <h5 class="card-title">comment：{{ $experience->content }}</h5>
-                <h5 class="card-title">post number：{{ $experience->id }}</h5>
-                <h5 class="card-updatedat">update date：{{ $experience->updated_at }}</h5>
+                <h5 class="card-title">Post：{{ $experience->content }}</h5>
+                <h5 class="modalforpostnumber">#{{ $experience->id }}</h5>
+                <h5 class="card-updatedat">update date：{{ $experience->updated_at ->format('F j, Y')}}</h5>
                 <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}"><i class="ri-more-line"></i></button>
                
                 {{-- 投稿者のみ更新・削除ボタンを表示開始 --}}
@@ -143,12 +143,12 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">Post number： {{ $experience->id }}</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">＃{{ $experience->id }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
-                    <p><strong>Comment:</strong> {{ $experience->content }}</p>
+                    <p><strong></strong> {{ $experience->content }}</p>
                     <p><strong>location:</strong> {{ $experience->address }}</p>
                     <p><strong>Instagram account:</strong> {{ $experience->ig_account }}</p>
                 </div>
@@ -184,7 +184,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="title" class="form-label">あとでけす:</label>
+                    <label for="title" class="form-label">Post:</label>
                     <div class="input-group" style="width: 100%;">
                         <input type="text" id="title" name="title"  style="width: 100%;">
                     </div>

@@ -11,14 +11,12 @@
         }
     </style>
 @endpush
-
-    <div class="container">
+<div class="containerfullpage" style="margin:10px 50px 0px 50px;">
+    <div class="container" style="gap:17px;">
         <!-- 左半分 -->
         <div class="left">
             <!-- カレンダー -->
             <div class="top-box">
-                カレンダー機能
-
             <div id='calendar'></div>
             </div>
             <!-- ニュース -->
@@ -52,17 +50,18 @@
                         <a href="https://www.instagram.com/hoshinoresorts.official/" target="blank" style="text-decoration: none;"><i class="ri-instagram-line" style="color: #colorcode;"></i></a>
                     </p>
                 </div>
-
+{{-- 
                 <div class="moreposts">
                     <p class='experience-index-instagram'>check more posts
                     <a href="{{ route('experience.index') }}" ><i class= "ri-gallery-line" style="color: #colorcode;"></i>
                     </a>
-                </div>
+                </div>  --}}
 
 
 
                 <!-- ポンポン投稿カードのコメント -->
-                <div class="d-flex flex-wrap justify-content-center custom-container">
+                {{-- <div class="d-flex flex-wrap justify-content-center custom-container"> --}}
+                    <div class="postgaps custom-container"> 
                     {{-- @foreach($experiences->reverse() as $key => $experience) --}}
                     @foreach($experiences as $key => $experience)
 
@@ -101,8 +100,9 @@
                             </div> --}}
                             
                             <div class="card-body">
+                                
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">comment：{{ $experience->title }}</h5> <!-- mb-0 removes the bottom margin -->
+                            <h1 class="card-title mb-0">{{ $experience->title }}</h1> <!-- mb-0 removes the bottom margin -->
                             <div class="btn-container" id="target{{ $experience->id }}">
                                 @if ($experience->isLike)
                                     <button id="unlike" onclick="unlike({{ $experience->id }})"><i class="ri-heart-fill"></i></button>
@@ -118,7 +118,7 @@
 
 
     @if(Auth::user()->role_id == 1)
-        <h5 class="card-updatedat">Update date：{{ $experience->updated_at }}</h5>
+        <h5 class="card-updatedat">Update date：{{ $experience->updated_at->format('F j, Y') }}</h5>
         <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}">Details</button>
         <form action="{{ route('experience.destroy', $experience->id) }}" method="POST" style="display: inline;">
             @csrf
@@ -189,27 +189,26 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">{{ $experience->title }}</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $key }}">＃{{ $experience->id }}</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
-                                    <p><strong>Address:</strong> {{ $experience->address }}</p>
-                                    <p><strong>Content:</strong> {{ $experience->content }}</p>
+                                    <p><strong></strong> {{ $experience->content }}</p>
+                                    <p><strong>location:</strong> {{ $experience->address }}</p>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     @endforeach
 
+            </div>
 
-                    {{-- Postingpageへの導線ボタン --}}
-                    <div class="moreposts">
-                        <p class='experience-index-instagram'>check more posts
-                        <a href="{{ route('experience.index') }}" ><i class= "ri-gallery-line" style="color: #colorcode;"></i></a>
-                        </p>
-                    </div>
-
+            <div class="moreposts">
+                <p class='experience-index-instagram text-center d-flex justify-content-center'>check more posts
+                <a href="{{ route('experience.index') }}" ><i class= "ri-gallery-line" style="color: #colorcode;"></i></a>
+                </p>
             </div>
 
             <!-- 詳細モーダル始 -->
@@ -395,6 +394,7 @@
         </div>
 
     </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

@@ -89,3 +89,27 @@ input[type="checkbox"] + label {
     padding-left: 8px;  /* 左のパディングを縮小 */
 }
 
+
+.card-body{
+  padding: 1px !important;
+}  
+
+.card-title{
+  font-size: 25px; 
+  font-weight: 50; 
+}
+
+.modalforpostnumber{
+  font-size: 15px; 
+  font-weight: 50; 
+}
+
+.card-updatedat{
+  font-size: 15px; 
+  font-weight: 50; 
+}
+
+.modal fad for derails{
+  font-size: 25px; 
+  font-weight: 50; 
+}
