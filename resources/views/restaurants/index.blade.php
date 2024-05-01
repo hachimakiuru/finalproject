@@ -26,29 +26,30 @@
                         <label for="genre_place" class="col-sm-2 col-form-label">Location</label>
                         <div class="col-sm-10">
                             <select class="form-select" id="genre_place" name="genre_place">
-                                <option selected disabled>選択してください</option>
-                                <option value="新宿">新宿</option>
-                                 <option value="代々木">代々木</option>
-                                 <option value="浅草">浅草</option>
-                                 <option value="筑地">筑地</option>
-                                 <option value="渋谷">渋谷</option>
-                                 <option value="池袋">池袋</option>
-                                 <option value="秋葉原">秋葉原</option>
-                                 <option value="原宿">原宿</option>
-                                 <option value="銀座">銀座</option>
-                                 <option value="上野">上野</option>
-                                 <option value="東京駅周辺">東京駅周辺</option>
-                                 <option value="六本木">六本木</option>
-                                 <option value="品川">品川</option>
-                                 <option value="赤坂">赤坂</option>
-                                 <option value="自由ヶ丘">自由ヶ丘</option>
-                                 <option value="恵比寿">恵比寿</option>
-                                 <option value="吉祥寺">吉祥寺</option>
-                                 <option value="中野">中野</option>
-                                 <option value="月島">月島</option>
-                                 <option value="お台場">お台場</option>
-                                 <option value="下北沢">下北沢</option>
-                                 <!-- 他のオプションを追加 -->
+                                <option selected disabled>Please select</option>
+                                <option value="Shinjuku">Shinjuku</option>
+                                <option value="Yoyogi">Yoyogi</option>
+                                <option value="Asakusa">Asakusa</option>
+                                <option value="Tsukiji">Tsukiji</option>
+                                <option value="Shibuya">Shibuya</option>
+                                <option value="Ikebukuro">Ikebukuro</option>
+                                <option value="Akihabara">Akihabara</option>
+                                <option value="Harajuku">Harajuku</option>
+                                <option value="Ginza">Ginza</option>
+                                <option value="Ueno">Ueno</option>
+                                <option value="Around Tokyo Station">Around Tokyo Station</option>
+                                <option value="Roppongi">Roppongi</option>
+                                <option value="Shinagawa">Shinagawa</option>
+                                <option value="Akasaka">Akasaka</option>
+                                <option value="Jiyugaoka">Jiyugaoka</option>
+                                <option value="Ebisu">Ebisu</option>
+                                <option value="Kichijoji">Kichijoji</option>
+                                <option value="Nakano">Nakano</option>
+                                <option value="Tsukishima">Tsukishima</option>
+                                <option value="Odaiba">Odaiba</option>
+                                <option value="Shimokitazawa">Shimokitazawa</option>
+                                <!-- Add other options -->
+
                             </select>
                         </div>
                     </div>
@@ -56,29 +57,30 @@
                         <label for="genre_variety" class="col-sm-2 col-form-label">Variety</label>
                         <div class="col-sm-10">
                             <select class="form-select" id="genre_variety" name="genre_variety">
-                                <option selected disabled>選択してください</option>
-                                <option value="寿司">寿司</option>
-                                <option value="天ぷら">天ぷら</option>
-                                <option value="すき焼き">すき焼き</option>
-                                <option value="しゃぶしゃぶ">しゃぶしゃぶ</option>
-                                <option value="ラーメン">ラーメン</option>
-                                <option value="お好み焼き">お好み焼き</option>
-                                <option value="たこ焼き">たこ焼き</option>
-                                <option value="和牛">和牛</option>
-                                <option value="そば">そば</option>
-                                <option value="うどん">うどん</option>
-                                <option value="和菓子">和菓子</option>
-                                <option value="焼き鳥">焼き鳥</option>
-                                <option value="刺身">刺身</option>
-                                <option value="おせち料理">おせち料理</option>
-                                <option value="カツ丼">カツ丼</option>
-                                <option value="イタリア料理">イタリア料理</option>
-                                <option value="フランス料理">フランス料理</option>
-                                <option value="スペイン料理">スペイン料理</option>
-                                <option value="ドイツ料理">ドイツ料理</option>
-                                <option value="中国料理">中国料理</option>
-                                <option value="インド料理">インド料理</option>
-                                <!-- 他のオプションを追加 -->
+                                <option selected disabled>Please select</option>
+                                <option value="Sushi">Sushi</option>
+                                <option value="Tempura">Tempura</option>
+                                <option value="Sukiyaki">Sukiyaki</option>
+                                <option value="Shabu-shabu">Shabu-shabu</option>
+                                <option value="Ramen">Ramen</option>
+                                <option value="Okonomiyaki">Okonomiyaki</option>
+                                <option value="Takoyaki">Takoyaki</option>
+                                <option value="Wagyu">Wagyu</option>
+                                <option value="Soba">Soba</option>
+                                <option value="Udon">Udon</option>
+                                <option value="Japanese sweets">Japanese sweets</option>
+                                <option value="Yakitori">Yakitori</option>
+                                <option value="Sashimi">Sashimi</option>
+                                <option value="New Year dishes">New Year dishes</option>
+                                <option value="Katsudon">Katsudon</option>
+                                <option value="Italian cuisine">Italian cuisine</option>
+                                <option value="French cuisine">French cuisine</option>
+                                <option value="Spanish cuisine">Spanish cuisine</option>
+                                <option value="German cuisine">German cuisine</option>
+                                <option value="Chinese cuisine">Chinese cuisine</option>
+                                <option value="Indian cuisine">Indian cuisine</option>
+                                <!-- Add other options -->
+
                             </select>
                         </div>
                     </div>
@@ -86,18 +88,18 @@
                         <label for="genre_religion" class="col-sm-2 col-form-label">Limitation</label>
                         <div class="col-sm-10">
                             <select class="form-select" id="genre_religion" name="genre_religion">
-                                <option selected disabled>選択してください</option>
-                                <option value="ベジタリアン対応">ベジタリアン対応</option>
-                                <option value="ヴィーガン対応">ヴィーガン対応</option>
-                                <option value="ハラルフード（ムスリム）">ハラルフード（ムスリム）</option>
-                                <option value="コーシャフード（ユダヤ教）">コーシャフード（ユダヤ教）</option>
-                                <option value="サトウキビ不使用">サトウキビ不使用</option>
-                                <option value="グルテンフリー">グルテンフリー</option>
-                                <option value="ラクトオボベジタリアン">ラクトオボベジタリアン</option>
-                                <option value="オーガニックフード">オーガニックフード</option>
-                                <option value="無添加食品">無添加食品</option>
+                                <option selected disabled>Please select</option>
+                                <option value="Vegetarian-friendly">Vegetarian-friendly</option>
+                                <option value="Vegan-friendly">Vegan-friendly</option>
+                                <option value="Halal food (Muslim)">Halal food (Muslim)</option>
+                                <option value="Kosher food (Jewish)">Kosher food (Jewish)</option>
+                                <option value="No cane sugar">No cane sugar</option>
+                                <option value="Gluten-free">Gluten-free</option>
+                                <option value="Lacto-ovo vegetarian">Lacto-ovo vegetarian</option>
+                                <option value="Organic food">Organic food</option>
+                                <option value="Additive-free food">Additive-free food</option>
+                                <!-- Add other options -->
 
-                                <!-- 他のオプションを追加 -->
                             </select>
                         </div>
                     </div>
@@ -105,19 +107,19 @@
                         <label for="genre_payment" class="col-sm-2 col-form-label">How to pay</label>
                         <div class="col-sm-10">
                             <select class="form-select" id="genre_payment" name="genre_payment">
-                                <option selected disabled>選択してください</option>
-                                <option value="なんでもok">なんでもok</option>
-                                <option value="現金のみ">現金のみ</option>
-                                <option value="クレジットカード">クレジットカード不可</option>
-                                <option value="電子マネー">電子マネー不可</option>
-                                <!-- 他のオプションを追加 -->
+                                <option selected disabled>Please select</option>
+                                <option value="Anything is okay">Anything is okay</option>
+                                <option value="Cash only">Cash only</option>
+                                <option value="No credit cards">No credit cards</option>
+                                <option value="No electronic money">No electronic money</option>
+                                 <!-- Add other options -->
                             </select>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary">検索</button>
+                            <button type="submit" class="btn btn-primary">Filter</button>
                         </div>
                     </div>
                 </form>
@@ -175,7 +177,7 @@
                 <div class="restaurant-dashboard-center">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4>レストラン一覧</h4>
+                            <h4>Restaurant List</h4>
                             <button type="button" class="btn btn-border-shadow-1 btn-border-shadow--color2-1 custom-btn-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Post ></button>
                         </div>
 
@@ -184,14 +186,14 @@
                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">レストラン投稿</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Restaurant Post</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form action="{{ route('restaurants.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="mb-3 row">
-                                                <label for="username" class="col-sm-2 col-form-label">ユーザー名</label>
+                                                <label for="username" class="col-sm-2 col-form-label">User Name</label>
                                                 <div class="col-sm-10">
                                                     <p>{{Auth::user()->name }}</p>
                                                     @error('user_id')
@@ -200,7 +202,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="storename" class="col-sm-2 col-form-label">店舗名</label>
+                                                <label for="storename" class="col-sm-2 col-form-label">Restaurant Name</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" id="storename" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                                                     @error('name')
@@ -209,7 +211,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="pac-input" class="col-sm-2 col-form-label">住所</label>
+                                                <label for="pac-input" class="col-sm-2 col-form-label">Address</label>
                                                 <div class="col-sm-10">
                                                     {{-- GoogleAPI Autcomplete --}}
                                                     <input type="text" id="pac-input" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}"placeholder="Enter the full-location">
@@ -233,7 +235,7 @@
                                             </div>
                                             {{-- ------------------ --}}
                                             <div class="mb-3 row">
-                                                <label for="image" class="col-sm-2 col-form-label">写真</label>
+                                                <label for="image" class="col-sm-2 col-form-label">Your Photo</label>
                                                 <div class="col-sm-10">
                                                     <input type="file" id="image" name="image_path" class="form-control @error('image_path') is-invalid @enderror" value="{{ old('image_path') }}">
                                                     @error('image_path')
@@ -242,32 +244,33 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_place" class="col-sm-2 col-form-label">場所</label>
+                                                <label for="genre_place" class="col-sm-2 col-form-label">Location</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_place') is-invalid @enderror" id="genre_place" name="genre_place">
-                                                        <option selected disabled>選択してください</option>
-                                                        <option value="新宿">新宿</option>
-                                                        <option value="代々木">代々木</option>
-                                                        <option value="浅草">浅草</option>
-                                                        <option value="筑地">筑地</option>
-                                                        <option value="渋谷">渋谷</option>
-                                                        <option value="池袋">池袋</option>
-                                                        <option value="秋葉原">秋葉原</option>
-                                                        <option value="原宿">原宿</option>
-                                                        <option value="銀座">銀座</option>
-                                                        <option value="上野">上野</option>
-                                                        <option value="東京駅周辺">東京駅周辺</option>
-                                                        <option value="六本木">六本木</option>
-                                                        <option value="品川">品川</option>
-                                                        <option value="赤坂">赤坂</option>
-                                                        <option value="自由ヶ丘">自由ヶ丘</option>
-                                                        <option value="恵比寿">恵比寿</option>
-                                                        <option value="吉祥寺">吉祥寺</option>
-                                                        <option value="中野">中野</option>
-                                                        <option value="月島">月島</option>
-                                                        <option value="お台場">お台場</option>
-                                                        <option value="下北沢">下北沢</option>
-                                                        <!-- 他のオプションを追加 -->
+                                                        <option selected disabled>Please select</option>
+                                                        <option value="Shinjuku">Shinjuku</option>
+                                                        <option value="Yoyogi">Yoyogi</option>
+                                                        <option value="Asakusa">Asakusa</option>
+                                                        <option value="Tsukiji">Tsukiji</option>
+                                                        <option value="Shibuya">Shibuya</option>
+                                                        <option value="Ikebukuro">Ikebukuro</option>
+                                                        <option value="Akihabara">Akihabara</option>
+                                                        <option value="Harajuku">Harajuku</option>
+                                                        <option value="Ginza">Ginza</option>
+                                                        <option value="Ueno">Ueno</option>
+                                                        <option value="Around Tokyo Station">Around Tokyo Station</option>
+                                                        <option value="Roppongi">Roppongi</option>
+                                                        <option value="Shinagawa">Shinagawa</option>
+                                                        <option value="Akasaka">Akasaka</option>
+                                                        <option value="Jiyugaoka">Jiyugaoka</option>
+                                                        <option value="Ebisu">Ebisu</option>
+                                                        <option value="Kichijoji">Kichijoji</option>
+                                                        <option value="Nakano">Nakano</option>
+                                                        <option value="Tsukishima">Tsukishima</option>
+                                                        <option value="Odaiba">Odaiba</option>
+                                                        <option value="Shimokitazawa">Shimokitazawa</option>
+                                                        <!-- Add other options -->
+
                                                     </select>
                                                     @error('genre_place')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -275,32 +278,32 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_variety" class="col-sm-2 col-form-label">種類</label>
+                                                <label for="genre_variety" class="col-sm-2 col-form-label">Variety</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select @error('genre_variety') is-invalid @enderror" id="genre_variety" name="genre_variety">
-                                                        <option selected disabled>選択してください</option>
-                                                        <option value="寿司">寿司</option>
-                                                        <option value="天ぷら">天ぷら</option>
-                                                        <option value="すき焼き">すき焼き</option>
-                                                        <option value="しゃぶしゃぶ">しゃぶしゃぶ</option>
-                                                        <option value="ラーメン">ラーメン</option>
-                                                        <option value="お好み焼き">お好み焼き</option>
-                                                        <option value="たこ焼き">たこ焼き</option>
-                                                        <option value="和牛">和牛</option>
-                                                        <option value="そば">そば</option>
-                                                        <option value="うどん">うどん</option>
-                                                        <option value="和菓子">和菓子</option>
-                                                        <option value="焼き鳥">焼き鳥</option>
-                                                        <option value="刺身">刺身</option>
-                                                        <option value="おせち料理">おせち料理</option>
-                                                        <option value="カツ丼">カツ丼</option>
-                                                        <option value="イタリア料理">イタリア料理</option>
-                                                        <option value="フランス料理">フランス料理</option>
-                                                        <option value="スペイン料理">スペイン料理</option>
-                                                        <option value="ドイツ料理">ドイツ料理</option>
-                                                        <option value="中国料理">中国料理</option>
-                                                        <option value="インド料理">インド料理</option>
-                                                        <!-- 他のオプションを追加 -->
+                                                        <option selected disabled>Please select</option>
+                                                        <option value="Sushi">Sushi</option>
+                                                        <option value="Tempura">Tempura</option>
+                                                        <option value="Sukiyaki">Sukiyaki</option>
+                                                        <option value="Shabu-shabu">Shabu-shabu</option>
+                                                        <option value="Ramen">Ramen</option>
+                                                        <option value="Okonomiyaki">Okonomiyaki</option>
+                                                        <option value="Takoyaki">Takoyaki</option>
+                                                        <option value="Wagyu">Wagyu</option>
+                                                        <option value="Soba">Soba</option>
+                                                        <option value="Udon">Udon</option>
+                                                        <option value="Japanese sweets">Japanese sweets</option>
+                                                        <option value="Yakitori">Yakitori</option>
+                                                        <option value="Sashimi">Sashimi</option>
+                                                        <option value="New Year dishes">New Year dishes</option>
+                                                        <option value="Katsudon">Katsudon</option>
+                                                        <option value="Italian cuisine">Italian cuisine</option>
+                                                        <option value="French cuisine">French cuisine</option>
+                                                        <option value="Spanish cuisine">Spanish cuisine</option>
+                                                        <option value="German cuisine">German cuisine</option>
+                                                        <option value="Chinese cuisine">Chinese cuisine</option>
+                                                        <option value="Indian cuisine">Indian cuisine</option>
+                                                        <!-- Add other options -->
                                                     </select>
                                                     @error('genre_variety')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -308,21 +311,21 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_religion" class="col-sm-2 col-form-label">食事制限</label>
+                                                <label for="genre_religion" class="col-sm-2 col-form-label">Your Preference</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select " id="genre_religion" name="genre_religion">
-                                                        <option selected disabled>選択してください</option>
-                                                        <option value="ベジタリアン対応">ベジタリアン対応</option>
-                                                        <option value="ヴィーガン対応">ヴィーガン対応</option>
-                                                        <option value="ハラルフード（ムスリム）">ハラルフード（ムスリム）</option>
-                                                        <option value="コーシャフード（ユダヤ教）">コーシャフード（ユダヤ教）</option>
-                                                        <option value="サトウキビ不使用">サトウキビ不使用</option>
-                                                        <option value="グルテンフリー">グルテンフリー</option>
-                                                        <option value="ラクトオボベジタリアン">ラクトオボベジタリアン</option>
-                                                        <option value="オーガニックフード">オーガニックフード</option>
-                                                        <option value="無添加食品">無添加食品</option>
-                                                        <option value="特になし">特に無し</option>
-                                                        <!-- 他のオプションを追加 -->
+                                                        <option selected disabled>Please select</option>
+                                                        <option value="Vegetarian-friendly">Vegetarian-friendly</option>
+                                                        <option value="Vegan-friendly">Vegan-friendly</option>
+                                                        <option value="Halal food (Muslim)">Halal food (Muslim)</option>
+                                                        <option value="Kosher food (Jewish)">Kosher food (Jewish)</option>
+                                                        <option value="No cane sugar">No cane sugar</option>
+                                                        <option value="Gluten-free">Gluten-free</option>
+                                                        <option value="Lacto-ovo vegetarian">Lacto-ovo vegetarian</option>
+                                                        <option value="Organic food">Organic food</option>
+                                                        <option value="Additive-free food">Additive-free food</option>
+                                                        <option value="No particular preference">No particular preference</option>
+                                                        <!-- Add other options -->
                                                     </select>
                                                     {{-- @error('genre_religion')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -330,15 +333,15 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="genre_payment" class="col-sm-2 col-form-label">支払方法</label>
+                                                <label for="genre_payment" class="col-sm-2 col-form-label">Payment</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-select " id="genre_payment" name="genre_payment">
-                                                        <option selected disabled>選択してください</option>
-                                                        <option value="なんでもok">なんでもok</option>
-                                                        <option value="現金のみ">現金のみ</option>
-                                                        <option value="クレジットカード">クレジットカード不可</option>
-                                                        <option value="電子マネー">電子マネー不可</option>
-                                                        <!-- 他のオプションを追加 -->
+                                                        <option selected disabled>Please select</option>
+                                                        <option value="Anything is okay">Anything is okay</option>
+                                                        <option value="Cash only">Cash only</option>
+                                                        <option value="No credit cards">No credit cards</option>
+                                                        <option value="No electronic money">No electronic money</option>
+                                                        <!-- Add other options -->
                                                     </select>                
                                                     {{-- @error('genre_payment')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -435,13 +438,13 @@
                                                                                     <div class="text-center">
                                                                                         <img src="{{ Storage::url($restaurant->image_path) }}" class="img-fluid rounded shadow-lg" alt="restaurant photo">
                                                                                     </div>
-                                                                                    <p><strong>ユーザー名:</strong> {{ $restaurant->user->name }}</p>
-                                                                                    <p><strong>店舗名:</strong> {{ $restaurant->name }}</p>
-                                                                                    <p><strong>住所:</strong> {{ $restaurant->address }}</p>
-                                                                                    <p><strong>エリア:</strong> {{ $restaurant->genre_place }}</p>
-                                                                                    <p><strong>ジャンル:</strong> {{ $restaurant->genre_variety }}</p>
-                                                                                    <p><strong>食事制限:</strong> {{ $restaurant->genre_religion }}</p>
-                                                                                    <p><strong>支払方法:</strong> {{ $restaurant->genre_payment }}</p>
+                                                                                    <p><strong>User Name:</strong> {{ $restaurant->user->name }}</p>
+                                                                                    <p><strong>Store Name:</strong> {{ $restaurant->name }}</p>
+                                                                                    <p><strong>Address:</strong> {{ $restaurant->address }}</p>
+                                                                                    <p><strong>Area:</strong> {{ $restaurant->genre_place }}</p>
+                                                                                    <p><strong>Genre:</strong> {{ $restaurant->genre_variety }}</p>
+                                                                                    <p><strong>Dietary Restrictions:</strong> {{ $restaurant->genre_religion }}</p>
+                                                                                    <p><strong>Payment Method:</strong> {{ $restaurant->genre_payment }}</p>
                                                                                 </div>
                                                                                 <!-- コメント部分 -->
                                                                                 <div class="container">
@@ -538,14 +541,14 @@
                                                                                 <input type="hidden" name="restaurant_post_id" value="{{ $restaurant->id }}">
                                                                                 
                                                                                 <div class="mb-3">
-                                                                                    <label for="day">希望日:</label>
+                                                                                    <label for="day">Desired Date:</label>
                                                                                     <input type="date" id="day" name="day" class="form-control" value="#" required>
                                                                                 </div>
                                                                                 
                                                                                 <div class="mb-3">
-                                                                                    <label for="time1">第一希望時間:</label>
+                                                                                    <label for="time1">First Preferred Time:</label>
                                                                                     <select id="time1" name="time1" class="form-control" required>
-                                                                                        <option value="">-- 時間を選択してください --</option>
+                                                                                        <option value="">-- Please select a time --</option>
                                                                                         <optgroup label="朝 (6:00 - 11:59)">
                                                                                             @for ($hour = 6; $hour < 12; $hour++)
                                                                                                 <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
@@ -571,9 +574,9 @@
                                                                                 </div>
                                                                                 
                                                                                 <div class="mb-3">
-                                                                                    <label for="time2">第二希望時間:</label>
+                                                                                    <label for="time2">Second Preferred Tim:</label>
                                                                                     <select id="time2" name="time2" class="form-control" required>
-                                                                                        <option value="">-- 時間を選択してください --</option>
+                                                                                        <option value="">-- First Preferred Time --</option>
                                                                                         <optgroup label="朝 (6:00 - 11:59)">
                                                                                             @for ($hour = 6; $hour < 12; $hour++)
                                                                                                 <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
@@ -599,24 +602,24 @@
                                                                                 </div>
                                                                                 
                                                                                 <div class="mb-3">
-                                                                                    <label for="number_guests">ゲスト人数:</label>
+                                                                                    <label for="number_guests">Number of Guests:</label>
                                                                                     <select id="number_guests" name="number_guests" class="form-control" required>
-                                                                                        <option value="">-- 選択してください --</option>
-                                                                                        <option value="1">1人</option>
-                                                                                        <option value="2">2人</option>
-                                                                                        <option value="3">3人</option>
-                                                                                        <option value="4">4人</option>
-                                                                                        <option value="5">5人</option>
-                                                                                        <option value="6">6人</option>
-                                                                                        <option value="7">7人</option>
-                                                                                        <option value="8">8人</option>
-                                                                                        <option value="9">9人</option>
-                                                                                        <option value="10">10人以上</option>
-                                                                                    </select>
+                                                                                        <option value="">-- Please select --</option>
+                                                                                        <option value="1">1 person</option>
+                                                                                        <option value="2">2 people</option>
+                                                                                        <option value="3">3 people</option>
+                                                                                        <option value="4">4 people</option>
+                                                                                        <option value="5">5 people</option>
+                                                                                        <option value="6">6 people</option>
+                                                                                        <option value="7">7 people</option>
+                                                                                        <option value="8">8 people</option>
+                                                                                        <option value="9">9 people</option>
+                                                                                        <option value="10">More than 10 people</option>
+                                                                                    </select>                                                                                    
                                                                                 </div>
                                                                                 
                                                                                 <div class="mb-3">
-                                                                                    <label for="memo">メモ:</label>
+                                                                                    <label for="memo">Memo:</label>
                                                                                     <textarea id="memo" name="memo" class="form-control"></textarea>
                                                                                 </div>
                                                                                 
@@ -646,7 +649,7 @@
                                                                     <div class="col-md-auto">
                                                                         <div class="btn-group" role="group" aria-label="アクション">
                                                                             @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
-                                                                            <form action="{{ route('restaurants.destroy', ['restaurant' => $restaurant]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？')">
+                                                                            <form action="{{ route('restaurants.destroy', ['restaurant' => $restaurant]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete?')">
                                                                                 @csrf
                                                                                 @method('DELETE')
                                                                                 <button type="submit" class="btn btn-danger">
@@ -690,7 +693,7 @@
                                                 @csrf
                                                 @method('put')
                                                 <div class="mb-3 row">
-                                                    <label for="username" class="col-sm-2 col-form-label">ユーザー名</label>
+                                                    <label for="username" class="col-sm-2 col-form-label">User Name</label>
                                                     <div class="col-sm-10">
                                                         <p>{{Auth::user()->name }}</p>
                                                         @error('user_id')
@@ -699,7 +702,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label for="storename" class="col-sm-2 col-form-label">店舗名</label>
+                                                    <label for="storename" class="col-sm-2 col-form-label">Restaurant Name</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" id="storename" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $restaurant->name }}">
                                                         @error('name')
@@ -708,7 +711,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label for="image" class="col-sm-2 col-form-label">写真</label>
+                                                    <label for="image" class="col-sm-2 col-form-label">Your Photo</label>
                                                     <div class="col-sm-10">
                                                         <input type="file" id="image" name="image_path" class="form-control @error('image_path') is-invalid @enderror" value="{{ $restaurant->image_path }}">
                                                         @error('image_path')
@@ -717,32 +720,33 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label for="genre_place" class="col-sm-2 col-form-label">場所</label>
+                                                    <label for="genre_place" class="col-sm-2 col-form-label">Location</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-select @error('genre_place') is-invalid @enderror" id="genre_place" name="genre_place">
-                                                            <option selected disabled>選択してください</option>
-                                                            <option value="新宿">新宿</option>
-                                                            <option value="代々木">代々木</option>
-                                                            <option value="浅草">浅草</option>
-                                                            <option value="筑地">筑地</option>
-                                                            <option value="渋谷">渋谷</option>
-                                                            <option value="池袋">池袋</option>
-                                                            <option value="秋葉原">秋葉原</option>
-                                                            <option value="原宿">原宿</option>
-                                                            <option value="銀座">銀座</option>
-                                                            <option value="上野">上野</option>
-                                                            <option value="東京駅周辺">東京駅周辺</option>
-                                                            <option value="六本木">六本木</option>
-                                                            <option value="品川">品川</option>
-                                                            <option value="赤坂">赤坂</option>
-                                                            <option value="自由ヶ丘">自由ヶ丘</option>
-                                                            <option value="恵比寿">恵比寿</option>
-                                                            <option value="吉祥寺">吉祥寺</option>
-                                                            <option value="中野">中野</option>
-                                                            <option value="月島">月島</option>
-                                                            <option value="お台場">お台場</option>
-                                                            <option value="下北沢">下北沢</option>
-                                                            <!-- 他のオプションを追加 -->
+                                                            <option selected disabled>Please select</option>
+                                                            <option value="Shinjuku">Shinjuku</option>
+                                                            <option value="Yoyogi">Yoyogi</option>
+                                                            <option value="Asakusa">Asakusa</option>
+                                                            <option value="Tsukiji">Tsukiji</option>
+                                                            <option value="Shibuya">Shibuya</option>
+                                                            <option value="Ikebukuro">Ikebukuro</option>
+                                                            <option value="Akihabara">Akihabara</option>
+                                                            <option value="Harajuku">Harajuku</option>
+                                                            <option value="Ginza">Ginza</option>
+                                                            <option value="Ueno">Ueno</option>
+                                                            <option value="Tokyo Station Area">Tokyo Station Area</option>
+                                                            <option value="Roppongi">Roppongi</option>
+                                                            <option value="Shinagawa">Shinagawa</option>
+                                                            <option value="Akasaka">Akasaka</option>
+                                                            <option value="Jiyugaoka">Jiyugaoka</option>
+                                                            <option value="Ebisu">Ebisu</option>
+                                                            <option value="Kichijoji">Kichijoji</option>
+                                                            <option value="Nakano">Nakano</option>
+                                                            <option value="Tsukishima">Tsukishima</option>
+                                                            <option value="Odaiba">Odaiba</option>
+                                                            <option value="Shimokitazawa">Shimokitazawa</option>
+                                                            <!-- Add more options -->
+
                                                         </select>
                                                         @error('genre_place')
                                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -750,32 +754,32 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label for="genre_variety" class="col-sm-2 col-form-label">種類</label>
+                                                    <label for="genre_variety" class="col-sm-2 col-form-label">Variety</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-select @error('genre_variety') is-invalid @enderror" id="genre_variety" name="genre_variety">
-                                                            <option selected disabled>選択してください</option>
-                                                            <option value="寿司">寿司</option>
-                                                            <option value="天ぷら">天ぷら</option>
-                                                            <option value="すき焼き">すき焼き</option>
-                                                            <option value="しゃぶしゃぶ">しゃぶしゃぶ</option>
-                                                            <option value="ラーメン">ラーメン</option>
-                                                            <option value="お好み焼き">お好み焼き</option>
-                                                            <option value="たこ焼き">たこ焼き</option>
-                                                            <option value="和牛">和牛</option>
-                                                            <option value="そば">そば</option>
-                                                            <option value="うどん">うどん</option>
-                                                            <option value="和菓子">和菓子</option>
-                                                            <option value="焼き鳥">焼き鳥</option>
-                                                            <option value="刺身">刺身</option>
-                                                            <option value="おせち料理">おせち料理</option>
-                                                            <option value="カツ丼">カツ丼</option>
-                                                            <option value="イタリア料理">イタリア料理</option>
-                                                            <option value="フランス料理">フランス料理</option>
-                                                            <option value="スペイン料理">スペイン料理</option>
-                                                            <option value="ドイツ料理">ドイツ料理</option>
-                                                            <option value="中国料理">中国料理</option>
-                                                            <option value="インド料理">インド料理</option>
-                                                            <!-- 他のオプションを追加 -->
+                                                            <option selected disabled>Please select</option>
+                                                            <option value="Sushi">Sushi</option>
+                                                            <option value="Tempura">Tempura</option>
+                                                            <option value="Sukiyaki">Sukiyaki</option>
+                                                            <option value="Shabu-shabu">Shabu-shabu</option>
+                                                            <option value="Ramen">Ramen</option>
+                                                            <option value="Okonomiyaki">Okonomiyaki</option>
+                                                            <option value="Takoyaki">Takoyaki</option>
+                                                            <option value="Wagyu">Wagyu</option>
+                                                            <option value="Soba">Soba</option>
+                                                            <option value="Udon">Udon</option>
+                                                            <option value="Japanese sweets">Japanese sweets</option>
+                                                            <option value="Yakitori">Yakitori</option>
+                                                            <option value="Sashimi">Sashimi</option>
+                                                            <option value="New Year dishes">New Year dishes</option>
+                                                            <option value="Katsudon">Katsudon</option>
+                                                            <option value="Italian cuisine">Italian cuisine</option>
+                                                            <option value="French cuisine">French cuisine</option>
+                                                            <option value="Spanish cuisine">Spanish cuisine</option>
+                                                            <option value="German cuisine">German cuisine</option>
+                                                            <option value="Chinese cuisine">Chinese cuisine</option>
+                                                            <option value="Indian cuisine">Indian cuisine</option>
+                                                            <!-- Add more options -->
                                                         </select>
                                                         @error('genre_variety')
                                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -783,21 +787,22 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label for="genre_religion" class="col-sm-2 col-form-label">食事制限</label>
+                                                    <label for="genre_religion" class="col-sm-2 col-form-label">Your Preference</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-select " id="genre_religion" name="genre_religion">
-                                                            <option selected disabled>選択してください</option>
-                                                            <option value="ベジタリアン対応">ベジタリアン対応</option>
-                                                            <option value="ヴィーガン対応">ヴィーガン対応</option>
-                                                            <option value="ハラルフード（ムスリム）">ハラルフード（ムスリム）</option>
-                                                            <option value="コーシャフード（ユダヤ教）">コーシャフード（ユダヤ教）</option>
-                                                            <option value="サトウキビ不使用">サトウキビ不使用</option>
-                                                            <option value="グルテンフリー">グルテンフリー</option>
-                                                            <option value="ラクトオボベジタリアン">ラクトオボベジタリアン</option>
-                                                            <option value="オーガニックフード">オーガニックフード</option>
-                                                            <option value="無添加食品">無添加食品</option>
-                                                            <option value="特になし">特に無し</option>
-                                                            <!-- 他のオプションを追加 -->
+                                                            <option selected disabled>Please select</option>
+                                                            <option value="Vegetarian-friendly">Vegetarian-friendly</option>
+                                                            <option value="Vegan-friendly">Vegan-friendly</option>
+                                                            <option value="Halal food (Muslim)">Halal food (Muslim)</option>
+                                                            <option value="Kosher food (Jewish)">Kosher food (Jewish)</option>
+                                                            <option value="No use of cane sugar">No use of cane sugar</option>
+                                                            <option value="Gluten-free">Gluten-free</option>
+                                                            <option value="Lacto-ovo vegetarian">Lacto-ovo vegetarian</option>
+                                                            <option value="Organic food">Organic food</option>
+                                                            <option value="Additive-free food">Additive-free food</option>
+                                                            <option value="None in particular">None in particular</option>
+                                                            <!-- Add more options -->
+
                                                         </select>
                                                         {{-- @error('genre_religion')
                                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -805,15 +810,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label for="genre_payment" class="col-sm-2 col-form-label">支払方法</label>
+                                                    <label for="genre_payment" class="col-sm-2 col-form-label">How to Pay</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-select " id="genre_payment" name="genre_payment">
-                                                            <option selected disabled>選択してください</option>
-                                                            <option value="なんでもok">なんでもok</option>
-                                                            <option value="現金のみ">現金のみ</option>
-                                                            <option value="クレジットカード">クレジットカード不可</option>
-                                                            <option value="電子マネー">電子マネー不可</option>
-                                                            <!-- 他のオプションを追加 -->
+                                                            <option selected disabled>Please select</option>
+                                                            <option value="Anything is okay">Anything is okay</option>
+                                                            <option value="Cash only">Cash only</option>
+                                                            <option value="Credit cards">Credit cards not accepted</option>
+                                                            <option value="Electronic money">Electronic money not accepted</option>
+                                                            <!-- Add more options -->
+
                                                         </select>                
                                                         {{-- @error('genre_payment')
                                                             <div class="invalid-feedback">{{ $message }}</div>
