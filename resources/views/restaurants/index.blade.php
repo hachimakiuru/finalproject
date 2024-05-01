@@ -14,13 +14,14 @@
         <div class="card-header" id="searchHeading">
             <h5 class="mb-0">
                 <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#searchFormCollapse" aria-expanded="false" aria-controls="searchFormCollapse" id="searchFormButton">
-                    <i class="bi bi-search"></i> Filter
+                    <i class="ri-equalizer-line"></i>
                 </button>             
             </h5>
         </div>
+        
         <div id="searchFormCollapse" class="collapse" aria-labelledby="searchHeading">
             <div class="card-body">
-                <form method="GET">
+                <form method="GET" id="searchForm">
                     <div class="row mb-3">
                         <label for="genre_place" class="col-sm-2 col-form-label">Location</label>
                         <div class="col-sm-10">
@@ -95,7 +96,7 @@
                                 <option value="ラクトオボベジタリアン">ラクトオボベジタリアン</option>
                                 <option value="オーガニックフード">オーガニックフード</option>
                                 <option value="無添加食品">無添加食品</option>
-                                <option value="特になし">特に無し</option>
+
                                 <!-- 他のオプションを追加 -->
                             </select>
                         </div>
@@ -113,6 +114,7 @@
                             </select>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary">検索</button>
@@ -122,47 +124,40 @@
             </div>
         </div>
     </div>
-
     
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var searchFormCollapse = document.getElementById('searchFormCollapse');
-            var searchFormButton = document.querySelector('[data-bs-target="#searchFormCollapse"]');
-            var isCollapsed = true; // フォームが閉じているかどうかを追跡する変数
-    
-            document.addEventListener('click', function(event) {
-                var isClickInsideForm = searchFormCollapse.contains(event.target);
-                var isClickOnButton = event.target === searchFormButton;
-    
-                // フォームが展開されており、かつボタンの外側をクリックした場合は閉じる
-                if (!isClickInsideForm && !isClickOnButton && !isCollapsed) {
-                    var bsCollapse = new bootstrap.Collapse(searchFormCollapse);
-                    bsCollapse.hide();
-                    isCollapsed = true; // フォームを閉じたことを更新
-                }
-            });
-    
-            searchFormButton.addEventListener('click', function() {
-                if (isCollapsed) {
-                    // フォームが閉じている場合は展開する
-                    var bsCollapse = new bootstrap.Collapse(searchFormCollapse);
-                    bsCollapse.show();
-                    isCollapsed = false; // フォームを展開したことを更新
-                } else {
-                    // フォームが展開されている場合は閉じる
-                    var bsCollapse = new bootstrap.Collapse(searchFormCollapse);
-                    bsCollapse.hide();
-                    isCollapsed = true; // フォームを閉じたことを更新
-                }
-            });
-        });
+    const searchFormCollapse = document.getElementById('searchFormCollapse');
+    const searchFormButton = document.querySelector('[data-bs-target="#searchFormCollapse"]');
+    let isCollapsed = true;
+
+    document.addEventListener('click', function(event) {
+        const isClickOutsideForm = !searchFormCollapse.contains(event.target);
+        const isClickOnButton = event.target === searchFormButton;
+
+        if (!isClickOnButton && !isCollapsed && isClickOutsideForm) {
+            toggleCollapse();
+        }
+    });
+
+    searchFormButton.addEventListener('click', function() {
+        toggleCollapse();
+    });
+
+    function toggleCollapse() {
+        const bsCollapse = new bootstrap.Collapse(searchFormCollapse);
+        if (isCollapsed) {
+            bsCollapse.show();
+        } else {
+            bsCollapse.hide();
+        }
+        isCollapsed = !isCollapsed;
+    }
+});
+
     </script>
     
-        
-
-
-
     
     <div class="row mt-2">
         <div class="col-md-3">
@@ -310,7 +305,7 @@
                                             <div class="mb-3 row">
                                                 <label for="genre_religion" class="col-sm-2 col-form-label">食事制限</label>
                                                 <div class="col-sm-10">
-                                                    <select class="form-select @error('genre_religion') is-invalid @enderror" id="genre_religion" name="genre_religion">
+                                                    <select class="form-select " id="genre_religion" name="genre_religion">
                                                         <option selected disabled>選択してください</option>
                                                         <option value="ベジタリアン対応">ベジタリアン対応</option>
                                                         <option value="ヴィーガン対応">ヴィーガン対応</option>
@@ -324,15 +319,15 @@
                                                         <option value="特になし">特に無し</option>
                                                         <!-- 他のオプションを追加 -->
                                                     </select>
-                                                    @error('genre_religion')
+                                                    {{-- @error('genre_religion')
                                                         <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror                
+                                                    @enderror                 --}}
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
                                                 <label for="genre_payment" class="col-sm-2 col-form-label">支払方法</label>
                                                 <div class="col-sm-10">
-                                                    <select class="form-select @error('genre_payment') is-invalid @enderror" id="genre_payment" name="genre_payment">
+                                                    <select class="form-select " id="genre_payment" name="genre_payment">
                                                         <option selected disabled>選択してください</option>
                                                         <option value="なんでもok">なんでもok</option>
                                                         <option value="現金のみ">現金のみ</option>
@@ -340,13 +335,13 @@
                                                         <option value="電子マネー">電子マネー不可</option>
                                                         <!-- 他のオプションを追加 -->
                                                     </select>                
-                                                    @error('genre_payment')
+                                                    {{-- @error('genre_payment')
                                                         <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror                
+                                                    @enderror                 --}}
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn-border">Save</button>
+                                                <button type="submit" class="btn-border">Share</button>
                                             </div>
                                         </form>
                                     </div>
@@ -357,6 +352,24 @@
                         
                         {{-- indexの中身 --}}
                         <div class="card-body" style="overflow-y: auto; max-height: 92vh;">
+
+                            @if($warning)
+    <div class="alert border-dark" role="alert">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                {{ $warning }}
+            </div>
+            <div>
+                <a href="{{ route('restaurants.index') }}" class="btn btn-outline-primary">Go back</a>
+            </div>
+        </div>
+    </div>
+@endif
+
+                        
+                        
+
+
                             <ul class="list-group">
                                 @foreach ($restaurants as $restaurant)
                                 <li class="list-group-item" style="background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 8px;">
@@ -377,7 +390,7 @@
 
 
                                             {{-- likeボタンの作成 --}}
-                                            <div class="btn-container" id="target{{ $restaurant->id }}">
+                                            <div class="btn-container" id="target{{ $restaurant->id }}" style="font-size: 20px;">
                                                 @if ($restaurant->isLike)
                                                     {{-- <form action="{{ route('like.destroy', $restaurant->id) }}" method="POST" class="likebutton">
                                                         @csrf
@@ -399,7 +412,7 @@
                                                 <div class="modal-dialog modal-dialog-centered" style="max-width: 90%;">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">{{ $restaurant->name }}</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Details & Reservation Form</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         {{-- モーダルbody --}}
@@ -430,7 +443,7 @@
                                                                                             @if ($restaurant->comments->count() > 0)
                                                                                                 <div class="card">
                                                                                                     <div class="card-header">
-                                                                                                        <h3 class="card-title">口コミ</h3>
+                                                                                                        <h3 class="card-title">Review</h3>
                                                                                                     </div>
                                                                                                     <div class="card-body" style="overflow-y: auto; max-height: 300px;">
                                                                                                         <div class="list-group">
@@ -441,13 +454,13 @@
                                                                                                                     <div id="comment-{{ $comment->id }}-short">
                                                                                                                         <p>{{ substr($comment->comment, 0, 20) }}...</p>
                                                                                                                         <!-- 「もっと読む」ボタン -->
-                                                                                                                        <a href="#" onclick="toggleFullText('{{ $comment->id }}', true)" id="read-more-{{ $comment->id }}">もっと読む</a>
+                                                                                                                        <a href="#" onclick="toggleFullText('{{ $comment->id }}', true)" id="read-more-{{ $comment->id }}">Read more</a>
                                                                                                                     </div>
                                                                                                                     <!-- フルテキスト（最初は非表示） -->
                                                                                                                     <div id="comment-{{ $comment->id }}-full" style="display: none";>
                                                                                                                     <p>{{ $comment->comment }}</p>
                                                                                                                     <!-- 「閉じる」ボタン -->
-                                                                                                                    <a href="#" onclick="toggleFullText('{{ $comment->id }}', false)" id="read-less-{{ $comment->id }}">閉じる</a>
+                                                                                                                    <a href="#" onclick="toggleFullText('{{ $comment->id }}', false)" id="read-less-{{ $comment->id }}">Close</a>
                                                                                                                 </div>
 
                                                                                                                 </div>
@@ -455,7 +468,7 @@
                                                                                                                     <form method="POST" action="{{ route('restaurant_comments.destroy', $comment->id) }}">
                                                                                                                         @csrf
                                                                                                                         @method('DELETE')
-                                                                                                                        <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                                                                                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                                                                                                     </form>
                                                                                                                 @endif
                                                                                                             </div>
@@ -465,7 +478,7 @@
                                                                                                 </div>
                                                                                             @else
                                                                                             <div class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                                                                                                <p>まだコメントがありません。</p>
+                                                                                                <p>Please write your reviews or comments</p>
                                                                                             </div>
                                                                                             @endif
                                                                                         </div>
@@ -491,13 +504,13 @@
                                                                                                 @csrf
                                                                                                 <input type="hidden" name="restaurant_post_id" value="{{ $restaurant->id }}">
                                                                                                 <div class="mb-3">
-                                                                                                    <label for="comment" class="form-label"><h3>コメント</h3></label>
-                                                                                                    <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="コメントを入力してください"></textarea>
+                                                                                                    <label for="comment" class="form-label"><h3>Review</h3></label>
+                                                                                                    <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="You can write your comments here"></textarea>
                                                                                                 </div>
                                                                                                 <button type="submit" class="btn-border">Comment</button>
                                                                                             </form>
                                                                                         @else
-                                                                                            <p>コメントを投稿するにはログインしてください。</p>
+                                                                                            <p>You can write your comments here</p>
                                                                                         @endif
                                                                                     </div>
                                                                                 </div>
@@ -509,7 +522,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form bg-light p-5 rounded ms-md-4" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 400px;">
-                                                                        <h2 class="mb-4 text-center" style="font-size: 1.5rem; color: #333;">予約フォーム</h2>
+                                                                        <h2 class="mb-4 text-center" style="font-size: 1.5rem; color: #333;">Reservation Form</h2>
                                                                     
                                                                         <!-- 予約フォーム -->
                                                                         <div class="booking">
@@ -616,12 +629,12 @@
                                                                 <div class="row justify-content-between align-items-center">
                                                                     <div class="col-md-auto">
                                                                         @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
-                                                                        <form action="{{ route('restaurants.edit', ['restaurant' => $restaurant]) }}">
-                                                                            <button type="submit" class="btn btn-primary" data-bs-target="#editModal_{{ $restaurant->id }}">
+                                                                        {{-- <form action="{{ route('restaurants.edit', ['restaurant' => $restaurant]) }}">  --}}
+                                                                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $restaurant->id }}">
                                                                                 <i class="ri-edit-2-line"></i>
                                                                             </button>
-                                                                        </form>
-                                                                        @endif
+                                                                        {{-- </form> --}}
+                                                                        @endif 
                                                                     </div>                                                        
                                                                     <div class="col-md-auto">
                                                                         <div class="btn-group" role="group" aria-label="アクション">
@@ -648,6 +661,189 @@
                                         </div>
                                     </div>
                                 </li>
+
+                                {{-- edit --}}
+                                    <div class="modal fade" id="exampleModal{{ $restaurant->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h1 class="modal-title fs-5" id="exampleModalLabel">Editing your post</h1>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="redirectToIndex()"></button>
+
+                                                <script>
+                                                    function redirectToIndex() {
+                                                        window.location.href = "{{ route('restaurants.index') }}";
+                                                    }
+                                                </script>
+                                            </div>
+
+                                            <div class="modal-body" >
+                                              {{-- ...yawa --}}
+                                              <form action="{{ route('restaurants.update', ['restaurant' => $restaurant]) }}" method="post" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('put')
+                                                <div class="mb-3 row">
+                                                    <label for="username" class="col-sm-2 col-form-label">ユーザー名</label>
+                                                    <div class="col-sm-10">
+                                                        <p>{{Auth::user()->name }}</p>
+                                                        @error('user_id')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="storename" class="col-sm-2 col-form-label">店舗名</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" id="storename" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
+                                                        @error('name')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="pac-input" class="col-sm-2 col-form-label">住所</label>
+                                                    <div class="col-sm-10">
+                                                        {{-- GoogleAPI Autcomplete --}}
+                                                        <input type="text" id="pac-input" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}"placeholder="Enter the full-location">
+                                                        @error('address')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <input class="form-control" type="" id="latitude" name="latitude" value="{{ old('latitude') }}">
+                                                    <input class="form-control" type="" id="longitude" name="longitude" value="{{ old('longitude') }}">
+                                                </div>
+                                                <div id="pac-container">
+                                                    <div id="map" style="display: none;"></div>
+                                                </div>
+                                                <div id="infowindow-content" style="display: none;">
+                                                    <img src="" width="16" height="16" id="place-icon" />
+                                                    <span id="place-name" class="title"></span><br/>
+                                                    <span id="place-address"></span>
+                                                </div>
+                                                {{-- ------------------ --}}
+                                                <div class="mb-3 row">
+                                                    <label for="image" class="col-sm-2 col-form-label">写真</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="file" id="image" name="image_path" class="form-control @error('image_path') is-invalid @enderror" value="{{ old('image_path') }}">
+                                                        @error('image_path')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="genre_place" class="col-sm-2 col-form-label">場所</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-select @error('genre_place') is-invalid @enderror" id="genre_place" name="genre_place">
+                                                            <option selected disabled>選択してください</option>
+                                                            <option value="新宿">新宿</option>
+                                                            <option value="代々木">代々木</option>
+                                                            <option value="浅草">浅草</option>
+                                                            <option value="筑地">筑地</option>
+                                                            <option value="渋谷">渋谷</option>
+                                                            <option value="池袋">池袋</option>
+                                                            <option value="秋葉原">秋葉原</option>
+                                                            <option value="原宿">原宿</option>
+                                                            <option value="銀座">銀座</option>
+                                                            <option value="上野">上野</option>
+                                                            <option value="東京駅周辺">東京駅周辺</option>
+                                                            <option value="六本木">六本木</option>
+                                                            <option value="品川">品川</option>
+                                                            <option value="赤坂">赤坂</option>
+                                                            <option value="自由ヶ丘">自由ヶ丘</option>
+                                                            <option value="恵比寿">恵比寿</option>
+                                                            <option value="吉祥寺">吉祥寺</option>
+                                                            <option value="中野">中野</option>
+                                                            <option value="月島">月島</option>
+                                                            <option value="お台場">お台場</option>
+                                                            <option value="下北沢">下北沢</option>
+                                                            <!-- 他のオプションを追加 -->
+                                                        </select>
+                                                        @error('genre_place')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror                
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="genre_variety" class="col-sm-2 col-form-label">種類</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-select @error('genre_variety') is-invalid @enderror" id="genre_variety" name="genre_variety">
+                                                            <option selected disabled>選択してください</option>
+                                                            <option value="寿司">寿司</option>
+                                                            <option value="天ぷら">天ぷら</option>
+                                                            <option value="すき焼き">すき焼き</option>
+                                                            <option value="しゃぶしゃぶ">しゃぶしゃぶ</option>
+                                                            <option value="ラーメン">ラーメン</option>
+                                                            <option value="お好み焼き">お好み焼き</option>
+                                                            <option value="たこ焼き">たこ焼き</option>
+                                                            <option value="和牛">和牛</option>
+                                                            <option value="そば">そば</option>
+                                                            <option value="うどん">うどん</option>
+                                                            <option value="和菓子">和菓子</option>
+                                                            <option value="焼き鳥">焼き鳥</option>
+                                                            <option value="刺身">刺身</option>
+                                                            <option value="おせち料理">おせち料理</option>
+                                                            <option value="カツ丼">カツ丼</option>
+                                                            <option value="イタリア料理">イタリア料理</option>
+                                                            <option value="フランス料理">フランス料理</option>
+                                                            <option value="スペイン料理">スペイン料理</option>
+                                                            <option value="ドイツ料理">ドイツ料理</option>
+                                                            <option value="中国料理">中国料理</option>
+                                                            <option value="インド料理">インド料理</option>
+                                                            <!-- 他のオプションを追加 -->
+                                                        </select>
+                                                        @error('genre_variety')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror                
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="genre_religion" class="col-sm-2 col-form-label">食事制限</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-select " id="genre_religion" name="genre_religion">
+                                                            <option selected disabled>選択してください</option>
+                                                            <option value="ベジタリアン対応">ベジタリアン対応</option>
+                                                            <option value="ヴィーガン対応">ヴィーガン対応</option>
+                                                            <option value="ハラルフード（ムスリム）">ハラルフード（ムスリム）</option>
+                                                            <option value="コーシャフード（ユダヤ教）">コーシャフード（ユダヤ教）</option>
+                                                            <option value="サトウキビ不使用">サトウキビ不使用</option>
+                                                            <option value="グルテンフリー">グルテンフリー</option>
+                                                            <option value="ラクトオボベジタリアン">ラクトオボベジタリアン</option>
+                                                            <option value="オーガニックフード">オーガニックフード</option>
+                                                            <option value="無添加食品">無添加食品</option>
+                                                            <option value="特になし">特に無し</option>
+                                                            <!-- 他のオプションを追加 -->
+                                                        </select>
+                                                        {{-- @error('genre_religion')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror                 --}}
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="genre_payment" class="col-sm-2 col-form-label">支払方法</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-select " id="genre_payment" name="genre_payment">
+                                                            <option selected disabled>選択してください</option>
+                                                            <option value="なんでもok">なんでもok</option>
+                                                            <option value="現金のみ">現金のみ</option>
+                                                            <option value="クレジットカード">クレジットカード不可</option>
+                                                            <option value="電子マネー">電子マネー不可</option>
+                                                            <!-- 他のオプションを追加 -->
+                                                        </select>                
+                                                        {{-- @error('genre_payment')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror                 --}}
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Change the contents</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {{-- edit --}}
+
                                 @endforeach
                             </ul>
                         </div>

@@ -13,6 +13,7 @@
             <div class="restaurant-dashboard-container">
                 <div class="restaurant-dashboard-center">
                     <div class="col-md-18">
+                        
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h4>編集フォーム</h4>
@@ -173,6 +174,7 @@
                                 <!-- 投稿フォーム -->
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

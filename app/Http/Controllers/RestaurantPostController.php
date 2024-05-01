@@ -14,28 +14,31 @@ class RestaurantPostController extends Controller
     {
         $query = RestaurantPost::withCount('comments')
             ->orderByDesc('comments_count'); // コメント数が多い順に並べ替え
-
+    
         // フィルターの条件を受け取り、クエリを調整
         if ($request->has('genre_place')) {
             $query->where('genre_place', $request->genre_place);
         }
-
+    
         if ($request->has('genre_variety')) {
             $query->where('genre_variety', $request->genre_variety);
         }
-
+    
         if ($request->has('genre_religion')) {
             $query->where('genre_religion', $request->genre_religion);
         }
-
+    
         if ($request->has('genre_payment')) {
             $query->where('genre_payment', $request->genre_payment);
         }
-
+    
         // 他のフィルタリング条件を追加する場合はここに追加
-
+    
         $restaurants = $query->get();
 
+        // 検索がヒットしなかった場合の警告文を設定
+    $warning = $restaurants->isEmpty() ? 'No restaurants matching your search criteria were found.' : null;
+    
         if ($restaurants) {
             foreach ($restaurants as $restaurant) {
                 $likes = RestaurantLike::where('user_id', Auth::user()->id)
@@ -44,10 +47,10 @@ class RestaurantPostController extends Controller
                 $restaurant['isLike'] = count($likes) > 0 ? true : false;
             }
         }
-
-        return view('restaurants.index', compact('restaurants'));
+    
+        return view('restaurants.index', compact('restaurants','warning'));
     }
-
+    
 
 
     public function create()
@@ -64,8 +67,6 @@ class RestaurantPostController extends Controller
             'genre_variety' => 'required',
             'genre_religion' => 'required',
             'genre_payment' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
         ]);
 
         $image = $request->file('image_path');
@@ -83,8 +84,6 @@ class RestaurantPostController extends Controller
         $restaurant->genre_variety = $Data['genre_variety'];
         $restaurant->genre_religion = $Data['genre_religion'];
         $restaurant->genre_payment = $Data['genre_payment'];
-        $restaurant->latitude = $Data['latitude'];
-        $restaurant->longitude = $Data['longitude'];
         $restaurant->save();
 
         // データベースからすべてのレストランポストを取得
@@ -108,8 +107,6 @@ class RestaurantPostController extends Controller
             'genre_variety' => 'required',
             'genre_religion' => 'required',
             'genre_payment' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
         ]);
 
         if ($request->hasFile('image_path')) {
@@ -134,4 +131,5 @@ class RestaurantPostController extends Controller
         $restaurant = RestaurantPost::findOrFail($id);
         return view('restaurants.show', ['restaurant' => $restaurant]);
     }
+
 }
