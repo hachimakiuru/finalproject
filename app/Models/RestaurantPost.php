@@ -27,6 +27,8 @@ class RestaurantPost extends Model
         'genre_wifi',
         'image_path',
         'favorite',
+        'latitude',
+        'longitude',
     ];
 
     /**
