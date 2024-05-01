@@ -139,12 +139,50 @@ button.btn-border-shadow--color2-1:before {
   box-shadow: 3px 3px 0 #78e5e5;
 } 
 
+/* タイトル */
 .news-title1{
-  font-size: 35px;
+  font-size: 30px;
 
 }
 
 .news-title2{
   font-size: 20px;
 
+}
+
+/* オプションボタン */
+
+.news-option {
+  display: flex; /* 要素をフレックスボックスとして配置 */
+  align-items: center; /* 要素を垂直方向に中央揃え */
+  margin-bottom: 1rem;
+}
+
+.news-option label {
+  font-weight: bold;
+  margin-right: 5rem; /* ラベルとセレクトボックスの間隔を設定 */
+}
+
+.news-option select {
+  width: 82.5%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  appearance: none;
+  background-color: #fff;
+}
+
+
+
+/* マウスが上に乗った時のスタイル */
+.news-option select:hover {
+  border-color: #6c757d;
+}
+
+/* セレクトボックスがフォーカスされた時のスタイル */
+.news-option select:focus {
+  border-color: #495057;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
 }
