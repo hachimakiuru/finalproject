@@ -68,7 +68,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">アカウント情報の変更</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Account Edit</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -80,34 +80,41 @@
                     @csrf 
                     @method('post')
                       <div class="form-group">
-                        <label for="name" class="text-dark">名前:</label><br>
+                        <label for="name" class="text-dark">Name:</label><br>
                         <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}">
                         @error('name')
                         <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
                         @enderror
                       </div>
                       <div class="form-group mt-3">
-                          <label for="email" class="text-dark">メールドレス:</label><br>
+                          <label for="email" class="text-dark">Email:</label><br>
                           <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}">
                           @error('email')
                           <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
                           @enderror
                       </div>
                       <div class="form-group mt-3">
-                        <label for="room_number" class="text-dark">部屋番号:</label><br>
-                        <input type="number" name="room_number" id="room_number" min="100" class="form-control" value="{{ $user->room_number }}">
+                        <label for="room_number" class="text-dark">Room Number:</label><br>
+                        <input type="number" name="room_number" id="room_number" class="form-control" value="{{ $user->room_number }}">
                         @error('room_number')
                         <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
                         @enderror
                       </div>
-                      <p class="mt-3">ユーザー権限:</p>
+                      <p class="mt-3">Authority:</p>
                       @foreach ($roles as $role)
                       <input class="form-check-input" type="radio" name="role_id" id="role_id_{{ $role->id }}" value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'checked' : '' }}>
                       <label class="form-check-label" for="role_id_{{ $role->id }}">{{ $role->name }}</label>
                       @endforeach
+                      <div class="form-group mt-3">
+                        <label for="room_number" class="text-dark">Passward:</label><br>
+                        <input type="password" name="password" id="password" class="form-control" value="{{ $user->password }}">
+                        @error('password')
+                        <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
+                        @enderror
+                      </div>
                       <div class="form-group">
                           <label for="remember-me" class="text-dark"></label><br>
-                          <input type="submit" name="submit" class="btn btn-dark btn-md" value="送信">
+                          <input type="submit" name="submit" class="btn btn-dark btn-md" value="Submit">
                       </div>
                   </form>
               </div>

@@ -16,7 +16,7 @@ use App\Http\Controllers\WelcomeController;
 
 
 use App\Http\Controllers\ExperienceController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\LikeController;
 
 use App\Http\Controllers\NewsBookingController;
@@ -27,6 +27,8 @@ use App\Http\Controllers\RestaurantLikeController;
 use App\Http\Controllers\RestaurantCommentsController;
 
 use App\Http\Controllers\NewsCalendarController;
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Models\NewsBooking;
 
 Route::get('/', function () {
@@ -77,6 +79,16 @@ Route::post('/register', [AuthController::class, 'store']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Password Change
+Route::get('/password/change', [PasswordController::class, 'showChangeForm'])->name('password.change.form');
+Route::post('/password/change', [PasswordController::class, 'changePassword'])->name('password.change');
+
+// パスワードリセットのためのルート定義
+Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 // admin.dashboardのルート
 Route::get('/admin', [UserController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);

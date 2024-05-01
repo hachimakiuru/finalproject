@@ -22,7 +22,7 @@
               <div class="form-group mt-3">
                 <label for="room_number" class="text-dark">Room Number or Employee ID:</label><br>
                 {{-- <p class="form-control pt-5">{{  }}</p> --}}
-                <input type="number" name="room_number" id="room_number" min="100" class="form-control">
+                <input type="number" name="room_number" id="room_number" class="form-control">
                 @error('room_number')
                 <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
                 @enderror
