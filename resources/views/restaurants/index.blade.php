@@ -663,7 +663,7 @@
                                 </li>
 
                                 {{-- edit --}}
-                                    <div class="modal fade" id="exampleModal{{ $restaurant->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                                    <div class="modal fade" id="exampleModal{{ $restaurant->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
                                         <div class="modal-dialog modal-dialog-centered modal-lg">
                                           <div class="modal-content">
                                             <div class="modal-header">
@@ -694,37 +694,16 @@
                                                 <div class="mb-3 row">
                                                     <label for="storename" class="col-sm-2 col-form-label">店舗名</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" id="storename" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
+                                                        <input type="text" id="storename" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $restaurant->name }}">
                                                         @error('name')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label for="pac-input" class="col-sm-2 col-form-label">住所</label>
-                                                    <div class="col-sm-10">
-                                                        {{-- GoogleAPI Autcomplete --}}
-                                                        <input type="text" id="pac-input" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}"placeholder="Enter the full-location">
-                                                        @error('address')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-                                                    <input class="form-control" type="" id="latitude" name="latitude" value="{{ old('latitude') }}">
-                                                    <input class="form-control" type="" id="longitude" name="longitude" value="{{ old('longitude') }}">
-                                                </div>
-                                                <div id="pac-container">
-                                                    <div id="map" style="display: none;"></div>
-                                                </div>
-                                                <div id="infowindow-content" style="display: none;">
-                                                    <img src="" width="16" height="16" id="place-icon" />
-                                                    <span id="place-name" class="title"></span><br/>
-                                                    <span id="place-address"></span>
-                                                </div>
-                                                {{-- ------------------ --}}
-                                                <div class="mb-3 row">
                                                     <label for="image" class="col-sm-2 col-form-label">写真</label>
                                                     <div class="col-sm-10">
-                                                        <input type="file" id="image" name="image_path" class="form-control @error('image_path') is-invalid @enderror" value="{{ old('image_path') }}">
+                                                        <input type="file" id="image" name="image_path" class="form-control @error('image_path') is-invalid @enderror" value="{{ $restaurant->image_path }}">
                                                         @error('image_path')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
@@ -834,11 +813,11 @@
                                                         @enderror                 --}}
                                                     </div>
                                                 </div>
-                                            </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">Change the contents</button>
                                             </div>
+                                        </form>
                                           </div>
                                         </div>
                                       </div>
