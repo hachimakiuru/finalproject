@@ -375,8 +375,6 @@
 @endif
 
                         
-                        
-
 
                             <ul class="list-group">
                                 @foreach ($restaurants as $restaurant)
@@ -394,11 +392,6 @@
                                             <button type="button" class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ $restaurant->id }}">
                                                 Details & Reservation Form >
                                             </button>
-                                            
-                                            
-
-
-
                                             {{-- likeボタンの作成 --}}
                                             <div class="btn-container" id="target{{ $restaurant->id }}" style="font-size: 20px;">
                                                 @if ($restaurant->isLike)
@@ -415,262 +408,263 @@
                                                 @endif
                                             </div>
                                             {{-- likeボタンの作成 --}}
+                                            @if(Auth::check() && ($restaurant->user->role_id === 2 || $restaurant->user->role_id === 1))
+                                            <p style="font-size: 16px; color: #333; margin-top: 10px;"><i class="ri-star-line" style="color: #ff6600;"></i> Staff Recommendation</p>
 
-
-                                            <!-- modal content -->
-                                            <div class="modal fade" id="exampleModal_{{ $restaurant->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" style="max-width: 90%;">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Details & Reservation Form</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        {{-- モーダルbody --}}
-                                                        <div class="modal-body">
-                                                            <div class="container-fluid">
-                                                                <div class="d-flex flex-column flex-md-row align-items-center"> <!-- detailとformを垂直方向に配置 -->
-                                                                    <div class="detail p-4">
-                                                                        <!-- detailの内容 -->
-                                                                        <div class="detail">
-                                                                            <div class="row">
-                                                                                <div class="col-md-13">
-                                                                                    <!-- 写真と詳細情報 -->
-                                                                                    <div class="text-center">
-                                                                                        <img src="{{ Storage::url($restaurant->image_path) }}" class="img-fluid rounded shadow-lg" alt="restaurant photo">
-                                                                                    </div>
-                                                                                    <p><strong>User Name:</strong> {{ $restaurant->user->name }}</p>
-                                                                                    <p><strong>Store Name:</strong> {{ $restaurant->name }}</p>
-                                                                                    <p><strong>Address:</strong> {{ $restaurant->address }}</p>
-                                                                                    <p><strong>Area:</strong> {{ $restaurant->genre_place }}</p>
-                                                                                    <p><strong>Genre:</strong> {{ $restaurant->genre_variety }}</p>
-                                                                                    <p><strong>Dietary Restrictions:</strong> {{ $restaurant->genre_religion }}</p>
-                                                                                    <p><strong>Payment Method:</strong> {{ $restaurant->genre_payment }}</p>
-                                                                                </div>
-                                                                                <!-- コメント部分 -->
-                                                                                <div class="container">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-12">
-                                                                                            @if ($restaurant->comments->count() > 0)
-                                                                                                <div class="card">
-                                                                                                    <div class="card-header">
-                                                                                                        <h3 class="card-title">Review</h3>
-                                                                                                    </div>
-                                                                                                    <div class="card-body" style="overflow-y: auto; max-height: 300px;">
-                                                                                                        <div class="list-group">
-                                                                                                            @foreach ($restaurant->comments as $comment)
-                                                                                                            <div class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                                                                                                                <div>
-                                                                                                                    <!-- 制限されたテキスト -->
-                                                                                                                    <div id="comment-{{ $comment->id }}-short">
-                                                                                                                        <p>{{ substr($comment->comment, 0, 20) }}...</p>
-                                                                                                                        <!-- 「もっと読む」ボタン -->
-                                                                                                                        <a href="#" onclick="toggleFullText('{{ $comment->id }}', true)" id="read-more-{{ $comment->id }}">Read more</a>
-                                                                                                                    </div>
-                                                                                                                    <!-- フルテキスト（最初は非表示） -->
-                                                                                                                    <div id="comment-{{ $comment->id }}-full" style="display: none";>
-                                                                                                                    <p>{{ $comment->comment }}</p>
-                                                                                                                    <!-- 「閉じる」ボタン -->
-                                                                                                                    <a href="#" onclick="toggleFullText('{{ $comment->id }}', false)" id="read-less-{{ $comment->id }}">Close</a>
-                                                                                                                </div>
-
-                                                                                                                </div>
-                                                                                                                @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
-                                                                                                                    <form method="POST" action="{{ route('restaurant_comments.destroy', $comment->id) }}">
-                                                                                                                        @csrf
-                                                                                                                        @method('DELETE')
-                                                                                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                                                                                                    </form>
-                                                                                                                @endif
-                                                                                                            </div>
-                                                                                                            @endforeach
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            @else
-                                                                                            <div class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                                                                                                <p>Please write your reviews or comments</p>
-                                                                                            </div>
-                                                                                            @endif
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                
-                                                                                <script>
-                                                                                    // 「もっと読む」ボタンまたは「閉じる」ボタンがクリックされたときに実行される関数
-                                                                                    function toggleFullText(commentId, showFull) {
-                                                                                        // 対応するコメントの短縮テキストとフルテキストを切り替えて表示
-                                                                                        document.getElementById('comment-' + commentId + '-short').style.display = showFull ? 'none' : 'block';
-                                                                                        document.getElementById('comment-' + commentId + '-full').style.display = showFull ? 'block' : 'none';
-                                                                                        // 「もっと読む」ボタンと「閉じる」ボタンを切り替えて表示
-                                                                                        document.getElementById('read-more-' + commentId).style.display = showFull ? 'none' : 'inline';
-                                                                                        document.getElementById('read-less-' + commentId).style.display = showFull ? 'inline' : 'none';
-                                                                                    }
-                                                                                </script>
-                                                                                
-                                                                                <div class="row mt-5 justify-content-start"> <!-- コメントフォームを左寄せに配置 -->
-                                                                                    <div class="col-md-8"> <!-- col-md-6 から col-md-8 に変更 -->
-                                                                                        @if (Auth::check())
-                                                                                            <form method="POST" action="{{ route('restaurant_comments.store') }}">
-                                                                                                @csrf
-                                                                                                <input type="hidden" name="restaurant_post_id" value="{{ $restaurant->id }}">
-                                                                                                <div class="mb-3">
-                                                                                                    <label for="comment" class="form-label"><h3>Review</h3></label>
-                                                                                                    <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="You can write your comments here"></textarea>
-                                                                                                </div>
-                                                                                                <button type="submit" class="btn-border">Comment</button>
-                                                                                            </form>
-                                                                                        @else
-                                                                                            <p>You can write your comments here</p>
-                                                                                        @endif
-                                                                                    </div>
-                                                                                </div>
-                                                                                
-                                                                                
-                                                                                
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form bg-light p-5 rounded ms-md-4" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 400px;">
-                                                                        <h2 class="mb-4 text-center" style="font-size: 1.5rem; color: #333;">Reservation Form</h2>
-                                                                    
-                                                                        <!-- 予約フォーム -->
-                                                                        <div class="booking">
-                                                                            <form action="{{ route('rbooking.store') }}" method="POST" enctype="multipart/form-data">
-                                                                                @csrf
-                                                                                <input type="hidden" name="restaurant_post_id" value="{{ $restaurant->id }}">
-                                                                                
-                                                                                <div class="mb-3">
-                                                                                    <label for="day">Desired Date:</label>
-                                                                                    <input type="date" id="day" name="day" class="form-control" value="#" required>
-                                                                                </div>
-                                                                                
-                                                                                <div class="mb-3">
-                                                                                    <label for="time1">First Preferred Time:</label>
-                                                                                    <select id="time1" name="time1" class="form-control" required>
-                                                                                        <option value="">-- Please select a time --</option>
-                                                                                        <optgroup label="朝 (6:00 - 11:59)">
-                                                                                            @for ($hour = 6; $hour < 12; $hour++)
-                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
-                                                                                            @endfor
-                                                                                        </optgroup>
-                                                                                        <optgroup label="昼 (12:00 - 17:59)">
-                                                                                            @for ($hour = 12; $hour < 18; $hour++)
-                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
-                                                                                            @endfor
-                                                                                        </optgroup>
-                                                                                        <optgroup label="夕方 (18:00 - 21:59)">
-                                                                                            @for ($hour = 18; $hour < 22; $hour++)
-                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
-                                                                                            @endfor
-                                                                                        </optgroup>
-                                                                                        <optgroup label="夜 (22:00 - 23:59)">
-                                                                                            @for ($hour = 22; $hour < 24; $hour++)
-                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
-                                                                                            @endfor
-                                                                                        </optgroup>
-                                                                                        <!-- 時間のオプション -->
-                                                                                    </select>
-                                                                                </div>
-                                                                                
-                                                                                <div class="mb-3">
-                                                                                    <label for="time2">Second Preferred Tim:</label>
-                                                                                    <select id="time2" name="time2" class="form-control" required>
-                                                                                        <option value="">-- First Preferred Time --</option>
-                                                                                        <optgroup label="朝 (6:00 - 11:59)">
-                                                                                            @for ($hour = 6; $hour < 12; $hour++)
-                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
-                                                                                            @endfor
-                                                                                        </optgroup>
-                                                                                        <optgroup label="昼 (12:00 - 17:59)">
-                                                                                            @for ($hour = 12; $hour < 18; $hour++)
-                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
-                                                                                            @endfor
-                                                                                        </optgroup>
-                                                                                        <optgroup label="夕方 (18:00 - 21:59)">
-                                                                                            @for ($hour = 18; $hour < 22; $hour++)
-                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
-                                                                                            @endfor
-                                                                                        </optgroup>
-                                                                                        <optgroup label="夜 (22:00 - 23:59)">
-                                                                                            @for ($hour = 22; $hour < 24; $hour++)
-                                                                                                <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
-                                                                                            @endfor
-                                                                                        </optgroup>
-                                                                                        <!-- 時間のオプション -->
-                                                                                    </select>
-                                                                                </div>
-                                                                                
-                                                                                <div class="mb-3">
-                                                                                    <label for="number_guests">Number of Guests:</label>
-                                                                                    <select id="number_guests" name="number_guests" class="form-control" required>
-                                                                                        <option value="">-- Please select --</option>
-                                                                                        <option value="1">1 person</option>
-                                                                                        <option value="2">2 people</option>
-                                                                                        <option value="3">3 people</option>
-                                                                                        <option value="4">4 people</option>
-                                                                                        <option value="5">5 people</option>
-                                                                                        <option value="6">6 people</option>
-                                                                                        <option value="7">7 people</option>
-                                                                                        <option value="8">8 people</option>
-                                                                                        <option value="9">9 people</option>
-                                                                                        <option value="10">More than 10 people</option>
-                                                                                    </select>                                                                                    
-                                                                                </div>
-                                                                                
-                                                                                <div class="mb-3">
-                                                                                    <label for="memo">Memo:</label>
-                                                                                    <textarea id="memo" name="memo" class="form-control"></textarea>
-                                                                                </div>
-                                                                                
-                                                                                <div class="d-grid">
-                                                                                    <button type="submit" class="btn-border">Make a Reservation</button>
-                                                                                </div>
-                                                                                
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>   
-                                                        </div>
-                                                        {{-- footer --}}
-                                                        <div class="modal-footer">
-                                                            <div class="container-fluid">
-                                                                <div class="row justify-content-between align-items-center">
-                                                                    <div class="col-md-auto">
-                                                                        @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
-                                                                        {{-- <form action="{{ route('restaurants.edit', ['restaurant' => $restaurant]) }}">  --}}
-                                                                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $restaurant->id }}">
-                                                                                <i class="ri-edit-2-line"></i>
-                                                                            </button>
-                                                                        {{-- </form> --}}
-                                                                        @endif 
-                                                                    </div>                                                        
-                                                                    <div class="col-md-auto">
-                                                                        <div class="btn-group" role="group" aria-label="アクション">
-                                                                            @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
-                                                                            <form action="{{ route('restaurants.destroy', ['restaurant' => $restaurant]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete?')">
-                                                                                @csrf
-                                                                                @method('DELETE')
-                                                                                <button type="submit" class="btn btn-danger">
-                                                                                    <i class="ri-delete-bin-line"></i>
-                                                                                </button>
-                                                                            </form>
-                                                                            @endif
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            
+                                            @endif
                                         </div>
                                     </div>
                                 </li>
+
+                                <!-- modal content -->
+                                <div class="modal fade" id="exampleModal_{{ $restaurant->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" style="max-width: 90%;">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Details & Reservation Form</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            {{-- モーダルbody --}}
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="d-flex flex-column flex-md-row align-items-center"> <!-- detailとformを垂直方向に配置 -->
+                                                        <div class="detail p-4">
+                                                            <!-- detailの内容 -->
+                                                            <div class="detail">
+                                                                <div class="row">
+                                                                    <div class="col-md-13">
+                                                                        <!-- 写真と詳細情報 -->
+                                                                        <div class="text-center">
+                                                                            <img src="{{ Storage::url($restaurant->image_path) }}" class="img-fluid rounded shadow-lg" alt="restaurant photo">
+                                                                        </div>
+                                                                        <p><strong>User Name:</strong> {{ $restaurant->user->name }}</p>
+                                                                        <p><strong>Store Name:</strong> {{ $restaurant->name }}</p>
+                                                                        <p><strong>Address:</strong> {{ $restaurant->address }}</p>
+                                                                        <p><strong>Area:</strong> {{ $restaurant->genre_place }}</p>
+                                                                        <p><strong>Genre:</strong> {{ $restaurant->genre_variety }}</p>
+                                                                        <p><strong>Dietary Restrictions:</strong> {{ $restaurant->genre_religion }}</p>
+                                                                        <p><strong>Payment Method:</strong> {{ $restaurant->genre_payment }}</p>
+                                                                    </div>
+                                                                    <!-- コメント部分 -->
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                @if ($restaurant->comments->count() > 0)
+                                                                                    <div class="card">
+                                                                                        <div class="card-header">
+                                                                                            <h3 class="card-title">Review</h3>
+                                                                                        </div>
+                                                                                        <div class="card-body" style="overflow-y: auto; max-height: 300px;">
+                                                                                            <div class="list-group">
+                                                                                                @foreach ($restaurant->comments as $comment)
+                                                                                                <div class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                                                                                                    <div>
+                                                                                                        <!-- 制限されたテキスト -->
+                                                                                                        <div id="comment-{{ $comment->id }}-short">
+                                                                                                            <p>{{ substr($comment->comment, 0, 20) }}...</p>
+                                                                                                            <!-- 「もっと読む」ボタン -->
+                                                                                                            <a href="#" onclick="toggleFullText('{{ $comment->id }}', true)" id="read-more-{{ $comment->id }}">Read more</a>
+                                                                                                        </div>
+                                                                                                        <!-- フルテキスト（最初は非表示） -->
+                                                                                                        <div id="comment-{{ $comment->id }}-full" style="display: none";>
+                                                                                                        <p>{{ $comment->comment }}</p>
+                                                                                                        <!-- 「閉じる」ボタン -->
+                                                                                                        <a href="#" onclick="toggleFullText('{{ $comment->id }}', false)" id="read-less-{{ $comment->id }}">Close</a>
+                                                                                                    </div>
+
+                                                                                                    </div>
+                                                                                                    @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
+                                                                                                        <form method="POST" action="{{ route('restaurant_comments.destroy', $comment->id) }}">
+                                                                                                            @csrf
+                                                                                                            @method('DELETE')
+                                                                                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                                                                        </form>
+                                                                                                    @endif
+                                                                                                </div>
+                                                                                                @endforeach
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @else
+                                                                                <div class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                                                                                    <p>Please write your reviews or comments</p>
+                                                                                </div>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <script>
+                                                                        // 「もっと読む」ボタンまたは「閉じる」ボタンがクリックされたときに実行される関数
+                                                                        function toggleFullText(commentId, showFull) {
+                                                                            // 対応するコメントの短縮テキストとフルテキストを切り替えて表示
+                                                                            document.getElementById('comment-' + commentId + '-short').style.display = showFull ? 'none' : 'block';
+                                                                            document.getElementById('comment-' + commentId + '-full').style.display = showFull ? 'block' : 'none';
+                                                                            // 「もっと読む」ボタンと「閉じる」ボタンを切り替えて表示
+                                                                            document.getElementById('read-more-' + commentId).style.display = showFull ? 'none' : 'inline';
+                                                                            document.getElementById('read-less-' + commentId).style.display = showFull ? 'inline' : 'none';
+                                                                        }
+                                                                    </script>
+                                                                    
+                                                                    <div class="row mt-5 justify-content-start"> <!-- コメントフォームを左寄せに配置 -->
+                                                                        <div class="col-md-8"> <!-- col-md-6 から col-md-8 に変更 -->
+                                                                            @if (Auth::check())
+                                                                                <form method="POST" action="{{ route('restaurant_comments.store') }}">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="restaurant_post_id" value="{{ $restaurant->id }}">
+                                                                                    <div class="mb-3">
+                                                                                        <label for="comment" class="form-label"><h3>Review</h3></label>
+                                                                                        <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="You can write your comments here"></textarea>
+                                                                                    </div>
+                                                                                    <button type="submit" class="btn-border">Comment</button>
+                                                                                </form>
+                                                                            @else
+                                                                                <p>You can write your comments here</p>
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form bg-light p-5 rounded ms-md-4" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 400px;">
+                                                            <h2 class="mb-4 text-center" style="font-size: 1.5rem; color: #333;">Reservation Form</h2>
+                                                        
+                                                            <!-- 予約フォーム -->
+                                                            <div class="booking">
+                                                                <form action="{{ route('rbooking.store') }}" method="POST" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <input type="hidden" name="restaurant_post_id" value="{{ $restaurant->id }}">
+                                                                    
+                                                                    <div class="mb-3">
+                                                                        <label for="day">Desired Date:</label>
+                                                                        <input type="date" id="day" name="day" class="form-control" value="#" required>
+                                                                    </div>
+                                                                    
+                                                                    <div class="mb-3">
+                                                                        <label for="time1">First Preferred Time:</label>
+                                                                        <select id="time1" name="time1" class="form-control" required>
+                                                                            <option value="">-- Please select a time --</option>
+                                                                            <optgroup label="朝 (6:00 - 11:59)">
+                                                                                @for ($hour = 6; $hour < 12; $hour++)
+                                                                                    <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                @endfor
+                                                                            </optgroup>
+                                                                            <optgroup label="昼 (12:00 - 17:59)">
+                                                                                @for ($hour = 12; $hour < 18; $hour++)
+                                                                                    <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                @endfor
+                                                                            </optgroup>
+                                                                            <optgroup label="夕方 (18:00 - 21:59)">
+                                                                                @for ($hour = 18; $hour < 22; $hour++)
+                                                                                    <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                @endfor
+                                                                            </optgroup>
+                                                                            <optgroup label="夜 (22:00 - 23:59)">
+                                                                                @for ($hour = 22; $hour < 24; $hour++)
+                                                                                    <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                @endfor
+                                                                            </optgroup>
+                                                                            <!-- 時間のオプション -->
+                                                                        </select>
+                                                                    </div>
+                                                                    
+                                                                    <div class="mb-3">
+                                                                        <label for="time2">Second Preferred Tim:</label>
+                                                                        <select id="time2" name="time2" class="form-control" required>
+                                                                            <option value="">-- First Preferred Time --</option>
+                                                                            <optgroup label="朝 (6:00 - 11:59)">
+                                                                                @for ($hour = 6; $hour < 12; $hour++)
+                                                                                    <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                @endfor
+                                                                            </optgroup>
+                                                                            <optgroup label="昼 (12:00 - 17:59)">
+                                                                                @for ($hour = 12; $hour < 18; $hour++)
+                                                                                    <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                @endfor
+                                                                            </optgroup>
+                                                                            <optgroup label="夕方 (18:00 - 21:59)">
+                                                                                @for ($hour = 18; $hour < 22; $hour++)
+                                                                                    <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                @endfor
+                                                                            </optgroup>
+                                                                            <optgroup label="夜 (22:00 - 23:59)">
+                                                                                @for ($hour = 22; $hour < 24; $hour++)
+                                                                                    <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
+                                                                                @endfor
+                                                                            </optgroup>
+                                                                            <!-- 時間のオプション -->
+                                                                        </select>
+                                                                    </div>
+                                                                    
+                                                                    <div class="mb-3">
+                                                                        <label for="number_guests">Number of Guests:</label>
+                                                                        <select id="number_guests" name="number_guests" class="form-control" required>
+                                                                            <option value="">-- Please select --</option>
+                                                                            <option value="1">1 person</option>
+                                                                            <option value="2">2 people</option>
+                                                                            <option value="3">3 people</option>
+                                                                            <option value="4">4 people</option>
+                                                                            <option value="5">5 people</option>
+                                                                            <option value="6">6 people</option>
+                                                                            <option value="7">7 people</option>
+                                                                            <option value="8">8 people</option>
+                                                                            <option value="9">9 people</option>
+                                                                            <option value="10">More than 10 people</option>
+                                                                        </select>                                                                                    
+                                                                    </div>
+                                                                    
+                                                                    <div class="mb-3">
+                                                                        <label for="memo">Memo:</label>
+                                                                        <textarea id="memo" name="memo" class="form-control"></textarea>
+                                                                    </div>
+                                                                    
+                                                                    <div class="d-grid">
+                                                                        <button type="submit" class="btn-border">Make a Reservation</button>
+                                                                    </div>
+                                                                    
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>   
+                                            </div>
+                                            {{-- footer --}}
+                                            <div class="modal-footer">
+                                                <div class="container-fluid">
+                                                    <div class="row justify-content-between align-items-center">
+                                                        <div class="col-md-auto">
+                                                            @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
+                                                            {{-- <form action="{{ route('restaurants.edit', ['restaurant' => $restaurant]) }}">  --}}
+                                                                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $restaurant->id }}">
+                                                                    <i class="ri-edit-2-line"></i>
+                                                                </button>
+                                                            {{-- </form> --}}
+                                                            @endif 
+                                                        </div>                                                        
+                                                        <div class="col-md-auto">
+                                                            <div class="btn-group" role="group" aria-label="アクション">
+                                                                @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
+                                                                <form action="{{ route('restaurants.destroy', ['restaurant' => $restaurant]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete?')">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger">
+                                                                        <i class="ri-delete-bin-line"></i>
+                                                                    </button>
+                                                                </form>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- modal content -->
 
                                 {{-- edit --}}
                                     <div class="modal fade" id="exampleModal{{ $restaurant->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
