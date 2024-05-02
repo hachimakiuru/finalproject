@@ -66,7 +66,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="place" class="col-sm-2 col-form-label">>Place</label>
+                                                <label for="place" class="col-sm-2 col-form-label">Place</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" id="place" name="place" class="form-control @error('place') is-invalid @enderror" value="">
                                                     @error('place')
