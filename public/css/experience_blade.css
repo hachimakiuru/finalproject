@@ -1,18 +1,21 @@
 input[type="checkbox"] + label {
-    background-color: gray;
+    background-color: white;
+    border: 1px solid black;
   }
   
   input[type="checkbox"]:checked  + label {
-    background-color: blue;
+    background-color: gray;
+    border: 1px solid black;
+
   }
   
   input[type="checkbox"] {
     display: none;
   }
   
-  .custom-button{
+  /* .custom-button{
     background-color: gray!important;
-  }
+  } */
   
   
   .custom-card {
@@ -93,7 +96,8 @@ input[type="checkbox"] + label {
   /* justify-content: center !important; */
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 3.33%;
 }
 
 .moreposts{
@@ -137,4 +141,21 @@ input[type="checkbox"] + label {
 
 .card.custom-card {
   margin: 3px 0px 3px 0px;
+}
+
+.btn ig-permissionz{
+  border-radius: 5px;
+}
+.ig-permission:hover {
+  border: 1px solid black!important;
+}
+
+header {
+  position: unset!important;
+}
+
+.item {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
