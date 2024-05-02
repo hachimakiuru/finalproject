@@ -188,6 +188,8 @@ button.btn-border-shadow--color2-1:before {
 }
 
 .ri-arrow-left-fill{
+  /* margin-right: 0px; */
+  margin-left: 400px;
   text-decoration: none; 
   font-size: 24px; 
   color: black; 
@@ -198,6 +200,8 @@ a{
 }
 
 .ri-arrow-right-fill{
+  /* margin-left: 0px; */
+  margin-right: 400px;
   text-decoration: none; 
   font-size: 24px; 
   color: black; 
