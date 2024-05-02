@@ -6,6 +6,7 @@ use App\Models\ChFavorite;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role as ModelsRole;
 
@@ -49,7 +50,7 @@ class AuthController extends Controller
             'favorite_id' => 1,
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'アカウント追加が完了しました！');
+        return redirect()->route('admin.dashboard')->with('success', 'Account has been created successfully!');
     }
 
     public function login()
@@ -59,7 +60,6 @@ class AuthController extends Controller
 
     public function authenticate()
     {
-        // dd(request()->all());
         $valideaed = request()->validate(
             [
                 'email' => 'required|email',
@@ -69,14 +69,21 @@ class AuthController extends Controller
         );
 
         if (auth()->attempt($valideaed)) {
-            request()->session()->regenerate();
-            return redirect()->route('welcome')->with('success', 'ログインが完了しました!');;
+            // ユーザーがログインした場合の処理
+            $user = Auth::user();
+            $user->increment('login_count');
 
-            // return redirect()->route('/')->
+            if ($user->login_count == 1) {
+                // ログイン回数が1の場合はパスワード変更ページにリダイレクト
+                return redirect()->route('password.change.form');
+            }
+
+            request()->session()->regenerate();
+            return redirect()->route('welcome')->with('success', 'You have been logged in successfully.');;
         }
 
         return redirect('login')->withErrors([
-            'email'  => "入力された情報全てにマッチするアカウントはありませんでした。"
+            'email'  => "No account matching all the provided information was found."
         ]);
     }
 
@@ -87,6 +94,6 @@ class AuthController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect('login')->with('success', "ログアウトしました。");
+        return redirect('login')->with('success', "You have been logged out.");
     }
 }

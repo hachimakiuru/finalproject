@@ -4,3 +4,19 @@
 .container {
   margin-top: 5%;
 }
+
+.btn-passwordChange {
+  padding: 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background: none
+}
+
+
+.btn-passwordChange a{
+  color: black;
+  text-decoration: none;
+  border-bottom: 1px solid;
+}

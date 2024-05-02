@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email_verified_at',
         'memo',
         'role_id',
+        'login_count', // ログイン回数を追加
     ];
 
     /**

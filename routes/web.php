@@ -16,7 +16,7 @@ use App\Http\Controllers\WelcomeController;
 
 
 use App\Http\Controllers\ExperienceController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\LikeController;
 
 use App\Http\Controllers\NewsBookingController;
@@ -27,6 +27,8 @@ use App\Http\Controllers\RestaurantLikeController;
 use App\Http\Controllers\RestaurantCommentsController;
 
 use App\Http\Controllers\NewsCalendarController;
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Models\NewsBooking;
 
 Route::get('/', function () {
@@ -35,7 +37,7 @@ Route::get('/', function () {
 
 Route::get('/welcome', function () {
     return view('welcome');
-})->name('welcome');
+})->name('welcome')->middleware(['auth']);
 
 // ここのルートを変更して各自の画面を確認する
 
@@ -78,11 +80,21 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Password Change
+Route::get('/password/change', [PasswordController::class, 'showChangeForm'])->name('password.change.form');
+Route::post('/password/change', [PasswordController::class, 'changePassword'])->name('password.change');
+
+// パスワードリセットのためのルート定義(使用できない)
+Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
 // admin.dashboardのルート
 Route::get('/admin', [UserController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'can:admin']);
-Route::get('/admin/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
-Route::post('/admin/{user}', [UserController::class, 'update'])->name('user.update');
-Route::delete('/admin/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::get('/admin/{user}/edit', [UserController::class, 'edit'])->name('user.edit')->middleware(['auth', 'can:admin']);
+Route::post('/admin/{user}', [UserController::class, 'update'])->name('user.update')->middleware(['auth', 'can:admin']);
+Route::delete('/admin/{user}', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth', 'can:admin']);
 
 // --------------------------------------------------------------
 

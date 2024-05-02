@@ -6,6 +6,8 @@
   a {
     color: white;
     text-decoration: none;
+    font-weight: lighter;
+    font-size: 15px;
   }
   li {
     list-style: none;

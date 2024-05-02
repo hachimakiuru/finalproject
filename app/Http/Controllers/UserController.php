@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-
-
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -44,8 +42,9 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'room_number' => 'nullable|integer|min:100',
+            'room_number' => 'nullable|integer',
             'role_id' => 'required|exists:roles,id',
+            'password' => 'nullable|string|min:8', // パスワードは空でも許可する
         ]);
 
         $user->update([
@@ -53,16 +52,16 @@ class UserController extends Controller
             'email' => $request->email,
             'room_number' => $request->room_number,
             'role_id' => $request->role_id,
+            'password' => $request->password,
+            'password' => Hash::make($request->password),
         ]);
-
-        // return redirect()->route('user.edit', $user->id)->with('success', 'ユーザー情報が更新されました。');
-        return redirect()->route('admin.dashboard')->with('success', 'ユーザー情報が更新されました。');
+        return redirect()->route('admin.dashboard')->with('success', "You have successfully changed user's information");
     }
 
     public function destroy(User $user)
     {
         // dd($user);
         $user->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'ユーザーの削除が完了しました。');
+        return redirect()->route('admin.dashboard')->with('success', 'This user account has been successfully deleted');
     }
 }

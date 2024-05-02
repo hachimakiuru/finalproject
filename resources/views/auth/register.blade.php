@@ -26,8 +26,8 @@
                   @enderror
               </div>
               <div class="form-group mt-3">
-                <label for="room_number" class="text-dark">Room Number: <span class="required">Only Guest is required</span></label><br>
-                <input type="number" name="room_number" id="room_number" min="100" class="form-control">
+                <label for="room_number" class="text-dark">Room Number or Employee ID </label><br>
+                <input type="number" name="room_number" id="room_number" class="form-control">
                 @error('room_number')
                 <span class="d-block fs-6 text-danger mt-10">{{ $message }}</span>
                 @enderror
@@ -60,9 +60,6 @@
               <div class="form-group">
                   <label for="remember-me" class="text-dark"></label><br>
                   <input type="submit" name="submit" class="btn btn-dark btn-md" value="Submit">
-              </div>
-              <div class="text-right mt-3">
-                  <a href="/login" class="text-dark">Click to login</a>
               </div>
           </form>
       </div>
