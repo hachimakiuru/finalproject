@@ -1,19 +1,21 @@
 input[type="checkbox"] + label {
-    background-color: gray;
+  background-color: white;
+  border: 1px solid black;
   }
   
   input[type="checkbox"]:checked  + label {
-    background-color: blue;
+    background-color: gray;
+    border: 1px solid black;
   }
   
   input[type="checkbox"] {
     display: none;
   }
   
-  .custom-button{
+  /* .custom-button{
     background-color: gray!important;
   }
-  
+   */
   
   .custom-card {
     /* カードの幅を調整 */
@@ -109,7 +111,3 @@ input[type="checkbox"] + label {
   font-weight: 50; 
 }
 
-.modal fad for derails{
-  font-size: 25px; 
-  font-weight: 50; 
-}

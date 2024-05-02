@@ -43,7 +43,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $experience->title }}</h5>
                 <h5 class="modalforpostnumber">#{{ $experience->id }}</h5>
-                <h5 class="card-updatedat">update date：{{ $experience->updated_at ->format('F j, Y')}}</h5>
+                <h5 class="card-updatedat">Update Date：{{ $experience->updated_at ->format('F j, Y')}}</h5>
                 <button type="button" class="btn btn-primary detail-button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $key }}" data-title="{{ $experience->title }}" data-address="{{ $experience->address }}" data-content="{{ $experience->content }}" data-image="{{ asset('storage/img/' . $experience->image_path) }}"><i class="ri-more-line"></i></button>
                
                 {{-- 投稿者のみ更新・削除ボタンを表示開始 --}}
@@ -98,7 +98,7 @@
                         <textarea placeholder="e.g. I wennt to Disney land" name="title" id="updateTitle{{ $key }}" class="form-control" cols="100" rows="5">{{ $experience->title }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="updateAddress{{ $key }}">location</label>
+                        <label for="updateAddress{{ $key }}">Location</label>
                         <input type="text" class="form-control" id="updateAddress{{ $key }}" name="address" value="{{ $experience->address }}">
                     </div>
                     {{-- <div class="form-group">
@@ -107,7 +107,7 @@
                     </div> --}}
 
                     <div class="mb-3">
-                        <span class="form-label">instagram permission *click the button if you don't mind :</span>
+                        <span class="form-label">Instagram permission *click the button if you don't mind :</span>
                         <div class="input-group" style="width: 100%;">
                             <input type="checkbox" id="instagram_permission{{ $experience->id }}" name="instagrampermission"  style="width: 100%;" @if ($experience->ig_permission)
                                 checked
@@ -210,7 +210,7 @@
                     <span class="form-label">instagram permission *click the button if you don't mind :</span>
                     <div class="input-group" style="width: 100%;">
                         <input type="checkbox" id="instagram_permission" name="instagrampermission"  style="width: 100%;">
-                        <label for="instagram_permission" class="btn ig-permission">share my memory on Instagram</label>
+                        <label for="instagram_permission" class="btn ig-permission" style="border-radius: 5px";>share my memory on Instagram</label>
                         
                     </div>
                 </div>
@@ -314,7 +314,7 @@
     });
 
 </script>
-    
+@endsection
 
 
 

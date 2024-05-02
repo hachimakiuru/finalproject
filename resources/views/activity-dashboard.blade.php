@@ -5,11 +5,6 @@
     <link rel="stylesheet" href="{{ asset('/css/activity-dasboad-blade.css')  }}" >
     <link rel="stylesheet" href="{{ asset('/css/experience_blade.css') }}">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-    <style>
-        header {
-            position: unset!important;
-        }
-    </style>
 @endpush
 <div class="containerfullpage" style="paddin-inline: 50px;">
     <div class="container" style="gap:17px;">
@@ -373,7 +368,7 @@
                                 {{-- <div class="input-group" style="width: 100%;"> --}}
                                     <div class="input-group" style="width: 100%;">
                                     {{-- <input type="text" id="title" name="title"  style="width: 100%;"> --}}
-                                    <textarea placeholder="e.g. I wennt to Disney land" name="title" id="title" cols="100" rows="5"></textarea>
+                                    <textarea placeholder="e.g. I went to Disneyland" name="title" id="title" cols="100" rows="5"></textarea>
                                 </div>
                             </div>
             
@@ -394,7 +389,7 @@
                                 <h6 class=" text-sm fs-6 text-danger" >*click the button if you don't mind :</h6>
                                 <div class="input-group" style="width: 100%;">
                                     <input type="checkbox" id="instagram_permission" name="instagrampermission"  style="width: 100%;">
-                                    <label for="instagram_permission" class="btn ig-permission">share my memory on Instagram</label>
+                                    <label for="instagram_permission" class="btn ig-permission"  style="border-radius: 5px";>share my memory on Instagram</label>
                                     
                                 </div>
                             </div>
@@ -465,7 +460,7 @@
 
                     if (data.length === 0) {
                     // データが空の場合
-                    $('#dateResult').append('<div class="no-information">NO EVENTS TODAY</div>');
+                    $('#dateResult').append('<div class="no-information">NO EVENTS</div>');
                     } else {
                     data.forEach(d => {
                         var $container = $('<div></div>').addClass('parent');
