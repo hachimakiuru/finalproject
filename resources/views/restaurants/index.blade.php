@@ -638,11 +638,11 @@
                                                     <div class="row justify-content-between align-items-center">
                                                         <div class="col-md-auto">
                                                             @if(Auth::check() && (Auth::user()->id === $restaurant->user_id || Auth::user()->role_id === 1))
-                                                            {{-- <form action="{{ route('restaurants.edit', ['restaurant' => $restaurant]) }}">  --}}
+
                                                                 <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $restaurant->id }}">
                                                                     <i class="ri-edit-2-line"></i>
                                                                 </button>
-                                                            {{-- </form> --}}
+
                                                             @endif 
                                                         </div>                                                        
                                                         <div class="col-md-auto">
@@ -683,7 +683,7 @@
 
                                             <div class="modal-body" >
                                               {{-- ...yawa --}}
-                                              <form action="{{ route('restaurants.update', ['restaurant' => $restaurant]) }}" method="post" enctype="multipart/form-data">
+                                            <form action="{{ route('restaurants.update', ['restaurant' => $restaurant]) }}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('put')
                                                 <div class="mb-3 row">
@@ -827,7 +827,7 @@
                                         </form>
                                           </div>
                                         </div>
-                                      </div>
+                                    </div>
                                       {{-- edit --}}
 
                                 @endforeach

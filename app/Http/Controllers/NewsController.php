@@ -146,9 +146,13 @@ class NewsController extends Controller
         //     $newsTimeLine->image = basename($imagePath);
         // }
 
-        $genre = $newsTimeLine->genre_id;
+      
+
+  
 
         $newsTimeLine->save();
+
+        $genre = NewsTimeLine::find($id)->genre_id;
 
         if ($genre == 1) {
             return redirect()->route('news.event');

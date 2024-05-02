@@ -276,15 +276,16 @@
             {{-- footer --}}
             <div class="modal-footer">
                 <!-- フッターの内容 -->
-                @if (Auth::user()->role_id == 1 || Auth::id() == $newsTimeLine->user_id)  
+                {{-- @if (Auth::user()->role_id == 1 || Auth::id() == $newsTimeLine->user_id)   --}}
+                @if(Auth::check() && (Auth::user()->role_id === 1 || Auth::id() === $newsTimeLine->user_id))
                 <div class="container-fluid">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-md-auto">
-                            <form action="{{ route('news.news-edit' , $newsTimeLine -> id) }}">
-                                <button type="submit" class="btn btn-primary" data-bs-target="#editModal_{{ $newsTimeLine->id }}">
+                          {{-- 編集Modalのボタン --}}
+                                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal_{{ $newsTimeLine->id }}">
                                     <i class="ri-edit-2-line"></i>
                                 </button>
-                            </form>
+                        {{-- 編集Modalのボタン --}}
                         </div>                                                        
                         <div class="col-md-auto">
                             <div class="btn-group" role="group" aria-label="アクション">
@@ -305,6 +306,85 @@
     </div>
 </div>
 <!--詳細&予約モーダル終 -->
+
+{{-- 編集 --}}
+<div class="modal fade" id="editModal_{{ $newsTimeLine->id }}" tabindex="-1" aria-labelledby="editModalLabel_{{ $newsTimeLine->id }}" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel_{{ $newsTimeLine->id }}">Edit your post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="redirectToIndex()"></button>
+
+                <script>
+                    function redirectToIndex() {
+                        window.location.href = "{{ route('news.others') }}";
+                    }
+                </script>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('news.update',$newsTimeLine->id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('put')
+                    <div class="mb-3">
+                        <label for="username" class="form-label">ユーザー名</label> 
+                        {{-- <input type="text" id="username" name="user_id" class="form-control @error('user_id') is-invalid @enderror" value="{{ old('user_id') }}">  --}}
+                         <p>{{Auth::user()->name }}</p>
+                        @error('user_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">タイトル</label>
+                        <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ $newsTimeLine->title }}">
+                        @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="start" class="form-label">開催日</label>
+                        <input type="date" id="start" name="start" class="form-control @error('start') is-invalid @enderror" value="{{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }}">
+                        @error('start')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="place" class="form-label">場所</label>
+                        <input type="text" id="place" name="place" class="form-control @error('place') is-invalid @enderror" value="{{ $newsTimeLine->place }}">
+                        @error('place')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">内容</label>
+                        <input type="text" id="content" name="content" class="form-control @error('content') is-invalid @enderror" value="{{ $newsTimeLine->content }}">
+                        @error('content')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">金額</label>
+                        <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ $newsTimeLine->price }}">
+                        @error('price')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="others" class="form-label">その他</label>
+                        <input type="text" id="others" name="others" class="form-control @error('others') is-invalid @enderror" value="{{ $newsTimeLine->others }}">
+                        @error('others')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- 編集 --}}
+
 
 
 
