@@ -12,9 +12,9 @@
                 <div class="restaurant-dashboard-center">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <a href="{{ route('news.event') }}"><i class="ri-arrow-left-fill"></i></a><h4>その他おすすめ情報</h4><a href="{{ route('news.japan-culture') }}"><i class="ri-arrow-right-fill"></i></a>
+                            <a href="{{ route('news.event') }}"><i class="ri-arrow-left-fill"></i></a><h4>Other Recommendations</h4><a href="{{ route('news.japan-culture') }}"><i class="ri-arrow-right-fill"></i></a>
                             @if (Auth::user()->role_id == 1)  
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">投稿</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Post ></button>
                             @endif
                         </div>
 
@@ -23,14 +23,14 @@
                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">新規投稿</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Create New Post </h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="mb-3 row">
-                                                <label for="username" class="col-sm-2 col-form-label">ユーザー名</label>
+                                                <label for="username" class="col-sm-2 col-form-label">User Name</label>
                                                 <div class="col-sm-10">
                                                     <p>{{Auth::user()->name }}</p>
                                                     @error('user_id')
@@ -39,16 +39,16 @@
                                                 </div>
                                             </div>
                                             <div class="news-option">
-                                                <label for="genre" class="news-option-form">ジャンル</label>
+                                                <label for="genre" class="news-option-form">Categories</label>
                                                 <select name="genre_id" id="genre">
-                                                    <option value="3">日本文化</option>
-                                                    <option value="2">ホテルからのお知らせ</option>
-                                                    <option value="4">その他おすすめ情報</option>
-                                                    <option value="1">ローカルイベント</option>
+                                                    <option value="3">Japanese Culture</option>
+                                                    <option value="2">Hotel Information</option>
+                                                    <option value="4">Other Recommendations</option>
+                                                    <option value="1">Local Events</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="title" class="col-sm-2 col-form-label">タイトル</label>
+                                                <label for="title" class="col-sm-2 col-form-label">Title</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="">
                                                     @error('title')
@@ -57,7 +57,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="start" class="col-sm-2 col-form-label">開催日</label>
+                                                <label for="start" class="col-sm-2 col-form-label">Event Date</label>
                                                 <div class="col-sm-10">
                                                     <input type="date" id="start" name="start" class="form-control @error('start') is-invalid @enderror" value="">
                                                     @error('start')
@@ -66,7 +66,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="place" class="col-sm-2 col-form-label">場所</label>
+                                                <label for="place" class="col-sm-2 col-form-label">Place</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" id="place" name="place" class="form-control @error('place') is-invalid @enderror" value="">
                                                     @error('place')
@@ -75,7 +75,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="place" class="col-sm-2 col-form-label">内容</label>
+                                                <label for="place" class="col-sm-2 col-form-label">Content</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" id="content" name="content" class="form-control @error('place') is-invalid @enderror" value="">
                                                     @error('place')
@@ -84,7 +84,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="price" class="col-sm-2 col-form-label">金額</label>
+                                                <label for="price" class="col-sm-2 col-form-label">Price</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" id="price" name="price"  placeholder="~yen ＊rough price" class="form-control @error('price') is-invalid @enderror" value="">
                                                     @error('price')
@@ -94,7 +94,7 @@
                                             </div>
                                           
                                             <div class="mb-3 row">
-                                                <label for="others" class="col-sm-2 col-form-label">その他</label>
+                                                <label for="others" class="col-sm-2 col-form-label">Others</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" id="others" name="others" class="form-control @error('others') is-invalid @enderror" value="">
                                                     @error('others')
@@ -103,7 +103,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3 row">
-                                                <label for="image" class="col-sm-2 col-form-label">写真</label>
+                                                <label for="image" class="col-sm-2 col-form-label">Photo</label>
                                                 <div class="col-sm-10">
                                                     <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" value="">
                                                     @error('image')
@@ -113,7 +113,7 @@
                                             </div>
                                          
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">保存する</button>
+                                                <button type="submit" class="btn btn-primary">Share</button>
                                             </div>
                                         </form>
                                     </div>
@@ -149,7 +149,7 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ $newsTimeLine->title }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Details & Reservation Form</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         
@@ -164,33 +164,33 @@
                                     <div class="text-center">
                                         <img src="{{ asset('storage/img/' . $newsTimeLine->image) }}" class="img-fluid rounded shadow-lg mb-4" alt="restaurant photo" style="max-width: 100%;">
                                     </div>
-                                    <p><strong>ユーザー名:</strong> {{ $newsTimeLine->user->name }}</p>
-                                    <p><strong>開催日:</strong> {{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }}</p>
-                                    <p><strong>場所:</strong> {{ $newsTimeLine->content }}</p>
-                                    <p><strong>内容:</strong> {{ $newsTimeLine->place }}</p>
-                                    <p><strong>金額:</strong> {{ $newsTimeLine->price }}~yen ＊rough price</p>
-                                    <p><strong>その他:</strong> {{ $newsTimeLine->others }}</p>
+                                    <p><strong>User Name:</strong> {{ $newsTimeLine->user->name }}</p>
+                                    <p><strong>Event Date:</strong> {{ \Carbon\Carbon::parse($newsTimeLine->start)->format('Y-m-d') }}</p>
+                                    <p><strong>Place:</strong> {{ $newsTimeLine->content }}</p>
+                                    <p><strong>Content:</strong> {{ $newsTimeLine->place }}</p>
+                                    <p><strong>Price:</strong> {{ $newsTimeLine->price }}~yen ＊rough pric</p>
+                                    <p><strong>Others:</strong> {{ $newsTimeLine->others }}</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 予約フォーム -->
                         <div class="form bg-light p-5 rounded ms-md-4" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 400px;">
-                            <h2 class="mb-4 text-center" style="font-size: 1.5rem; color: #333;">予約フォーム</h2>
+                            <h2 class="mb-4 text-center" style="font-size: 1.5rem; color: #333;">Reservation Form</h2>
                             <div class="booking">
                                 <form action="{{ route('news-booking.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="news_time_line_id" value="{{ $newsTimeLine->id }}">
 
                                     <div class="mb-3">
-                                        <label for="day">希望日:</label>
+                                        <label for="day">Desired Date:</label>
                                         <input type="date" id="day" name="day" class="form-control" value="#" required>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="time1">第一希望時間:</label>
+                                        <label for="time1">First Preferred Time:</label>
                                         <select id="time1" name="time1" class="form-control" required>
-                                            <option value="">-- 時間を選択してください --</option>
+                                            <option value="">-- Please select a time --</option>
                                             <optgroup label="朝 (6:00 - 11:59)">
                                                 @for ($hour = 6; $hour < 12; $hour++)
                                                     <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
@@ -215,9 +215,9 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="time2">第二希望時間:</label>
+                                        <label for="time2">Second Preferred Tim:</label>
                                         <select id="time2" name="time2" class="form-control" required>
-                                            <option value="">-- 時間を選択してください --</option>
+                                            <option value="">-- Please select a time --</option>
                                             <optgroup label="朝 (6:00 - 11:59)">
                                                 @for ($hour = 6; $hour < 12; $hour++)
                                                     <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
@@ -242,24 +242,24 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="number_guests">ゲスト人数:</label>
+                                        <label for="number_guests">Number of Guests:</label>
                                         <select id="number_guests" name="number_guests" class="form-control" required>
-                                            <option value="">-- 選択してください --</option>
-                                            <option value="1">1人</option>
-                                            <option value="2">2人</option>
-                                            <option value="3">3人</option>
-                                            <option value="4">4人</option>
-                                            <option value="5">5人</option>
-                                            <option value="6">6人</option>
-                                            <option value="7">7人</option>
-                                            <option value="8">8人</option>
-                                            <option value="9">9人</option>
-                                            <option value="10">10人以上</option>
+                                            <option value="">-- Please select --</option>
+                                            <option value="1">1person</option>
+                                            <option value="2">2person</option>
+                                            <option value="3">3person</option>
+                                            <option value="4">4person</option>
+                                            <option value="5">5person</option>
+                                            <option value="6">6person</option>
+                                            <option value="7">7person</option>
+                                            <option value="8">8person</option>
+                                            <option value="9">9person</option>
+                                            <option value="10">More than 10 people</option>
                                         </select>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="memo">メモ:</label>
+                                        <label for="memo">Memo:</label>
                                         <textarea id="memo" name="memo" class="form-control"></textarea>
                                     </div>
 
@@ -288,7 +288,7 @@
                         </div>                                                        
                         <div class="col-md-auto">
                             <div class="btn-group" role="group" aria-label="アクション">
-                                <form action="{{ route('news.destroy', $newsTimeLine -> id) }}" method="POST" onsubmit="return confirm('本当に削除しますか？')">
+                                <form action="{{ route('news.destroy', $newsTimeLine -> id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">
