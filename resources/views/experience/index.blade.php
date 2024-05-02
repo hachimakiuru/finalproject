@@ -22,10 +22,10 @@
 
 
 <div class="d-flex justify-content-center p-3">
-    <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#test">share your memories here!</button>
+    <button class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#test">Share your memories!</button>
 </div>
 <div>
-    <p class='experience-index-instagram'>Check our officieal Instagram
+    <p class='experience-index-instagram'>Check our official Instagram
         <a href="https://www.instagram.com/hoshinoresorts.official/" target="blank" style="text-decoration: none;"><i class="ri-instagram-line" style="color: #colorcode;"></i></a>
     </p>
 </div>

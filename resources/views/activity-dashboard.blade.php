@@ -43,10 +43,10 @@
         <!-- アクティビティ -->
             <div class="right overflow-scroll">
                 <div class="d-flex justify-content-center p-3">
-                    <button class="btn custom-button" data-bs-toggle="modal" data-bs-target="#test">share your memories!!</button>
+                    <button class="btn btn-border-shadow btn-border-shadow--color2 custom-btn" data-bs-toggle="modal" data-bs-target="#test">Share your memories!!</button>
                 </div>
                 <div>
-                    <p class='experience-index-instagram'>Check our officieal Instagram
+                    <p class='experience-index-instagram'>Check our official Instagram
                         <a href="https://www.instagram.com/hoshinoresorts.official/" target="blank" style="text-decoration: none;"><i class="ri-instagram-line" style="color: #colorcode;"></i></a>
                     </p>
                 </div>
@@ -136,44 +136,57 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="updateModalLabel{{ $key }}">投稿を更新するよ</h5>
+                                <h5 class="modal-title" id="updateModalLabel{{ $key }}">Update</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form id="updateForm{{ $key }}" action="{{ route('experience.update', $experience->id) }}" method="POST"  enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
+
+
                                     <div class="form-group">
-                                        <label for="updateTitle{{ $key }}">タイトル</label>
-                                        <input type="text" class="form-control" id="updateTitle{{ $key }}" name="title" value="{{ $experience->title }}">
+                                        <label for="updateImage{{ $key }}">Pick your memory</label>
+                                        <input type="file" class="form-control" id="updateImage{{ $key }}" name="image" accept="image/*">
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="updateAddress{{ $key }}">住所</label>
+                                        <label for="updateTitle{{ $key }}">Post</label>
+                                        {{-- <input type="text" class="form-control" id="updateTitle{{ $key }}" name="title" value="{{ $experience->title }}"> --}}
+                                        <textarea placeholder="e.g. I wennt to Disney land" name="title" id="updateTitle{{ $key }}" class="form-control" cols="100" rows="5">{{ $experience->title }}</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="updateAddress{{ $key }}">Location</label>
                                         <input type="text" class="form-control" id="updateAddress{{ $key }}" name="address" value="{{ $experience->address }}">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="updateContent{{ $key }}">内容</label>
-                                        <textarea class="form-control" id="updateContent{{ $key }}" name="content" rows="3">{{ $experience->content }}</textarea>
-                                    </div>
-                
+                                            
                                     <div class="mb-3">
-                                        <span class="form-label">instagram permission :</span>
+                                        <span class="form-label">Instagram permission :</span>
                                         <div class="input-group" style="width: 100%;">
                                             <input type="checkbox" id="instagram_permission{{ $experience->id }}" name="instagrampermission"  style="width: 100%;" @if ($experience->ig_permission)
                                                 checked
                                             @endif>
-                                            <label for="instagram_permission{{ $experience->id }}" class="btn ig-permission">投稿可能な場合はこちらをクリック</label>
+                                            <label for="instagram_permission{{ $experience->id }}" class="btn ig-permission">Share my memory on Instagram</label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mb-3">
+                                        <label for="instagram_account" class="form-label">Instagram Account:</label>
+                                        <div class="input-group" style="width: 100%;">
+                                            <input type="text" id="instagramaccount" name="instagramaccount"  style="width: 100%;" placeholder="e.g. @hoshinoresorts.official">
                                         </div>
                                     </div>
                 
-                                    <div class="form-group">
-                                        <label for="updateImage{{ $key }}">画像を選択してください</label>
+                                    {{-- <div class="form-group">
+                                        <label for="updateImage{{ $key }}">Pick your memory</label>
                                         <input type="file" class="form-control" id="updateImage{{ $key }}" name="image" accept="image/*">
-                                    </div>
+                                    </div> --}}
                                 </br>
                                     <div class="mb-3">
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">更新</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </div>
                                 </div>
@@ -194,6 +207,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <img src="{{ asset('storage/img/' . $experience->image_path) }}" class="card-img-top" alt="...">
+                                    <p><strong></strong> {{ $experience->title }}</p>
                                     <p><strong></strong> {{ $experience->content }}</p>
                                     <p><strong>location:</strong> {{ $experience->address }}</p>
                                     
@@ -230,21 +244,21 @@
                                 <div class="page" id="page2">
                                     <div class="row mt-4">
                                         <div class="col-md-12">
-                                            <h2>予約フォーム</h2>
+                                            <h2>Reservation Form</h2>
                                             <form action="{{ route('activity.dashboard.store') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @foreach($newsBooking as  $newsBooking)
                                                 <input type="number" name="news_time_line_id" value="{{$newsBooking->news_time_line_id }}" hidden>
                                                 @endforeach
                                                 <div class="form-group">
-                                                    <label for="day">希望日:</label>
+                                                    <label for="day">Desired Date:</label>
                                                     <input type="date" id="day" name="day" class="form-control" required>
                                                 </div>
                                                 
                                                 <div class="form-group">
-                                                    <label for="time1">第一希望時間:</label>
+                                                    <label for="time1">First Preferred Time:</label>
                                                     <select id="time1" name="time1" class="form-control" required>
-                                                        <option value="">-- 時間を選択してください --</option>
+                                                        <option value="">-- Please select time --</option>
                                                         <optgroup label="朝 (6:00 - 11:59)">
                                                             @for ($hour = 6; $hour < 12; $hour++)
                                                                 <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
@@ -269,9 +283,9 @@
                                                 </div>
                                                 
                                                 <div class="form-group">
-                                                    <label for="time2">第二希望時間:</label>
+                                                    <label for="time2">Second Preferred Time:</label>
                                                     <select id="time2" name="time2" class="form-control" required>
-                                                        <option value="">-- 時間を選択してください --</option>
+                                                        <option value="">-- Please select time --</option>
                                                         <optgroup label="朝 (6:00 - 11:59)">
                                                             @for ($hour = 6; $hour < 12; $hour++)
                                                                 <option value="{{ sprintf('%02d:00', $hour) }}">{{ sprintf('%02d:00', $hour) }}</option>
@@ -296,23 +310,32 @@
                                                 </div>
                                                 
                                                 <div class="form-group">
-                                                <label for="number_guests">ゲスト人数:</label>
-                                                <select id="number_guests" name="number_guests" class="form-control" required>
-                                                    <option value="">-- 選択してください --</option>
-                                                    @for ($i = 1; $i <= 9; $i++)
-                                                        <option value="{{ $i }}">{{ $i }}人</option>
-                                                    @endfor
-                                                    <option value="10">10人以上</option>
+                                                    <div class="mb-3">
+                                                        <label for="number_guests">Number of Guests:</label>
+                                                        <select id="number_guests" name="number_guests" class="form-control" required>
+                                                            <option value="">-- Please select --</option>
+                                                            <option value="1">1 person</option>
+                                                            <option value="2">2 people</option>
+                                                            <option value="3">3 people</option>
+                                                            <option value="4">4 people</option>
+                                                            <option value="5">5 people</option>
+                                                            <option value="6">6 people</option>
+                                                            <option value="7">7 people</option>
+                                                            <option value="8">8 people</option>
+                                                            <option value="9">9 people</option>
+                                                            <option value="10">More than 10 people</option>
+                                                        </select>                                                                                    
+                                                    </div>
                                                 </select>
                                             </div>
                                 
                                                 
                                                 <div class="form-group">
-                                                    <label for="memo">メモ:</label>
+                                                    <label for="memo">Memo:</label>
                                                     <textarea id="memo" name="memo" class="form-control"></textarea>
                                                 </div>
                                                 
-                                                <button type="submit" class="btn btn-primary">予約する</button>
+                                                <button type="submit" class="btn btn-primary">Make a reservation</button>
                                             </form>
                                         </div>
                                     </div>
