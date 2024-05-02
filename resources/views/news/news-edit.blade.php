@@ -16,7 +16,7 @@
                             </div>
                             <div class="card-body"> 
                                 <!-- 投稿フォーム -->
-                               <form action="{{ route('news.update',$newsTimeLine->id) }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('news.update',$newsTimeLine->id) }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
                                     <div class="mb-3">
@@ -81,7 +81,7 @@
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary">保存する</button>
                                     </div>
-                                </form>
+                            </form>
                                 <!-- 投稿フォーム -->
                             </div>
                         </div>
