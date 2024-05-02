@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='utf-8' />
@@ -15,7 +15,33 @@
     </style>
         <h1>upcoming events</h1>
 </head>
-<body>
+<body> --}}
+
+
+
+    {{-- レイアウトのお試し --}}
+    @extends('layouts.layout')
+
+
+@push('css')
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<style>
+    header {
+        position: unset!important;
+    }
+</style>
+@endpush
+@section('content')  
+
+
+
+
+
+{{-- @include('layouts.header') --}}
+
 
     <div id='calendar'></div>
 
@@ -152,5 +178,7 @@
         });
     
     </script>
-</body>
-</html>
+
+@endsection
+{{-- </body>
+</html> --}}
