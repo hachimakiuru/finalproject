@@ -3,17 +3,17 @@
 @endpush
 
 <div class="news-dashboard-bottom-box">
-    <a href="{{ route('news.event') }}" data-text="ローカルイベント">
-        <img src="{{ asset('img/event.jpg') }}" alt="ローカルイベント">
+    <a href="{{ route('news.event') }}" data-text="Local Events">
+        <img src="{{ asset('img/event.jpg') }}" alt="Local Events">
     </a>
-    <a href="{{ route('news.hotel-info') }}" data-text="ホテルからのお知らせ">
-        <img src="{{ asset('img/hotel-info.jpg') }}" alt="ホテルからのお知らせ">
+    <a href="{{ route('news.hotel-info') }}" data-text="Hotel Information">
+        <img src="{{ asset('img/hotel-info.jpg') }}" alt="Hotel Information">
     </a>
-    <a href="{{ route('news.japan-culture') }}" data-text="日本文化">
-        <img src="{{ asset('img/japan-culture.jpg') }}" alt="日本文化">
+    <a href="{{ route('news.japan-culture') }}" data-text="Japanese Culture">
+        <img src="{{ asset('img/japan-culture.jpg') }}" alt="Japanese Culture">
     </a>
-    <a href="{{ route('news.others') }}" data-text="その他おすすめ情報">
-        <img src="{{ asset('img/others.jpg') }}" alt="その他おすすめ情報">
+    <a href="{{ route('news.others') }}" data-text="Other Recommendations">
+        <img src="{{ asset('img/others.jpg') }}" alt="Other Recommendations">
     </a>
 </div>
 
